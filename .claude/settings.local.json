@@ -1,0 +1,41 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(xargs grep:*)",
+      "Bash(\"C:\\\\Program Files\\\\Microsoft Visual Studio\\\\2022\\\\Community\\\\MSBuild\\\\Current\\\\Bin\\\\MSBuild.exe\" Pianificazione_2/Tirelli.vbproj /p:Configuration=Debug /t:Build)",
+      "Bash(\"C:\\\\Program Files\\\\Microsoft Visual Studio\\\\2022\\\\Community\\\\MSBuild\\\\Current\\\\Bin\\\\MSBuild.exe\" \"Pianificazione_2/Tirelli.vbproj\" \"/p:Configuration=Debug\" \"/t:Build\")",
+      "Bash(\"C:\\\\Program Files\\\\Microsoft Visual Studio\\\\2022\\\\Community\\\\MSBuild\\\\Current\\\\Bin\\\\MSBuild.exe\" Tirelli.vbproj)",
+      "Bash(\"C:\\\\Program Files\\\\Microsoft Visual Studio\\\\2022\\\\Community\\\\MSBuild\\\\Current\\\\Bin\\\\MSBuild.exe\" Pianificazione_2.vbproj)",
+      "Bash(\"C:\\\\Program Files\\\\Microsoft Visual Studio\\\\2022\\\\Community\\\\MSBuild\\\\Current\\\\Bin\\\\MSBuild.exe\" Pianificazione_2.sln)",
+      "Bash(grep -v \"^$\")",
+      "Bash(powershell -Command ':*)",
+      "Bash(powershell -Command \"\\(Get-Content 'Magazzino.Designer.vb' -Encoding UTF8\\) | Select-String 'UseVisualStyleBackColor\\\\s*=\\\\s*True' | Select-Object -First 20\")",
+      "Bash(powershell -Command \"\\(Get-Content 'Homepage.Designer.vb' -Encoding UTF8\\) | Select-String 'Button.*ForeColor.*Maroon' | Select-Object Line\")",
+      "Bash(powershell -Command \"\\(Get-Content 'Homepage.Designer.vb' -Encoding UTF8\\) | Select-String '\\(Button|MES|Cmd\\).*UseVisualStyleBackColor\\\\s*=\\\\s*True' | Select-Object Line\")",
+      "Bash(powershell -Command \"\\(Get-Content 'Homepage.Designer.vb' -Encoding UTF8\\) | Select-String 'Me\\\\.\\(Cmd_Consumabili|Button17|Button22\\)\\\\.' | Select-Object Line\")",
+      "Bash(powershell:*)",
+      "Bash(grep -l \"Scheda_commessa_Pianificazione\\\\|scheda_commessa_pianificazione\" \"C:/Users/giovannitirelli/Desktop/Pianificazione 247/Pianificazione_2/\"*.vb)",
+      "Bash(ls /c/Users/giovannitirelli/Desktop/*.txt)",
+      "Bash(ls /c/Users/giovannitirelli/Desktop/*.sql)",
+      "Bash(python3:*)",
+      "Bash(ls /c/Users/giovannitirelli/Desktop/stato_commesse*)",
+      "Bash(ls /c/Users/giovannitirelli/Desktop/Stato_commesse*)",
+      "Bash(ls \"C:\\\\Users\\\\giovannitirelli\\\\Desktop\"/*.png)",
+      "Bash(ls /c/Users/giovannitirelli/Desktop/*.png)",
+      "Bash(MSBuild Pianificazione_2.sln /p:Configuration=Debug)",
+      "Bash(cmd /c \"cd \\\\\"C:\\\\Users\\\\giovannitirelli\\\\Desktop\\\\Pianificazione 249\\\\\" && \\\\\"C:\\\\Program Files\\\\Microsoft Visual Studio\\\\2022\\\\Community\\\\MSBuild\\\\Current\\\\Bin\\\\MSBuild.exe\\\\\" Pianificazione_2.sln /p:Configuration=Debug /t:Build 2>&1\")",
+      "Bash(cmd /c \"\\\\\"C:\\\\Program Files\\\\Microsoft Visual Studio\\\\2022\\\\Community\\\\MSBuild\\\\Current\\\\Bin\\\\MSBuild.exe\\\\\" \\\\\"C:\\\\Users\\\\giovannitirelli\\\\Desktop\\\\Pianificazione 249\\\\Pianificazione_2.sln\\\\\" /p:Configuration=Debug /t:Build\")",
+      "Bash(cmd:*)",
+      "Bash(echo \"EXIT:$?\")",
+      "Bash(\"/c/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/Roslyn/vbc.exe\" \"C:\\\\Users\\\\giovannitirelli\\\\Desktop\\\\Pianificazione 249\\\\Pianificazione_2\\\\Entrate_merci.vb\" /noconfig /target:library)",
+      "Bash(\"/c/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/Roslyn/vbc.exe\" \"/C:\\\\Users\\\\giovannitirelli\\\\Desktop\\\\Pianificazione 249\\\\Pianificazione_2\\\\Entrate_merci.vb\" /target:library)",
+      "Bash(/c/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/MSBuild.exe:*)",
+      "Bash(\"/c/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/MSBuild.exe\" \"C:/Users/giovannitirelli/Desktop/Pianificazione 249/Pianificazione_2.sln\" //p:Configuration=Debug //verbosity:minimal //noautoresponse)",
+      "Bash(\"/c/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/Roslyn/vbc.exe\" \"/C:\\\\Users\\\\giovannitirelli\\\\Desktop\\\\Pianificazione 249\\\\Pianificazione_2\\\\Entrate_merci.Designer.vb\" /target:library)",
+      "Bash(unzip -o ManualCraft_CCMS_1.zip -d ManualCraft_CCMS_1_extracted)",
+      "Bash(where nuget:*)",
+      "Bash(where dotnet:*)",
+      "Bash(nuget install:*)"
+    ]
+  }
+}

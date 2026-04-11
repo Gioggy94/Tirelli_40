@@ -1,0 +1,4 @@
+﻿[*.vb]
+
+# IDE0058: Il valore dell'espressione non viene mai usato
+visual_basic_style_unused_value_expression_statement_preference = unused_local_variable:silent

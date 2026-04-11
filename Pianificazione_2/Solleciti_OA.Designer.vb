@@ -1,0 +1,363 @@
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+Partial Class Solleciti_OA
+    Inherits System.Windows.Forms.Form
+
+    Protected Overrides Sub Dispose(ByVal disposing As Boolean)
+        Try
+            If disposing AndAlso components IsNot Nothing Then
+                components.Dispose()
+            End If
+        Finally
+            MyBase.Dispose(disposing)
+        End Try
+    End Sub
+
+    Private components As System.ComponentModel.IContainer
+
+    <System.Diagnostics.DebuggerStepThrough()>
+    Private Sub InitializeComponent()
+        Me.tlpMain = New System.Windows.Forms.TableLayoutPanel()
+        Me.gbFiltri = New System.Windows.Forms.GroupBox()
+        Me.lblFiltroForn = New System.Windows.Forms.Label()
+        Me.cmbFiltroFornitore = New System.Windows.Forms.ComboBox()
+        Me.lblFiltroComm = New System.Windows.Forms.Label()
+        Me.txtFiltroCommessa = New System.Windows.Forms.TextBox()
+        Me.chkSoloScaduti = New System.Windows.Forms.CheckBox()
+        Me.btnCarica = New System.Windows.Forms.Button()
+        Me.lblStato = New System.Windows.Forms.Label()
+        Me.scMain = New System.Windows.Forms.SplitContainer()
+        Me.gbFornitori = New System.Windows.Forms.GroupBox()
+        Me.lvFornitori = New System.Windows.Forms.ListView()
+        Me.lblConteggioFornitori = New System.Windows.Forms.Label()
+        Me.gbOrdini = New System.Windows.Forms.GroupBox()
+        Me.pnlBtnsOrdini = New System.Windows.Forms.Panel()
+        Me.btnSelTutti = New System.Windows.Forms.Button()
+        Me.btnDeselTutti = New System.Windows.Forms.Button()
+        Me.lblConteggio = New System.Windows.Forms.Label()
+        Me.dgvOrdini = New System.Windows.Forms.DataGridView()
+        Me.gbAnteprima = New System.Windows.Forms.GroupBox()
+        Me.pnlMailHeader = New System.Windows.Forms.Panel()
+        Me.lblA = New System.Windows.Forms.Label()
+        Me.txtEmail = New System.Windows.Forms.TextBox()
+        Me.lblOggetto = New System.Windows.Forms.Label()
+        Me.txtOggetto = New System.Windows.Forms.TextBox()
+        Me.pnlBtnsAnteprima = New System.Windows.Forms.Panel()
+        Me.btnAggiornaAnteprima = New System.Windows.Forms.Button()
+        Me.btnPreparaMail = New System.Windows.Forms.Button()
+        Me.btnTutteMail = New System.Windows.Forms.Button()
+        Me.rtbAnteprima = New System.Windows.Forms.RichTextBox()
+
+        Me.tlpMain.SuspendLayout()
+        Me.gbFiltri.SuspendLayout()
+        CType(Me.scMain, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.scMain.Panel1.SuspendLayout()
+        Me.scMain.Panel2.SuspendLayout()
+        Me.scMain.SuspendLayout()
+        Me.gbFornitori.SuspendLayout()
+        Me.gbOrdini.SuspendLayout()
+        Me.pnlBtnsOrdini.SuspendLayout()
+        CType(Me.dgvOrdini, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.gbAnteprima.SuspendLayout()
+        Me.pnlMailHeader.SuspendLayout()
+        Me.pnlBtnsAnteprima.SuspendLayout()
+        Me.SuspendLayout()
+
+        ' ── tlpMain ──────────────────────────────────────────
+        Me.tlpMain.ColumnCount = 1
+        Me.tlpMain.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.tlpMain.Controls.Add(Me.gbFiltri, 0, 0)
+        Me.tlpMain.Controls.Add(Me.scMain, 0, 1)
+        Me.tlpMain.Controls.Add(Me.gbAnteprima, 0, 2)
+        Me.tlpMain.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tlpMain.Location = New System.Drawing.Point(0, 0)
+        Me.tlpMain.Margin = New System.Windows.Forms.Padding(0)
+        Me.tlpMain.Name = "tlpMain"
+        Me.tlpMain.RowCount = 3
+        Me.tlpMain.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 65.0!))
+        Me.tlpMain.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.tlpMain.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 255.0!))
+        Me.tlpMain.Size = New System.Drawing.Size(1400, 860)
+        Me.tlpMain.TabIndex = 0
+
+        ' ── gbFiltri ─────────────────────────────────────────
+        Me.gbFiltri.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.gbFiltri.Margin = New System.Windows.Forms.Padding(4, 3, 4, 2)
+        Me.gbFiltri.Name = "gbFiltri"
+        Me.gbFiltri.Text = "Filtri"
+        Me.gbFiltri.TabIndex = 0
+        Me.gbFiltri.Controls.Add(Me.lblFiltroForn)
+        Me.gbFiltri.Controls.Add(Me.cmbFiltroFornitore)
+        Me.gbFiltri.Controls.Add(Me.lblFiltroComm)
+        Me.gbFiltri.Controls.Add(Me.txtFiltroCommessa)
+        Me.gbFiltri.Controls.Add(Me.chkSoloScaduti)
+        Me.gbFiltri.Controls.Add(Me.btnCarica)
+        Me.gbFiltri.Controls.Add(Me.lblStato)
+
+        ' lblFiltroForn
+        Me.lblFiltroForn.AutoSize = True
+        Me.lblFiltroForn.Location = New System.Drawing.Point(8, 24)
+        Me.lblFiltroForn.Name = "lblFiltroForn"
+        Me.lblFiltroForn.Text = "Fornitore:"
+
+        ' cmbFiltroFornitore
+        Me.cmbFiltroFornitore.Location = New System.Drawing.Point(72, 21)
+        Me.cmbFiltroFornitore.Name = "cmbFiltroFornitore"
+        Me.cmbFiltroFornitore.Size = New System.Drawing.Size(210, 22)
+        Me.cmbFiltroFornitore.TabIndex = 0
+        Me.cmbFiltroFornitore.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbFiltroFornitore.DropDownWidth = 380
+
+        ' lblFiltroComm
+        Me.lblFiltroComm.AutoSize = True
+        Me.lblFiltroComm.Location = New System.Drawing.Point(292, 24)
+        Me.lblFiltroComm.Name = "lblFiltroComm"
+        Me.lblFiltroComm.Text = "Commessa:"
+
+        ' txtFiltroCommessa
+        Me.txtFiltroCommessa.Location = New System.Drawing.Point(366, 21)
+        Me.txtFiltroCommessa.Name = "txtFiltroCommessa"
+        Me.txtFiltroCommessa.Size = New System.Drawing.Size(120, 22)
+        Me.txtFiltroCommessa.TabIndex = 1
+
+        ' chkSoloScaduti
+        Me.chkSoloScaduti.AutoSize = True
+        Me.chkSoloScaduti.Location = New System.Drawing.Point(500, 23)
+        Me.chkSoloScaduti.Name = "chkSoloScaduti"
+        Me.chkSoloScaduti.Text = "Solo scaduti"
+        Me.chkSoloScaduti.TabIndex = 2
+
+        ' btnCarica
+        Me.btnCarica.Location = New System.Drawing.Point(625, 18)
+        Me.btnCarica.Name = "btnCarica"
+        Me.btnCarica.Size = New System.Drawing.Size(120, 28)
+        Me.btnCarica.TabIndex = 3
+        Me.btnCarica.Text = "Carica dati"
+        Me.btnCarica.BackColor = System.Drawing.Color.SteelBlue
+        Me.btnCarica.ForeColor = System.Drawing.Color.White
+        Me.btnCarica.UseVisualStyleBackColor = False
+
+        ' lblStato
+        Me.lblStato.AutoSize = False
+        Me.lblStato.Location = New System.Drawing.Point(758, 24)
+        Me.lblStato.Name = "lblStato"
+        Me.lblStato.Size = New System.Drawing.Size(500, 18)
+        Me.lblStato.ForeColor = System.Drawing.Color.Navy
+        Me.lblStato.Text = ""
+
+        ' ── scMain ───────────────────────────────────────────
+        Me.scMain.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.scMain.Margin = New System.Windows.Forms.Padding(4, 2, 4, 2)
+        Me.scMain.Name = "scMain"
+        Me.scMain.Orientation = System.Windows.Forms.Orientation.Vertical
+        Me.scMain.SplitterDistance = 330
+        Me.scMain.SplitterWidth = 5
+        Me.scMain.TabIndex = 1
+
+        ' ── scMain.Panel1 → gbFornitori ──────────────────────
+        Me.scMain.Panel1.Controls.Add(Me.gbFornitori)
+
+        Me.gbFornitori.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.gbFornitori.Name = "gbFornitori"
+        Me.gbFornitori.Text = "Fornitori con OA aperti"
+        Me.gbFornitori.TabIndex = 0
+        Me.gbFornitori.Controls.Add(Me.lvFornitori)
+        Me.gbFornitori.Controls.Add(Me.lblConteggioFornitori)
+
+        Me.lvFornitori.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lvFornitori.Name = "lvFornitori"
+        Me.lvFornitori.TabIndex = 0
+
+        Me.lblConteggioFornitori.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.lblConteggioFornitori.Height = 20
+        Me.lblConteggioFornitori.Name = "lblConteggioFornitori"
+        Me.lblConteggioFornitori.Text = ""
+        Me.lblConteggioFornitori.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lblConteggioFornitori.Padding = New System.Windows.Forms.Padding(4, 0, 0, 0)
+        Me.lblConteggioFornitori.ForeColor = System.Drawing.Color.DimGray
+
+        ' ── scMain.Panel2 → gbOrdini ─────────────────────────
+        Me.scMain.Panel2.Controls.Add(Me.gbOrdini)
+
+        Me.gbOrdini.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.gbOrdini.Name = "gbOrdini"
+        Me.gbOrdini.Text = "Ordini del fornitore selezionato"
+        Me.gbOrdini.TabIndex = 0
+        ' Add dgvOrdini first (Fill), then pnlBtnsOrdini (Bottom - higher z, docks first)
+        Me.gbOrdini.Controls.Add(Me.dgvOrdini)
+        Me.gbOrdini.Controls.Add(Me.pnlBtnsOrdini)
+
+        ' pnlBtnsOrdini
+        Me.pnlBtnsOrdini.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.pnlBtnsOrdini.Height = 34
+        Me.pnlBtnsOrdini.Name = "pnlBtnsOrdini"
+        Me.pnlBtnsOrdini.Controls.Add(Me.btnSelTutti)
+        Me.pnlBtnsOrdini.Controls.Add(Me.btnDeselTutti)
+        Me.pnlBtnsOrdini.Controls.Add(Me.lblConteggio)
+
+        Me.btnSelTutti.Location = New System.Drawing.Point(3, 4)
+        Me.btnSelTutti.Name = "btnSelTutti"
+        Me.btnSelTutti.Size = New System.Drawing.Size(105, 25)
+        Me.btnSelTutti.TabIndex = 0
+        Me.btnSelTutti.Text = "Seleziona tutti"
+
+        Me.btnDeselTutti.Location = New System.Drawing.Point(113, 4)
+        Me.btnDeselTutti.Name = "btnDeselTutti"
+        Me.btnDeselTutti.Size = New System.Drawing.Size(118, 25)
+        Me.btnDeselTutti.TabIndex = 1
+        Me.btnDeselTutti.Text = "Deseleziona tutti"
+
+        Me.lblConteggio.AutoSize = False
+        Me.lblConteggio.Location = New System.Drawing.Point(240, 8)
+        Me.lblConteggio.Name = "lblConteggio"
+        Me.lblConteggio.Size = New System.Drawing.Size(350, 18)
+        Me.lblConteggio.ForeColor = System.Drawing.Color.DimGray
+        Me.lblConteggio.Text = ""
+
+        ' dgvOrdini
+        Me.dgvOrdini.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.dgvOrdini.Name = "dgvOrdini"
+        Me.dgvOrdini.TabIndex = 0
+        Me.dgvOrdini.BackgroundColor = System.Drawing.Color.White
+        Me.dgvOrdini.BorderStyle = System.Windows.Forms.BorderStyle.None
+
+        ' ── gbAnteprima ──────────────────────────────────────
+        Me.gbAnteprima.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.gbAnteprima.Margin = New System.Windows.Forms.Padding(4, 2, 4, 3)
+        Me.gbAnteprima.Name = "gbAnteprima"
+        Me.gbAnteprima.Text = "Anteprima mail"
+        Me.gbAnteprima.TabIndex = 2
+        ' Add rtbAnteprima first (Fill, lowest z), then pnlBtnsAnteprima (Right), then pnlMailHeader (Top, highest z)
+        Me.gbAnteprima.Controls.Add(Me.rtbAnteprima)
+        Me.gbAnteprima.Controls.Add(Me.pnlBtnsAnteprima)
+        Me.gbAnteprima.Controls.Add(Me.pnlMailHeader)
+
+        ' pnlMailHeader
+        Me.pnlMailHeader.Dock = System.Windows.Forms.DockStyle.Top
+        Me.pnlMailHeader.Height = 30
+        Me.pnlMailHeader.Name = "pnlMailHeader"
+        Me.pnlMailHeader.Controls.Add(Me.lblA)
+        Me.pnlMailHeader.Controls.Add(Me.txtEmail)
+        Me.pnlMailHeader.Controls.Add(Me.lblOggetto)
+        Me.pnlMailHeader.Controls.Add(Me.txtOggetto)
+
+        Me.lblA.AutoSize = True
+        Me.lblA.Location = New System.Drawing.Point(3, 7)
+        Me.lblA.Name = "lblA"
+        Me.lblA.Text = "A:"
+
+        Me.txtEmail.Location = New System.Drawing.Point(22, 4)
+        Me.txtEmail.Name = "txtEmail"
+        Me.txtEmail.Size = New System.Drawing.Size(360, 22)
+        Me.txtEmail.TabIndex = 0
+
+        Me.lblOggetto.AutoSize = True
+        Me.lblOggetto.Location = New System.Drawing.Point(392, 7)
+        Me.lblOggetto.Name = "lblOggetto"
+        Me.lblOggetto.Text = "Oggetto:"
+
+        Me.txtOggetto.Location = New System.Drawing.Point(450, 4)
+        Me.txtOggetto.Name = "txtOggetto"
+        Me.txtOggetto.Size = New System.Drawing.Size(700, 22)
+        Me.txtOggetto.Anchor = System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right Or System.Windows.Forms.AnchorStyles.Top
+        Me.txtOggetto.TabIndex = 1
+
+        ' pnlBtnsAnteprima
+        Me.pnlBtnsAnteprima.Dock = System.Windows.Forms.DockStyle.Right
+        Me.pnlBtnsAnteprima.Width = 178
+        Me.pnlBtnsAnteprima.Name = "pnlBtnsAnteprima"
+        Me.pnlBtnsAnteprima.Padding = New System.Windows.Forms.Padding(4)
+        Me.pnlBtnsAnteprima.Controls.Add(Me.btnAggiornaAnteprima)
+        Me.pnlBtnsAnteprima.Controls.Add(Me.btnPreparaMail)
+        Me.pnlBtnsAnteprima.Controls.Add(Me.btnTutteMail)
+
+        Me.btnAggiornaAnteprima.Location = New System.Drawing.Point(5, 5)
+        Me.btnAggiornaAnteprima.Name = "btnAggiornaAnteprima"
+        Me.btnAggiornaAnteprima.Size = New System.Drawing.Size(167, 28)
+        Me.btnAggiornaAnteprima.TabIndex = 0
+        Me.btnAggiornaAnteprima.Text = "Aggiorna anteprima"
+
+        Me.btnPreparaMail.Location = New System.Drawing.Point(5, 40)
+        Me.btnPreparaMail.Name = "btnPreparaMail"
+        Me.btnPreparaMail.Size = New System.Drawing.Size(167, 35)
+        Me.btnPreparaMail.TabIndex = 1
+        Me.btnPreparaMail.Text = "Prepara mail in Outlook"
+        Me.btnPreparaMail.BackColor = System.Drawing.Color.SteelBlue
+        Me.btnPreparaMail.ForeColor = System.Drawing.Color.White
+        Me.btnPreparaMail.UseVisualStyleBackColor = False
+
+        Me.btnTutteMail.Location = New System.Drawing.Point(5, 83)
+        Me.btnTutteMail.Name = "btnTutteMail"
+        Me.btnTutteMail.Size = New System.Drawing.Size(167, 28)
+        Me.btnTutteMail.TabIndex = 2
+        Me.btnTutteMail.Text = "Prepara mail selezione..."
+
+        ' rtbAnteprima
+        Me.rtbAnteprima.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.rtbAnteprima.Name = "rtbAnteprima"
+        Me.rtbAnteprima.Font = New System.Drawing.Font("Courier New", 9.0!)
+        Me.rtbAnteprima.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical
+        Me.rtbAnteprima.TabIndex = 0
+        Me.rtbAnteprima.ReadOnly = True
+        Me.rtbAnteprima.BackColor = System.Drawing.Color.White
+
+        ' ── Form ─────────────────────────────────────────────
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.ClientSize = New System.Drawing.Size(1400, 860)
+        Me.Controls.Add(Me.tlpMain)
+        Me.MinimumSize = New System.Drawing.Size(1050, 650)
+        Me.Name = "Solleciti_OA"
+        Me.Text = "Solleciti Ordini di Acquisto"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
+
+        Me.tlpMain.ResumeLayout(False)
+        Me.gbFiltri.ResumeLayout(False)
+        Me.gbFiltri.PerformLayout()
+        Me.scMain.Panel1.ResumeLayout(False)
+        Me.scMain.Panel2.ResumeLayout(False)
+        CType(Me.scMain, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.scMain.ResumeLayout(False)
+        Me.gbFornitori.ResumeLayout(False)
+        Me.gbOrdini.ResumeLayout(False)
+        Me.pnlBtnsOrdini.ResumeLayout(False)
+        CType(Me.dgvOrdini, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.gbAnteprima.ResumeLayout(False)
+        Me.pnlMailHeader.ResumeLayout(False)
+        Me.pnlMailHeader.PerformLayout()
+        Me.pnlBtnsAnteprima.ResumeLayout(False)
+        Me.ResumeLayout(False)
+    End Sub
+
+    Friend WithEvents tlpMain As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents gbFiltri As System.Windows.Forms.GroupBox
+    Friend WithEvents lblFiltroForn As System.Windows.Forms.Label
+    Friend WithEvents cmbFiltroFornitore As System.Windows.Forms.ComboBox
+    Friend WithEvents lblFiltroComm As System.Windows.Forms.Label
+    Friend WithEvents txtFiltroCommessa As System.Windows.Forms.TextBox
+    Friend WithEvents chkSoloScaduti As System.Windows.Forms.CheckBox
+    Friend WithEvents btnCarica As System.Windows.Forms.Button
+    Friend WithEvents lblStato As System.Windows.Forms.Label
+    Friend WithEvents scMain As System.Windows.Forms.SplitContainer
+    Friend WithEvents gbFornitori As System.Windows.Forms.GroupBox
+    Friend WithEvents lvFornitori As System.Windows.Forms.ListView
+    Friend WithEvents lblConteggioFornitori As System.Windows.Forms.Label
+    Friend WithEvents gbOrdini As System.Windows.Forms.GroupBox
+    Friend WithEvents pnlBtnsOrdini As System.Windows.Forms.Panel
+    Friend WithEvents btnSelTutti As System.Windows.Forms.Button
+    Friend WithEvents btnDeselTutti As System.Windows.Forms.Button
+    Friend WithEvents lblConteggio As System.Windows.Forms.Label
+    Friend WithEvents dgvOrdini As System.Windows.Forms.DataGridView
+    Friend WithEvents gbAnteprima As System.Windows.Forms.GroupBox
+    Friend WithEvents pnlMailHeader As System.Windows.Forms.Panel
+    Friend WithEvents lblA As System.Windows.Forms.Label
+    Friend WithEvents txtEmail As System.Windows.Forms.TextBox
+    Friend WithEvents lblOggetto As System.Windows.Forms.Label
+    Friend WithEvents txtOggetto As System.Windows.Forms.TextBox
+    Friend WithEvents pnlBtnsAnteprima As System.Windows.Forms.Panel
+    Friend WithEvents btnAggiornaAnteprima As System.Windows.Forms.Button
+    Friend WithEvents btnPreparaMail As System.Windows.Forms.Button
+    Friend WithEvents btnTutteMail As System.Windows.Forms.Button
+    Friend WithEvents rtbAnteprima As System.Windows.Forms.RichTextBox
+
+End Class
