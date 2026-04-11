@@ -22,61 +22,94 @@ Public Module MC_PanelBuild
             .Text = "Home macchina", .Font = New Font("Segoe UI Semibold", 16),
             .ForeColor = Color.FromArgb(40, 40, 40), .AutoSize = True, .Location = New Point(0, 0)
         }
-        Dim card As Panel = BuildCard(0, 40, 600, 340, "Selezione macchina")
+        Dim card As Panel = BuildCard(0, 40, 600, 370, "Selezione macchina")
 
+        ' ── Ricerca per matricola ──────────────────────────────────────
         Dim lblMat As New Label() With {.Text = "Codice matricola:", .Location = New Point(16, 50), .AutoSize = True, .Font = FONT_LABEL}
         Dim txtMat As New TextBox() With {.Location = New Point(160, 47), .Size = New Size(180, 24), .Font = FONT_BODY}
         Dim btnCerca As New Button() With {.Text = "Cerca", .Location = New Point(350, 46), .Size = New Size(80, 26), .Font = FONT_BODY}
         StyleButton(btnCerca, True)
 
-        Dim fields As New Dictionary(Of String, TextBox)
-        Dim lblNames As String() = {"Nome macchina:", "Modello:", "Tipo macchina:", "Cliente finale:", "Anno:", "Lingua:"}
+        ' ── Campi risultato ───────────────────────────────────────────
         Dim y = 90
-        For Each lbl In lblNames
-            card.Controls.Add(New Label() With {.Text = lbl, .Location = New Point(16, y + 3), .Size = New Size(140, 20), .Font = FONT_LABEL})
-            Dim txt As New TextBox() With {.Location = New Point(160, y), .Size = New Size(380, 24), .Font = FONT_BODY}
-            card.Controls.Add(txt)
-            fields(lbl) = txt
-            y += 32
-        Next
+        Dim txtNome   As New TextBox() With {.Location = New Point(160, y),      .Size = New Size(380, 24), .Font = FONT_BODY, .ReadOnly = True, .BackColor = Color.FromArgb(245, 245, 242)}
+        Dim txtCliente As New TextBox() With {.Location = New Point(160, y + 64), .Size = New Size(380, 24), .Font = FONT_BODY, .ReadOnly = True, .BackColor = Color.FromArgb(245, 245, 242)}
+        Dim txtLingua As New TextBox() With {.Location = New Point(160, y + 96),  .Size = New Size(100, 24), .Font = FONT_BODY, .ReadOnly = True, .BackColor = Color.FromArgb(245, 245, 242)}
 
-        Dim btnSeleziona As New Button() With {.Text = "Imposta come attiva", .Location = New Point(16, y + 8), .Size = New Size(170, 32), .Font = FONT_BODY}
+        ' Modello (ComboBox)
+        Dim cmbModello As New ComboBox() With {
+            .DropDownStyle = ComboBoxStyle.DropDownList,
+            .Location = New Point(160, y + 32), .Size = New Size(280, 24), .Font = FONT_BODY
+        }
+        ' Tipo macchina (ComboBox)
+        Dim cmbTipo As New ComboBox() With {
+            .DropDownStyle = ComboBoxStyle.DropDownList,
+            .Location = New Point(160, y + 64), .Size = New Size(280, 24), .Font = FONT_BODY
+        }
+
+        ' Etichette
+        For Each pair In {("Nome macchina:", y), ("Modello:", y + 32), ("Tipo macchina:", y + 64), ("Cliente finale:", y + 96), ("Lingua:", y + 128)}
+            card.Controls.Add(New Label() With {.Text = pair.Item1, .Location = New Point(16, pair.Item2 + 3), .Size = New Size(140, 20), .Font = FONT_LABEL})
+        Next
+        txtCliente = New TextBox() With {.Location = New Point(160, y + 96),  .Size = New Size(380, 24), .Font = FONT_BODY, .ReadOnly = True, .BackColor = Color.FromArgb(245, 245, 242)}
+        txtLingua  = New TextBox() With {.Location = New Point(160, y + 128), .Size = New Size(100, 24), .Font = FONT_BODY, .ReadOnly = True, .BackColor = Color.FromArgb(245, 245, 242)}
+
+        Dim btnSeleziona As New Button() With {.Text = "Imposta come attiva", .Location = New Point(16, y + 168), .Size = New Size(170, 32), .Font = FONT_BODY}
         StyleButton(btnSeleziona, True)
 
+        ' Carica voci dropdown
+        Dim CaricaDropdown As Action = Sub()
+            Dim modelli = db.GetModelli()
+            Dim tipi    = db.GetTipiMacchina()
+            cmbModello.DataSource    = modelli   : cmbModello.DisplayMember = "Nome" : cmbModello.ValueMember = "ID"
+            cmbTipo.DataSource       = tipi      : cmbTipo.DisplayMember    = "Nome" : cmbTipo.ValueMember    = "ID"
+        End Sub
+        Try : CaricaDropdown() : Catch : End Try
+
         AddHandler btnCerca.Click, Sub(s, e)
-                                       Try
-                                           Dim m = db.GetMacchinaByMatricola(txtMat.Text.Trim())
-                                           If m IsNot Nothing Then
-                                               fields("Nome macchina:").Text = m.NomeMacchina
-                                               fields("Modello:").Text = m.Modello
-                                               fields("Tipo macchina:").Text = m.TipoMacchina
-                                               fields("Cliente finale:").Text = m.ClienteFinale
-                                               fields("Anno:").Text = If(m.AnnoCostruzione.HasValue, m.AnnoCostruzione.Value.ToString(), "")
-                                               fields("Lingua:").Text = m.LinguaCodice
-                                               card.Tag = m
-                                           Else
-                                               MessageBox.Show("Matricola non trovata.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                                           End If
-                                       Catch ex As Exception
-                                           MessageBox.Show("Errore DB: " & ex.Message, "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                                       End Try
-                                   End Sub
+            Try
+                CaricaDropdown()
+                Dim m = db.GetMacchinaByMatricola(txtMat.Text.Trim())
+                If m IsNot Nothing Then
+                    txtNome.Text    = m.NomeMacchina
+                    txtCliente.Text = m.ClienteFinale
+                    txtLingua.Text  = m.LinguaCodice
+                    Dim selMod = DirectCast(cmbModello.DataSource, List(Of MC_Modello)).FirstOrDefault(Function(x) x.Nome = m.Modello)
+                    If selMod IsNot Nothing Then cmbModello.SelectedItem = selMod
+                    Dim selTipo = DirectCast(cmbTipo.DataSource, List(Of MC_TipoMacchina)).FirstOrDefault(Function(x) x.Nome = m.TipoMacchina)
+                    If selTipo IsNot Nothing Then cmbTipo.SelectedItem = selTipo
+                    card.Tag = m
+                Else
+                    MessageBox.Show("Matricola non trovata.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                End If
+            Catch ex As Exception
+                MessageBox.Show("Errore DB: " & ex.Message, "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+        End Sub
 
         AddHandler btnSeleziona.Click, Sub(s, e)
-                                           If card.Tag IsNot Nothing Then
-                                               owner.SetMacchinaCorrente(DirectCast(card.Tag, MC_Macchina))
-                                               MessageBox.Show("Macchina impostata come attiva.", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                                           End If
-                                       End Sub
+            If card.Tag Is Nothing Then Return
+            Dim m = DirectCast(card.Tag, MC_Macchina)
+            m.Modello      = If(cmbModello.SelectedItem IsNot Nothing, DirectCast(cmbModello.SelectedItem, MC_Modello).Nome, "")
+            m.TipoMacchina = If(cmbTipo.SelectedItem IsNot Nothing, DirectCast(cmbTipo.SelectedItem, MC_TipoMacchina).Nome, "")
+            m.LinguaCodice = txtLingua.Text.Trim()
+            Try
+                m.ID = db.SalvaExtraMacchina(m)
+                owner.SetMacchinaCorrente(m)
+                MessageBox.Show("Macchina impostata come attiva.", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Catch ex As Exception
+                MessageBox.Show("Errore salvataggio: " & ex.Message, "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+        End Sub
 
-        card.Controls.AddRange({lblMat, txtMat, btnCerca, btnSeleziona})
+        card.Controls.AddRange({lblMat, txtMat, btnCerca, txtNome, cmbModello, cmbTipo, txtCliente, txtLingua, btnSeleziona})
         pnl.Controls.AddRange({lblTitle, card})
 
         AddHandler pnl.SizeChanged, Sub(s, e)
-                                        Dim cx = Math.Max(24, (pnl.ClientSize.Width - card.Width) \ 2)
-                                        card.Left = cx
-                                        lblTitle.Left = cx
-                                    End Sub
+            Dim cx = Math.Max(24, (pnl.ClientSize.Width - card.Width) \ 2)
+            card.Left = cx
+            lblTitle.Left = cx
+        End Sub
 
         Return pnl
     End Function
@@ -87,12 +120,37 @@ Public Module MC_PanelBuild
 
     Public Function BuildPanelMacchine(owner As MC_FrmMain, db As MC_DatabaseService) As Panel
         Dim pnl As New Panel()
-        Dim lblTitle As New Label() With {
+
+        ' ── Titolo ───────────────────────────────────────────────────────
+        Dim pnlTitle As New Panel() With {.Dock = DockStyle.Top, .Height = 50}
+        pnlTitle.Controls.Add(New Label() With {
             .Text = "Anagrafica macchine", .Font = New Font("Segoe UI Semibold", 16),
-            .ForeColor = Color.FromArgb(40, 40, 40), .AutoSize = True, .Location = New Point(0, 0)
-        }
+            .ForeColor = Color.FromArgb(40, 40, 40), .AutoSize = True, .Location = New Point(0, 8)
+        })
+
+        ' ── Barra di ricerca ─────────────────────────────────────────────
+        Dim pnlSearch As New Panel() With {.Dock = DockStyle.Top, .Height = 42}
+        Dim lblMat As New Label() With {.Text = "Matricola:", .AutoSize = True, .Location = New Point(0, 11), .Font = FONT_LABEL}
+        Dim txtMat As New TextBox() With {.Location = New Point(68, 8), .Size = New Size(150, 24), .Font = FONT_BODY}
+        Dim lblCli As New Label() With {.Text = "Cliente:", .AutoSize = True, .Location = New Point(228, 11), .Font = FONT_LABEL}
+        Dim txtCli As New TextBox() With {.Location = New Point(278, 8), .Size = New Size(200, 24), .Font = FONT_BODY}
+        Dim btnCerca As New Button() With {.Text = "Cerca", .Location = New Point(488, 7), .Size = New Size(80, 26), .Font = FONT_BODY}
+        StyleButton(btnCerca, True)
+        pnlSearch.Controls.AddRange({lblMat, txtMat, lblCli, txtCli, btnCerca})
+
+        ' ── Pulsanti azione ──────────────────────────────────────────────
+        Dim pnlBtns As New Panel() With {.Dock = DockStyle.Bottom, .Height = 48}
+        Dim btnAssoc   As New Button() With {.Text = "Associa dati manuale", .Location = New Point(0, 8), .Size = New Size(170, 32), .Font = FONT_BODY}
+        Dim btnImposta As New Button() With {.Text = "Imposta come attiva",  .Location = New Point(180, 8), .Size = New Size(160, 32), .Font = FONT_BODY}
+        Dim btnGestMod As New Button() With {.Text = "Modelli...",           .Location = New Point(360, 8), .Size = New Size(100, 32), .Font = FONT_BODY}
+        Dim btnGestTip As New Button() With {.Text = "Tipi macchina...",     .Location = New Point(470, 8), .Size = New Size(130, 32), .Font = FONT_BODY}
+        StyleButton(btnAssoc, True) : StyleButton(btnImposta, True)
+        StyleButton(btnGestMod, False) : StyleButton(btnGestTip, False)
+        pnlBtns.Controls.AddRange({btnAssoc, btnImposta, btnGestMod, btnGestTip})
+
+        ' ── Griglia ──────────────────────────────────────────────────────
         Dim dgv As New DataGridView() With {
-            .Location = New Point(0, 50), .Size = New Size(900, 420),
+            .Dock = DockStyle.Fill,
             .AllowUserToAddRows = False, .ReadOnly = True,
             .SelectionMode = DataGridViewSelectionMode.FullRowSelect,
             .AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill,
@@ -104,57 +162,62 @@ Public Module MC_PanelBuild
         dgv.ColumnHeadersDefaultCellStyle.Font = New Font("Segoe UI Semibold", 9)
         dgv.EnableHeadersVisualStyles = False
 
-        Dim btnNuova As New Button() With {.Text = "+ Nuova", .Location = New Point(0, 484), .Size = New Size(120, 32), .Font = FONT_BODY}
-        Dim btnModifica As New Button() With {.Text = "Modifica", .Location = New Point(130, 484), .Size = New Size(100, 32), .Font = FONT_BODY}
-        Dim btnElimina As New Button() With {.Text = "Elimina", .Location = New Point(240, 484), .Size = New Size(100, 32), .Font = FONT_BODY}
-        Dim btnImposta As New Button() With {.Text = "Imposta come attiva", .Location = New Point(350, 484), .Size = New Size(170, 32), .Font = FONT_BODY}
-        StyleButton(btnNuova, True) : StyleButton(btnModifica, False) : StyleButton(btnElimina, False) : StyleButton(btnImposta, True)
+        ' ── Azione di ricerca (riusata da più handler) ───────────────────
+        Dim Cerca As Action = Sub()
+            dgv.Rows.Clear() : dgv.Columns.Clear()
+            For Each col In {"Matricola", "Nome macchina", "Cliente", "Modello", "Tipo macchina", "Lingua"}
+                dgv.Columns.Add(col, col)
+            Next
+            Try
+                For Each m In db.GetMacchineAS400(txtMat.Text.Trim(), txtCli.Text.Trim())
+                    dgv.Rows.Add(m.Matricola, m.NomeMacchina, m.ClienteFinale, m.Modello, m.TipoMacchina, m.LinguaCodice)
+                    dgv.Rows(dgv.Rows.Count - 1).Tag = m
+                Next
+            Catch ex As Exception
+                MessageBox.Show("Errore ricerca AS400: " & ex.Message, "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+        End Sub
 
-        AddHandler btnNuova.Click, Sub(s, e)
-                                       Using f As New MC_FrmEditMacchina(Nothing, db)
-                                           If f.ShowDialog(owner) = DialogResult.OK Then RicaricaMacchine(pnl, db)
-                                       End Using
-                                   End Sub
-        AddHandler btnModifica.Click, Sub(s, e)
-                                          Dim m = GetSelectedMacchina(dgv) : If m Is Nothing Then Return
-                                          Using f As New MC_FrmEditMacchina(m, db)
-                                              If f.ShowDialog(owner) = DialogResult.OK Then RicaricaMacchine(pnl, db)
-                                          End Using
-                                      End Sub
-        AddHandler btnElimina.Click, Sub(s, e)
-                                         Dim m = GetSelectedMacchina(dgv) : If m Is Nothing Then Return
-                                         If MessageBox.Show($"Eliminare '{m.NomeMacchina}'?", "Conferma", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = DialogResult.Yes Then
-                                             db.EliminaMacchina(m.ID) : RicaricaMacchine(pnl, db)
-                                         End If
-                                     End Sub
+        AddHandler btnCerca.Click, Sub(s, e) Cerca()
+        AddHandler txtMat.KeyDown, Sub(s, e) If e.KeyCode = Keys.Return Then Cerca()
+        AddHandler txtCli.KeyDown, Sub(s, e) If e.KeyCode = Keys.Return Then Cerca()
+
+        AddHandler btnAssoc.Click, Sub(s, e)
+            Dim m = GetSelectedMacchina(dgv) : If m Is Nothing Then Return
+            Using f As New MC_FrmEditMacchina(m, db)
+                If f.ShowDialog(owner) = DialogResult.OK Then Cerca()
+            End Using
+        End Sub
+
         AddHandler btnImposta.Click, Sub(s, e)
-                                         Dim m = GetSelectedMacchina(dgv) : If m Is Nothing Then Return
-                                         owner.SetMacchinaCorrente(m)
-                                         MessageBox.Show($"Macchina '{m.NomeMacchina}' impostata come attiva.", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                                     End Sub
+            Dim m = GetSelectedMacchina(dgv) : If m Is Nothing Then Return
+            If m.ID = 0 Then m.ID = db.SalvaExtraMacchina(m)
+            owner.SetMacchinaCorrente(m)
+            MessageBox.Show($"Macchina '{m.NomeMacchina}' ({m.Matricola}) impostata come attiva.",
+                            "OK", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End Sub
 
-        pnl.Controls.AddRange({lblTitle, dgv, btnNuova, btnModifica, btnElimina, btnImposta})
-        Try : RicaricaMacchine(pnl, db) : Catch : End Try
+        AddHandler btnGestMod.Click, Sub(s, e)
+            Using f As New MC_FrmGestisciLookup("Modelli", db)
+                f.ShowDialog(owner)
+            End Using
+        End Sub
+        AddHandler btnGestTip.Click, Sub(s, e)
+            Using f As New MC_FrmGestisciLookup("TipiMacchina", db)
+                f.ShowDialog(owner)
+            End Using
+        End Sub
+
+        ' Ordine aggiunta: Fill prima, poi Bottom, poi Top (ordine z per docking corretto)
+        pnl.Controls.Add(dgv)
+        pnl.Controls.Add(pnlBtns)
+        pnl.Controls.Add(pnlSearch)
+        pnl.Controls.Add(pnlTitle)
         Return pnl
     End Function
 
+    ' La ricerca è interna al pannello — questa sub rimane per compatibilità con la navigazione
     Public Sub RicaricaMacchine(pnl As Panel, db As MC_DatabaseService)
-        Dim dgv = TryCast(pnl.Controls.Find("dgvMacchine", True).FirstOrDefault(), DataGridView)
-        If dgv Is Nothing Then Return
-        dgv.Rows.Clear() : dgv.Columns.Clear()
-        For Each col In {"Matricola", "Nome macchina", "Modello", "Cliente", "Anno", "Lingua", "Stato"}
-            dgv.Columns.Add(col, col)
-        Next
-        Try
-            For Each m In db.GetMacchine(False)
-                dgv.Rows.Add(m.Matricola, m.NomeMacchina, m.Modello, m.ClienteFinale,
-                             If(m.AnnoCostruzione.HasValue, m.AnnoCostruzione.Value.ToString(), ""),
-                             m.LinguaCodice, If(m.Attiva, "Attiva", "Disattiva"))
-                dgv.Rows(dgv.Rows.Count - 1).Tag = m
-            Next
-        Catch ex As Exception
-            MessageBox.Show("Errore caricamento: " & ex.Message, "DB Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End Try
     End Sub
 
     Private Function GetSelectedMacchina(dgv As DataGridView) As MC_Macchina

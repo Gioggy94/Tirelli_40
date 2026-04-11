@@ -54,3 +54,19 @@ Public Class MC_Lingua
         Return $"{Nome} ({Codice})"
     End Function
 End Class
+
+Public Class MC_Modello
+    Public Property ID As Integer
+    Public Property Nome As String = ""
+    Public Overrides Function ToString() As String
+        Return Nome
+    End Function
+End Class
+
+Public Class MC_TipoMacchina
+    Public Property ID As Integer
+    Public Property Nome As String = ""
+    Public Overrides Function ToString() As String
+        Return Nome
+    End Function
+End Class

@@ -2,81 +2,177 @@ Imports System.Drawing
 Imports System.IO
 Imports System.Windows.Forms
 
+' Form per associare Modello/Tipo/Lingua a una macchina proveniente da AS400
 Public Class MC_FrmEditMacchina
     Inherits Form
 
     Private _m As MC_Macchina
     Private _db As MC_DatabaseService
-    Private _fields As New Dictionary(Of String, Control)
 
     Public Sub New(m As MC_Macchina, db As MC_DatabaseService)
-        _m = If(m IsNot Nothing, m, New MC_Macchina())
+        _m  = m
         _db = db
-        Me.Text = If(m IsNot Nothing, "Modifica macchina", "Nuova macchina")
-        Me.Size = New Size(500, 460)
-        Me.StartPosition = FormStartPosition.CenterParent
+        Me.Text            = "Associa dati manuale"
+        Me.Size            = New Size(480, 380)
+        Me.StartPosition   = FormStartPosition.CenterParent
         Me.FormBorderStyle = FormBorderStyle.FixedDialog
-        Me.MaximizeBox = False
-        Me.Font = New Font("Segoe UI", 9)
+        Me.MaximizeBox     = False
+        Me.Font            = New Font("Segoe UI", 9)
 
-        Dim y = 20
-        Dim defs As (String, String)() = {
-            ("Matricola*:", _m.Matricola),
-            ("Nome macchina*:", _m.NomeMacchina),
-            ("Modello*:", _m.Modello),
-            ("Tipo macchina:", _m.TipoMacchina),
-            ("Cliente finale:", _m.ClienteFinale),
-            ("Anno costruzione:", If(_m.AnnoCostruzione.HasValue, _m.AnnoCostruzione.Value.ToString(), ""))
-        }
-        For Each d In defs
-            Me.Controls.Add(New Label() With {.Text = d.Item1, .Location = New Point(20, y + 3), .Size = New Size(140, 20)})
-            Dim txt As New TextBox() With {.Text = d.Item2, .Location = New Point(165, y), .Size = New Size(295, 24)}
-            Me.Controls.Add(txt)
-            _fields(d.Item1) = txt
-            y += 34
+        Dim y = 16
+
+        ' ── Campi readonly da AS400 ──────────────────────
+        For Each pair In {("Matricola:", m.Matricola), ("Nome macchina:", m.NomeMacchina), ("Cliente:", m.ClienteFinale)}
+            Me.Controls.Add(New Label() With {.Text = pair.Item1, .Location = New Point(16, y + 3), .Size = New Size(120, 20)})
+            Me.Controls.Add(New Label() With {
+                .Text = pair.Item2, .Location = New Point(140, y + 3), .Size = New Size(300, 20),
+                .Font = New Font("Segoe UI", 9, FontStyle.Bold), .ForeColor = Color.FromArgb(40, 40, 40)
+            })
+            y += 28
         Next
+        y += 8
 
-        Me.Controls.Add(New Label() With {.Text = "Lingua:", .Location = New Point(20, y + 3), .Size = New Size(140, 20)})
-        Dim cmbLng As New ComboBox() With {.DropDownStyle = ComboBoxStyle.DropDownList, .Location = New Point(165, y), .Size = New Size(120, 24)}
+        ' ── Modello (dropdown) ───────────────────────────
+        Me.Controls.Add(New Label() With {.Text = "Modello:", .Location = New Point(16, y + 3), .Size = New Size(120, 20)})
+        Dim cmbMod As New ComboBox() With {
+            .DropDownStyle = ComboBoxStyle.DropDownList, .Location = New Point(140, y), .Size = New Size(280, 24)
+        }
+        Dim modelli = _db.GetModelli()
+        cmbMod.DataSource    = modelli
+        cmbMod.DisplayMember = "Nome"
+        cmbMod.ValueMember   = "ID"
+        Dim selMod = modelli.FirstOrDefault(Function(x) x.Nome = _m.Modello)
+        If selMod IsNot Nothing Then cmbMod.SelectedItem = selMod
+        Me.Controls.Add(cmbMod)
+        y += 32
+
+        ' ── Tipo macchina (dropdown) ─────────────────────
+        Me.Controls.Add(New Label() With {.Text = "Tipo macchina:", .Location = New Point(16, y + 3), .Size = New Size(120, 20)})
+        Dim cmbTipo As New ComboBox() With {
+            .DropDownStyle = ComboBoxStyle.DropDownList, .Location = New Point(140, y), .Size = New Size(280, 24)
+        }
+        Dim tipi = _db.GetTipiMacchina()
+        cmbTipo.DataSource    = tipi
+        cmbTipo.DisplayMember = "Nome"
+        cmbTipo.ValueMember   = "ID"
+        Dim selTipo = tipi.FirstOrDefault(Function(x) x.Nome = _m.TipoMacchina)
+        If selTipo IsNot Nothing Then cmbTipo.SelectedItem = selTipo
+        Me.Controls.Add(cmbTipo)
+        y += 32
+
+        ' ── Lingua ──────────────────────────────────────
+        Me.Controls.Add(New Label() With {.Text = "Lingua:", .Location = New Point(16, y + 3), .Size = New Size(120, 20)})
+        Dim cmbLng As New ComboBox() With {
+            .DropDownStyle = ComboBoxStyle.DropDownList, .Location = New Point(140, y), .Size = New Size(120, 24)
+        }
         For Each l In {"IT", "EN", "FR", "ES", "DE"} : cmbLng.Items.Add(l) : Next
         cmbLng.SelectedItem = If(String.IsNullOrEmpty(_m.LinguaCodice), "IT", _m.LinguaCodice)
         Me.Controls.Add(cmbLng)
-        _fields("Lingua:") = cmbLng
-        y += 34
+        y += 32
 
-        Dim chkAtt As New CheckBox() With {.Text = "Macchina attiva", .Checked = _m.Attiva, .Location = New Point(165, y), .AutoSize = True}
-        Me.Controls.Add(chkAtt)
-        y += 40
+        ' ── Note ────────────────────────────────────────
+        Me.Controls.Add(New Label() With {.Text = "Note:", .Location = New Point(16, y + 3), .Size = New Size(120, 20)})
+        Dim txtNote As New TextBox() With {
+            .Text = _m.Note, .Location = New Point(140, y), .Size = New Size(295, 54), .Multiline = True
+        }
+        Me.Controls.Add(txtNote)
+        y += 66
 
-        Dim btnOk  As New Button() With {.Text = "Salva",   .Location = New Point(165, y), .Size = New Size(100, 32)}
-        Dim btnAnn As New Button() With {.Text = "Annulla", .Location = New Point(275, y), .Size = New Size(100, 32), .DialogResult = DialogResult.Cancel}
+        ' ── Pulsanti ────────────────────────────────────
+        Dim btnOk  As New Button() With {.Text = "Salva",   .Location = New Point(140, y), .Size = New Size(100, 32)}
+        Dim btnAnn As New Button() With {.Text = "Annulla", .Location = New Point(250, y), .Size = New Size(100, 32), .DialogResult = DialogResult.Cancel}
         MC_PanelBuild.StyleButton(btnOk, True)
         MC_PanelBuild.StyleButton(btnAnn, False)
         Me.Controls.AddRange({btnOk, btnAnn})
         Me.CancelButton = btnAnn
 
         AddHandler btnOk.Click, Sub(s, e)
-            _m.Matricola     = _fields("Matricola*:").Text.Trim()
-            _m.NomeMacchina  = _fields("Nome macchina*:").Text.Trim()
-            _m.Modello       = _fields("Modello*:").Text.Trim()
-            _m.TipoMacchina  = _fields("Tipo macchina:").Text.Trim()
-            _m.ClienteFinale = _fields("Cliente finale:").Text.Trim()
-            Dim anno As Integer
-            If Integer.TryParse(_fields("Anno costruzione:").Text.Trim(), anno) Then _m.AnnoCostruzione = anno
+            _m.Modello      = If(cmbMod.SelectedItem IsNot Nothing, DirectCast(cmbMod.SelectedItem, MC_Modello).Nome, "")
+            _m.TipoMacchina = If(cmbTipo.SelectedItem IsNot Nothing, DirectCast(cmbTipo.SelectedItem, MC_TipoMacchina).Nome, "")
             _m.LinguaCodice = cmbLng.SelectedItem?.ToString()
-            _m.Attiva       = chkAtt.Checked
-            If String.IsNullOrEmpty(_m.Matricola) OrElse String.IsNullOrEmpty(_m.NomeMacchina) Then
-                MessageBox.Show("Matricola e Nome macchina sono obbligatori.", "Attenzione", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                Return
-            End If
+            _m.Note         = txtNote.Text.Trim()
             Try
-                _db.SalvaMacchina(_m)
+                _m.ID = _db.SalvaExtraMacchina(_m)
                 Me.DialogResult = DialogResult.OK
                 Me.Close()
             Catch ex As Exception
                 MessageBox.Show("Errore salvataggio: " & ex.Message, "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
         End Sub
+    End Sub
+End Class
+
+' Form per gestire le voci dei dropdown (Modelli / Tipi macchina)
+Public Class MC_FrmGestisciLookup
+    Inherits Form
+
+    Private _tipo As String   ' "Modelli" oppure "TipiMacchina"
+    Private _db As MC_DatabaseService
+    Private _lst As ListBox
+
+    Public Sub New(tipo As String, db As MC_DatabaseService)
+        _tipo = tipo
+        _db   = db
+        Me.Text            = If(tipo = "Modelli", "Gestisci Modelli", "Gestisci Tipi macchina")
+        Me.Size            = New Size(360, 380)
+        Me.StartPosition   = FormStartPosition.CenterParent
+        Me.FormBorderStyle = FormBorderStyle.FixedDialog
+        Me.MaximizeBox     = False
+        Me.Font            = New Font("Segoe UI", 9)
+
+        _lst = New ListBox() With {
+            .Location = New Point(16, 16), .Size = New Size(310, 260), .Font = New Font("Segoe UI", 10)
+        }
+        Me.Controls.Add(_lst)
+
+        Dim txtNuovo As New TextBox() With {.Location = New Point(16, 284), .Size = New Size(200, 24)}
+        Dim btnAgg   As New Button() With {.Text = "+ Aggiungi", .Location = New Point(224, 283), .Size = New Size(100, 26)}
+        Dim btnEl    As New Button() With {.Text = "Elimina selezionato", .Location = New Point(16, 316), .Size = New Size(170, 28)}
+        Dim btnChiudi As New Button() With {.Text = "Chiudi", .Location = New Point(200, 316), .Size = New Size(80, 28), .DialogResult = DialogResult.OK}
+        MC_PanelBuild.StyleButton(btnAgg, True)
+        MC_PanelBuild.StyleButton(btnEl, False)
+        MC_PanelBuild.StyleButton(btnChiudi, False)
+        Me.Controls.AddRange({txtNuovo, btnAgg, btnEl, btnChiudi})
+        Me.AcceptButton = btnChiudi
+
+        AddHandler btnAgg.Click, Sub(s, e)
+            Dim nome = txtNuovo.Text.Trim()
+            If String.IsNullOrEmpty(nome) Then Return
+            Try
+                If _tipo = "Modelli" Then _db.SalvaModello(nome) Else _db.SalvaTipoMacchina(nome)
+                txtNuovo.Clear()
+                Ricarica()
+            Catch ex As Exception
+                MessageBox.Show("Errore: " & ex.Message, "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+        End Sub
+
+        AddHandler btnEl.Click, Sub(s, e)
+            If _lst.SelectedItem Is Nothing Then Return
+            If MessageBox.Show($"Eliminare '{_lst.SelectedItem}'?", "Conferma",
+                               MessageBoxButtons.YesNo, MessageBoxIcon.Warning) <> DialogResult.Yes Then Return
+            Try
+                Dim id = CInt(_lst.SelectedValue)
+                If _tipo = "Modelli" Then _db.EliminaModello(id) Else _db.EliminaTipoMacchina(id)
+                Ricarica()
+            Catch ex As Exception
+                MessageBox.Show("Errore: " & ex.Message, "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+        End Sub
+
+        Ricarica()
+    End Sub
+
+    Private Sub Ricarica()
+        If _tipo = "Modelli" Then
+            _lst.DataSource    = _db.GetModelli()
+            _lst.DisplayMember = "Nome"
+            _lst.ValueMember   = "ID"
+        Else
+            _lst.DataSource    = _db.GetTipiMacchina()
+            _lst.DisplayMember = "Nome"
+            _lst.ValueMember   = "ID"
+        End If
     End Sub
 End Class
 

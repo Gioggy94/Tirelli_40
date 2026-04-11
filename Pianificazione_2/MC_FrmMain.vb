@@ -38,21 +38,21 @@ Public Class MC_FrmMain
     Private _btnCorrente As Button = Nothing
 
     Public Sub New()
-        InitializeComponent()
+        SetupUI()
         CaricaLingue()
         MostraPannello(pnlHome, btnHome)
     End Sub
 
-    Private Sub InitializeComponent()
-        Me.Text          = "ManualCraft CCMS – Tirelli"
-        Me.Size          = New Size(1200, 800)
-        Me.MinimumSize   = New Size(950, 650)
+    Private Sub SetupUI()
+        Me.Text = "ManualCraft CCMS – Tirelli"
+        Me.Size = New Size(1200, 800)
+        Me.MinimumSize = New Size(950, 650)
         Me.StartPosition = FormStartPosition.CenterScreen
-        Me.BackColor     = Color.FromArgb(245, 245, 242)
-        Me.Font          = New Font("Segoe UI", 9)
+        Me.BackColor = Color.FromArgb(245, 245, 242)
+        Me.Font = New Font("Segoe UI", 9)
 
-        BuildSidebar()
         BuildPanels()
+        BuildSidebar()
     End Sub
 
     ' ══════════════════════════════════════════════
@@ -217,7 +217,6 @@ Public Class MC_FrmMain
     End Sub
 
     Private Sub btnMacchine_Click(s As Object, e As EventArgs) Handles btnMacchine.Click
-        MC_PanelBuild.RicaricaMacchine(pnlMacchine, _db)
         MostraPannello(pnlMacchine, btnMacchine)
     End Sub
 

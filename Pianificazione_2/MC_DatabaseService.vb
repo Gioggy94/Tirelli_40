@@ -2,9 +2,40 @@ Imports System.Data.SqlClient
 
 Public Class MC_DatabaseService
 
+    Public Sub New()
+        Try
+            CreaTabelleSeNonEsistono()
+        Catch
+        End Try
+    End Sub
+
     Private Function GetConnection() As SqlConnection
         Return New SqlConnection(Homepage.sap_tirelli)
     End Function
+
+    ' ──────────────────────────────────────────────
+    ' SETUP TABELLE LOOKUP
+    ' ──────────────────────────────────────────────
+
+    Private Sub CreaTabelleSeNonEsistono()
+        Dim sql = "
+IF NOT EXISTS (SELECT * FROM [Tirelli_40].sys.tables WHERE name='MC_Modelli')
+CREATE TABLE [Tirelli_40].dbo.MC_Modelli (
+    ID   int IDENTITY(1,1) PRIMARY KEY,
+    Nome nvarchar(100) NOT NULL,
+    DataCreazione datetime DEFAULT GETDATE()
+);
+IF NOT EXISTS (SELECT * FROM [Tirelli_40].sys.tables WHERE name='MC_TipiMacchina')
+CREATE TABLE [Tirelli_40].dbo.MC_TipiMacchina (
+    ID   int IDENTITY(1,1) PRIMARY KEY,
+    Nome nvarchar(100) NOT NULL,
+    DataCreazione datetime DEFAULT GETDATE()
+);"
+        Using cn = GetConnection(), cmd As New SqlCommand(sql, cn)
+            cn.Open()
+            cmd.ExecuteNonQuery()
+        End Using
+    End Sub
 
     ' ──────────────────────────────────────────────
     ' MACCHINE
@@ -73,6 +104,158 @@ Public Class MC_DatabaseService
         Using cn = GetConnection(), cmd As New SqlCommand(sql, cn)
             AddMacchinaParams(cmd, m)
             cmd.Parameters.AddWithValue("@ID", m.ID)
+            cn.Open()
+            cmd.ExecuteNonQuery()
+        End Using
+    End Sub
+
+    ' Ricerca macchine su AS400 + arricchimento locale
+    Public Function GetMacchineAS400(filtroMatricola As String, filtroCliente As String) As List(Of MC_Macchina)
+        Dim lista As New List(Of MC_Macchina)
+        Dim fm = If(filtroMatricola?.Trim(), "")
+        Dim fc = If(filtroCliente?.Trim(), "")
+
+        Dim inner = "SELECT trim(t0.matricola) as matricola, " &
+                    "trim(t0.itemname) as itemname, " &
+                    "trim(t0.dscli_fatt) as dscli_fatt " &
+                    "FROM TIR90VIS.JGALCOM t0 " &
+                    "WHERE t0.matricola <> '''' " &
+                    "AND substring(t0.matricola,1,1) = ''M'' "
+        If Not String.IsNullOrEmpty(fm) Then
+            inner &= $"AND UPPER(t0.matricola) LIKE ''%{EscAs400(fm)}%'' "
+        End If
+        If Not String.IsNullOrEmpty(fc) Then
+            Dim fcE = EscAs400(fc)
+            inner &= $"AND (UPPER(t0.dscli_fatt) LIKE ''%{fcE}%'' " &
+                     $"OR UPPER(t0.codice_finale) LIKE ''%{fcE}%'') "
+        End If
+        inner &= "ORDER BY t0.matricola DESC FETCH FIRST 200 ROWS ONLY"
+
+        Dim sql = "SELECT oq.matricola, oq.itemname, oq.dscli_fatt, " &
+                  "ISNULL(m.ID, 0) as ID, " &
+                  "ISNULL(m.Modello, '') as Modello, " &
+                  "ISNULL(m.TipoMacchina, '') as TipoMacchina, " &
+                  "ISNULL(m.LinguaCodice, 'IT') as LinguaCodice, " &
+                  "ISNULL(m.Note, '') as Note " &
+                  $"FROM OPENQUERY(AS400, '{inner}') oq " &
+                  "LEFT JOIN [Tirelli_40].dbo.Macchine m ON m.Matricola = oq.matricola COLLATE SQL_Latin1_General_CP1_CI_AS"
+
+        Using cn = GetConnection(), cmd As New SqlCommand(sql, cn)
+            cn.Open()
+            Using rd = cmd.ExecuteReader()
+                While rd.Read()
+                    lista.Add(New MC_Macchina With {
+                        .Matricola     = rd.GetString(0).Trim(),
+                        .NomeMacchina  = If(rd.IsDBNull(1), "", rd.GetString(1).Trim()),
+                        .ClienteFinale = If(rd.IsDBNull(2), "", rd.GetString(2).Trim()),
+                        .ID            = rd.GetInt32(3),
+                        .Modello       = rd.GetString(4),
+                        .TipoMacchina  = rd.GetString(5),
+                        .LinguaCodice  = rd.GetString(6),
+                        .Note          = rd.GetString(7)
+                    })
+                End While
+            End Using
+        End Using
+        Return lista
+    End Function
+
+    Private Shared Function EscAs400(s As String) As String
+        Return s.ToUpper().Replace("'", "''''")
+    End Function
+
+    ' UPSERT dati locali per una macchina (crea record in Macchine se non esiste)
+    Public Function SalvaExtraMacchina(m As MC_Macchina) As Integer
+        Dim sql = "IF EXISTS (SELECT 1 FROM [Tirelli_40].dbo.Macchine WHERE Matricola=@Mat) " &
+                  "  UPDATE [Tirelli_40].dbo.Macchine SET " &
+                  "    NomeMacchina=@Nome, Modello=@Mod, TipoMacchina=@Tipo, " &
+                  "    ClienteFinale=@Cli, LinguaCodice=@Lng, Note=@Note, DataModifica=GETDATE() " &
+                  "  WHERE Matricola=@Mat " &
+                  "ELSE " &
+                  "  INSERT INTO [Tirelli_40].dbo.Macchine " &
+                  "    (Matricola,NomeMacchina,Modello,TipoMacchina,ClienteFinale,LinguaCodice,Attiva,Note) " &
+                  "  VALUES (@Mat,@Nome,@Mod,@Tipo,@Cli,@Lng,1,@Note); " &
+                  "SELECT ID FROM [Tirelli_40].dbo.Macchine WHERE Matricola=@Mat"
+        Using cn = GetConnection(), cmd As New SqlCommand(sql, cn)
+            cmd.Parameters.AddWithValue("@Mat",  m.Matricola)
+            cmd.Parameters.AddWithValue("@Nome", If(m.NomeMacchina, ""))
+            cmd.Parameters.AddWithValue("@Mod", If(m.Modello, ""))
+            cmd.Parameters.AddWithValue("@Tipo", If(m.TipoMacchina, ""))
+            cmd.Parameters.AddWithValue("@Cli", If(m.ClienteFinale, ""))
+            cmd.Parameters.AddWithValue("@Lng", If(String.IsNullOrEmpty(m.LinguaCodice), "IT", m.LinguaCodice))
+            cmd.Parameters.AddWithValue("@Note", If(m.Note, ""))
+            cn.Open()
+            Return CInt(cmd.ExecuteScalar())
+        End Using
+    End Function
+
+    ' ──────────────────────────────────────────────
+    ' MODELLI
+    ' ──────────────────────────────────────────────
+
+    Public Function GetModelli() As List(Of MC_Modello)
+        Dim lista As New List(Of MC_Modello)
+        Using cn = GetConnection(),
+              cmd As New SqlCommand("SELECT ID, Nome FROM [Tirelli_40].dbo.MC_Modelli ORDER BY Nome", cn)
+            cn.Open()
+            Using rd = cmd.ExecuteReader()
+                While rd.Read()
+                    lista.Add(New MC_Modello With {.ID = rd.GetInt32(0), .Nome = rd.GetString(1)})
+                End While
+            End Using
+        End Using
+        Return lista
+    End Function
+
+    Public Sub SalvaModello(nome As String)
+        Using cn = GetConnection(),
+              cmd As New SqlCommand("INSERT INTO [Tirelli_40].dbo.MC_Modelli (Nome) VALUES (@N)", cn)
+            cmd.Parameters.AddWithValue("@N", nome)
+            cn.Open()
+            cmd.ExecuteNonQuery()
+        End Using
+    End Sub
+
+    Public Sub EliminaModello(id As Integer)
+        Using cn = GetConnection(),
+              cmd As New SqlCommand("DELETE FROM [Tirelli_40].dbo.MC_Modelli WHERE ID=@ID", cn)
+            cmd.Parameters.AddWithValue("@ID", id)
+            cn.Open()
+            cmd.ExecuteNonQuery()
+        End Using
+    End Sub
+
+    ' ──────────────────────────────────────────────
+    ' TIPI MACCHINA
+    ' ──────────────────────────────────────────────
+
+    Public Function GetTipiMacchina() As List(Of MC_TipoMacchina)
+        Dim lista As New List(Of MC_TipoMacchina)
+        Using cn = GetConnection(),
+              cmd As New SqlCommand("SELECT ID, Nome FROM [Tirelli_40].dbo.MC_TipiMacchina ORDER BY Nome", cn)
+            cn.Open()
+            Using rd = cmd.ExecuteReader()
+                While rd.Read()
+                    lista.Add(New MC_TipoMacchina With {.ID = rd.GetInt32(0), .Nome = rd.GetString(1)})
+                End While
+            End Using
+        End Using
+        Return lista
+    End Function
+
+    Public Sub SalvaTipoMacchina(nome As String)
+        Using cn = GetConnection(),
+              cmd As New SqlCommand("INSERT INTO [Tirelli_40].dbo.MC_TipiMacchina (Nome) VALUES (@N)", cn)
+            cmd.Parameters.AddWithValue("@N", nome)
+            cn.Open()
+            cmd.ExecuteNonQuery()
+        End Using
+    End Sub
+
+    Public Sub EliminaTipoMacchina(id As Integer)
+        Using cn = GetConnection(),
+              cmd As New SqlCommand("DELETE FROM [Tirelli_40].dbo.MC_TipiMacchina WHERE ID=@ID", cn)
+            cmd.Parameters.AddWithValue("@ID", id)
             cn.Open()
             cmd.ExecuteNonQuery()
         End Using

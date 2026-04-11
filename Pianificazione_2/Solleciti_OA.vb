@@ -7,8 +7,12 @@ Public Class Solleciti_OA
     Private _codFornSelezionato As String = ""
     Private _descFornSelezionato As String = ""
     Private _aggiornandoAnteprima As Boolean = False
+    Private _htmlAnteprima As String = ""
+    Private _fornSollecito As New HashSet(Of String)(StringComparer.OrdinalIgnoreCase)
 
     Private Sub Solleciti_OA_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        CreaTabellaFornitatoriSollecito()
+        CaricaFornitatoriSollecito()
         ImpostaListaFornitori()
         ImpostaGriglia()
     End Sub
@@ -23,9 +27,10 @@ Public Class Solleciti_OA
         lvFornitori.FullRowSelect = True
         lvFornitori.GridLines = True
         lvFornitori.MultiSelect = True
-        lvFornitori.Columns.Add("Fornitore", 210)
-        lvFornitori.Columns.Add("Righe", 55, HorizontalAlignment.Right)
-        lvFornitori.Columns.Add("Scad.", 55, HorizontalAlignment.Right)
+        lvFornitori.Columns.Add("Sol.", 38, HorizontalAlignment.Center)
+        lvFornitori.Columns.Add("Fornitore", 185)
+        lvFornitori.Columns.Add("Righe", 50, HorizontalAlignment.Right)
+        lvFornitori.Columns.Add("Scad.", 50, HorizontalAlignment.Right)
     End Sub
 
     Private Sub ImpostaGriglia()
@@ -60,6 +65,7 @@ Public Class Solleciti_OA
                           End Sub
 
         aggiungiCol("colNumdoc", "N. Ordine", 95)
+        aggiungiCol("colMatricola", "Matricola", 85)
         aggiungiCol("colCodart", "Codice", 105)
         aggiungiCol("colDesCode", "Descrizione", 215)
         aggiungiCol("colDataRichiesta", "Data rich.", 95)
@@ -110,9 +116,9 @@ Public Class Solleciti_OA
             CMD.CommandText =
                 "SELECT * FROM OPENQUERY(AS400, " &
                 "'SELECT numdoc, codart, des_code, data_immissione, data_richiesta, " &
-                " qta_ord, qta_ent, evaso, id_comm, cod_forn, desc_for, disegno " &
+                " qta_ord, qta_ent, evaso, id_comm,matricola, cod_forn, desc_for, disegno " &
                 " FROM TIR90VIS.JGALord t0 " &
-                " WHERE DOC = ''OA'' " &
+                " WHERE DOC = ''OA'' and (substring(codart,1,1)=''C'' or substring(codart,1,1)=''D'' or substring(codart,1,1)=''0'')  " &
                 " AND evaso <> ''S''')"
             Dim DA As New SqlDataAdapter(CMD)
             _datiOA = New DataTable
@@ -138,6 +144,7 @@ Public Class Solleciti_OA
         Dim oggi = DateTime.Today
         Dim filtroComm = txtFiltroCommessa.Text.Trim().ToUpper()
         Dim soloScaduti = chkSoloScaduti.Checked
+        Dim soloSollecito = chkSoloSollecito.Checked
         Dim filtroForn = If(cmbFiltroFornitore.SelectedIndex > 0, CStr(cmbFiltroFornitore.SelectedItem), "")
 
         Dim gruppi = _datiOA.AsEnumerable().
@@ -159,7 +166,8 @@ Public Class Solleciti_OA
                            .RigheScadute = scadute
                        }
                    End Function).
-            Where(Function(f) Not soloScaduti OrElse f.RigheScadute > 0).
+            Where(Function(f) (Not soloScaduti OrElse f.RigheScadute > 0) AndAlso
+                              (Not soloSollecito OrElse _fornSollecito.Contains(f.CodForn))).
             OrderBy(Function(f) f.DescFor).
             ToList()
 
@@ -177,14 +185,20 @@ Public Class Solleciti_OA
 
         lvFornitori.Items.Clear()
         For Each f In gruppi
-            Dim item As New ListViewItem(f.DescFor & " [" & f.CodForn & "]")
+            Dim inSollecito = _fornSollecito.Contains(f.CodForn)
+            Dim item As New ListViewItem(If(inSollecito, "★", ""))
+            item.SubItems.Add(f.DescFor & " [" & f.CodForn & "]")
             item.SubItems.Add(f.TotRighe.ToString())
             item.SubItems.Add(f.RigheScadute.ToString())
             item.Tag = f.CodForn
+            If inSollecito Then
+                item.BackColor = Color.FromArgb(230, 255, 230)
+                item.Font = New Font(lvFornitori.Font, FontStyle.Bold)
+            End If
             If f.RigheScadute > 0 Then item.ForeColor = Color.DarkRed
             lvFornitori.Items.Add(item)
         Next
-        lblConteggioFornitori.Text = gruppi.Count & " fornitori"
+        lblConteggioFornitori.Text = gruppi.Count & " fornitori  (" & _fornSollecito.Count & " da sollecitare)"
     End Sub
 
     ' ─────────────────────────────────────────────────────────
@@ -223,9 +237,13 @@ Public Class Solleciti_OA
             Dim dataImmiss = ParseDataAS400(r("data_immissione"))
             Dim scaduta = dataRich.HasValue AndAlso dataRich.Value < oggi
 
+            ' Applica filtro "solo scaduti" anche alla griglia ordini
+            If chkSoloScaduti.Checked AndAlso Not scaduta Then Continue For
+
             Dim idx = dgvOrdini.Rows.Add(
                 True,
                 r("numdoc").ToString().Trim(),
+                r("matricola").ToString().Trim(),
                 r("codart").ToString().Trim(),
                 r("des_code").ToString().Trim(),
                 If(dataRich.HasValue, dataRich.Value.ToString("dd/MM/yyyy"), ""),
@@ -281,45 +299,72 @@ Public Class Solleciti_OA
 
         If righeSelezionate.Count = 0 Then
             rtbAnteprima.Text = "(nessuna riga selezionata)"
+            _htmlAnteprima = ""
             Return
         End If
-
-        Dim sb As New System.Text.StringBuilder
-        sb.AppendLine("Spett.le " & descFor & ",")
-        sb.AppendLine()
-        sb.AppendLine("con la presente Vi sollecitiamo la consegna dei seguenti ordini di acquisto ancora in attesa di evasione:")
-        sb.AppendLine()
-
-        Dim hdr = String.Format("{0,-12} {1,-14} {2,-32} {3,8} {4,8} {5,12}  {6}",
-                                 "N. Ordine", "Codice", "Descrizione", "Q.ord.", "Q.ric.", "Data rich.", "Commessa")
-        sb.AppendLine(hdr)
-        sb.AppendLine(New String("-"c, Math.Max(hdr.Length, 90)))
-
-        For Each row In righeSelezionate
-            Dim numdoc = If(TryCast(row.Cells("colNumdoc").Value, String), "")
-            Dim codart = If(TryCast(row.Cells("colCodart").Value, String), "")
-            Dim desc = If(TryCast(row.Cells("colDesCode").Value, String), "")
-            If desc.Length > 30 Then desc = desc.Substring(0, 30)
-            Dim qtaOrd = If(TryCast(row.Cells("colQtaOrd").Value, String), "")
-            Dim qtaEnt = If(TryCast(row.Cells("colQtaEnt").Value, String), "")
-            Dim dataRich = If(TryCast(row.Cells("colDataRichiesta").Value, String), "")
-            Dim idComm = If(TryCast(row.Cells("colIdComm").Value, String), "")
-            sb.AppendLine(String.Format("{0,-12} {1,-14} {2,-32} {3,8} {4,8} {5,12}  {6}",
-                                         numdoc, codart, desc, qtaOrd, qtaEnt, dataRich, idComm))
-        Next
-
-        sb.AppendLine()
-        sb.AppendLine("Vi chiediamo cortesemente di confermarci la data di consegna prevista per ciascun articolo.")
-        sb.AppendLine()
-        sb.AppendLine("In attesa di un vostro riscontro, porgiamo distinti saluti.")
-        sb.AppendLine()
-        sb.AppendLine("Tirelli S.r.l. - Ufficio Acquisti")
-
-        rtbAnteprima.Text = sb.ToString()
 
         If txtOggetto.Text = "" Then
             txtOggetto.Text = "Sollecito ordini di acquisto - Tirelli S.r.l."
         End If
+
+        ' ── Genera HTML ──────────────────────────────────────────────────
+        Dim hsb As New System.Text.StringBuilder
+        hsb.AppendLine("<html><body style='font-family:Calibri,Arial,sans-serif;font-size:11pt;'>")
+        hsb.AppendLine($"<p>Spett.le {Net.WebUtility.HtmlEncode(descFor)},</p>")
+        hsb.AppendLine("<p>con la presente Vi sollecitiamo la consegna dei seguenti ordini di acquisto ancora in attesa di evasione:</p>")
+        hsb.AppendLine("<table border='1' cellpadding='5' cellspacing='0' style='border-collapse:collapse;font-size:10pt;'>")
+        hsb.AppendLine("<tr style='background-color:#1F5FAF;color:white;font-weight:bold;'>")
+        For Each h In {"N. Ordine", "Matricola", "Codice", "Disegno", "Descrizione", "Data ordine", "Data consegna", "Q.ord.", "Q.ric.", "Q.res.", "Commessa"}
+            hsb.AppendLine($"<th style='padding:5px 8px;'>{h}</th>")
+        Next
+        hsb.AppendLine("</tr>")
+
+        Dim oggi = DateTime.Today
+        Dim txtSb As New System.Text.StringBuilder  ' testo per anteprima rtb
+        txtSb.AppendLine($"A: {descFor}")
+        txtSb.AppendLine("Oggetto: " & txtOggetto.Text)
+        txtSb.AppendLine()
+        txtSb.AppendLine(String.Format("{0,-10} {1,-10} {2,-12} {3,-28} {4,-12} {5,-12} {6,6} {7,6} {8,6}  {9}",
+                                        "N.Ordine", "Matricola", "Codice", "Descrizione",
+                                        "Dt.Ordine", "Dt.Consegna", "Q.ord", "Q.ric", "Q.res", "Commessa"))
+        txtSb.AppendLine(New String("-"c, 110))
+
+        For Each row In righeSelezionate
+            Dim numdoc = If(TryCast(row.Cells("colNumdoc").Value, String), "")
+            Dim matr = If(TryCast(row.Cells("colMatricola").Value, String), "")
+            Dim codart = If(TryCast(row.Cells("colCodart").Value, String), "")
+            Dim disegno = If(TryCast(row.Cells("colDisegno").Value, String), "")
+            Dim desc = If(TryCast(row.Cells("colDesCode").Value, String), "")
+            Dim dtOrd = If(TryCast(row.Cells("colDataImmissione").Value, String), "")
+            Dim dtCons = If(TryCast(row.Cells("colDataRichiesta").Value, String), "")
+            Dim qtaOrd = If(TryCast(row.Cells("colQtaOrd").Value, String), "")
+            Dim qtaEnt = If(TryCast(row.Cells("colQtaEnt").Value, String), "")
+            Dim qtaRes = If(TryCast(row.Cells("colQtaRes").Value, String), "")
+            Dim idComm = If(TryCast(row.Cells("colIdComm").Value, String), "")
+
+            ' Scaduta = data consegna in passato
+            Dim dtConsDate As Date
+            Dim scaduta = Date.TryParse(dtCons, dtConsDate) AndAlso dtConsDate < oggi
+            Dim rowBg = If(scaduta, "background-color:#FFD0D0;", "")
+
+            hsb.AppendLine($"<tr style='{rowBg}'>")
+            For Each v In {numdoc, matr, codart, disegno, desc, dtOrd, dtCons, qtaOrd, qtaEnt, qtaRes, idComm}
+                hsb.AppendLine($"<td style='padding:4px 8px;'>{Net.WebUtility.HtmlEncode(v)}</td>")
+            Next
+            hsb.AppendLine("</tr>")
+
+            Dim descShort = If(desc.Length > 26, desc.Substring(0, 26), desc)
+            txtSb.AppendLine(String.Format("{0,-10} {1,-10} {2,-12} {3,-28} {4,-12} {5,-12} {6,6} {7,6} {8,6}  {9}",
+                                            numdoc, matr, codart, descShort, dtOrd, dtCons, qtaOrd, qtaEnt, qtaRes, idComm))
+        Next
+
+        hsb.AppendLine("</table>")
+        hsb.AppendLine("<p>Vi chiediamo cortesemente di confermarci la data di consegna prevista per ciascun articolo.</p>")
+        hsb.AppendLine("<p>In attesa di un vostro riscontro, porgiamo distinti saluti.<br/><br/>Tirelli S.r.l. - Ufficio Acquisti</p>")
+        hsb.AppendLine("</body></html>")
+
+        _htmlAnteprima = hsb.ToString()
+        rtbAnteprima.Text = txtSb.ToString()
     End Sub
 
     ' ─────────────────────────────────────────────────────────
@@ -327,7 +372,7 @@ Public Class Solleciti_OA
     ' ─────────────────────────────────────────────────────────
 
     Sub PreparaMail()
-        If rtbAnteprima.Text.Trim() = "" OrElse rtbAnteprima.Text.Trim() = "(nessuna riga selezionata)" Then
+        If String.IsNullOrWhiteSpace(_htmlAnteprima) Then
             MessageBox.Show("Nessuna riga selezionata. Selezionare almeno una riga.", "Attenzione", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
@@ -337,7 +382,7 @@ Public Class Solleciti_OA
             With objMail
                 .To = txtEmail.Text.Trim()
                 .Subject = txtOggetto.Text
-                .Body = rtbAnteprima.Text
+                .HTMLBody = _htmlAnteprima
                 .Display()
             End With
             objMail = Nothing
@@ -455,12 +500,91 @@ Public Class Solleciti_OA
         If _datiOA IsNot Nothing Then AggiornaTabellaFornitori()
     End Sub
 
+    Private Sub chkSoloSollecito_CheckedChanged(sender As Object, e As EventArgs) Handles chkSoloSollecito.CheckedChanged
+        If _datiOA IsNot Nothing Then AggiornaTabellaFornitori()
+    End Sub
+
     Private Sub txtFiltroCommessa_TextChanged(sender As Object, e As EventArgs) Handles txtFiltroCommessa.TextChanged
         If _datiOA IsNot Nothing Then AggiornaTabellaFornitori()
     End Sub
 
     Private Sub cmbFiltroFornitore_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbFiltroFornitore.SelectedIndexChanged
         If _datiOA IsNot Nothing Then AggiornaTabellaFornitori()
+    End Sub
+
+    Private Sub btnToggleSollecito_Click(sender As Object, e As EventArgs) Handles btnToggleSollecito.Click
+        If lvFornitori.SelectedItems.Count = 0 Then
+            MessageBox.Show("Seleziona un fornitore dalla lista.", "Attenzione", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Return
+        End If
+        Dim item = lvFornitori.SelectedItems(0)
+        Dim codForn = item.Tag.ToString()
+        Dim descFor = item.SubItems(1).Text  ' SubItems(0)=Sol., SubItems(1)=nome fornitore
+        Try
+            ToggleFornitoreSollecito(codForn, descFor)
+            CaricaFornitatoriSollecito()
+            AggiornaTabellaFornitori()
+        Catch ex As Exception
+            MessageBox.Show("Errore: " & ex.Message, "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    Private Sub lvFornitori_DoubleClick(sender As Object, e As EventArgs) Handles lvFornitori.DoubleClick
+        btnToggleSollecito_Click(sender, e)
+    End Sub
+
+    ' ─────────────────────────────────────────────────────────
+    ' DB — Fornitori da sollecitare
+    ' ─────────────────────────────────────────────────────────
+
+    Private Sub CreaTabellaFornitatoriSollecito()
+        Try
+            Using cn As New SqlConnection(Homepage.sap_tirelli)
+                cn.Open()
+                Dim sql = "IF NOT EXISTS (SELECT * FROM [Tirelli_40].sys.tables WHERE name='FornitatoriSollecito') " &
+                          "CREATE TABLE [Tirelli_40].dbo.FornitatoriSollecito (" &
+                          "  CodForn nvarchar(30) PRIMARY KEY, " &
+                          "  DescFor nvarchar(250), " &
+                          "  DataAggiunta datetime DEFAULT GETDATE())"
+                Call New SqlCommand(sql, cn).ExecuteNonQuery()
+            End Using
+        Catch
+        End Try
+    End Sub
+
+    Private Sub CaricaFornitatoriSollecito()
+        _fornSollecito.Clear()
+        Try
+            Using cn As New SqlConnection(Homepage.sap_tirelli)
+                cn.Open()
+                Using cmd As New SqlCommand("SELECT CodForn FROM [Tirelli_40].dbo.FornitatoriSollecito", cn)
+                    Using rd = cmd.ExecuteReader()
+                        While rd.Read()
+                            _fornSollecito.Add(rd.GetString(0).Trim())
+                        End While
+                    End Using
+                End Using
+            End Using
+        Catch
+        End Try
+    End Sub
+
+    Private Sub ToggleFornitoreSollecito(codForn As String, descFor As String)
+        Using cn As New SqlConnection(Homepage.sap_tirelli)
+            cn.Open()
+            If _fornSollecito.Contains(codForn) Then
+                Using cmd As New SqlCommand("DELETE FROM [Tirelli_40].dbo.FornitatoriSollecito WHERE CodForn=@C", cn)
+                    cmd.Parameters.AddWithValue("@C", codForn)
+                    cmd.ExecuteNonQuery()
+                End Using
+            Else
+                Using cmd As New SqlCommand("INSERT INTO [Tirelli_40].dbo.FornitatoriSollecito (CodForn, DescFor) VALUES (@C, @D)", cn)
+                    cmd.Parameters.AddWithValue("@C", codForn)
+                    cmd.Parameters.AddWithValue("@D", descFor)
+                    cmd.ExecuteNonQuery()
+                End Using
+            End If
+        End Using
     End Sub
 
 End Class

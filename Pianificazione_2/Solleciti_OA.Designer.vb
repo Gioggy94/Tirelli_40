@@ -23,12 +23,15 @@ Partial Class Solleciti_OA
         Me.lblFiltroComm = New System.Windows.Forms.Label()
         Me.txtFiltroCommessa = New System.Windows.Forms.TextBox()
         Me.chkSoloScaduti = New System.Windows.Forms.CheckBox()
+        Me.chkSoloSollecito = New System.Windows.Forms.CheckBox()
         Me.btnCarica = New System.Windows.Forms.Button()
         Me.lblStato = New System.Windows.Forms.Label()
         Me.scMain = New System.Windows.Forms.SplitContainer()
         Me.gbFornitori = New System.Windows.Forms.GroupBox()
         Me.lvFornitori = New System.Windows.Forms.ListView()
+        Me.pnlFornBottom = New System.Windows.Forms.Panel()
         Me.lblConteggioFornitori = New System.Windows.Forms.Label()
+        Me.btnToggleSollecito = New System.Windows.Forms.Button()
         Me.gbOrdini = New System.Windows.Forms.GroupBox()
         Me.pnlBtnsOrdini = New System.Windows.Forms.Panel()
         Me.btnSelTutti = New System.Windows.Forms.Button()
@@ -90,6 +93,7 @@ Partial Class Solleciti_OA
         Me.gbFiltri.Controls.Add(Me.lblFiltroComm)
         Me.gbFiltri.Controls.Add(Me.txtFiltroCommessa)
         Me.gbFiltri.Controls.Add(Me.chkSoloScaduti)
+        Me.gbFiltri.Controls.Add(Me.chkSoloSollecito)
         Me.gbFiltri.Controls.Add(Me.btnCarica)
         Me.gbFiltri.Controls.Add(Me.lblStato)
 
@@ -126,11 +130,19 @@ Partial Class Solleciti_OA
         Me.chkSoloScaduti.Text = "Solo scaduti"
         Me.chkSoloScaduti.TabIndex = 2
 
+        ' chkSoloSollecito
+        Me.chkSoloSollecito.AutoSize = True
+        Me.chkSoloSollecito.Location = New System.Drawing.Point(610, 23)
+        Me.chkSoloSollecito.Name = "chkSoloSollecito"
+        Me.chkSoloSollecito.Text = "Solo da sollecitare"
+        Me.chkSoloSollecito.TabIndex = 3
+        Me.chkSoloSollecito.ForeColor = System.Drawing.Color.DarkGreen
+
         ' btnCarica
-        Me.btnCarica.Location = New System.Drawing.Point(625, 18)
+        Me.btnCarica.Location = New System.Drawing.Point(765, 18)
         Me.btnCarica.Name = "btnCarica"
         Me.btnCarica.Size = New System.Drawing.Size(120, 28)
-        Me.btnCarica.TabIndex = 3
+        Me.btnCarica.TabIndex = 4
         Me.btnCarica.Text = "Carica dati"
         Me.btnCarica.BackColor = System.Drawing.Color.SteelBlue
         Me.btnCarica.ForeColor = System.Drawing.Color.White
@@ -138,9 +150,9 @@ Partial Class Solleciti_OA
 
         ' lblStato
         Me.lblStato.AutoSize = False
-        Me.lblStato.Location = New System.Drawing.Point(758, 24)
+        Me.lblStato.Location = New System.Drawing.Point(898, 24)
         Me.lblStato.Name = "lblStato"
-        Me.lblStato.Size = New System.Drawing.Size(500, 18)
+        Me.lblStato.Size = New System.Drawing.Size(450, 18)
         Me.lblStato.ForeColor = System.Drawing.Color.Navy
         Me.lblStato.Text = ""
 
@@ -161,19 +173,35 @@ Partial Class Solleciti_OA
         Me.gbFornitori.Text = "Fornitori con OA aperti"
         Me.gbFornitori.TabIndex = 0
         Me.gbFornitori.Controls.Add(Me.lvFornitori)
-        Me.gbFornitori.Controls.Add(Me.lblConteggioFornitori)
+        Me.gbFornitori.Controls.Add(Me.pnlFornBottom)
 
         Me.lvFornitori.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lvFornitori.Name = "lvFornitori"
         Me.lvFornitori.TabIndex = 0
 
-        Me.lblConteggioFornitori.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.lblConteggioFornitori.Height = 20
+        ' pnlFornBottom — contiene conteggio + pulsante toggle sollecito
+        Me.pnlFornBottom.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.pnlFornBottom.Height = 28
+        Me.pnlFornBottom.Name = "pnlFornBottom"
+        Me.pnlFornBottom.Controls.Add(Me.lblConteggioFornitori)
+        Me.pnlFornBottom.Controls.Add(Me.btnToggleSollecito)
+
+        Me.lblConteggioFornitori.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lblConteggioFornitori.Name = "lblConteggioFornitori"
         Me.lblConteggioFornitori.Text = ""
         Me.lblConteggioFornitori.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.lblConteggioFornitori.Padding = New System.Windows.Forms.Padding(4, 0, 0, 0)
         Me.lblConteggioFornitori.ForeColor = System.Drawing.Color.DimGray
+
+        Me.btnToggleSollecito.Dock = System.Windows.Forms.DockStyle.Right
+        Me.btnToggleSollecito.Width = 175
+        Me.btnToggleSollecito.Name = "btnToggleSollecito"
+        Me.btnToggleSollecito.Text = "★ Aggiungi/Rimuovi sollecito"
+        Me.btnToggleSollecito.TabIndex = 1
+        Me.btnToggleSollecito.BackColor = System.Drawing.Color.DarkGreen
+        Me.btnToggleSollecito.ForeColor = System.Drawing.Color.White
+        Me.btnToggleSollecito.UseVisualStyleBackColor = False
+        Me.btnToggleSollecito.Font = New System.Drawing.Font("Segoe UI", 8.5F)
 
         ' ── scMain.Panel2 → gbOrdini ─────────────────────────
         Me.scMain.Panel2.Controls.Add(Me.gbOrdini)
@@ -336,12 +364,15 @@ Partial Class Solleciti_OA
     Friend WithEvents lblFiltroComm As System.Windows.Forms.Label
     Friend WithEvents txtFiltroCommessa As System.Windows.Forms.TextBox
     Friend WithEvents chkSoloScaduti As System.Windows.Forms.CheckBox
+    Friend WithEvents chkSoloSollecito As System.Windows.Forms.CheckBox
     Friend WithEvents btnCarica As System.Windows.Forms.Button
     Friend WithEvents lblStato As System.Windows.Forms.Label
     Friend WithEvents scMain As System.Windows.Forms.SplitContainer
     Friend WithEvents gbFornitori As System.Windows.Forms.GroupBox
     Friend WithEvents lvFornitori As System.Windows.Forms.ListView
+    Friend WithEvents pnlFornBottom As System.Windows.Forms.Panel
     Friend WithEvents lblConteggioFornitori As System.Windows.Forms.Label
+    Friend WithEvents btnToggleSollecito As System.Windows.Forms.Button
     Friend WithEvents gbOrdini As System.Windows.Forms.GroupBox
     Friend WithEvents pnlBtnsOrdini As System.Windows.Forms.Panel
     Friend WithEvents btnSelTutti As System.Windows.Forms.Button
