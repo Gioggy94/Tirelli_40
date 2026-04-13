@@ -24,6 +24,19 @@ Partial Class Magazzino
     Private Sub InitializeComponent()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -69,19 +82,6 @@ Partial Class Magazzino
         Dim DataGridViewCellStyle57 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle58 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle59 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.Panel6 = New System.Windows.Forms.Panel()
         Me.Panel5 = New System.Windows.Forms.Panel()
@@ -102,6 +102,24 @@ Partial Class Magazzino
         Me.GroupBox10 = New System.Windows.Forms.GroupBox()
         Me.Label22 = New System.Windows.Forms.Label()
         Me.DataGridView_trasferito = New System.Windows.Forms.DataGridView()
+        Me.Doc = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ODP = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.POS = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ODP_NAME = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.OC = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.Q = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Tras = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Da_tras = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Comm = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Baia = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Cliente = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Mag_IM = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Div = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Stato = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Linenum = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.REP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Fase = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Evas = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.TableLayoutPanel17 = New System.Windows.Forms.TableLayoutPanel()
         Me.Button17 = New System.Windows.Forms.Button()
@@ -330,24 +348,6 @@ Partial Class Magazzino
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.BackgroundWorker = New System.ComponentModel.BackgroundWorker()
-        Me.Doc = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ODP = New System.Windows.Forms.DataGridViewButtonColumn()
-        Me.POS = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ODP_NAME = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.OC = New System.Windows.Forms.DataGridViewButtonColumn()
-        Me.Q = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Tras = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Da_tras = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Comm = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Baia = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Cliente = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Mag_IM = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Div = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Stato = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Linenum = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.REP = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Fase = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Evas = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel4.SuspendLayout()
         Me.Panel5.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -721,6 +721,166 @@ Partial Class Magazzino
         Me.DataGridView_trasferito.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
         Me.DataGridView_trasferito.Size = New System.Drawing.Size(669, 540)
         Me.DataGridView_trasferito.TabIndex = 173
+        '
+        'Doc
+        '
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Doc.DefaultCellStyle = DataGridViewCellStyle3
+        Me.Doc.FillWeight = 60.0!
+        Me.Doc.HeaderText = "Doc"
+        Me.Doc.MinimumWidth = 15
+        Me.Doc.Name = "Doc"
+        '
+        'ODP
+        '
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ODP.DefaultCellStyle = DataGridViewCellStyle4
+        Me.ODP.FillWeight = 80.0!
+        Me.ODP.HeaderText = "ODP"
+        Me.ODP.MinimumWidth = 15
+        Me.ODP.Name = "ODP"
+        Me.ODP.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.ODP.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        '
+        'POS
+        '
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.POS.DefaultCellStyle = DataGridViewCellStyle5
+        Me.POS.FillWeight = 80.0!
+        Me.POS.HeaderText = "POS"
+        Me.POS.Name = "POS"
+        '
+        'ODP_NAME
+        '
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.ODP_NAME.DefaultCellStyle = DataGridViewCellStyle6
+        Me.ODP_NAME.FillWeight = 200.0!
+        Me.ODP_NAME.HeaderText = "ODP NAME"
+        Me.ODP_NAME.MinimumWidth = 6
+        Me.ODP_NAME.Name = "ODP_NAME"
+        '
+        'OC
+        '
+        Me.OC.FillWeight = 80.0!
+        Me.OC.HeaderText = "OC"
+        Me.OC.MinimumWidth = 15
+        Me.OC.Name = "OC"
+        Me.OC.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.OC.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        '
+        'Q
+        '
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle7.Format = "N2"
+        Me.Q.DefaultCellStyle = DataGridViewCellStyle7
+        Me.Q.FillWeight = 80.0!
+        Me.Q.HeaderText = "Q"
+        Me.Q.MinimumWidth = 15
+        Me.Q.Name = "Q"
+        '
+        'Tras
+        '
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle8.Format = "N2"
+        Me.Tras.DefaultCellStyle = DataGridViewCellStyle8
+        Me.Tras.FillWeight = 80.0!
+        Me.Tras.HeaderText = "Tras"
+        Me.Tras.MinimumWidth = 15
+        Me.Tras.Name = "Tras"
+        '
+        'Da_tras
+        '
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle9.Format = "N2"
+        Me.Da_tras.DefaultCellStyle = DataGridViewCellStyle9
+        Me.Da_tras.FillWeight = 80.0!
+        Me.Da_tras.HeaderText = "Da Tras"
+        Me.Da_tras.MinimumWidth = 15
+        Me.Da_tras.Name = "Da_tras"
+        '
+        'Comm
+        '
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Comm.DefaultCellStyle = DataGridViewCellStyle10
+        Me.Comm.HeaderText = "Commessa"
+        Me.Comm.MinimumWidth = 15
+        Me.Comm.Name = "Comm"
+        '
+        'Baia
+        '
+        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Baia.DefaultCellStyle = DataGridViewCellStyle11
+        Me.Baia.HeaderText = "Baia"
+        Me.Baia.Name = "Baia"
+        '
+        'Cliente
+        '
+        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle12.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.Cliente.DefaultCellStyle = DataGridViewCellStyle12
+        Me.Cliente.FillWeight = 120.0!
+        Me.Cliente.HeaderText = "Cliente"
+        Me.Cliente.MinimumWidth = 15
+        Me.Cliente.Name = "Cliente"
+        '
+        'Mag_IM
+        '
+        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Mag_IM.DefaultCellStyle = DataGridViewCellStyle13
+        Me.Mag_IM.FillWeight = 70.0!
+        Me.Mag_IM.HeaderText = "Mag imp"
+        Me.Mag_IM.Name = "Mag_IM"
+        '
+        'Div
+        '
+        Me.Div.FillWeight = 70.0!
+        Me.Div.HeaderText = "Mag Dest"
+        Me.Div.Name = "Div"
+        '
+        'Stato
+        '
+        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle14.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Stato.DefaultCellStyle = DataGridViewCellStyle14
+        Me.Stato.FillWeight = 50.0!
+        Me.Stato.HeaderText = "Stato"
+        Me.Stato.MinimumWidth = 15
+        Me.Stato.Name = "Stato"
+        Me.Stato.Visible = False
+        '
+        'Linenum
+        '
+        Me.Linenum.HeaderText = "Linenum"
+        Me.Linenum.MinimumWidth = 6
+        Me.Linenum.Name = "Linenum"
+        Me.Linenum.Visible = False
+        '
+        'REP
+        '
+        Me.REP.HeaderText = "REP"
+        Me.REP.MinimumWidth = 6
+        Me.REP.Name = "REP"
+        Me.REP.Visible = False
+        '
+        'Fase
+        '
+        Me.Fase.HeaderText = "Fase"
+        Me.Fase.MinimumWidth = 6
+        Me.Fase.Name = "Fase"
+        Me.Fase.Visible = False
+        '
+        'Evas
+        '
+        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Evas.DefaultCellStyle = DataGridViewCellStyle15
+        Me.Evas.FillWeight = 50.0!
+        Me.Evas.HeaderText = "Evas"
+        Me.Evas.Name = "Evas"
         '
         'GroupBox1
         '
@@ -3490,166 +3650,6 @@ Partial Class Magazzino
         '
         Me.BackgroundWorker.WorkerReportsProgress = True
         Me.BackgroundWorker.WorkerSupportsCancellation = True
-        '
-        'Doc
-        '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Doc.DefaultCellStyle = DataGridViewCellStyle3
-        Me.Doc.FillWeight = 60.0!
-        Me.Doc.HeaderText = "Doc"
-        Me.Doc.MinimumWidth = 15
-        Me.Doc.Name = "Doc"
-        '
-        'ODP
-        '
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ODP.DefaultCellStyle = DataGridViewCellStyle4
-        Me.ODP.FillWeight = 80.0!
-        Me.ODP.HeaderText = "ODP"
-        Me.ODP.MinimumWidth = 15
-        Me.ODP.Name = "ODP"
-        Me.ODP.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.ODP.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        '
-        'POS
-        '
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.POS.DefaultCellStyle = DataGridViewCellStyle5
-        Me.POS.FillWeight = 80.0!
-        Me.POS.HeaderText = "POS"
-        Me.POS.Name = "POS"
-        '
-        'ODP_NAME
-        '
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.ODP_NAME.DefaultCellStyle = DataGridViewCellStyle6
-        Me.ODP_NAME.FillWeight = 200.0!
-        Me.ODP_NAME.HeaderText = "ODP NAME"
-        Me.ODP_NAME.MinimumWidth = 6
-        Me.ODP_NAME.Name = "ODP_NAME"
-        '
-        'OC
-        '
-        Me.OC.FillWeight = 80.0!
-        Me.OC.HeaderText = "OC"
-        Me.OC.MinimumWidth = 15
-        Me.OC.Name = "OC"
-        Me.OC.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.OC.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        '
-        'Q
-        '
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle7.Format = "N2"
-        Me.Q.DefaultCellStyle = DataGridViewCellStyle7
-        Me.Q.FillWeight = 80.0!
-        Me.Q.HeaderText = "Q"
-        Me.Q.MinimumWidth = 15
-        Me.Q.Name = "Q"
-        '
-        'Tras
-        '
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle8.Format = "N2"
-        Me.Tras.DefaultCellStyle = DataGridViewCellStyle8
-        Me.Tras.FillWeight = 80.0!
-        Me.Tras.HeaderText = "Tras"
-        Me.Tras.MinimumWidth = 15
-        Me.Tras.Name = "Tras"
-        '
-        'Da_tras
-        '
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle9.Format = "N2"
-        Me.Da_tras.DefaultCellStyle = DataGridViewCellStyle9
-        Me.Da_tras.FillWeight = 80.0!
-        Me.Da_tras.HeaderText = "Da Tras"
-        Me.Da_tras.MinimumWidth = 15
-        Me.Da_tras.Name = "Da_tras"
-        '
-        'Comm
-        '
-        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Comm.DefaultCellStyle = DataGridViewCellStyle10
-        Me.Comm.HeaderText = "Commessa"
-        Me.Comm.MinimumWidth = 15
-        Me.Comm.Name = "Comm"
-        '
-        'Baia
-        '
-        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Baia.DefaultCellStyle = DataGridViewCellStyle11
-        Me.Baia.HeaderText = "Baia"
-        Me.Baia.Name = "Baia"
-        '
-        'Cliente
-        '
-        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle12.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.Cliente.DefaultCellStyle = DataGridViewCellStyle12
-        Me.Cliente.FillWeight = 120.0!
-        Me.Cliente.HeaderText = "Cliente"
-        Me.Cliente.MinimumWidth = 15
-        Me.Cliente.Name = "Cliente"
-        '
-        'Mag_IM
-        '
-        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Mag_IM.DefaultCellStyle = DataGridViewCellStyle13
-        Me.Mag_IM.FillWeight = 70.0!
-        Me.Mag_IM.HeaderText = "Mag imp"
-        Me.Mag_IM.Name = "Mag_IM"
-        '
-        'Div
-        '
-        Me.Div.FillWeight = 70.0!
-        Me.Div.HeaderText = "Mag Dest"
-        Me.Div.Name = "Div"
-        '
-        'Stato
-        '
-        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle14.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Stato.DefaultCellStyle = DataGridViewCellStyle14
-        Me.Stato.FillWeight = 50.0!
-        Me.Stato.HeaderText = "Stato"
-        Me.Stato.MinimumWidth = 15
-        Me.Stato.Name = "Stato"
-        Me.Stato.Visible = False
-        '
-        'Linenum
-        '
-        Me.Linenum.HeaderText = "Linenum"
-        Me.Linenum.MinimumWidth = 6
-        Me.Linenum.Name = "Linenum"
-        Me.Linenum.Visible = False
-        '
-        'REP
-        '
-        Me.REP.HeaderText = "REP"
-        Me.REP.MinimumWidth = 6
-        Me.REP.Name = "REP"
-        Me.REP.Visible = False
-        '
-        'Fase
-        '
-        Me.Fase.HeaderText = "Fase"
-        Me.Fase.MinimumWidth = 6
-        Me.Fase.Name = "Fase"
-        Me.Fase.Visible = False
-        '
-        'Evas
-        '
-        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Evas.DefaultCellStyle = DataGridViewCellStyle15
-        Me.Evas.FillWeight = 50.0!
-        Me.Evas.HeaderText = "Evas"
-        Me.Evas.Name = "Evas"
         '
         'Magazzino
         '

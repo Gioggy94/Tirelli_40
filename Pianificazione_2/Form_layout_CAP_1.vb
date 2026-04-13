@@ -30,7 +30,7 @@ Public Class Form_layout_CAP_1
 
     Private Sub Form_layout_CAP_1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.BackColor = Color.White
-        PictureBox1.Image = Image.FromFile(Homepage.logo_azienda)
+        '    PictureBox1.Image = Image.FromFile(Homepage.logo_azienda)
         compila_datagridview_macchine(DataGridView1)
         AbilitaDragDropZona("Officina")
     End Sub

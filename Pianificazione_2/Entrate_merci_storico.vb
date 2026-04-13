@@ -42,12 +42,23 @@ Public Class Entrate_merci_storico
             where.Add("(T1.FIRSTNAME LIKE @dip OR T1.LASTNAME LIKE @dip)")
             params.Add(New SqlParameter("@dip", "%" & txtDipendente.Text.Trim() & "%"))
         End If
+        If txtDDT.Text.Trim() <> "" Then
+            where.Add("t0.DDT_Numero LIKE @ddt")
+            params.Add(New SqlParameter("@ddt", "%" & txtDDT.Text.Trim() & "%"))
+        End If
+        If txtBollaID.Text.Trim() <> "" Then
+            Dim bollaIdVal As Integer
+            If Integer.TryParse(txtBollaID.Text.Trim(), bollaIdVal) Then
+                where.Add("t0.Bolla_ID = @bollaId")
+                params.Add(New SqlParameter("@bollaId", bollaIdVal))
+            End If
+        End If
 
-        Dim sql As String = "SELECT t0.ID, t0.DDT_Numero, t0.DDT_Data, t0.Fornitore, t0.Ordine_Acquisto, " &
-                            "t0.Codice_Articolo, t0.Disegno, t0.UM, t0.Quantita, t0.Stato, t0.PDF_File, t0.Data_Inserimento, t0.Utente, " &
+        Dim sql As String = "SELECT t0.ID, t0.Bolla_ID, t0.DDT_Numero, t0.DDT_Data, t0.Fornitore, t0.Ordine_Acquisto, " &
+                            "t0.Codice_Articolo, t0.Disegno, t0.UM, t0.Quantita, t0.Stato, t0.PDF_File, t0.Data_Inserimento, " &
                             "CONCAT(T1.FIRSTNAME, ' ', T1.LASTNAME) AS Dipendente " &
                             "FROM [TIRELLI_40].[dbo].[Entrate_merci] t0 " &
-                            "LEFT JOIN [TIRELLI_40].[dbo].[OHEM] t1 ON T0.Utente_Galileo = T1.Galileo"
+                            "LEFT JOIN [TIRELLI_40].[dbo].[OHEM] t1 ON T0.Utente = T1.empid"
         If where.Count > 0 Then sql &= " WHERE " & String.Join(" AND ", where)
         sql &= " ORDER BY t0.Data_Inserimento DESC, t0.ID DESC"
 
@@ -111,11 +122,33 @@ Public Class Entrate_merci_storico
         End Try
     End Sub
 
+    Private Sub btnPrepara_Click(sender As Object, e As EventArgs) Handles btnPrepara.Click
+        Dim dt As DataTable = TryCast(dgvStorico.DataSource, DataTable)
+        If dt Is Nothing OrElse dt.Rows.Count = 0 Then
+            rtbOrdini.Text = ""
+            rtbCodici.Text = ""
+            Return
+        End If
+
+        Dim ordini As New HashSet(Of String)(StringComparer.OrdinalIgnoreCase)
+        Dim codici As New HashSet(Of String)(StringComparer.OrdinalIgnoreCase)
+
+        For Each row As DataRow In dt.Rows
+            Dim ord As String = If(row("Ordine_Acquisto") Is DBNull.Value, "", row("Ordine_Acquisto").ToString().Trim())
+            Dim cod As String = If(row("Codice_Articolo") Is DBNull.Value, "", row("Codice_Articolo").ToString().Trim())
+            If ord <> "" Then ordini.Add(ord)
+            If cod <> "" Then codici.Add(cod)
+        Next
+
+        rtbOrdini.Text = String.Join(";", ordini)
+        rtbCodici.Text = String.Join(";", codici)
+    End Sub
+
     Private Sub btnChiudi_Click(sender As Object, e As EventArgs) Handles btnChiudi.Click
         Me.Close()
     End Sub
 
-    Private Sub txtFiltro_KeyDown(sender As Object, e As KeyEventArgs) Handles txtFornitore.KeyDown, txtCodice.KeyDown, txtOrdine.KeyDown, txtDipendente.KeyDown
+    Private Sub txtFiltro_KeyDown(sender As Object, e As KeyEventArgs) Handles txtFornitore.KeyDown, txtCodice.KeyDown, txtOrdine.KeyDown, txtDipendente.KeyDown, txtBollaID.KeyDown, txtDDT.KeyDown
         If e.KeyCode = Keys.Enter Then Carica()
     End Sub
 

@@ -1471,6 +1471,7 @@ Partial Class FORM6
         Me.Button2.Text = "START"
         Me.Button2.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage
         Me.Button2.UseVisualStyleBackColor = True
+        Me.Button2.Visible = False
         '
         'Button4
         '
@@ -1486,6 +1487,7 @@ Partial Class FORM6
         Me.Button4.Text = "STOP"
         Me.Button4.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage
         Me.Button4.UseVisualStyleBackColor = True
+        Me.Button4.Visible = False
         '
         'TableLayoutPanel16
         '

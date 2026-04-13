@@ -127,7 +127,9 @@ Public Class FORM6
 
         CMD_SAP_7.Connection = CNN
 
-        CMD_SAP_7.CommandText = "update t0 set T0.u_stato= '" & stato_lavorazione & "' from owor t0 where t0.docnum= '" & ODP & "'"
+        CMD_SAP_7.CommandText = "update t0 
+set T0.u_stato= '" & stato_lavorazione & "' 
+from owor t0 where t0.docnum= '" & ODP & "'"
 
         CMD_SAP_7.ExecuteNonQuery()
 

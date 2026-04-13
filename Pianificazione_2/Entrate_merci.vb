@@ -35,6 +35,8 @@ Public Class Entrate_merci
         Dim d As New Dictionary(Of String, String())(StringComparer.OrdinalIgnoreCase)
         ' Lasergi (1410002492): scrive "#N" invece di "-RN" e "-" invece di "_"
         d("1410002492") = New String() {"#(\d+)", "-R$1", "_", "-"}
+        ' Vanoni SRL (1410005129): aggiunge prefisso "TIR" davanti al codice Tirelli (es. TIRD122578 -> D122578)
+        d("1410005129") = New String() {"^TIR", ""}
         Return d
     End Function
 
@@ -270,7 +272,7 @@ Public Class Entrate_merci
         Dim errori As Integer = 0
         Dim nomeFile As String = If(String.IsNullOrEmpty(_pdfPath), "", Path.GetFileName(_pdfPath))
         Dim utente As String = Homepage.ID_SALVATO
-        Dim utenteGalileo As String = Homepage.Trova_Dettagli_dipendente(Homepage.ID_SALVATO).Utente_Galileo
+        Dim utenteGalileo As String = Homepage.trova_Dettagli_dipendente(Homepage.ID_SALVATO).Utente_Galileo
 
         Using conn As New SqlConnection(connStr)
             Try
@@ -279,6 +281,12 @@ Public Class Entrate_merci
                 MsgBox("Impossibile connettersi al database:" & vbCrLf & ex.Message, MsgBoxStyle.Critical, "Errore connessione")
                 Return
             End Try
+
+            ' Calcola il prossimo Bolla_ID: tutte le righe di questo salvataggio condividono lo stesso ID
+            Dim bollaId As Integer = 1
+            Using cmdMax As New SqlCommand("SELECT ISNULL(MAX(Bolla_ID), 0) + 1 FROM [TIRELLI_40].[dbo].[Entrate_merci]", conn)
+                bollaId = CInt(cmdMax.ExecuteScalar())
+            End Using
 
             For Each row As DataGridViewRow In righeSelezionate
                 Try
@@ -304,8 +312,8 @@ Public Class Entrate_merci
 
                     Dim cmd As New SqlCommand(
                         "INSERT INTO [TIRELLI_40].[dbo].[Entrate_merci] (DDT_Numero, DDT_Data, Fornitore, Ordine_Acquisto, " &
-                        "Codice_Articolo, Disegno, UM, Quantita, Stato, PDF_File, Data_Inserimento, Utente, Utente_Galileo) " &
-                        "VALUES (@ddt, @data, @forn, @ord, @cod, @dis, @um, @qta, @stato, @file, GETDATE(), @utente, @utenteGalileo)",
+                        "Codice_Articolo, Disegno, UM, Quantita, Stato, PDF_File, Data_Inserimento, Utente, Utente_Galileo, Bolla_ID) " &
+                        "VALUES (@ddt, @data, @forn, @ord, @cod, @dis, @um, @qta, @stato, @file, GETDATE(), @utente, @utenteGalileo, @bollaId)",
                         conn)
 
                     cmd.Parameters.AddWithValue("@ddt", If(String.IsNullOrEmpty(ddt), DBNull.Value, CObj(ddt)))
@@ -320,6 +328,7 @@ Public Class Entrate_merci
                     cmd.Parameters.AddWithValue("@file", If(String.IsNullOrEmpty(nomeFile), DBNull.Value, CObj(nomeFile)))
                     cmd.Parameters.AddWithValue("@utente", If(String.IsNullOrEmpty(utente), DBNull.Value, CObj(utente)))
                     cmd.Parameters.AddWithValue("@utenteGalileo", If(String.IsNullOrEmpty(utenteGalileo), DBNull.Value, CObj(utenteGalileo)))
+                    cmd.Parameters.AddWithValue("@bollaId", bollaId)
 
                     cmd.ExecuteNonQuery()
                     salvate += 1
@@ -358,13 +367,16 @@ Public Class Entrate_merci
  FROM TIR90VIS.JGALord t0
  WHERE  
    DOC = ''OA''
-   and (evaso <> ''S''
-   or data_richiesta >= 
-       INTEGER(TO_CHAR(CURRENT DATE - 100 DAYS, ''YYYYMMDD'')))
+   and evaso <> ''S''
+   
 ')"
                 Dim da As New SqlDataAdapter(query, conn)
                 da.Fill(dtOrdini)
             End Using
+
+            '(
+            '     or data_richiesta >= 
+            'INTEGER(TO_CHAR(CURRENT DATE - 100 DAYS, ''YYYYMMDD'')))
 
         Catch ex As Exception
             lblStatus.Text = $"Riconoscimento completato. Confronto ordini non disponibile: {ex.Message}"

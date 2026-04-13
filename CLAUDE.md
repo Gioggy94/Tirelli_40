@@ -142,6 +142,7 @@ Private Shared ReadOnly RegoleFornitore As New Dictionary(Of String, String())(S
 |----------|-------------|---------|--------------|
 | 1410002492 (Lasergi) | Usa `#N` invece di `-RN` (revisione) | `#(\d+)` | `-R$1` |
 | 1410002492 (Lasergi) | Scrive `-` invece di `_` | `_` | `-` |
+| 1410005129 (Vanoni SRL) | Aggiunge prefisso `TIR` davanti al codice Tirelli (es. `TIRD122578` → `D122578`) | `^TIR` | `` |
 
 **Peculiarità estratzione ordine per fornitore (solo prompt OCR, nessun RegoleFornitore VB.NET):**
 

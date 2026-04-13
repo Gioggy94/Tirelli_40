@@ -32,14 +32,25 @@ Partial Class Entrate_merci_storico
         Me.cmbStato = New System.Windows.Forms.ComboBox()
         Me.lblDipendente = New System.Windows.Forms.Label()
         Me.txtDipendente = New System.Windows.Forms.TextBox()
+        Me.lblBollaID = New System.Windows.Forms.Label()
+        Me.txtBollaID = New System.Windows.Forms.TextBox()
+        Me.lblDDT = New System.Windows.Forms.Label()
+        Me.txtDDT = New System.Windows.Forms.TextBox()
         Me.btnCerca = New System.Windows.Forms.Button()
         Me.pnlBottom = New System.Windows.Forms.Panel()
         Me.lblCount = New System.Windows.Forms.Label()
         Me.btnElimina = New System.Windows.Forms.Button()
         Me.btnChiudi = New System.Windows.Forms.Button()
+        Me.pnlEstratto = New System.Windows.Forms.Panel()
+        Me.btnPrepara = New System.Windows.Forms.Button()
+        Me.lblOrdiniTxt = New System.Windows.Forms.Label()
+        Me.rtbOrdini = New System.Windows.Forms.RichTextBox()
+        Me.lblCodiciTxt = New System.Windows.Forms.Label()
+        Me.rtbCodici = New System.Windows.Forms.RichTextBox()
         Me.dgvStorico = New System.Windows.Forms.DataGridView()
         Me.pnlTop.SuspendLayout()
         Me.pnlBottom.SuspendLayout()
+        Me.pnlEstratto.SuspendLayout()
         CType(Me.dgvStorico, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -61,6 +72,10 @@ Partial Class Entrate_merci_storico
         Me.pnlTop.Controls.Add(Me.lblDal)
         Me.pnlTop.Controls.Add(Me.txtDipendente)
         Me.pnlTop.Controls.Add(Me.lblDipendente)
+        Me.pnlTop.Controls.Add(Me.txtBollaID)
+        Me.pnlTop.Controls.Add(Me.lblBollaID)
+        Me.pnlTop.Controls.Add(Me.txtDDT)
+        Me.pnlTop.Controls.Add(Me.lblDDT)
         Me.pnlTop.Dock = System.Windows.Forms.DockStyle.Top
         Me.pnlTop.Location = New System.Drawing.Point(0, 0)
         Me.pnlTop.Name = "pnlTop"
@@ -182,6 +197,38 @@ Partial Class Entrate_merci_storico
         Me.txtDipendente.Size = New System.Drawing.Size(200, 20)
         Me.txtDipendente.TabIndex = 7
         '
+        'lblBollaID
+        '
+        Me.lblBollaID.AutoSize = True
+        Me.lblBollaID.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.lblBollaID.ForeColor = System.Drawing.Color.White
+        Me.lblBollaID.Location = New System.Drawing.Point(315, 58)
+        Me.lblBollaID.Name = "lblBollaID"
+        Me.lblBollaID.Text = "Bolla ID:"
+        '
+        'txtBollaID
+        '
+        Me.txtBollaID.Location = New System.Drawing.Point(385, 54)
+        Me.txtBollaID.Name = "txtBollaID"
+        Me.txtBollaID.Size = New System.Drawing.Size(80, 20)
+        Me.txtBollaID.TabIndex = 8
+        '
+        'lblDDT
+        '
+        Me.lblDDT.AutoSize = True
+        Me.lblDDT.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.lblDDT.ForeColor = System.Drawing.Color.White
+        Me.lblDDT.Location = New System.Drawing.Point(480, 58)
+        Me.lblDDT.Name = "lblDDT"
+        Me.lblDDT.Text = "DDT N°:"
+        '
+        'txtDDT
+        '
+        Me.txtDDT.Location = New System.Drawing.Point(550, 54)
+        Me.txtDDT.Name = "txtDDT"
+        Me.txtDDT.Size = New System.Drawing.Size(100, 20)
+        Me.txtDDT.TabIndex = 9
+        '
         'btnCerca
         '
         Me.btnCerca.BackColor = System.Drawing.Color.FromArgb(0, 150, 80)
@@ -238,6 +285,63 @@ Partial Class Entrate_merci_storico
         Me.btnChiudi.Text = "Chiudi"
         Me.btnChiudi.UseVisualStyleBackColor = True
         '
+        'pnlEstratto
+        '
+        Me.pnlEstratto.BackColor = System.Drawing.Color.FromArgb(225, 225, 225)
+        Me.pnlEstratto.Controls.Add(Me.btnPrepara)
+        Me.pnlEstratto.Controls.Add(Me.lblOrdiniTxt)
+        Me.pnlEstratto.Controls.Add(Me.rtbOrdini)
+        Me.pnlEstratto.Controls.Add(Me.lblCodiciTxt)
+        Me.pnlEstratto.Controls.Add(Me.rtbCodici)
+        Me.pnlEstratto.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.pnlEstratto.Name = "pnlEstratto"
+        Me.pnlEstratto.Size = New System.Drawing.Size(1300, 85)
+        Me.pnlEstratto.TabIndex = 3
+        '
+        'btnPrepara
+        '
+        Me.btnPrepara.BackColor = System.Drawing.Color.FromArgb(0, 110, 180)
+        Me.btnPrepara.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.btnPrepara.ForeColor = System.Drawing.Color.White
+        Me.btnPrepara.Location = New System.Drawing.Point(10, 27)
+        Me.btnPrepara.Name = "btnPrepara"
+        Me.btnPrepara.Size = New System.Drawing.Size(130, 30)
+        Me.btnPrepara.TabIndex = 0
+        Me.btnPrepara.Text = "Prepara riepilogo"
+        Me.btnPrepara.UseVisualStyleBackColor = False
+        '
+        'lblOrdiniTxt
+        '
+        Me.lblOrdiniTxt.AutoSize = True
+        Me.lblOrdiniTxt.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Bold)
+        Me.lblOrdiniTxt.Location = New System.Drawing.Point(150, 8)
+        Me.lblOrdiniTxt.Name = "lblOrdiniTxt"
+        Me.lblOrdiniTxt.Text = "Ordini acquisto:"
+        '
+        'rtbOrdini
+        '
+        Me.rtbOrdini.Location = New System.Drawing.Point(150, 24)
+        Me.rtbOrdini.Name = "rtbOrdini"
+        Me.rtbOrdini.Size = New System.Drawing.Size(510, 54)
+        Me.rtbOrdini.TabIndex = 1
+        Me.rtbOrdini.Text = ""
+        '
+        'lblCodiciTxt
+        '
+        Me.lblCodiciTxt.AutoSize = True
+        Me.lblCodiciTxt.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Bold)
+        Me.lblCodiciTxt.Location = New System.Drawing.Point(670, 8)
+        Me.lblCodiciTxt.Name = "lblCodiciTxt"
+        Me.lblCodiciTxt.Text = "Codici articolo:"
+        '
+        'rtbCodici
+        '
+        Me.rtbCodici.Location = New System.Drawing.Point(670, 24)
+        Me.rtbCodici.Name = "rtbCodici"
+        Me.rtbCodici.Size = New System.Drawing.Size(620, 54)
+        Me.rtbCodici.TabIndex = 2
+        Me.rtbCodici.Text = ""
+        '
         'dgvStorico
         '
         Me.dgvStorico.AllowUserToAddRows = False
@@ -261,6 +365,7 @@ Partial Class Entrate_merci_storico
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1300, 700)
         Me.Controls.Add(Me.dgvStorico)
+        Me.Controls.Add(Me.pnlEstratto)
         Me.Controls.Add(Me.pnlBottom)
         Me.Controls.Add(Me.pnlTop)
         Me.MinimumSize = New System.Drawing.Size(1000, 600)
@@ -271,6 +376,8 @@ Partial Class Entrate_merci_storico
         Me.pnlTop.PerformLayout()
         Me.pnlBottom.ResumeLayout(False)
         Me.pnlBottom.PerformLayout()
+        Me.pnlEstratto.ResumeLayout(False)
+        Me.pnlEstratto.PerformLayout()
         CType(Me.dgvStorico, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
     End Sub
@@ -290,10 +397,20 @@ Partial Class Entrate_merci_storico
     Friend WithEvents cmbStato As ComboBox
     Friend WithEvents lblDipendente As Label
     Friend WithEvents txtDipendente As TextBox
+    Friend WithEvents lblBollaID As Label
+    Friend WithEvents txtBollaID As TextBox
+    Friend WithEvents lblDDT As Label
+    Friend WithEvents txtDDT As TextBox
     Friend WithEvents btnCerca As Button
     Friend WithEvents pnlBottom As Panel
     Friend WithEvents lblCount As Label
     Friend WithEvents btnElimina As Button
     Friend WithEvents btnChiudi As Button
+    Friend WithEvents pnlEstratto As Panel
+    Friend WithEvents btnPrepara As Button
+    Friend WithEvents lblOrdiniTxt As Label
+    Friend WithEvents rtbOrdini As RichTextBox
+    Friend WithEvents lblCodiciTxt As Label
+    Friend WithEvents rtbCodici As RichTextBox
     Friend WithEvents dgvStorico As DataGridView
 End Class

@@ -88,7 +88,7 @@ Public Class Homepage
     Public Stampante_Selezionata As Boolean = False
 
     Public azienda As String = "Tirelli"
-    Public logo_azienda As String = "\\tirfs01\00-Tirelli 4.0\Immagini generiche\Logo Tirelli.jpg"
+    Public logo_azienda As String = "T:\00-Tirelli 4.0\Immagini generiche\TIRELLI_blue_nopayoff_360x250.png"
 
     Public colore_sfondo As New Color
     Public commessa As String

@@ -52,5 +52,13 @@ IF NOT EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'Entr
     ALTER TABLE [dbo].[Entrate_merci] ADD [Utente] NVARCHAR(100) NULL
 GO
 
+IF NOT EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'Entrate_merci' AND COLUMN_NAME = 'Bolla_ID')
+    ALTER TABLE [dbo].[Entrate_merci] ADD [Bolla_ID] INT NULL
+GO
+
+IF NOT EXISTS (SELECT 1 FROM sys.indexes WHERE name = 'IX_Entrate_merci_Bolla_ID' AND object_id = OBJECT_ID('dbo.Entrate_merci'))
+    CREATE INDEX [IX_Entrate_merci_Bolla_ID] ON [dbo].[Entrate_merci] ([Bolla_ID])
+GO
+
 PRINT 'Modifica tabella Entrate_merci completata.'
 GO
