@@ -9,6 +9,10 @@ Public Class MC_Macchina
     Public Property LinguaCodice As String = "IT"
     Public Property Attiva As Boolean = True
     Public Property Note As String = ""
+    Public Property PesoKg As Double?
+    Public Property ConsumoAria As Double?
+    Public Property Corrente As String = ""
+    Public Property Tensione As String = ""
     Public Property DataCreazione As DateTime
     Public Property DataModifica As DateTime?
 
@@ -20,16 +24,32 @@ End Class
 Public Class MC_Fotocellula
     Public Property ID As Integer
     Public Property MacchinaID As Integer
+    Public Property CatalogoID As Integer
+    ' Campi derivati dal JOIN con MC_CatalogoFotocellule (solo lettura)
     Public Property Codice As String = ""
-    Public Property Marca As String = ""
-    Public Property Modello As String = ""
-    Public Property TipoRilevazione As String = ""
-    Public Property Posizione As String = ""
-    Public Property TensioneLavoro As String = ""
-    Public Property UscitaLogica As String = ""
-    Public Property DistanzaRilev As String = ""
-    Public Property NoteInstallaz As String = ""
+    Public Property TipoNome As String = ""
+    Public Property PathImmagine As String = ""
     Public Property DataCreazione As DateTime
+End Class
+
+Public Class MC_TipoFotocellula
+    Public Property ID As Integer
+    Public Property Nome As String = ""
+    Public Overrides Function ToString() As String
+        Return Nome
+    End Function
+End Class
+
+Public Class MC_CatalogoFotocellula
+    Public Property ID As Integer
+    Public Property Codice As String = ""
+    Public Property TipoID As Integer
+    Public Property TipoNome As String = ""
+    Public Property PathImmagine As String = ""
+    Public Property DataCreazione As DateTime
+    Public Overrides Function ToString() As String
+        Return $"{Codice} ({TipoNome})"
+    End Function
 End Class
 
 Public Class MC_CodiceErrore

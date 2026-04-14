@@ -45,18 +45,65 @@ Public Class Scheda_tecnica
 
     Private Sub Scheda_tecnica_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         TabControl1.DrawMode = TabDrawMode.OwnerDrawFixed
-        Dim tabDaGestire As String() = {"Accessorio", "Soffiatura", "Riempimento", "Tappatura", "Termosaldatrice", "Etichettatrice"}
-
-        ' Aggiungi gestori eventi ai controlli di queste tab
-        Me.BackColor = Homepage.colore_sfondo
+        '    Me.BackColor = Homepage.colore_sfondo
+        ApplicaStile()
         Inserimento_dipendenti()
-        'carica_reparti()
-
         For Each page As TabPage In TabControl1.TabPages
             For Each ctrl As Control In page.Controls
                 AggiungiGestoreEvento(ctrl)
             Next
         Next
+    End Sub
+
+    Private Sub ApplicaStile()
+        Dim navy As Color = Color.FromArgb(22, 45, 84)
+        Dim navyHover As Color = Color.FromArgb(30, 63, 122)
+        Dim navyDark As Color = Color.FromArgb(10, 26, 55)
+        Dim fontUI As String = "Segoe UI"
+
+        Me.Font = New Font(fontUI, 9)
+
+        ' Pulsanti principali: stile flat coerente con Homepage
+        For Each btn As Button In Me.Controls.OfType(Of Button)()
+            btn.FlatStyle = FlatStyle.Flat
+            btn.FlatAppearance.BorderSize = 1
+            btn.Font = New Font(fontUI, 9, FontStyle.Regular)
+        Next
+
+        ' Pulsanti di navigazione/azione: sfondo navy
+        Dim btnNavy() As Button = {Button3}  ' chiudi
+        For Each btn As Button In btnNavy
+            If btn IsNot Nothing Then
+                btn.BackColor = navy
+                btn.ForeColor = Color.White
+                btn.FlatAppearance.BorderSize = 0
+                btn.FlatAppearance.MouseOverBackColor = navyHover
+                btn.FlatAppearance.MouseDownBackColor = navyDark
+            End If
+        Next
+
+        ' Label intestazione commessa
+        For Each lbl As System.Windows.Forms.Label In New System.Windows.Forms.Label() {Label1, Label2}
+            lbl.Font = New Font(fontUI, 10, FontStyle.Bold)
+            lbl.ForeColor = navy
+        Next
+
+        ' Label secondarie
+        For Each lbl As System.Windows.Forms.Label In New System.Windows.Forms.Label() {Label3, Label4, Label5, Label6}
+            lbl.Font = New Font(fontUI, 9, FontStyle.Regular)
+            lbl.ForeColor = Color.FromArgb(40, 60, 90)
+        Next
+
+        ' DataGridView revisioni
+        DataGridView_revisione.BorderStyle = BorderStyle.None
+        DataGridView_revisione.BackgroundColor = Color.White
+        DataGridView_revisione.GridColor = Color.FromArgb(210, 220, 235)
+        DataGridView_revisione.ColumnHeadersDefaultCellStyle.BackColor = navy
+        DataGridView_revisione.ColumnHeadersDefaultCellStyle.ForeColor = Color.White
+        DataGridView_revisione.ColumnHeadersDefaultCellStyle.Font = New Font(fontUI, 8.5F, FontStyle.Bold)
+        DataGridView_revisione.EnableHeadersVisualStyles = False
+        DataGridView_revisione.RowsDefaultCellStyle.SelectionBackColor = Color.FromArgb(210, 225, 245)
+        DataGridView_revisione.RowsDefaultCellStyle.SelectionForeColor = navy
     End Sub
 
     Private Sub AggiungiGestoreEvento(ctrl As Control)
@@ -146,46 +193,18 @@ Public Class Scheda_tecnica
         Return False
     End Function
 
-    '    Sub carica_reparti()
-    '        Dim indice = 0
-    '        ComboBox_reparto.Items.Clear()
-    '        Dim Cnn1 As New SqlConnection
-    '        Cnn1.ConnectionString = Homepage.sap_tirelli
-    '        Cnn1.Open()
-
-    '        Dim CMD_SAP_2 As New SqlCommand
-    '        Dim cmd_SAP_reader_2 As SqlDataReader
-
-
-    '        CMD_SAP_2.Connection = Cnn1
-    '        CMD_SAP_2.CommandText = "select *
-    'from [TIRELLI_40].[DBO].COLL_Reparti"
-
-    '        cmd_SAP_reader_2 = CMD_SAP_2.ExecuteReader
-
-    '        Do While cmd_SAP_reader_2.Read()
-    '            ComboBox_reparto.Items.Add(cmd_SAP_reader_2("Descrizione"))
-    '            Elenco_reparti(indice) = cmd_SAP_reader_2("Id_reparto")
-    '            indice = indice + 1
-    '        Loop
-    '        cmd_SAP_reader_2.Close()
-    '        Cnn1.Close()
-    '        ComboBox_reparto.Text = Homepage.nome_reparto
-
-    '    End Sub
 
     Sub riempi_scheda_tecnica(par_codice_commessa As String, par_n_rev As Integer)
 
-        Dim Cnn1 As New SqlConnection
-        Cnn1.ConnectionString = Homepage.sap_tirelli
-        Cnn1.Open()
+        Using Cnn1 As New SqlConnection(Homepage.sap_tirelli)
+            Cnn1.Open()
 
-        Dim CMD_SAP_2 As New SqlCommand
-        Dim cmd_SAP_reader_2 As SqlDataReader
+            Using CMD_SAP_2 As New SqlCommand()
+                Dim cmd_SAP_reader_2 As SqlDataReader
 
 
-        CMD_SAP_2.Connection = Cnn1
-        CMD_SAP_2.CommandText = "SELECT t0.[ID]
+                CMD_SAP_2.Connection = Cnn1
+                CMD_SAP_2.CommandText = "SELECT t0.[ID]
       ,t0.[Commessa]
       ,t0.[Rev]
 ,t0.note
@@ -376,205 +395,205 @@ left join [Tirelli_40].[dbo].[Scheda_tecnica_revisioni] t1 on t1.commessa='" & p
 where t0.commessa='" & par_codice_commessa & "' and t0.rev ='" & par_n_rev & "'
 "
 
-        cmd_SAP_reader_2 = CMD_SAP_2.ExecuteReader
+                cmd_SAP_reader_2 = CMD_SAP_2.ExecuteReader
 
-        If cmd_SAP_reader_2.Read() Then
-            ComboBox70.Text = cmd_SAP_reader_2("Stato_scheda")
-            RichTextBox44.Text = cmd_SAP_reader_2("Note")
-            TextBox2.Text = cmd_SAP_reader_2("Velocita")
-            ComboBox4.Text = cmd_SAP_reader_2("Tipo_nastro")
-            TextBox13.Text = cmd_SAP_reader_2("Tipo_nastro_commento")
-            TextBox1.Text = cmd_SAP_reader_2("Altezza_lavoro")
-            ComboBox3.Text = cmd_SAP_reader_2("Altezza_lavoro_commento")
-            ComboBox1.Text = cmd_SAP_reader_2("Scarto")
-            ComboBox2.Text = cmd_SAP_reader_2("Nastro_Scarto")
-            ComboBox10.Text = cmd_SAP_reader_2("Pulsantiera")
-            TextBox3.Text = cmd_SAP_reader_2("Pulsantiera_commento")
-            ComboBox7.Text = cmd_SAP_reader_2("Allacciamenti_elettrici")
-            RichTextBox1.Text = cmd_SAP_reader_2("Allacciamenti_elettrici_Commento")
-            ComboBox8.Text = cmd_SAP_reader_2("Allacciamenti_pneumatici")
-            RichTextBox2.Text = cmd_SAP_reader_2("Allacciamenti_pneumatici_commento")
-            TextBox12.Text = cmd_SAP_reader_2("Marca_motiri")
-            ComboBox9.Text = cmd_SAP_reader_2("Industria_4_0")
-            ComboBox6.Text = cmd_SAP_reader_2("Teleassistenza")
-            ComboBox54.Text = cmd_SAP_reader_2("Marca_PLC")
-            CheckBox24.Checked = Convert.ToBoolean(cmd_SAP_reader_2("Controllo_presenza_tappo"))
-            CheckBox25.Checked = Convert.ToBoolean(cmd_SAP_reader_2("Controllo_mal_tappato"))
-            CheckBox26.Checked = Convert.ToBoolean(cmd_SAP_reader_2("Controllo_presenza_pescante"))
-            CheckBox27.Checked = Convert.ToBoolean(cmd_SAP_reader_2("Controllo_presenza_oggetto"))
-            CheckBox28.Checked = Convert.ToBoolean(cmd_SAP_reader_2("telecamera_e_pannello"))
-            CheckBox29.Checked = Convert.ToBoolean(cmd_SAP_reader_2("Etichetta_trasparente"))
-            CheckBox30.Checked = Convert.ToBoolean(cmd_SAP_reader_2("Illuminatore"))
-            CheckBox52.Checked = Convert.ToBoolean(cmd_SAP_reader_2("Ambiente_standard"))
-            CheckBox53.Checked = Convert.ToBoolean(cmd_SAP_reader_2("ambiente_standard_prod_inf"))
-            CheckBox54.Checked = Convert.ToBoolean(cmd_SAP_reader_2("Ambiente_installazione_Atex_1"))
-            CheckBox55.Checked = Convert.ToBoolean(cmd_SAP_reader_2("Ambiente_installazione_Atex_2"))
-            CheckBox56.Checked = Convert.ToBoolean(cmd_SAP_reader_2("Hazloc"))
-            CheckBox5.Checked = Convert.ToBoolean(cmd_SAP_reader_2("light_washable"))
-            CheckBox6.Checked = Convert.ToBoolean(cmd_SAP_reader_2("alleggerita"))
-            ComboBox19.Text = cmd_SAP_reader_2("Documenti_aggiuntivi")
-            TextBox10.Text = cmd_SAP_reader_2("Documenti_aggiuntivi_commento")
-            ComboBox5.Text = cmd_SAP_reader_2("Certificazioni_materiali")
-            ComboBox33.Text = cmd_SAP_reader_2("Lingua_manuale")
-            TextBox11.Text = cmd_SAP_reader_2("Lingua_manuale_commento")
-            TextBox8.Text = cmd_SAP_reader_2("Layout")
+                If cmd_SAP_reader_2.Read() Then
+                    ComboBox70.Text = cmd_SAP_reader_2("Stato_scheda")
+                    RichTextBox44.Text = cmd_SAP_reader_2("Note")
+                    TextBox2.Text = cmd_SAP_reader_2("Velocita")
+                    ComboBox4.Text = cmd_SAP_reader_2("Tipo_nastro")
+                    TextBox13.Text = cmd_SAP_reader_2("Tipo_nastro_commento")
+                    TextBox1.Text = cmd_SAP_reader_2("Altezza_lavoro")
+                    ComboBox3.Text = cmd_SAP_reader_2("Altezza_lavoro_commento")
+                    ComboBox1.Text = cmd_SAP_reader_2("Scarto")
+                    ComboBox2.Text = cmd_SAP_reader_2("Nastro_Scarto")
+                    ComboBox10.Text = cmd_SAP_reader_2("Pulsantiera")
+                    TextBox3.Text = cmd_SAP_reader_2("Pulsantiera_commento")
+                    ComboBox7.Text = cmd_SAP_reader_2("Allacciamenti_elettrici")
+                    RichTextBox1.Text = cmd_SAP_reader_2("Allacciamenti_elettrici_Commento")
+                    ComboBox8.Text = cmd_SAP_reader_2("Allacciamenti_pneumatici")
+                    RichTextBox2.Text = cmd_SAP_reader_2("Allacciamenti_pneumatici_commento")
+                    TextBox12.Text = cmd_SAP_reader_2("Marca_motiri")
+                    ComboBox9.Text = cmd_SAP_reader_2("Industria_4_0")
+                    ComboBox6.Text = cmd_SAP_reader_2("Teleassistenza")
+                    ComboBox54.Text = cmd_SAP_reader_2("Marca_PLC")
+                    CheckBox24.Checked = Convert.ToBoolean(cmd_SAP_reader_2("Controllo_presenza_tappo"))
+                    CheckBox25.Checked = Convert.ToBoolean(cmd_SAP_reader_2("Controllo_mal_tappato"))
+                    CheckBox26.Checked = Convert.ToBoolean(cmd_SAP_reader_2("Controllo_presenza_pescante"))
+                    CheckBox27.Checked = Convert.ToBoolean(cmd_SAP_reader_2("Controllo_presenza_oggetto"))
+                    CheckBox28.Checked = Convert.ToBoolean(cmd_SAP_reader_2("telecamera_e_pannello"))
+                    CheckBox29.Checked = Convert.ToBoolean(cmd_SAP_reader_2("Etichetta_trasparente"))
+                    CheckBox30.Checked = Convert.ToBoolean(cmd_SAP_reader_2("Illuminatore"))
+                    CheckBox52.Checked = Convert.ToBoolean(cmd_SAP_reader_2("Ambiente_standard"))
+                    CheckBox53.Checked = Convert.ToBoolean(cmd_SAP_reader_2("ambiente_standard_prod_inf"))
+                    CheckBox54.Checked = Convert.ToBoolean(cmd_SAP_reader_2("Ambiente_installazione_Atex_1"))
+                    CheckBox55.Checked = Convert.ToBoolean(cmd_SAP_reader_2("Ambiente_installazione_Atex_2"))
+                    CheckBox56.Checked = Convert.ToBoolean(cmd_SAP_reader_2("Hazloc"))
+                    CheckBox5.Checked = Convert.ToBoolean(cmd_SAP_reader_2("light_washable"))
+                    CheckBox6.Checked = Convert.ToBoolean(cmd_SAP_reader_2("alleggerita"))
+                    ComboBox19.Text = cmd_SAP_reader_2("Documenti_aggiuntivi")
+                    TextBox10.Text = cmd_SAP_reader_2("Documenti_aggiuntivi_commento")
+                    ComboBox5.Text = cmd_SAP_reader_2("Certificazioni_materiali")
+                    ComboBox33.Text = cmd_SAP_reader_2("Lingua_manuale")
+                    TextBox11.Text = cmd_SAP_reader_2("Lingua_manuale_commento")
+                    TextBox8.Text = cmd_SAP_reader_2("Layout")
 
-            CheckBox50.Checked = Convert.ToBoolean(cmd_SAP_reader_2("Lista_ricambi_consigliata"))
+                    CheckBox50.Checked = Convert.ToBoolean(cmd_SAP_reader_2("Lista_ricambi_consigliata"))
 
-            ComboBox36.Text = cmd_SAP_reader_2(“Lista_ricambi_dettagli”)
-            TextBox14.Text = cmd_SAP_reader_2(“Lista_ricambi_importo”)
-            ComboBox18.Text = cmd_SAP_reader_2(“accessorio_tipo_macchina”)
-            ComboBox20.Text = cmd_SAP_reader_2(“accessorio_sottotipo_macchina”)
-            ComboBox21.Text = cmd_SAP_reader_2(“accessorio_diametro”)
-            ComboBox38.Text = cmd_SAP_reader_2(“soffiatura_tipo_trattamento”)
-            ComboBox39.Text = cmd_SAP_reader_2(“soffiatura_ugello”)
-            ComboBox68.Text = cmd_SAP_reader_2(“Soffiatura_numero_ugelli”)
-
-
-            CheckBox51.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“soffiatura_accessorio_lavaggio”))
-            CheckBox57.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“soffiatura_accessorio_copertura_totale”))
-            CheckBox58.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“soffiatura_accessorio_aspirazione_polveri”))
-            CheckBox59.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“soffiatura_accessorio_ionizzazione”))
-            RichTextBox3.Text = cmd_SAP_reader_2(“soffiatura_accessorio_commento”)
-            ComboBox11.Text = cmd_SAP_reader_2(“Riempimento_sottotipo_macchina”)
-            ComboBox12.Text = cmd_SAP_reader_2(“Riempimento_N_rubinetti”)
-            ComboBox14.Text = cmd_SAP_reader_2(“Riempimento_tipologia”)
-            TextBox4.Text = cmd_SAP_reader_2(“Riempimento_tipologia_commento”)
-            ComboBox16.Text = cmd_SAP_reader_2(“Riempimento_carrello_riempimento”)
-            TextBox5.Text = cmd_SAP_reader_2(“Riempimento_carrello_commento”)
-            ComboBox17.Text = cmd_SAP_reader_2(“Riempimento_carrello_lavaggio”)
-            TextBox15.Text = cmd_SAP_reader_2(“Riempimento_carrello_lavaggio_commento”)
-            ComboBox22.Text = cmd_SAP_reader_2(“Riempimento_movimentazione_rubinetti”)
-            ComboBox67.Text = cmd_SAP_reader_2("Riempimento_salita_discesa")
-            CheckBox43.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Riempimento_accessorio_azoto”))
-            CheckBox44.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Riempimento_accessorio_pompa_carico_prodotto”))
-            CheckBox45.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Riempimento_accessorio_pompa_carico_lavaggio”))
-            CheckBox46.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Riempimento_accessorio_serbatoio_esterno”))
-            CheckBox47.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Riempimento_accessorio_soffiatura”))
-            CheckBox48.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Riempimento_accessorio_circuito_riscaldamento”))
-            CheckBox49.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Riempimento_accessorio_raccogli_goccia”))
-            TextBox6.Text = cmd_SAP_reader_2(“Riempimento_accessorio_commento”)
-            ComboBox23.Text = cmd_SAP_reader_2(“Tappatura_Tipo_Macchina”)
-            ComboBox24.Text = cmd_SAP_reader_2(“Tappatura_Sottotipo_Macchina”)
-            ComboBox69.Text = cmd_SAP_reader_2(“Tappatura_fornitura_torretta”)
-            ComboBox25.Text = cmd_SAP_reader_2(“Tappatura_numero_teste”)
-
-            CheckBox12.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Tappatura_stiratura_pompetta_elettronica”))
-            CheckBox13.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Tappatura_stiratura_pompetta_pneumatica”))
-            CheckBox14.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Tappatura_optional_pompetta_Caricamento_automatica”))
-            CheckBox15.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Tappatura_optional_pompetta_centratori”))
-            CheckBox16.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Tappatura_optional_pompetta_testa_bordatrice”))
-            CheckBox17.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Tappatura_optional_pompetta_testa_trigger”))
-            CheckBox18.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Tappatura_optional_pompetta_blocco_ingresso”))
-            CheckBox19.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Tappatura_optional_pompetta_antirotazione”))
-            CheckBox20.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Tappatura_optional_pompetta_pressetta”))
-            CheckBox21.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Tappatura_optional_pompetta_sistema_termosaldatura”))
-            CheckBox22.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Tappatura_optional_pompetta_stella”))
-            CheckBox23.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Tappatura_optional_pompetta_a_inseguimento”))
-            ComboBox30.Text = cmd_SAP_reader_2(“Termosaldatura_sottotipo_macchina”)
-            ComboBox31.Text = cmd_SAP_reader_2(“Termosaldatura_N_teste”)
-            ComboBox32.Text = cmd_SAP_reader_2(“Termosaldatura_tipologia_sigillatura”)
-            ComboBox37.Text = cmd_SAP_reader_2(“Termosaldatura_azoto”)
-            TextBox9.Text = cmd_SAP_reader_2(“Termosladatura_Passo_termosaldatrice”)
-            ComboBox26.Text = cmd_SAP_reader_2(“Etichettatura_Sottotipo_macchina”)
-            ComboBox27.Text = cmd_SAP_reader_2(“Etichettatura_Nome”)
-
-            ComboBox29.Text = cmd_SAP_reader_2(“Etichettatura_Tipo_testata”)
-            TextBox7.Text = cmd_SAP_reader_2(“Etichettatura_tipo_testata_commento”)
-            CheckBox39.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Etichettatura_accessorio_stiratura_3_rulli”))
-            CheckBox40.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Etichettatura_accessorio_centratore_3_rulli”))
-            CheckBox38.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Etichettatura_accessorio_blocco_ingresso”))
-            CheckBox37.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Etichettatura_accessorio_centratore_orbitale”))
-            CheckBox36.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Etichettatura_accessorio_Divisore_rotante”))
-            CheckBox35.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Etichettatura_accessorio_Nastrino_superiore”))
-            CheckBox34.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Etichettatura_accessorio_Stiratura_tondi_con_contrasto”))
-            CheckBox33.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Etichettatura_accessorio_timbratore_inkjet_nastrino_inkjet”))
-            CheckBox32.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Etichettatura_accessorio_timbratore_laser”))
-            CheckBox31.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Etichettatura_accessorio_Lettore_fine_bobina”))
-            CheckBox41.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Etichettatura_accessorio_gruppo_stampa_barban”))
-            RichTextBox4.Text = cmd_SAP_reader_2(“Etichettatura_accessorio_commento”)
+                    ComboBox36.Text = cmd_SAP_reader_2(“Lista_ricambi_dettagli”)
+                    TextBox14.Text = cmd_SAP_reader_2(“Lista_ricambi_importo”)
+                    ComboBox18.Text = cmd_SAP_reader_2(“accessorio_tipo_macchina”)
+                    ComboBox20.Text = cmd_SAP_reader_2(“accessorio_sottotipo_macchina”)
+                    ComboBox21.Text = cmd_SAP_reader_2(“accessorio_diametro”)
+                    ComboBox38.Text = cmd_SAP_reader_2(“soffiatura_tipo_trattamento”)
+                    ComboBox39.Text = cmd_SAP_reader_2(“soffiatura_ugello”)
+                    ComboBox68.Text = cmd_SAP_reader_2(“Soffiatura_numero_ugelli”)
 
 
+                    CheckBox51.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“soffiatura_accessorio_lavaggio”))
+                    CheckBox57.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“soffiatura_accessorio_copertura_totale”))
+                    CheckBox58.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“soffiatura_accessorio_aspirazione_polveri”))
+                    CheckBox59.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“soffiatura_accessorio_ionizzazione”))
+                    RichTextBox3.Text = cmd_SAP_reader_2(“soffiatura_accessorio_commento”)
+                    ComboBox11.Text = cmd_SAP_reader_2(“Riempimento_sottotipo_macchina”)
+                    ComboBox12.Text = cmd_SAP_reader_2(“Riempimento_N_rubinetti”)
+                    ComboBox14.Text = cmd_SAP_reader_2(“Riempimento_tipologia”)
+                    TextBox4.Text = cmd_SAP_reader_2(“Riempimento_tipologia_commento”)
+                    ComboBox16.Text = cmd_SAP_reader_2(“Riempimento_carrello_riempimento”)
+                    TextBox5.Text = cmd_SAP_reader_2(“Riempimento_carrello_commento”)
+                    ComboBox17.Text = cmd_SAP_reader_2(“Riempimento_carrello_lavaggio”)
+                    TextBox15.Text = cmd_SAP_reader_2(“Riempimento_carrello_lavaggio_commento”)
+                    ComboBox22.Text = cmd_SAP_reader_2(“Riempimento_movimentazione_rubinetti”)
+                    ComboBox67.Text = cmd_SAP_reader_2("Riempimento_salita_discesa")
+                    CheckBox43.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Riempimento_accessorio_azoto”))
+                    CheckBox44.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Riempimento_accessorio_pompa_carico_prodotto”))
+                    CheckBox45.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Riempimento_accessorio_pompa_carico_lavaggio”))
+                    CheckBox46.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Riempimento_accessorio_serbatoio_esterno”))
+                    CheckBox47.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Riempimento_accessorio_soffiatura”))
+                    CheckBox48.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Riempimento_accessorio_circuito_riscaldamento”))
+                    CheckBox49.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Riempimento_accessorio_raccogli_goccia”))
+                    TextBox6.Text = cmd_SAP_reader_2(“Riempimento_accessorio_commento”)
+                    ComboBox23.Text = cmd_SAP_reader_2(“Tappatura_Tipo_Macchina”)
+                    ComboBox24.Text = cmd_SAP_reader_2(“Tappatura_Sottotipo_Macchina”)
+                    ComboBox69.Text = cmd_SAP_reader_2(“Tappatura_fornitura_torretta”)
+                    ComboBox25.Text = cmd_SAP_reader_2(“Tappatura_numero_teste”)
 
-            TextBox18.Text = cmd_SAP_reader_2(“Etichettatura_diametro_primitivo”)
-            ComboBox50.Text = cmd_SAP_reader_2(“Etichettatura_Numero_piattelli”)
-            Label10.Text = cmd_SAP_reader_2(“Numero_gruppi”)
-            ComboBox51.Text = cmd_SAP_reader_2(“Etichettatura_senso_rotazione”)
-            ComboBox53.Text = cmd_SAP_reader_2(“Etichettatura_regolazione_giostra”)
+                    CheckBox12.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Tappatura_stiratura_pompetta_elettronica”))
+                    CheckBox13.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Tappatura_stiratura_pompetta_pneumatica”))
+                    CheckBox14.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Tappatura_optional_pompetta_Caricamento_automatica”))
+                    CheckBox15.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Tappatura_optional_pompetta_centratori”))
+                    CheckBox16.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Tappatura_optional_pompetta_testa_bordatrice”))
+                    CheckBox17.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Tappatura_optional_pompetta_testa_trigger”))
+                    CheckBox18.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Tappatura_optional_pompetta_blocco_ingresso”))
+                    CheckBox19.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Tappatura_optional_pompetta_antirotazione”))
+                    CheckBox20.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Tappatura_optional_pompetta_pressetta”))
+                    CheckBox21.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Tappatura_optional_pompetta_sistema_termosaldatura”))
+                    CheckBox22.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Tappatura_optional_pompetta_stella”))
+                    CheckBox23.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Tappatura_optional_pompetta_a_inseguimento”))
+                    ComboBox30.Text = cmd_SAP_reader_2(“Termosaldatura_sottotipo_macchina”)
+                    ComboBox31.Text = cmd_SAP_reader_2(“Termosaldatura_N_teste”)
+                    ComboBox32.Text = cmd_SAP_reader_2(“Termosaldatura_tipologia_sigillatura”)
+                    ComboBox37.Text = cmd_SAP_reader_2(“Termosaldatura_azoto”)
+                    TextBox9.Text = cmd_SAP_reader_2(“Termosladatura_Passo_termosaldatrice”)
+                    ComboBox26.Text = cmd_SAP_reader_2(“Etichettatura_Sottotipo_macchina”)
+                    ComboBox27.Text = cmd_SAP_reader_2(“Etichettatura_Nome”)
 
-            ComboBox52.Text = cmd_SAP_reader_2(“Etichettatura_coclea”)
-            CheckBox1.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Etichettatura_piattello_gomma_vulcanizzata”))
-            CheckBox2.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Etichettatura_piattello_gomma_sagoma”))
-            CheckBox3.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Etichettatura_piattello_espulsore_molla”))
-            CheckBox4.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Etichettatura_piattello_perno_espulsore”))
-            CheckBox7.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Etichettatura_piattello_orientamento_meccanico”))
-            CheckBox60.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Etichettatura_piattello_orientamento_elettronico”))
-
-
-            CheckBox5.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“light_washable”))
-            CheckBox6.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“alleggerita”))
-            ComboBox13.Text = cmd_SAP_reader_2(“family_feeling”)
-            ComboBox15.Text = cmd_SAP_reader_2(“protezioni_porte”)
-            ComboBox34.Text = cmd_SAP_reader_2(“Marca_pannello_operatore”)
-            ComboBox15.Text = cmd_SAP_reader_2(“protezioni_porte”)
-            TextBox17.Text = cmd_SAP_reader_2(“Dimensioni_pannello_operatore”)
-
-
-            ComboBox35.Text = cmd_SAP_reader_2("serbatoio”)
-            ComboBox40.Text = cmd_SAP_reader_2(“Accessori_serbatoio”)
-            ComboBox41.Text = cmd_SAP_reader_2(“Lavaggio”)
-            ComboBox42.Text = cmd_SAP_reader_2(“Ingresso_prodotto”)
-            ComboBox43.Text = cmd_SAP_reader_2(“Pompa_Prodotto”)
-            ComboBox44.Text = cmd_SAP_reader_2(“CIP”)
-            ComboBox46.Text = cmd_SAP_reader_2(“Circuito_riempimento”)
-            ComboBox47.Text = cmd_SAP_reader_2(“Livello_lavaggio”)
-            ComboBox48.Text = cmd_SAP_reader_2(“Guarnizioni”)
-
-
-            CheckBox11.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Tappatura_accessori_presenza_tappo”))
-            CheckBox42.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Tappatura_tappo_maltappato”))
-            CheckBox10.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Tappatura_presenza_prescante”))
-            CheckBox9.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Tappatura_presenza_oggetto”))
-            CheckBox8.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Tappatura_termosigillatura”))
-
-            ComboBox49.Text = cmd_SAP_reader_2(“Tappatura_fornitura_canale_tappi”)
-            ComboBox45.Text = cmd_SAP_reader_2(“Tappatura_CF_Canale_Tappi”)
-
-            TextBox16.Text = cmd_SAP_reader_2(“Tipo_catena”)
-            ComboBox57.Text = cmd_SAP_reader_2(“By_pass”)
-            ComboBox58.Text = cmd_SAP_reader_2(“Condizionamento_quadro”)
-
-            If cmd_SAP_reader_2(“Generico_UTE”) <> "" Then
-                RichTextBox5.Text = cmd_SAP_reader_2(“Generico_UTE”)
-            End If
-
-            ComboBox66.Text = cmd_SAP_reader_2(“Colori_Attrezzature”)
-            ComboBox28.Text = cmd_SAP_reader_2(“Etichettatura_tetto_antipolvere”)
-            ComboBox55.Text = cmd_SAP_reader_2(“Etichettatura_Lamiera_forata”)
-            ComboBox56.Text = cmd_SAP_reader_2(“Etichettatura_Camma_piattello”)
+                    ComboBox29.Text = cmd_SAP_reader_2(“Etichettatura_Tipo_testata”)
+                    TextBox7.Text = cmd_SAP_reader_2(“Etichettatura_tipo_testata_commento”)
+                    CheckBox39.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Etichettatura_accessorio_stiratura_3_rulli”))
+                    CheckBox40.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Etichettatura_accessorio_centratore_3_rulli”))
+                    CheckBox38.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Etichettatura_accessorio_blocco_ingresso”))
+                    CheckBox37.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Etichettatura_accessorio_centratore_orbitale”))
+                    CheckBox36.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Etichettatura_accessorio_Divisore_rotante”))
+                    CheckBox35.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Etichettatura_accessorio_Nastrino_superiore”))
+                    CheckBox34.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Etichettatura_accessorio_Stiratura_tondi_con_contrasto”))
+                    CheckBox33.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Etichettatura_accessorio_timbratore_inkjet_nastrino_inkjet”))
+                    CheckBox32.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Etichettatura_accessorio_timbratore_laser”))
+                    CheckBox31.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Etichettatura_accessorio_Lettore_fine_bobina”))
+                    CheckBox41.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Etichettatura_accessorio_gruppo_stampa_barban”))
+                    RichTextBox4.Text = cmd_SAP_reader_2(“Etichettatura_accessorio_commento”)
 
 
 
-            ComboBox59.Text = cmd_SAP_reader_2(“Etichettatura_altezza_albero_Centrale”)
-            ComboBox60.Text = cmd_SAP_reader_2(“Etichettatura_tipo_testina”)
-            ComboBox61.Text = cmd_SAP_reader_2(“Etichettatura_tipo_molla”)
-            ComboBox62.Text = cmd_SAP_reader_2(“Etichettatura_pressurizzazione_bottiglia”)
-            ComboBox63.Text = cmd_SAP_reader_2(“Etichettatura_lavaggio”)
-            ComboBox64.Text = cmd_SAP_reader_2(“Etichettatura_stella_entrata”)
-            ComboBox65.Text = cmd_SAP_reader_2(“Etichettatura_stella_uscita”)
-            TextBox19.Text = cmd_SAP_reader_2(“Etichettatura_stella_entrata_diametro”)
-            TextBox20.Text = cmd_SAP_reader_2(“Etichettatura_stella_uscita_diametro”)
+                    TextBox18.Text = cmd_SAP_reader_2(“Etichettatura_diametro_primitivo”)
+                    ComboBox50.Text = cmd_SAP_reader_2(“Etichettatura_Numero_piattelli”)
+                    Label10.Text = cmd_SAP_reader_2(“Numero_gruppi”)
+                    ComboBox51.Text = cmd_SAP_reader_2(“Etichettatura_senso_rotazione”)
+                    ComboBox53.Text = cmd_SAP_reader_2(“Etichettatura_regolazione_giostra”)
 
-            RichTextBox6.Text = cmd_SAP_reader_2(“FAT_concordata”)
+                    ComboBox52.Text = cmd_SAP_reader_2(“Etichettatura_coclea”)
+                    CheckBox1.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Etichettatura_piattello_gomma_vulcanizzata”))
+                    CheckBox2.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Etichettatura_piattello_gomma_sagoma”))
+                    CheckBox3.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Etichettatura_piattello_espulsore_molla”))
+                    CheckBox4.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Etichettatura_piattello_perno_espulsore”))
+                    CheckBox7.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Etichettatura_piattello_orientamento_meccanico”))
+                    CheckBox60.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Etichettatura_piattello_orientamento_elettronico”))
+
+
+                    CheckBox5.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“light_washable”))
+                    CheckBox6.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“alleggerita”))
+                    ComboBox13.Text = cmd_SAP_reader_2(“family_feeling”)
+                    ComboBox15.Text = cmd_SAP_reader_2(“protezioni_porte”)
+                    ComboBox34.Text = cmd_SAP_reader_2(“Marca_pannello_operatore”)
+                    ComboBox15.Text = cmd_SAP_reader_2(“protezioni_porte”)
+                    TextBox17.Text = cmd_SAP_reader_2(“Dimensioni_pannello_operatore”)
+
+
+                    ComboBox35.Text = cmd_SAP_reader_2("serbatoio”)
+                    ComboBox40.Text = cmd_SAP_reader_2(“Accessori_serbatoio”)
+                    ComboBox41.Text = cmd_SAP_reader_2(“Lavaggio”)
+                    ComboBox42.Text = cmd_SAP_reader_2(“Ingresso_prodotto”)
+                    ComboBox43.Text = cmd_SAP_reader_2(“Pompa_Prodotto”)
+                    ComboBox44.Text = cmd_SAP_reader_2(“CIP”)
+                    ComboBox46.Text = cmd_SAP_reader_2(“Circuito_riempimento”)
+                    ComboBox47.Text = cmd_SAP_reader_2(“Livello_lavaggio”)
+                    ComboBox48.Text = cmd_SAP_reader_2(“Guarnizioni”)
+
+
+                    CheckBox11.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Tappatura_accessori_presenza_tappo”))
+                    CheckBox42.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Tappatura_tappo_maltappato”))
+                    CheckBox10.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Tappatura_presenza_prescante”))
+                    CheckBox9.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Tappatura_presenza_oggetto”))
+                    CheckBox8.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Tappatura_termosigillatura”))
+
+                    ComboBox49.Text = cmd_SAP_reader_2(“Tappatura_fornitura_canale_tappi”)
+                    ComboBox45.Text = cmd_SAP_reader_2(“Tappatura_CF_Canale_Tappi”)
+
+                    TextBox16.Text = cmd_SAP_reader_2(“Tipo_catena”)
+                    ComboBox57.Text = cmd_SAP_reader_2(“By_pass”)
+                    ComboBox58.Text = cmd_SAP_reader_2(“Condizionamento_quadro”)
+
+                    If cmd_SAP_reader_2(“Generico_UTE”) <> "" Then
+                        RichTextBox5.Text = cmd_SAP_reader_2(“Generico_UTE”)
+                    End If
+
+                    ComboBox66.Text = cmd_SAP_reader_2(“Colori_Attrezzature”)
+                    ComboBox28.Text = cmd_SAP_reader_2(“Etichettatura_tetto_antipolvere”)
+                    ComboBox55.Text = cmd_SAP_reader_2(“Etichettatura_Lamiera_forata”)
+                    ComboBox56.Text = cmd_SAP_reader_2(“Etichettatura_Camma_piattello”)
+
+
+
+                    ComboBox59.Text = cmd_SAP_reader_2(“Etichettatura_altezza_albero_Centrale”)
+                    ComboBox60.Text = cmd_SAP_reader_2(“Etichettatura_tipo_testina”)
+                    ComboBox61.Text = cmd_SAP_reader_2(“Etichettatura_tipo_molla”)
+                    ComboBox62.Text = cmd_SAP_reader_2(“Etichettatura_pressurizzazione_bottiglia”)
+                    ComboBox63.Text = cmd_SAP_reader_2(“Etichettatura_lavaggio”)
+                    ComboBox64.Text = cmd_SAP_reader_2(“Etichettatura_stella_entrata”)
+                    ComboBox65.Text = cmd_SAP_reader_2(“Etichettatura_stella_uscita”)
+                    TextBox19.Text = cmd_SAP_reader_2(“Etichettatura_stella_entrata_diametro”)
+                    TextBox20.Text = cmd_SAP_reader_2(“Etichettatura_stella_uscita_diametro”)
+
+                    RichTextBox6.Text = cmd_SAP_reader_2(“FAT_concordata”)
 
 
 
 
 
-        End If
-        cmd_SAP_reader_2.Close()
-        Cnn1.Close()
-
+                End If
+                cmd_SAP_reader_2.Close()
+            End Using ' CMD_SAP_2
+        End Using ' Cnn1
 
     End Sub
 
@@ -612,18 +631,16 @@ where t0.commessa='" & par_codice_commessa & "' and t0.rev ='" & par_n_rev & "'
     End Function
 
     Sub compila_anagrafica(par_codice_Commessa As String)
-        Dim Cnn1 As New SqlConnection
+        Using Cnn1 As New SqlConnection(Homepage.sap_tirelli)
+            Cnn1.Open()
 
-        Cnn1.ConnectionString = Homepage.sap_tirelli
-        Cnn1.Open()
-
-        Dim CMD_SAP_2 As New SqlCommand
-        Dim cmd_SAP_reader_2 As SqlDataReader
+            Using CMD_SAP_2 As New SqlCommand()
+                Dim cmd_SAP_reader_2 As SqlDataReader
 
 
-        CMD_SAP_2.Connection = Cnn1
-        If Homepage.ERP_provenienza = "SAP" Then
-            CMD_SAP_2.CommandText = "Select t10.itemcode, coalesce(t15.absentry, 0) as 'N_progetto', coalesce(t15.name,'') as 'Nome_progetto',coalesce(CONCAT(T16.LASTNAME,' ',T16.FIRSTNAME),'') AS 'PM', t13.itemname, case when t12.cardcode is null then '' else t12.cardcode end as 'Cardcode', case when t12.cardname is null then '' else t12.cardname end as 'Cardname', t12.docduedate,case when t12.u_destinazione is null then '' else t12.u_destinazione end as 'u_destinazione', case when t12.u_codicebp is null then '' else t12.u_codicebp end as 'codice_Cliente_finale', case when t14.cardname is null then '' else t14.cardname end  as 'Cliente_F' 
+                CMD_SAP_2.Connection = Cnn1
+                If Homepage.ERP_provenienza = "SAP" Then
+                    CMD_SAP_2.CommandText = "Select t10.itemcode, coalesce(t15.absentry, 0) as 'N_progetto', coalesce(t15.name,'') as 'Nome_progetto',coalesce(CONCAT(T16.LASTNAME,' ',T16.FIRSTNAME),'') AS 'PM', t13.itemname, case when t12.cardcode is null then '' else t12.cardcode end as 'Cardcode', case when t12.cardname is null then '' else t12.cardname end as 'Cardname', t12.docduedate,case when t12.u_destinazione is null then '' else t12.u_destinazione end as 'u_destinazione', case when t12.u_codicebp is null then '' else t12.u_codicebp end as 'codice_Cliente_finale', case when t14.cardname is null then '' else t14.cardname end  as 'Cliente_F' 
 
             
 			
@@ -642,8 +659,8 @@ left join [TIRELLISRLDB].[DBO].opmg t15 on t15.absentry=t13.u_progetto
 LEFT Join [TIRELLI_40].[dbo].OHEM T16 ON T15.OWNER=T16.EMPID
 
 order by t10.docentry DESC, t10.itemcode"
-        Else
-            CMD_SAP_2.CommandText =
+                Else
+                    CMD_SAP_2.CommandText =
                 "SELECT top 100 trim(t10.matricola) as 'Itemcode'
 ,    trim(numero_progetto) as 'N_progetto'
 ,    trim(numero_progetto) as 'Nome_progetto'
@@ -693,65 +710,64 @@ ORDER BY T0.matricola DESC
 
 limit 100  
 ') T10"
-        End If
+                End If
 
 
-        cmd_SAP_reader_2 = CMD_SAP_2.ExecuteReader
+                cmd_SAP_reader_2 = CMD_SAP_2.ExecuteReader
 
-        If cmd_SAP_reader_2.Read() Then
+                If cmd_SAP_reader_2.Read() Then
 
-            Label1.Text = cmd_SAP_reader_2("itemcode")
-            Label2.Text = cmd_SAP_reader_2("itemname")
-            Label16.Text = cmd_SAP_reader_2("u_destinazione")
-            If cmd_SAP_reader_2("docduedate") IsNot DBNull.Value Then
-                Dim data As DateTime = Convert.ToDateTime(cmd_SAP_reader_2("docduedate"))
-                Label17.Text = data.ToString("dd/MM/yyyy") ' Converte la data nel formato "gg/mm/YYYY" e la assegna a Label17.Text
-            Else
-                ' Se il valore è DBNull, puoi assegnare un valore predefinito o vuoto a Label17.Text
-                Label17.Text = "Valore non disponibile"
-                ' oppure Label17.Text = String.Empty
-            End If
-            'Label17.Text = cmd_SAP_reader_2("docduedate")
-            If cmd_SAP_reader_2("cardcode") = "" Then
-                bp_code = Ottieni_cliente_papa_macchina(par_codice_Commessa).cardcode_sap
-                Label3.Text = Ottieni_cliente_papa_macchina(par_codice_Commessa).cardname
-                final_bp_code = Ottieni_cliente_papa_macchina(par_codice_Commessa).final_cardcode_sap
-                Label4.Text = Ottieni_cliente_papa_macchina(par_codice_Commessa).final_cardname
-                bp_code_galileo = Ottieni_cliente_papa_macchina(par_codice_Commessa).cardcode_galileo
-                final_bp_code = Ottieni_cliente_papa_macchina(par_codice_Commessa).final_cardcode_galileo
-                final_bp_code_galileo = Ottieni_cliente_papa_macchina(par_codice_Commessa).final_cardcode_galileo
-            Else
-                bp_code = cmd_SAP_reader_2("cardcode")
-                Label3.Text = cmd_SAP_reader_2("cardname")
-                final_bp_code = cmd_SAP_reader_2("codice_Cliente_finale")
-                Label4.Text = cmd_SAP_reader_2("Cliente_F")
-                bp_code_galileo = Ottieni_cliente_papa_macchina(par_codice_Commessa).cardcode_galileo
-                final_bp_code = Ottieni_cliente_papa_macchina(par_codice_Commessa).final_cardcode_galileo
-                final_bp_code_galileo = Ottieni_cliente_papa_macchina(par_codice_Commessa).final_cardcode_galileo
-            End If
+                    Label1.Text = cmd_SAP_reader_2("itemcode")
+                    Label2.Text = cmd_SAP_reader_2("itemname")
+                    Label16.Text = cmd_SAP_reader_2("u_destinazione")
+                    If cmd_SAP_reader_2("docduedate") IsNot DBNull.Value Then
+                        Dim data As DateTime = Convert.ToDateTime(cmd_SAP_reader_2("docduedate"))
+                        Label17.Text = data.ToString("dd/MM/yyyy") ' Converte la data nel formato "gg/mm/YYYY" e la assegna a Label17.Text
+                    Else
+                        ' Se il valore è DBNull, puoi assegnare un valore predefinito o vuoto a Label17.Text
+                        Label17.Text = "Valore non disponibile"
+                        ' oppure Label17.Text = String.Empty
+                    End If
+                    'Label17.Text = cmd_SAP_reader_2("docduedate")
+                    Dim clienteInfo = Ottieni_cliente_papa_macchina(par_codice_Commessa)
+                    If cmd_SAP_reader_2("cardcode").ToString() = "" Then
+                        bp_code = clienteInfo.cardcode_sap
+                        Label3.Text = clienteInfo.cardname
+                        final_bp_code = clienteInfo.final_cardcode_sap
+                        Label4.Text = clienteInfo.final_cardname
+                    Else
+                        bp_code = cmd_SAP_reader_2("cardcode").ToString()
+                        Label3.Text = cmd_SAP_reader_2("cardname").ToString()
+                        final_bp_code = cmd_SAP_reader_2("codice_Cliente_finale").ToString()
+                        Label4.Text = cmd_SAP_reader_2("Cliente_F").ToString()
+                    End If
+                    bp_code_galileo = clienteInfo.cardcode_galileo
+                    final_bp_code = clienteInfo.final_cardcode_galileo
+                    final_bp_code_galileo = clienteInfo.final_cardcode_galileo
 
-            If Homepage.ERP_provenienza = "SAP" Then
+                    If Homepage.ERP_provenienza = "SAP" Then
 
-            Else
-                bp_code = cmd_SAP_reader_2("Codice_sap_cliente_fatturazione")
-                final_bp_code = cmd_SAP_reader_2("Codice_sap_cliente_finale")
-            End If
+                    Else
+                        bp_code = cmd_SAP_reader_2("Codice_sap_cliente_fatturazione")
+                        final_bp_code = cmd_SAP_reader_2("Codice_sap_cliente_finale")
+                    End If
 
-            'cartella_macchina = cmd_SAP_reader_2("u_cartella_macchina")
-            cartella_macchina = trova_percorso_documenti(cmd_SAP_reader_2("itemcode"), "COMMESSA", "")
+                    'cartella_macchina = cmd_SAP_reader_2("u_cartella_macchina")
+                    cartella_macchina = trova_percorso_documenti(cmd_SAP_reader_2("itemcode"), "COMMESSA", "")
 
-            Dim valore As String = cmd_SAP_reader_2("N_progetto")
-            Dim numero As Integer = Integer.Parse(System.Text.RegularExpressions.Regex.Match(valore, "\d+").Value)
+                    Dim valore As String = cmd_SAP_reader_2("N_progetto")
+                    Dim numero As Integer = Integer.Parse(System.Text.RegularExpressions.Regex.Match(valore, "\d+").Value)
 
 
-            Button26.Text = numero
-            Button12.Text = valore
-            Label5.Text = cmd_SAP_reader_2("Nome_progetto")
-            Label6.Text = cmd_SAP_reader_2("PM")
+                    Button26.Text = numero
+                    Button12.Text = valore
+                    Label5.Text = cmd_SAP_reader_2("Nome_progetto")
+                    Label6.Text = cmd_SAP_reader_2("PM")
 
-        End If
-        cmd_SAP_reader_2.Close()
-        Cnn1.Close()
+                End If
+                cmd_SAP_reader_2.Close()
+            End Using ' CMD_SAP_2
+        End Using ' Cnn1
 
         If cartella_macchina = "" Or cartella_macchina = "-" Then
             Try
@@ -766,127 +782,80 @@ limit 100
 
     End Sub
 
-    Public Function trova_percorso_documenti(par_codice As String, par_tipo As String, par_codice_progetto As String)
+
+
+    Public Function trova_percorso_documenti(par_codice As String, par_tipo As String, par_codice_progetto As String) As String
         Dim percorso As String = ""
-        Dim Cnn1 As New SqlConnection
-
-        Cnn1.ConnectionString = Homepage.sap_tirelli
-        Cnn1.Open()
-
-        Dim CMD_SAP_2 As New SqlCommand
-        Dim cmd_SAP_reader_2 As SqlDataReader
-
-
-        CMD_SAP_2.Connection = Cnn1
-        CMD_SAP_2.CommandText = "SELECT TOP 1 [Tipo]
-      ,[Codice]
-      ,[Percorso]
-  FROM [Tirelli_40].[dbo].[Percorsi_Documentale]
-  WHERE (CODICE='" & par_codice & "' or CODICE='" & par_codice_progetto & "')  and tipo='" & par_tipo & "'"
-
-        cmd_SAP_reader_2 = CMD_SAP_2.ExecuteReader
-
-        If cmd_SAP_reader_2.Read() Then
-            percorso = cmd_SAP_reader_2("percorso")
-
-
-        End If
-
-
-        cmd_SAP_reader_2.Close()
-        Cnn1.Close()
-
+        Using Cnn1 As New SqlConnection(Homepage.sap_tirelli)
+            Cnn1.Open()
+            Using CMD As New SqlCommand(
+                "SELECT TOP 1 [Percorso] FROM [Tirelli_40].[dbo].[Percorsi_Documentale]
+                 WHERE (CODICE=@codice OR CODICE=@codice_prog) AND tipo=@tipo", Cnn1)
+                CMD.Parameters.AddWithValue("@codice", par_codice)
+                CMD.Parameters.AddWithValue("@codice_prog", par_codice_progetto)
+                CMD.Parameters.AddWithValue("@tipo", par_tipo)
+                Using reader As SqlDataReader = CMD.ExecuteReader()
+                    If reader.Read() Then percorso = reader("percorso").ToString()
+                End Using
+            End Using
+        End Using
         Return percorso
     End Function
 
     Sub elenca_revisioni(par_codice_Commessa As String)
-        Dim Cnn1 As New SqlConnection
         DataGridView_revisione.Rows.Clear()
-        Cnn1.ConnectionString = Homepage.sap_tirelli
-        Cnn1.Open()
-
-        Dim CMD_SAP_2 As New SqlCommand
-        Dim cmd_SAP_reader_2 As SqlDataReader
-
-
-        CMD_SAP_2.Connection = Cnn1
-        CMD_SAP_2.CommandText = "SELECT t0.[ID]
-      ,t0.[Commessa]
-	  ,t0.numero
-      ,t0.[utente]
-      ,t0.[Data]
-      ,t0.[ora]
-,coalesce(t0.note,'') as 'Note'
-,coalesce(t0.stato,'') as 'Stato'
-,CONCAT(T1.LASTNAME,' ',T1.FIRSTNAME) as 'Nome_utente'
-  FROM [Tirelli_40].[dbo].[Scheda_tecnica_revisioni] t0
-left join [TIRELLI_40].[dbo].ohem t1 on t1.empid=t0.utente
-where t0.commessa='" & par_codice_Commessa & "'
-order by t0.ID DESC
-"
-
-        cmd_SAP_reader_2 = CMD_SAP_2.ExecuteReader
-
-        Do While cmd_SAP_reader_2.Read()
-
-            DataGridView_revisione.Rows.Add(cmd_SAP_reader_2("numero"), cmd_SAP_reader_2("utente"), cmd_SAP_reader_2("nome_utente"), cmd_SAP_reader_2("data"), cmd_SAP_reader_2("ora"), cmd_SAP_reader_2("Stato"), cmd_SAP_reader_2("Note"))
-
-
-        Loop
-
-
-        cmd_SAP_reader_2.Close()
-        Cnn1.Close()
-
-
+        Using Cnn1 As New SqlConnection(Homepage.sap_tirelli)
+            Cnn1.Open()
+            Using CMD As New SqlCommand(
+                "SELECT t0.numero, t0.utente, CONCAT(T1.LASTNAME,' ',T1.FIRSTNAME) AS 'Nome_utente',
+                        t0.Data, t0.ora, COALESCE(t0.stato,'') AS Stato, COALESCE(t0.note,'') AS Note
+                 FROM [Tirelli_40].[dbo].[Scheda_tecnica_revisioni] t0
+                 LEFT JOIN [TIRELLI_40].[dbo].ohem t1 ON t1.empid = t0.utente
+                 WHERE t0.commessa = @commessa
+                 ORDER BY t0.ID DESC", Cnn1)
+                CMD.Parameters.AddWithValue("@commessa", par_codice_Commessa)
+                Using reader As SqlDataReader = CMD.ExecuteReader()
+                    Do While reader.Read()
+                        DataGridView_revisione.Rows.Add(
+                            reader("numero"), reader("utente"), reader("nome_utente"),
+                            reader("data"), reader("ora"), reader("Stato"), reader("Note"))
+                    Loop
+                End Using
+            End Using
+        End Using
     End Sub
 
     Sub Inserimento_dipendenti()
         ComboBox_utente.Items.Clear()
-        Dim Cnn As New SqlConnection
-        Cnn.ConnectionString = Homepage.sap_tirelli
-        Cnn.Open()
-
-
-
-        Dim CMD_SAP As New SqlCommand
-        Dim cmd_SAP_reader As SqlDataReader
-
-        CMD_SAP.Connection = Cnn
-        CMD_SAP.CommandText = "SELECT T0.[empID] as 'Codice dipendenti', T0.[lastName] + ' ' + T0.[firstName] AS 'Nome', T1.[name] 
-        FROM [TIRELLI_40].[dbo].OHEM T0 
-left join [TIRELLI_40].[dbo].oudp t1 on T0.[dept]=t1.code 
-inner join [TIRELLI_40].[DBO].COLL_Reparti t2 on (t2.sap_id_reparto =t1.code or t2.sap_id_reparto_2 =t1.code)   
-where t0.active='Y' 
-and (cast(t2.id_reparto as varchar)='" & Homepage.trova_Dettagli_dipendente(Homepage.ID_SALVATO).codice_reparto & "'   or cast(t2.id_reparto as varchar)='" & Replace(Homepage.trova_Dettagli_dipendente(Homepage.ID_SALVATO).codice_reparto, "T", "") & "' )
-
-order by T0.[lastName] + ' ' + T0.[firstName] "
-
-        cmd_SAP_reader = CMD_SAP.ExecuteReader
-
-        Dim Indice As Integer
-        Indice = 0
-        Do While cmd_SAP_reader.Read()
-            Elenco_dipendenti(Indice) = cmd_SAP_reader("Codice dipendenti")
-            ComboBox_utente.Items.Add(cmd_SAP_reader("Nome"))
-
-            If cmd_SAP_reader("Codice dipendenti") = Homepage.ID_SALVATO Then
-                ComboBox_utente.Text = cmd_SAP_reader("Nome")
-            End If
-            Indice = Indice + 1
-        Loop
-        cmd_SAP_reader.Close()
-        Cnn.Close()
-        'Try
-        '    id_utente = Homepage.ID_SALVATO
-        '    ComboBox_utente.Text = Homepage.UTENTE_SALVATO
-        'Catch ex As Exception
-
-        'End Try
-
-
-
-    End Sub 'Inserisco le risorse nella combo box
+        Dim dip = Homepage.trova_Dettagli_dipendente(Homepage.ID_SALVATO)
+        Dim codRep As String = dip.codice_reparto
+        Dim codRepSenzaT As String = codRep.Replace("T", "")
+        Using Cnn As New SqlConnection(Homepage.sap_tirelli)
+            Cnn.Open()
+            Using CMD As New SqlCommand(
+                "SELECT T0.[empID] AS 'Codice dipendenti', T0.[lastName] + ' ' + T0.[firstName] AS 'Nome'
+                 FROM [TIRELLI_40].[dbo].OHEM T0
+                 JOIN [TIRELLI_40].[dbo].oudp t1 ON T0.[dept] = t1.code
+                 JOIN [TIRELLI_40].[DBO].COLL_Reparti t2 ON (t2.sap_id_reparto = t1.code OR t2.sap_id_reparto_2 = t1.code)
+                 WHERE t0.active = 'Y'
+                   AND (CAST(t2.id_reparto AS VARCHAR) = @rep OR CAST(t2.id_reparto AS VARCHAR) = @repNoT)
+                 ORDER BY T0.[lastName] + ' ' + T0.[firstName]", Cnn)
+                CMD.Parameters.AddWithValue("@rep", codRep)
+                CMD.Parameters.AddWithValue("@repNoT", codRepSenzaT)
+                Using reader As SqlDataReader = CMD.ExecuteReader()
+                    Dim indice As Integer = 0
+                    Do While reader.Read()
+                        Elenco_dipendenti(indice) = reader("Codice dipendenti").ToString()
+                        ComboBox_utente.Items.Add(reader("Nome").ToString())
+                        If reader("Codice dipendenti").ToString() = Homepage.ID_SALVATO.ToString() Then
+                            ComboBox_utente.Text = reader("Nome").ToString()
+                        End If
+                        indice += 1
+                    Loop
+                End Using
+            End Using
+        End Using
+    End Sub
 
     Sub trova_cartella_macchina()
         Dim cartella_padre As String
@@ -1004,43 +973,21 @@ order by T0.[lastName] + ' ' + T0.[firstName] "
 
 
     Sub inserisci_numero_nuova_revisione(par_codice_commessa As String, par_stato As String, Par_note As String)
-
-
         trova_ultima_revisione(codice_commessa)
-        Dim Cnn3 As New SqlConnection
-        Cnn3.ConnectionString = Homepage.sap_tirelli
-        Cnn3.Open()
-
-        Dim CMD_SAP_3 As New SqlCommand
-
-        CMD_SAP_3.Connection = Cnn3
-
-
-        CMD_SAP_3.CommandText = "
-
-INSERT INTO [Tirelli_40].[dbo].[Scheda_tecnica_revisioni]
-           ([Commessa]
-           ,[Numero]
-           ,[utente]
-           ,[Data]
-           ,[ora]
-,[stato]
-,[Note])
-     VALUES
-           ('" & par_codice_commessa & "'
-           ," & numero_ultima_revisione & "+1
-           ," & Homepage.ID_SALVATO & "
-,getdate()
-           ,convert(varchar, getdate(), 108)
-,'" & par_stato & "'
-,'" & Par_note & "')"
-
-
-        CMD_SAP_3.ExecuteNonQuery()
-
-        Cnn3.Close()
-
-
+        Using Cnn As New SqlConnection(Homepage.sap_tirelli)
+            Cnn.Open()
+            Using CMD As New SqlCommand(
+                "INSERT INTO [Tirelli_40].[dbo].[Scheda_tecnica_revisioni]
+                 ([Commessa],[Numero],[utente],[Data],[ora],[stato],[Note])
+                 VALUES (@commessa, @num+1, @utente, GETDATE(), CONVERT(VARCHAR,GETDATE(),108), @stato, @note)", Cnn)
+                CMD.Parameters.AddWithValue("@commessa", par_codice_commessa)
+                CMD.Parameters.AddWithValue("@num", numero_ultima_revisione)
+                CMD.Parameters.AddWithValue("@utente", Homepage.ID_SALVATO)
+                CMD.Parameters.AddWithValue("@stato", par_stato)
+                CMD.Parameters.AddWithValue("@note", Par_note)
+                CMD.ExecuteNonQuery()
+            End Using
+        End Using
     End Sub
 
     Sub inserisci_valori_scheda_tecnica(par_codice_commessa As String)
@@ -3003,17 +2950,17 @@ order by t0.n"
             End Try
 
 
-' Imposta l'altezza massima desiderata
-Dim maxHeight As Integer = 60
-Dim scaleFactor As Double = maxHeight / image.Height
-                Dim newWidth As Integer = CInt(image.Width * scaleFactor)
-                Dim newSize As New Size(newWidth, maxHeight)
+            ' Imposta l'altezza massima desiderata
+            Dim maxHeight As Integer = 60
+            Dim scaleFactor As Double = maxHeight / image.Height
+            Dim newWidth As Integer = CInt(image.Width * scaleFactor)
+            Dim newSize As New Size(newWidth, maxHeight)
 
-' Crea l'immagine ridimensionata
-                Dim smallImage As New Bitmap(image, newSize)
+            ' Crea l'immagine ridimensionata
+            Dim smallImage As New Bitmap(image, newSize)
 
 
-                par_datagridview.Rows.Add(cmd_SAP_reader("ID"), contatore, cmd_SAP_reader("Tecnologia"), cmd_SAP_reader("Note"), smallImage)
+            par_datagridview.Rows.Add(cmd_SAP_reader("ID"), contatore, cmd_SAP_reader("Tecnologia"), cmd_SAP_reader("Note"), smallImage)
             contatore += 1
         Loop
         cmd_SAP_reader.Close()
@@ -3755,54 +3702,24 @@ limit 100
         End If
 
 
-        '        CMD_SAP.CommandText = "Select t10.itemcode, coalesce(t15.absentry, 0) as 'N_progetto'
-        ', coalesce(t15.name,'') as 'Nome_progetto'
-        ',coalesce(CONCAT(T16.LASTNAME,' ',T16.FIRSTNAME),'') AS 'PM'
-        ', t13.itemname
-        ', case when t12.cardcode is null then '' else t12.cardcode end as 'Cardcode'
-        ', case when t12.cardname is null then '' else t12.cardname end as 'Cardname'
-        ', t12.docduedate,case when t12.u_destinazione is null then '' else t12.u_destinazione end as 'u_destinazione'
-        ', case when t12.u_codicebp is null then '' else t12.u_codicebp end as 'codice_Cliente_finale'
-        ', case when t14.cardname is null then '' else t14.cardname end  as 'Cliente_F'
-        'from
-        '(
-        'SELECT t0.itemcode, max(t0.docentry) as 'Docentry'
-        'from oitm t99 left join itt1 t98 on t98.code=t99.itemcode
-        'left join rdr1 t0 on t98.father=t0.itemcode
-        'where substring(t99.itemcode,1,1)='M' and t99.itemcode ='" & par_Codice_macchina & "'
-        'group by t0.itemcode
-        ')
-        'as t10 left join rdr1 t11 on t11.itemcode=t10.itemcode and t11.docentry=t10.docentry
-        'left join ordr t12 on t12.docentry=t11.docentry
-        'left join [TIRELLISRLDB].[DBO].oitm t13 on t13.itemcode=t10.itemcode
-        'left join [TIRELLISRLDB].[DBO].ocrd t14 on t14.cardcode=t12.u_codicebp
-        'left join [TIRELLISRLDB].[DBO].opmg t15 on t15.absentry=t13.u_progetto
-        'LEFT Join [TIRELLI_40].[dbo].OHEM T16 ON T15.OWNER=T16.EMPID
-        'order by t10.docentry DESC, t10.itemcode"
+
         cmd_SAP_reader = CMD_SAP.ExecuteReader
 
-        If cmd_SAP_reader.Read() = True Then
+        If cmd_SAP_reader.Read() Then
             If Homepage.ERP_provenienza = "SAP" Then
-                dettagli.cardcode_sap = cmd_SAP_reader("codice_cliente")
-                dettagli.cardname = cmd_SAP_reader("cliente")
-                dettagli.final_cardcode_sap = cmd_SAP_reader("U_CodiceBP")
-                dettagli.final_cardname = cmd_SAP_reader("cliente_finale")
-                dettagli.cardcode_galileo = ""
-                dettagli.final_cardcode_galileo = ""
-
-
+                dettagli.cardcode_sap = cmd_SAP_reader("codice_cliente").ToString().Trim()
+                dettagli.cardname = cmd_SAP_reader("cliente").ToString().Trim()
+                dettagli.final_cardcode_sap = cmd_SAP_reader("U_CodiceBP").ToString().Trim()
+                dettagli.final_cardname = cmd_SAP_reader("cliente_finale").ToString().Trim()
             Else
-
-                dettagli.cardcode_sap = cmd_SAP_reader("codice_cliente_SAP")
-                dettagli.cardname = cmd_SAP_reader("Cliente")
-                dettagli.final_cardcode_sap = cmd_SAP_reader("codice_cliente_finale_SAP")
-                dettagli.final_cardname = cmd_SAP_reader("Cliente_finale")
-                dettagli.cardcode_galileo = cmd_SAP_reader("Codice_cliente")
-                dettagli.final_cardcode_galileo = cmd_SAP_reader("Codice_cliente_finale")
-
+                dettagli.cardcode_sap = cmd_SAP_reader("codice_cliente_SAP").ToString().Trim()
+                dettagli.cardname = cmd_SAP_reader("Cliente").ToString().Trim()
+                dettagli.final_cardcode_sap = cmd_SAP_reader("codice_cliente_finale_SAP").ToString().Trim()
+                dettagli.final_cardname = cmd_SAP_reader("Cliente_finale").ToString().Trim()
+                dettagli.cardcode_galileo = cmd_SAP_reader("Codice_cliente").ToString().Trim()
+                dettagli.final_cardcode_galileo = cmd_SAP_reader("Codice_cliente_finale").ToString().Trim()
+                dettagli.progetto = cmd_SAP_reader("numero_progetto").ToString().Trim()
             End If
-
-
         End If
         cmd_SAP_reader.Close()
         Cnn.Close()
@@ -3810,13 +3727,13 @@ limit 100
     End Function
 
     Public Class Dettaglicliente
-
-        Public cardcode_sap As String
-        Public cardname As String
-        Public final_cardcode_sap As String
-        Public final_cardname As String
-        Public cardcode_galileo As String
-        Public final_cardcode_galileo As String
+        Public cardcode_sap As String = ""
+        Public cardname As String = ""
+        Public final_cardcode_sap As String = ""
+        Public final_cardname As String = ""
+        Public cardcode_galileo As String = ""
+        Public final_cardcode_galileo As String = ""
+        Public progetto As String = ""
     End Class
 
     Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button10.Click

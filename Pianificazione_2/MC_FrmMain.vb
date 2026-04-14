@@ -19,18 +19,18 @@ Public Class MC_FrmMain
     Private cmbLingua As ComboBox
 
     ' ── Pulsanti sidebar ─────────────────────────
-    Private WithEvents btnHome         As Button
     Private WithEvents btnMacchine     As Button
     Private WithEvents btnFotocellule  As Button
+    Private WithEvents btnCatalogo     As Button
     Private WithEvents btnSoftware     As Button
     Private WithEvents btnErrori       As Button
     Private WithEvents btnGenera       As Button
     Private WithEvents btnImpostazioni As Button
 
     ' ── Pannelli sezioni ─────────────────────────
-    Private pnlHome        As Panel
     Private pnlMacchine    As Panel
     Private pnlFotocellule As Panel
+    Private pnlCatalogo    As Panel
     Private pnlSoftware    As Panel
     Private pnlErrori      As Panel
     Private pnlGenera      As Panel
@@ -40,7 +40,7 @@ Public Class MC_FrmMain
     Public Sub New()
         SetupUI()
         CaricaLingue()
-        MostraPannello(pnlHome, btnHome)
+        MostraPannello(pnlMacchine, btnMacchine)
     End Sub
 
     Private Sub SetupUI()
@@ -110,18 +110,18 @@ Public Class MC_FrmMain
         Dim pnlNav As New Panel() With {.Dock = DockStyle.Fill, .BackColor = Color.White}
 
         Dim navDefs As (String, Button)() = {
-            ("  Home macchina",       New Button()),
-            ("  Anagrafica macchine", New Button()),
-            ("  Fotocellule (5.1)",   New Button()),
-            ("  Software PLC",        New Button()),
-            ("  Codici errore",       New Button()),
-            ("  Genera manuale",      New Button()),
-            ("  Impostazioni",        New Button())
+            ("  Anagrafica macchine",   New Button()),
+            ("  Fotocellule (5.1)",     New Button()),
+            ("  Catalogo fotocellule",  New Button()),
+            ("  Software PLC",          New Button()),
+            ("  Codici errore",         New Button()),
+            ("  Genera manuale",        New Button()),
+            ("  Impostazioni",          New Button())
         }
 
-        btnHome         = navDefs(0).Item2
-        btnMacchine     = navDefs(1).Item2
-        btnFotocellule  = navDefs(2).Item2
+        btnMacchine     = navDefs(0).Item2
+        btnFotocellule  = navDefs(1).Item2
+        btnCatalogo     = navDefs(2).Item2
         btnSoftware     = navDefs(3).Item2
         btnErrori       = navDefs(4).Item2
         btnGenera       = navDefs(5).Item2
@@ -186,14 +186,14 @@ Public Class MC_FrmMain
         }
         Me.Controls.Add(pnlContent)
 
-        pnlHome        = MC_PanelBuild.BuildPanelHome(Me, _db)
         pnlMacchine    = MC_PanelBuild.BuildPanelMacchine(Me, _db)
         pnlFotocellule = MC_PanelBuild.BuildPanelFotocellule(Me, _db, _ai)
+        pnlCatalogo    = MC_PanelBuild.BuildPanelCatalogo(Me, _db)
         pnlSoftware    = MC_PanelBuild.BuildPanelSoftware(Me, _db, _ai)
         pnlErrori      = MC_PanelBuild.BuildPanelErrori(Me, _db, _ai)
         pnlGenera      = MC_PanelBuild.BuildPanelGenera(Me, _db, _ai, _word)
 
-        For Each pnl In {pnlHome, pnlMacchine, pnlFotocellule, pnlSoftware, pnlErrori, pnlGenera}
+        For Each pnl In {pnlMacchine, pnlFotocellule, pnlCatalogo, pnlSoftware, pnlErrori, pnlGenera}
             pnl.Dock    = DockStyle.Fill
             pnl.Visible = False
             pnlContent.Controls.Add(pnl)
@@ -201,7 +201,7 @@ Public Class MC_FrmMain
     End Sub
 
     Private Sub MostraPannello(pannello As Panel, btn As Button)
-        For Each pnl In {pnlHome, pnlMacchine, pnlFotocellule, pnlSoftware, pnlErrori, pnlGenera}
+        For Each pnl In {pnlMacchine, pnlFotocellule, pnlCatalogo, pnlSoftware, pnlErrori, pnlGenera}
             pnl.Visible = False
         Next
         pannello.Visible = True
@@ -212,10 +212,6 @@ Public Class MC_FrmMain
     ' NAVIGAZIONE
     ' ══════════════════════════════════════════════
 
-    Private Sub btnHome_Click(s As Object, e As EventArgs) Handles btnHome.Click
-        MostraPannello(pnlHome, btnHome)
-    End Sub
-
     Private Sub btnMacchine_Click(s As Object, e As EventArgs) Handles btnMacchine.Click
         MostraPannello(pnlMacchine, btnMacchine)
     End Sub
@@ -224,6 +220,10 @@ Public Class MC_FrmMain
         If Not CheckMacchina() Then Return
         MC_PanelBuild.RicaricaFotocellule(pnlFotocellule, _db, _macchinaCorrente)
         MostraPannello(pnlFotocellule, btnFotocellule)
+    End Sub
+
+    Private Sub btnCatalogo_Click(s As Object, e As EventArgs) Handles btnCatalogo.Click
+        MostraPannello(pnlCatalogo, btnCatalogo)
     End Sub
 
     Private Sub btnSoftware_Click(s As Object, e As EventArgs) Handles btnSoftware.Click

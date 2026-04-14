@@ -560,7 +560,7 @@ and t0.itemcode='" & par_codice_sap & "'"
 FROM OPENQUERY(AS400, '
      SELECT 
         cod_mag AS whscode,
-        qta_mag+QTA_QUA -qta_ass AS onhand,
+        qta_mag -qta_ass AS onhand,
 		qta_ass,
 		QTA_QUA,
         qta_imp + qta_ven AS iscommited,

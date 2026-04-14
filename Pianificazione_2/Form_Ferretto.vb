@@ -4,6 +4,8 @@ Imports System.Drawing.Printing
 Public Class Form_Ferretto
     Public id_da_stampare As Integer = 0
     Public Stampante_Selezionata As Boolean
+    Public stampa_descrizione As String
+    Public stampa_progetto As String
 
     ' Helper: converte DBNull/Nothing in stringa vuota e fa Trim
     Private Shared Function S(val As Object) As String
@@ -243,7 +245,8 @@ WHERE id = @id"
                         stampa_articolo = S(reader("item"))
                         stampa_qta_richiesta = S(reader("requestedQty"))
                         stampa_qta_processata = S(reader("processedQty"))
-
+                        stampa_descrizione = Magazzino.OttieniDettagliAnagrafica(stampa_articolo).Descrizione
+                        stampa_progetto = Scheda_tecnica.Ottieni_cliente_papa_macchina(stampa_COM).progetto
                         If stampa_qta_processata = "" OrElse stampa_qta_processata = "0" OrElse stampa_qta_processata = "0.000" Then
                             MessageBox.Show("Nessuna quantità processata, stampa annullata.")
                             Exit Sub
@@ -274,11 +277,11 @@ WHERE id = @id"
             sel.Document = Scontrino
             If sel.ShowDialog() = DialogResult.OK Then
                 Stampante_Selezionata = True
-                Scontrino.DefaultPageSettings.PaperSize = New System.Drawing.Printing.PaperSize("Scontrino", 185, 215)
+                Scontrino.DefaultPageSettings.PaperSize = New System.Drawing.Printing.PaperSize("Scontrino", 185, 235)
                 Scontrino.Print()
             End If
         Else
-            Scontrino.DefaultPageSettings.PaperSize = New System.Drawing.Printing.PaperSize("Scontrino", 185, 215)
+            Scontrino.DefaultPageSettings.PaperSize = New System.Drawing.Printing.PaperSize("Scontrino", 185, 235)
             Scontrino.Print()
         End If
     End Sub
@@ -296,7 +299,7 @@ WHERE id = @id"
         g.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
 
         ' --- BORDO ESTERNO ---
-        g.DrawRectangle(Penna, 1, 1, 183, 210)
+        g.DrawRectangle(Penna, 1, 1, 183, 230)
 
         ' --- INTESTAZIONE: numero scontrino ---
         g.DrawString("N° " & stampa_numero_scontrino, fTitolo, Brushes.Gray, 3, 2)
@@ -339,13 +342,27 @@ WHERE id = @id"
         g.DrawString("Qtà Processata", fTitolo, Brushes.Black, 5, 142)
         g.DrawString(stampa_qta_processata, fQta, Brushes.Black, 5, 151)
 
+        ' RIGA 5: Descrizione articolo
+        Dim desc_safe As String = If(stampa_descrizione, "")
+        Dim desc_troncata As String = desc_safe.Substring(0, Math.Min(35, desc_safe.Length))
+        g.DrawRectangle(Penna, 3, 174, 179, 18)
+        g.DrawString("Descrizione", fTitolo, Brushes.Black, 5, 175)
+        g.DrawString(desc_troncata, fSmall, Brushes.Black, 5, 183)
+
+        ' RIGA 6: Progetto
+        Dim prog_safe As String = If(stampa_progetto, "")
+        Dim progetto_troncato As String = prog_safe.Substring(0, Math.Min(35, prog_safe.Length))
+        g.DrawRectangle(Penna, 3, 195, 179, 18)
+        g.DrawString("Progetto", fTitolo, Brushes.Black, 5, 196)
+        g.DrawString(progetto_troncato, fSmall, Brushes.Black, 5, 204)
+
         ' FOOTER: data/ora + utente (una sola query)
         Dim DataOggi As String = DateTime.Now.ToString("dd/MM/yy HH:mm")
-        g.DrawString(DataOggi, fSmall, Brushes.Black, 120, 197)
+        g.DrawString(DataOggi, fSmall, Brushes.Black, 120, 217)
 
         Dim d = Homepage.trova_Dettagli_dipendente(Homepage.ID_SALVATO)
         Dim NomeTroncato As String = (d.COGNOME & " " & d.NOME).Substring(0, Math.Min(12, (d.COGNOME & " " & d.NOME).Length))
-        g.DrawString(NomeTroncato, fSmall, Brushes.Black, 5, 197)
+        g.DrawString(NomeTroncato, fSmall, Brushes.Black, 5, 217)
 
     End Sub
 

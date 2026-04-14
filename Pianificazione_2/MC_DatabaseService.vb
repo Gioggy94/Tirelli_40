@@ -30,7 +30,31 @@ CREATE TABLE [Tirelli_40].dbo.MC_TipiMacchina (
     ID   int IDENTITY(1,1) PRIMARY KEY,
     Nome nvarchar(100) NOT NULL,
     DataCreazione datetime DEFAULT GETDATE()
-);"
+);
+IF NOT EXISTS (SELECT * FROM [Tirelli_40].sys.columns WHERE object_id=OBJECT_ID('[Tirelli_40].dbo.Macchine') AND name='PesoKg')
+    ALTER TABLE [Tirelli_40].dbo.Macchine ADD PesoKg float NULL;
+IF NOT EXISTS (SELECT * FROM [Tirelli_40].sys.columns WHERE object_id=OBJECT_ID('[Tirelli_40].dbo.Macchine') AND name='ConsumoAria')
+    ALTER TABLE [Tirelli_40].dbo.Macchine ADD ConsumoAria float NULL;
+IF NOT EXISTS (SELECT * FROM [Tirelli_40].sys.columns WHERE object_id=OBJECT_ID('[Tirelli_40].dbo.Macchine') AND name='Corrente')
+    ALTER TABLE [Tirelli_40].dbo.Macchine ADD Corrente nvarchar(100) NULL;
+IF NOT EXISTS (SELECT * FROM [Tirelli_40].sys.columns WHERE object_id=OBJECT_ID('[Tirelli_40].dbo.Macchine') AND name='Tensione')
+    ALTER TABLE [Tirelli_40].dbo.Macchine ADD Tensione nvarchar(100) NULL;
+IF NOT EXISTS (SELECT * FROM [Tirelli_40].sys.tables WHERE name='MC_TipiFotocellule')
+CREATE TABLE [Tirelli_40].dbo.MC_TipiFotocellule (
+    ID   int IDENTITY(1,1) PRIMARY KEY,
+    Nome nvarchar(100) NOT NULL,
+    DataCreazione datetime DEFAULT GETDATE()
+);
+IF NOT EXISTS (SELECT * FROM [Tirelli_40].sys.tables WHERE name='MC_CatalogoFotocellule')
+CREATE TABLE [Tirelli_40].dbo.MC_CatalogoFotocellule (
+    ID            int IDENTITY(1,1) PRIMARY KEY,
+    Codice        nvarchar(100) NOT NULL,
+    TipoID        int NOT NULL,
+    PathImmagine  nvarchar(500) NULL,
+    DataCreazione datetime DEFAULT GETDATE()
+);
+IF NOT EXISTS (SELECT * FROM [Tirelli_40].sys.columns WHERE object_id=OBJECT_ID('[Tirelli_40].dbo.Fotocellule') AND name='CatalogoID')
+    ALTER TABLE [Tirelli_40].dbo.Fotocellule ADD CatalogoID int NULL;"
         Using cn = GetConnection(), cmd As New SqlCommand(sql, cn)
             cn.Open()
             cmd.ExecuteNonQuery()
@@ -45,7 +69,7 @@ CREATE TABLE [Tirelli_40].dbo.MC_TipiMacchina (
         Dim lista As New List(Of MC_Macchina)
         Dim sql = "SELECT ID,Matricola,NomeMacchina,Modello,TipoMacchina," &
                   "ClienteFinale,AnnoCostruzione,LinguaCodice,Attiva,Note," &
-                  "DataCreazione,DataModifica " &
+                  "DataCreazione,DataModifica,PesoKg,ConsumoAria,Corrente,Tensione " &
                   "FROM [Tirelli_40].dbo.Macchine " &
                   If(soloAttive, "WHERE Attiva=1 ", "") &
                   "ORDER BY Matricola"
@@ -63,7 +87,7 @@ CREATE TABLE [Tirelli_40].dbo.MC_TipiMacchina (
     Public Function GetMacchinaByMatricola(matricola As String) As MC_Macchina
         Dim sql = "SELECT ID,Matricola,NomeMacchina,Modello,TipoMacchina," &
                   "ClienteFinale,AnnoCostruzione,LinguaCodice,Attiva,Note," &
-                  "DataCreazione,DataModifica " &
+                  "DataCreazione,DataModifica,PesoKg,ConsumoAria,Corrente,Tensione " &
                   "FROM [Tirelli_40].dbo.Macchine WHERE Matricola=@M"
         Using cn = GetConnection(), cmd As New SqlCommand(sql, cn)
             cmd.Parameters.AddWithValue("@M", matricola)
@@ -136,7 +160,10 @@ CREATE TABLE [Tirelli_40].dbo.MC_TipiMacchina (
                   "ISNULL(m.Modello, '') as Modello, " &
                   "ISNULL(m.TipoMacchina, '') as TipoMacchina, " &
                   "ISNULL(m.LinguaCodice, 'IT') as LinguaCodice, " &
-                  "ISNULL(m.Note, '') as Note " &
+                  "ISNULL(m.Note, '') as Note, " &
+                  "m.PesoKg, m.ConsumoAria, " &
+                  "ISNULL(m.Corrente, '') as Corrente, " &
+                  "ISNULL(m.Tensione, '') as Tensione " &
                   $"FROM OPENQUERY(AS400, '{inner}') oq " &
                   "LEFT JOIN [Tirelli_40].dbo.Macchine m ON m.Matricola = oq.matricola COLLATE SQL_Latin1_General_CP1_CI_AS"
 
@@ -152,7 +179,11 @@ CREATE TABLE [Tirelli_40].dbo.MC_TipiMacchina (
                         .Modello       = rd.GetString(4),
                         .TipoMacchina  = rd.GetString(5),
                         .LinguaCodice  = rd.GetString(6),
-                        .Note          = rd.GetString(7)
+                        .Note          = rd.GetString(7),
+                        .PesoKg        = If(rd.IsDBNull(8), Nothing, CType(rd.GetDouble(8), Double?)),
+                        .ConsumoAria   = If(rd.IsDBNull(9), Nothing, CType(rd.GetDouble(9), Double?)),
+                        .Corrente      = rd.GetString(10),
+                        .Tensione      = rd.GetString(11)
                     })
                 End While
             End Using
@@ -169,21 +200,27 @@ CREATE TABLE [Tirelli_40].dbo.MC_TipiMacchina (
         Dim sql = "IF EXISTS (SELECT 1 FROM [Tirelli_40].dbo.Macchine WHERE Matricola=@Mat) " &
                   "  UPDATE [Tirelli_40].dbo.Macchine SET " &
                   "    NomeMacchina=@Nome, Modello=@Mod, TipoMacchina=@Tipo, " &
-                  "    ClienteFinale=@Cli, LinguaCodice=@Lng, Note=@Note, DataModifica=GETDATE() " &
+                  "    ClienteFinale=@Cli, LinguaCodice=@Lng, Note=@Note, " &
+                  "    PesoKg=@Peso, ConsumoAria=@Aria, Corrente=@Cor, Tensione=@Ten, " &
+                  "    DataModifica=GETDATE() " &
                   "  WHERE Matricola=@Mat " &
                   "ELSE " &
                   "  INSERT INTO [Tirelli_40].dbo.Macchine " &
-                  "    (Matricola,NomeMacchina,Modello,TipoMacchina,ClienteFinale,LinguaCodice,Attiva,Note) " &
-                  "  VALUES (@Mat,@Nome,@Mod,@Tipo,@Cli,@Lng,1,@Note); " &
+                  "    (Matricola,NomeMacchina,Modello,TipoMacchina,ClienteFinale,LinguaCodice,Attiva,Note,PesoKg,ConsumoAria,Corrente,Tensione) " &
+                  "  VALUES (@Mat,@Nome,@Mod,@Tipo,@Cli,@Lng,1,@Note,@Peso,@Aria,@Cor,@Ten); " &
                   "SELECT ID FROM [Tirelli_40].dbo.Macchine WHERE Matricola=@Mat"
         Using cn = GetConnection(), cmd As New SqlCommand(sql, cn)
             cmd.Parameters.AddWithValue("@Mat",  m.Matricola)
             cmd.Parameters.AddWithValue("@Nome", If(m.NomeMacchina, ""))
-            cmd.Parameters.AddWithValue("@Mod", If(m.Modello, ""))
+            cmd.Parameters.AddWithValue("@Mod",  If(m.Modello, ""))
             cmd.Parameters.AddWithValue("@Tipo", If(m.TipoMacchina, ""))
-            cmd.Parameters.AddWithValue("@Cli", If(m.ClienteFinale, ""))
-            cmd.Parameters.AddWithValue("@Lng", If(String.IsNullOrEmpty(m.LinguaCodice), "IT", m.LinguaCodice))
+            cmd.Parameters.AddWithValue("@Cli",  If(m.ClienteFinale, ""))
+            cmd.Parameters.AddWithValue("@Lng",  If(String.IsNullOrEmpty(m.LinguaCodice), "IT", m.LinguaCodice))
             cmd.Parameters.AddWithValue("@Note", If(m.Note, ""))
+            cmd.Parameters.AddWithValue("@Peso", If(m.PesoKg.HasValue, CObj(m.PesoKg.Value), DBNull.Value))
+            cmd.Parameters.AddWithValue("@Aria", If(m.ConsumoAria.HasValue, CObj(m.ConsumoAria.Value), DBNull.Value))
+            cmd.Parameters.AddWithValue("@Cor",  If(m.Corrente, ""))
+            cmd.Parameters.AddWithValue("@Ten",  If(m.Tensione, ""))
             cn.Open()
             Return CInt(cmd.ExecuteScalar())
         End Using
@@ -295,7 +332,11 @@ CREATE TABLE [Tirelli_40].dbo.MC_TipiMacchina (
             .Attiva          = rd.GetBoolean(8),
             .Note            = If(rd.IsDBNull(9), "", rd.GetString(9)),
             .DataCreazione   = rd.GetDateTime(10),
-            .DataModifica    = If(rd.IsDBNull(11), Nothing, CType(rd.GetDateTime(11), DateTime?))
+            .DataModifica    = If(rd.IsDBNull(11), Nothing, CType(rd.GetDateTime(11), DateTime?)),
+            .PesoKg          = If(rd.FieldCount > 12 AndAlso Not rd.IsDBNull(12), CType(rd.GetDouble(12), Double?), Nothing),
+            .ConsumoAria     = If(rd.FieldCount > 13 AndAlso Not rd.IsDBNull(13), CType(rd.GetDouble(13), Double?), Nothing),
+            .Corrente        = If(rd.FieldCount > 14 AndAlso Not rd.IsDBNull(14), rd.GetString(14), ""),
+            .Tensione        = If(rd.FieldCount > 15 AndAlso Not rd.IsDBNull(15), rd.GetString(15), "")
         }
     End Function
 
@@ -305,10 +346,15 @@ CREATE TABLE [Tirelli_40].dbo.MC_TipiMacchina (
 
     Public Function GetFotocellule(macchinaID As Integer) As List(Of MC_Fotocellula)
         Dim lista As New List(Of MC_Fotocellula)
-        Dim sql = "SELECT ID,MacchinaID,Codice,Marca,Modello,TipoRilevazione," &
-                  "Posizione,TensioneLavoro,UscitaLogica,DistanzaRilev," &
-                  "NoteInstallaz,DataCreazione " &
-                  "FROM [Tirelli_40].dbo.Fotocellule WHERE MacchinaID=@MID ORDER BY Codice"
+        Dim sql = "SELECT f.ID, f.MacchinaID, ISNULL(f.CatalogoID,0), " &
+                  "ISNULL(c.Codice,'') AS Codice, " &
+                  "ISNULL(t.Nome,'') AS TipoNome, " &
+                  "ISNULL(c.PathImmagine,'') AS PathImmagine, " &
+                  "f.DataCreazione " &
+                  "FROM [Tirelli_40].dbo.Fotocellule f " &
+                  "LEFT JOIN [Tirelli_40].dbo.MC_CatalogoFotocellule c ON c.ID = f.CatalogoID " &
+                  "LEFT JOIN [Tirelli_40].dbo.MC_TipiFotocellule t ON t.ID = c.TipoID " &
+                  "WHERE f.MacchinaID=@MID ORDER BY c.Codice"
         Using cn = GetConnection(), cmd As New SqlCommand(sql, cn)
             cmd.Parameters.AddWithValue("@MID", macchinaID)
             cn.Open()
@@ -322,31 +368,14 @@ CREATE TABLE [Tirelli_40].dbo.MC_TipiMacchina (
     End Function
 
     Public Function SalvaFotocellula(f As MC_Fotocellula) As Integer
-        If f.ID = 0 Then
-            Dim sql = "INSERT INTO [Tirelli_40].dbo.Fotocellule " &
-                      "(MacchinaID,Codice,Marca,Modello,TipoRilevazione," &
-                      "Posizione,TensioneLavoro,UscitaLogica,DistanzaRilev,NoteInstallaz) " &
-                      "VALUES (@MID,@Cod,@Mar,@Mod,@Tipo,@Pos,@Tens,@Usc,@Dist,@Note);" &
-                      "SELECT SCOPE_IDENTITY();"
-            Using cn = GetConnection(), cmd As New SqlCommand(sql, cn)
-                AddFotocParam(cmd, f)
-                cn.Open()
-                Return CInt(cmd.ExecuteScalar())
-            End Using
-        Else
-            Dim sql = "UPDATE [Tirelli_40].dbo.Fotocellule SET " &
-                      "Codice=@Cod,Marca=@Mar,Modello=@Mod,TipoRilevazione=@Tipo," &
-                      "Posizione=@Pos,TensioneLavoro=@Tens,UscitaLogica=@Usc," &
-                      "DistanzaRilev=@Dist,NoteInstallaz=@Note " &
-                      "WHERE ID=@ID"
-            Using cn = GetConnection(), cmd As New SqlCommand(sql, cn)
-                AddFotocParam(cmd, f)
-                cmd.Parameters.AddWithValue("@ID", f.ID)
-                cn.Open()
-                cmd.ExecuteNonQuery()
-                Return f.ID
-            End Using
-        End If
+        Dim sql = "INSERT INTO [Tirelli_40].dbo.Fotocellule (MacchinaID,CatalogoID) " &
+                  "VALUES (@MID,@CatID); SELECT SCOPE_IDENTITY();"
+        Using cn = GetConnection(), cmd As New SqlCommand(sql, cn)
+            cmd.Parameters.AddWithValue("@MID",   f.MacchinaID)
+            cmd.Parameters.AddWithValue("@CatID", f.CatalogoID)
+            cn.Open()
+            Return CInt(cmd.ExecuteScalar())
+        End Using
     End Function
 
     Public Sub EliminaFotocellula(id As Integer)
@@ -358,35 +387,119 @@ CREATE TABLE [Tirelli_40].dbo.MC_TipiMacchina (
         End Using
     End Sub
 
-    Private Sub AddFotocParam(cmd As SqlCommand, f As MC_Fotocellula)
-        cmd.Parameters.AddWithValue("@MID",  f.MacchinaID)
-        cmd.Parameters.AddWithValue("@Cod",  f.Codice)
-        cmd.Parameters.AddWithValue("@Mar",  If(f.Marca, CObj(DBNull.Value)))
-        cmd.Parameters.AddWithValue("@Mod",  If(f.Modello, CObj(DBNull.Value)))
-        cmd.Parameters.AddWithValue("@Tipo", If(f.TipoRilevazione, CObj(DBNull.Value)))
-        cmd.Parameters.AddWithValue("@Pos",  If(f.Posizione, CObj(DBNull.Value)))
-        cmd.Parameters.AddWithValue("@Tens", If(f.TensioneLavoro, CObj(DBNull.Value)))
-        cmd.Parameters.AddWithValue("@Usc",  If(f.UscitaLogica, CObj(DBNull.Value)))
-        cmd.Parameters.AddWithValue("@Dist", If(f.DistanzaRilev, CObj(DBNull.Value)))
-        cmd.Parameters.AddWithValue("@Note", If(f.NoteInstallaz, CObj(DBNull.Value)))
-    End Sub
-
     Private Function ReadFotocellula(rd As SqlDataReader) As MC_Fotocellula
         Return New MC_Fotocellula With {
-            .ID             = rd.GetInt32(0),
-            .MacchinaID     = rd.GetInt32(1),
-            .Codice         = rd.GetString(2),
-            .Marca          = If(rd.IsDBNull(3), "", rd.GetString(3)),
-            .Modello        = If(rd.IsDBNull(4), "", rd.GetString(4)),
-            .TipoRilevazione= If(rd.IsDBNull(5), "", rd.GetString(5)),
-            .Posizione      = If(rd.IsDBNull(6), "", rd.GetString(6)),
-            .TensioneLavoro = If(rd.IsDBNull(7), "", rd.GetString(7)),
-            .UscitaLogica   = If(rd.IsDBNull(8), "", rd.GetString(8)),
-            .DistanzaRilev  = If(rd.IsDBNull(9), "", rd.GetString(9)),
-            .NoteInstallaz  = If(rd.IsDBNull(10), "", rd.GetString(10)),
-            .DataCreazione  = rd.GetDateTime(11)
+            .ID            = rd.GetInt32(0),
+            .MacchinaID    = rd.GetInt32(1),
+            .CatalogoID    = rd.GetInt32(2),
+            .Codice        = rd.GetString(3),
+            .TipoNome      = rd.GetString(4),
+            .PathImmagine  = rd.GetString(5),
+            .DataCreazione = rd.GetDateTime(6)
         }
     End Function
+
+    ' ──────────────────────────────────────────────
+    ' CATALOGO FOTOCELLULE
+    ' ──────────────────────────────────────────────
+
+    Public Function GetTipiFotocellula() As List(Of MC_TipoFotocellula)
+        Dim lista As New List(Of MC_TipoFotocellula)
+        Using cn = GetConnection(),
+              cmd As New SqlCommand("SELECT ID,Nome FROM [Tirelli_40].dbo.MC_TipiFotocellule ORDER BY Nome", cn)
+            cn.Open()
+            Using rd = cmd.ExecuteReader()
+                While rd.Read()
+                    lista.Add(New MC_TipoFotocellula With {.ID = rd.GetInt32(0), .Nome = rd.GetString(1)})
+                End While
+            End Using
+        End Using
+        Return lista
+    End Function
+
+    Public Sub SalvaTipoFotocellula(nome As String)
+        Using cn = GetConnection(),
+              cmd As New SqlCommand("INSERT INTO [Tirelli_40].dbo.MC_TipiFotocellule (Nome) VALUES (@N)", cn)
+            cmd.Parameters.AddWithValue("@N", nome)
+            cn.Open()
+            cmd.ExecuteNonQuery()
+        End Using
+    End Sub
+
+    Public Sub EliminaTipoFotocellula(id As Integer)
+        Using cn = GetConnection(),
+              cmd As New SqlCommand("DELETE FROM [Tirelli_40].dbo.MC_TipiFotocellule WHERE ID=@ID", cn)
+            cmd.Parameters.AddWithValue("@ID", id)
+            cn.Open()
+            cmd.ExecuteNonQuery()
+        End Using
+    End Sub
+
+    Public Function GetCatalogoFotocellule(Optional filtro As String = "") As List(Of MC_CatalogoFotocellula)
+        Dim lista As New List(Of MC_CatalogoFotocellula)
+        Dim where = If(String.IsNullOrWhiteSpace(filtro), "",
+                       $" AND (UPPER(c.Codice) LIKE '%{filtro.ToUpper().Replace("'", "''")}%' " &
+                       $"OR UPPER(t.Nome) LIKE '%{filtro.ToUpper().Replace("'", "''")}%')")
+        Dim sql = "SELECT c.ID, c.Codice, c.TipoID, ISNULL(t.Nome,'') as TipoNome, " &
+                  "ISNULL(c.PathImmagine,'') as PathImmagine, c.DataCreazione " &
+                  "FROM [Tirelli_40].dbo.MC_CatalogoFotocellule c " &
+                  "LEFT JOIN [Tirelli_40].dbo.MC_TipiFotocellule t ON t.ID = c.TipoID " &
+                  $"WHERE 1=1{where} ORDER BY c.Codice"
+        Using cn = GetConnection(), cmd As New SqlCommand(sql, cn)
+            cn.Open()
+            Using rd = cmd.ExecuteReader()
+                While rd.Read()
+                    lista.Add(New MC_CatalogoFotocellula With {
+                        .ID           = rd.GetInt32(0),
+                        .Codice       = rd.GetString(1),
+                        .TipoID       = rd.GetInt32(2),
+                        .TipoNome     = rd.GetString(3),
+                        .PathImmagine = rd.GetString(4),
+                        .DataCreazione= rd.GetDateTime(5)
+                    })
+                End While
+            End Using
+        End Using
+        Return lista
+    End Function
+
+    Public Function GetCatalogoFotocellula(id As Integer) As MC_CatalogoFotocellula
+        Return GetCatalogoFotocellule().FirstOrDefault(Function(x) x.ID = id)
+    End Function
+
+    Public Function SalvaCatalogoFotocellula(c As MC_CatalogoFotocellula) As Integer
+        If c.ID = 0 Then
+            Dim sql = "INSERT INTO [Tirelli_40].dbo.MC_CatalogoFotocellule (Codice,TipoID,PathImmagine) " &
+                      "VALUES (@Cod,@TipoID,@Path); SELECT SCOPE_IDENTITY();"
+            Using cn = GetConnection(), cmd As New SqlCommand(sql, cn)
+                cmd.Parameters.AddWithValue("@Cod",   c.Codice)
+                cmd.Parameters.AddWithValue("@TipoID",c.TipoID)
+                cmd.Parameters.AddWithValue("@Path",  If(String.IsNullOrEmpty(c.PathImmagine), CObj(DBNull.Value), c.PathImmagine))
+                cn.Open()
+                Return CInt(cmd.ExecuteScalar())
+            End Using
+        Else
+            Dim sql = "UPDATE [Tirelli_40].dbo.MC_CatalogoFotocellule SET Codice=@Cod,TipoID=@TipoID,PathImmagine=@Path WHERE ID=@ID"
+            Using cn = GetConnection(), cmd As New SqlCommand(sql, cn)
+                cmd.Parameters.AddWithValue("@Cod",   c.Codice)
+                cmd.Parameters.AddWithValue("@TipoID",c.TipoID)
+                cmd.Parameters.AddWithValue("@Path",  If(String.IsNullOrEmpty(c.PathImmagine), CObj(DBNull.Value), c.PathImmagine))
+                cmd.Parameters.AddWithValue("@ID",    c.ID)
+                cn.Open()
+                cmd.ExecuteNonQuery()
+                Return c.ID
+            End Using
+        End If
+    End Function
+
+    Public Sub EliminaCatalogoFotocellula(id As Integer)
+        Using cn = GetConnection(),
+              cmd As New SqlCommand("DELETE FROM [Tirelli_40].dbo.MC_CatalogoFotocellule WHERE ID=@ID", cn)
+            cmd.Parameters.AddWithValue("@ID", id)
+            cn.Open()
+            cmd.ExecuteNonQuery()
+        End Using
+    End Sub
 
     ' ──────────────────────────────────────────────
     ' CODICI ERRORE

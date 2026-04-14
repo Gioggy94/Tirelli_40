@@ -36,8 +36,8 @@ Public Class MC_WordService
             body.Append(InfoRow("Data:", DateTime.Now.ToString("dd/MM/yyyy")))
             body.Append(PageBreakPara())
 
-            ' CAP. 5.1 FOTOCELLULE
-            body.Append(Para("5.1 Fotocellule", bold:=True, size:=24))
+            ' CAP. 5.2 COMANDI E FOTOCELLULE
+            body.Append(Para("5.2 Comandi e fotocellule", bold:=True, size:=24))
             body.Append(Para(""))
             If Not String.IsNullOrWhiteSpace(testoFotocellule) Then
                 For Each linea In testoFotocellule.Split(New Char() {vbLf(0)})
@@ -48,12 +48,8 @@ Public Class MC_WordService
                 body.Append(Para(""))
                 For i As Integer = 0 To fotocellule.Count - 1
                     Dim f = fotocellule(i)
-                    body.Append(Para($"5.1.{i + 1}  {f.Codice} – {f.Marca} {f.Modello}", bold:=True, size:=20))
-                    body.Append(Para($"Posizione: {f.Posizione}"))
-                    body.Append(Para($"Tipo rilevazione: {f.TipoRilevazione}"))
-                    body.Append(Para($"Tensione: {f.TensioneLavoro}  |  Uscita logica: {f.UscitaLogica}"))
-                    If Not String.IsNullOrEmpty(f.DistanzaRilev) Then body.Append(Para($"Distanza: {f.DistanzaRilev}"))
-                    If Not String.IsNullOrEmpty(f.NoteInstallaz) Then body.Append(Para($"Note: {f.NoteInstallaz}"))
+                    body.Append(Para($"5.2.{i + 1}  {f.Codice}", bold:=True, size:=20))
+                    body.Append(Para($"Tipo: {f.TipoNome}"))
                     body.Append(Para(""))
                 Next
             End If
@@ -132,9 +128,9 @@ Public Class MC_WordService
     Private Function TabellaFotocellule(fotocellule As List(Of MC_Fotocellula)) As Table
         Dim t As New Table()
         t.Append(TableProps())
-        t.Append(BuildRow(True, "Codice", "Marca", "Modello", "Tipo", "Posizione", "Tensione"))
+        t.Append(BuildRow(True, "Codice", "Tipo"))
         For Each f In fotocellule
-            t.Append(BuildRow(False, f.Codice, f.Marca, f.Modello, f.TipoRilevazione, f.Posizione, f.TensioneLavoro))
+            t.Append(BuildRow(False, f.Codice, f.TipoNome))
         Next
         Return t
     End Function

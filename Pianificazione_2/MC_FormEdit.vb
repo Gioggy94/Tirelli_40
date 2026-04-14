@@ -177,89 +177,6 @@ Public Class MC_FrmGestisciLookup
 End Class
 
 ' ══════════════════════════════════════════════
-Public Class MC_FrmEditFotocellula
-    Inherits Form
-
-    Private _fc As MC_Fotocellula
-    Private _db As MC_DatabaseService
-    Private _macchinaID As Integer
-
-    Public Sub New(fc As MC_Fotocellula, macchinaID As Integer, db As MC_DatabaseService)
-        _fc = If(fc IsNot Nothing, fc, New MC_Fotocellula() With {.MacchinaID = macchinaID})
-        _macchinaID = macchinaID
-        _db = db
-        Me.Text = If(fc IsNot Nothing, "Modifica fotocellula", "Nuova fotocellula")
-        Me.Size = New Size(520, 520)
-        Me.StartPosition = FormStartPosition.CenterParent
-        Me.FormBorderStyle = FormBorderStyle.FixedDialog
-        Me.MaximizeBox = False
-        Me.Font = New Font("Segoe UI", 9)
-
-        Dim fields As New Dictionary(Of String, TextBox)
-        Dim defs As (String, String)() = {
-            ("Codice* (es. FC-01):", _fc.Codice),
-            ("Marca:", _fc.Marca),
-            ("Modello:", _fc.Modello),
-            ("Posizione:", _fc.Posizione),
-            ("Tensione lavoro:", _fc.TensioneLavoro),
-            ("Uscita logica:", _fc.UscitaLogica),
-            ("Distanza rilevazione:", _fc.DistanzaRilev)
-        }
-        Dim y = 20
-        For Each d In defs
-            Me.Controls.Add(New Label() With {.Text = d.Item1, .Location = New Point(16, y + 3), .Size = New Size(160, 20)})
-            Dim txt As New TextBox() With {.Text = d.Item2, .Location = New Point(180, y), .Size = New Size(290, 24)}
-            Me.Controls.Add(txt)
-            fields(d.Item1) = txt
-            y += 32
-        Next
-
-        Me.Controls.Add(New Label() With {.Text = "Tipo rilevazione:", .Location = New Point(16, y + 3), .Size = New Size(160, 20)})
-        Dim cmbTipo As New ComboBox() With {.DropDownStyle = ComboBoxStyle.DropDownList, .Location = New Point(180, y), .Size = New Size(180, 24)}
-        For Each t In {"Barriera", "Riflessione", "Prossimità", "Laser", "A fibra ottica"} : cmbTipo.Items.Add(t) : Next
-        cmbTipo.SelectedItem = If(String.IsNullOrEmpty(_fc.TipoRilevazione), "Barriera", _fc.TipoRilevazione)
-        Me.Controls.Add(cmbTipo)
-        y += 32
-
-        Me.Controls.Add(New Label() With {.Text = "Note installazione:", .Location = New Point(16, y + 3), .Size = New Size(160, 20)})
-        Dim txtNote As New TextBox() With {.Text = _fc.NoteInstallaz, .Location = New Point(180, y), .Size = New Size(290, 60), .Multiline = True}
-        Me.Controls.Add(txtNote)
-        y += 72
-
-        Dim btnOk  As New Button() With {.Text = "Salva",   .Location = New Point(180, y), .Size = New Size(100, 32)}
-        Dim btnAnn As New Button() With {.Text = "Annulla", .Location = New Point(290, y), .Size = New Size(100, 32), .DialogResult = DialogResult.Cancel}
-        MC_PanelBuild.StyleButton(btnOk, True)
-        MC_PanelBuild.StyleButton(btnAnn, False)
-        Me.Controls.AddRange({btnOk, btnAnn})
-        Me.CancelButton = btnAnn
-
-        AddHandler btnOk.Click, Sub(s, e)
-            _fc.MacchinaID      = _macchinaID
-            _fc.Codice          = fields("Codice* (es. FC-01):").Text.Trim()
-            _fc.Marca           = fields("Marca:").Text.Trim()
-            _fc.Modello         = fields("Modello:").Text.Trim()
-            _fc.Posizione       = fields("Posizione:").Text.Trim()
-            _fc.TensioneLavoro  = fields("Tensione lavoro:").Text.Trim()
-            _fc.UscitaLogica    = fields("Uscita logica:").Text.Trim()
-            _fc.DistanzaRilev   = fields("Distanza rilevazione:").Text.Trim()
-            _fc.TipoRilevazione = cmbTipo.SelectedItem?.ToString()
-            _fc.NoteInstallaz   = txtNote.Text.Trim()
-            If String.IsNullOrEmpty(_fc.Codice) Then
-                MessageBox.Show("Il codice è obbligatorio.", "Attenzione", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                Return
-            End If
-            Try
-                _db.SalvaFotocellula(_fc)
-                Me.DialogResult = DialogResult.OK
-                Me.Close()
-            Catch ex As Exception
-                MessageBox.Show("Errore: " & ex.Message, "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            End Try
-        End Sub
-    End Sub
-End Class
-
-' ══════════════════════════════════════════════
 Public Class MC_FrmEditCodiceErrore
     Inherits Form
 
@@ -370,6 +287,265 @@ Public Class MC_FrmTestoGenerato
         pnlBtn.Controls.AddRange({btnCopia, btnChiudi})
         Me.Controls.Add(rtb)
         Me.Controls.Add(pnlBtn)
+    End Sub
+End Class
+
+' ══════════════════════════════════════════════
+' Form per gestire i tipi di fotocellula (catalogo)
+Public Class MC_FrmGestisciLookupFotoc
+    Inherits Form
+
+    Private _db As MC_DatabaseService
+    Private _lst As ListBox
+
+    Public Sub New(tipo As String, db As MC_DatabaseService)
+        _db = db
+        Me.Text            = "Gestisci tipi fotocellula"
+        Me.Size            = New Size(360, 380)
+        Me.StartPosition   = FormStartPosition.CenterParent
+        Me.FormBorderStyle = FormBorderStyle.FixedDialog
+        Me.MaximizeBox     = False
+        Me.Font            = New Font("Segoe UI", 9)
+
+        _lst = New ListBox() With {.Location = New Point(16, 16), .Size = New Size(310, 260), .Font = New Font("Segoe UI", 10)}
+        Me.Controls.Add(_lst)
+
+        Dim txtNuovo  As New TextBox() With {.Location = New Point(16, 284), .Size = New Size(200, 24)}
+        Dim btnAgg    As New Button() With {.Text = "+ Aggiungi", .Location = New Point(224, 283), .Size = New Size(100, 26)}
+        Dim btnEl     As New Button() With {.Text = "Elimina selezionato", .Location = New Point(16, 316), .Size = New Size(170, 28)}
+        Dim btnChiudi As New Button() With {.Text = "Chiudi", .Location = New Point(200, 316), .Size = New Size(80, 28), .DialogResult = DialogResult.OK}
+        MC_PanelBuild.StyleButton(btnAgg, True) : MC_PanelBuild.StyleButton(btnEl, False) : MC_PanelBuild.StyleButton(btnChiudi, False)
+        Me.Controls.AddRange({txtNuovo, btnAgg, btnEl, btnChiudi})
+        Me.AcceptButton = btnChiudi
+
+        AddHandler btnAgg.Click, Sub(s, e)
+            Dim nome = txtNuovo.Text.Trim()
+            If String.IsNullOrEmpty(nome) Then Return
+            Try : _db.SalvaTipoFotocellula(nome) : txtNuovo.Clear() : Ricarica()
+            Catch ex As Exception : MessageBox.Show("Errore: " & ex.Message, "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+        End Sub
+        AddHandler btnEl.Click, Sub(s, e)
+            If _lst.SelectedItem Is Nothing Then Return
+            If MessageBox.Show($"Eliminare '{_lst.SelectedItem}'?", "Conferma",
+                               MessageBoxButtons.YesNo, MessageBoxIcon.Warning) <> DialogResult.Yes Then Return
+            Try : _db.EliminaTipoFotocellula(CInt(_lst.SelectedValue)) : Ricarica()
+            Catch ex As Exception : MessageBox.Show("Errore: " & ex.Message, "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+        End Sub
+        Ricarica()
+    End Sub
+
+    Private Sub Ricarica()
+        _lst.DataSource    = _db.GetTipiFotocellula()
+        _lst.DisplayMember = "Nome"
+        _lst.ValueMember   = "ID"
+    End Sub
+End Class
+
+' ══════════════════════════════════════════════
+' Form per creare/modificare una voce del catalogo fotocellule
+Public Class MC_FrmEditCatalogoFotocellula
+    Inherits Form
+
+    Private _cat As MC_CatalogoFotocellula
+    Private _db  As MC_DatabaseService
+
+    Public Sub New(cat As MC_CatalogoFotocellula, db As MC_DatabaseService)
+        _cat = If(cat IsNot Nothing, cat, New MC_CatalogoFotocellula())
+        _db  = db
+        Me.Text            = If(cat IsNot Nothing AndAlso cat.ID > 0, "Modifica fotocellula catalogo", "Nuova fotocellula catalogo")
+        Me.Size            = New Size(560, 440)
+        Me.StartPosition   = FormStartPosition.CenterParent
+        Me.FormBorderStyle = FormBorderStyle.FixedDialog
+        Me.MaximizeBox     = False
+        Me.Font            = New Font("Segoe UI", 9)
+
+        Dim y = 20
+
+        ' Codice
+        Me.Controls.Add(New Label() With {.Text = "Codice*:", .Location = New Point(16, y + 3), .Size = New Size(100, 20)})
+        Dim txtCodice As New TextBox() With {.Text = _cat.Codice, .Location = New Point(120, y), .Size = New Size(300, 24)}
+        Me.Controls.Add(txtCodice)
+        y += 36
+
+        ' Tipo (dropdown)
+        Me.Controls.Add(New Label() With {.Text = "Tipo*:", .Location = New Point(16, y + 3), .Size = New Size(100, 20)})
+        Dim cmbTipo As New ComboBox() With {.DropDownStyle = ComboBoxStyle.DropDownList, .Location = New Point(120, y), .Size = New Size(240, 24)}
+        Dim btnGestTipi As New Button() With {.Text = "Gestisci...", .Location = New Point(368, y), .Size = New Size(90, 24)}
+        MC_PanelBuild.StyleButton(btnGestTipi, False)
+        Me.Controls.AddRange({cmbTipo, btnGestTipi})
+        y += 36
+
+        Dim RicaricaTipi As Action = Sub()
+            Dim tipi = _db.GetTipiFotocellula()
+            cmbTipo.DataSource    = tipi
+            cmbTipo.DisplayMember = "Nome"
+            cmbTipo.ValueMember   = "ID"
+            Dim sel = tipi.FirstOrDefault(Function(t) t.ID = _cat.TipoID)
+            If sel IsNot Nothing Then cmbTipo.SelectedItem = sel
+        End Sub
+        Try : RicaricaTipi() : Catch : End Try
+
+        AddHandler btnGestTipi.Click, Sub(s, e)
+            Using f As New MC_FrmGestisciLookupFotoc("TipiFotocellule", _db) : f.ShowDialog(Me) : End Using
+            RicaricaTipi()
+        End Sub
+
+        ' Immagine
+        Me.Controls.Add(New Label() With {.Text = "Immagine:", .Location = New Point(16, y + 3), .Size = New Size(100, 20)})
+        Dim txtPath As New TextBox() With {.Text = _cat.PathImmagine, .Location = New Point(120, y), .Size = New Size(240, 24), .ReadOnly = True}
+        Dim btnSfoglia As New Button() With {.Text = "Sfoglia...", .Location = New Point(368, y), .Size = New Size(90, 24)}
+        MC_PanelBuild.StyleButton(btnSfoglia, False)
+        Me.Controls.AddRange({txtPath, btnSfoglia})
+        y += 36
+
+        ' Anteprima immagine
+        Dim pic As New PictureBox() With {
+            .Location = New Point(120, y), .Size = New Size(330, 200),
+            .SizeMode = PictureBoxSizeMode.Zoom, .BackColor = Color.FromArgb(245, 245, 242),
+            .BorderStyle = BorderStyle.FixedSingle
+        }
+        Me.Controls.Add(pic)
+        If Not String.IsNullOrEmpty(_cat.PathImmagine) AndAlso IO.File.Exists(_cat.PathImmagine) Then
+            Try : pic.Image = Image.FromFile(_cat.PathImmagine) : Catch : End Try
+        End If
+        y += 210
+
+        AddHandler btnSfoglia.Click, Sub(s, e)
+            Using ofd As New OpenFileDialog() With {.Filter = "Immagini|*.png;*.jpg;*.jpeg;*.bmp;*.gif;*.tif|Tutti|*.*"}
+                If ofd.ShowDialog() = DialogResult.OK Then
+                    txtPath.Text = ofd.FileName
+                    Try : pic.Image = Image.FromFile(ofd.FileName) : Catch : End Try
+                End If
+            End Using
+        End Sub
+
+        ' Pulsanti salva/annulla
+        Dim btnOk  As New Button() With {.Text = "Salva",   .Location = New Point(120, y), .Size = New Size(100, 32)}
+        Dim btnAnn As New Button() With {.Text = "Annulla", .Location = New Point(228, y), .Size = New Size(90, 32), .DialogResult = DialogResult.Cancel}
+        MC_PanelBuild.StyleButton(btnOk, True) : MC_PanelBuild.StyleButton(btnAnn, False)
+        Me.Controls.AddRange({btnOk, btnAnn})
+        Me.CancelButton = btnAnn
+
+        AddHandler btnOk.Click, Sub(s, e)
+            If String.IsNullOrWhiteSpace(txtCodice.Text) Then
+                MessageBox.Show("Il codice è obbligatorio.", "Attenzione", MessageBoxButtons.OK, MessageBoxIcon.Warning) : Return
+            End If
+            If cmbTipo.SelectedItem Is Nothing Then
+                MessageBox.Show("Seleziona un tipo.", "Attenzione", MessageBoxButtons.OK, MessageBoxIcon.Warning) : Return
+            End If
+            _cat.Codice       = txtCodice.Text.Trim()
+            _cat.TipoID       = DirectCast(cmbTipo.SelectedItem, MC_TipoFotocellula).ID
+            _cat.PathImmagine = txtPath.Text.Trim()
+            Try
+                _cat.ID = _db.SalvaCatalogoFotocellula(_cat)
+                Me.DialogResult = DialogResult.OK
+                Me.Close()
+            Catch ex As Exception
+                MessageBox.Show("Errore: " & ex.Message, "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+        End Sub
+    End Sub
+End Class
+
+' ══════════════════════════════════════════════
+' Picker per selezionare una fotocellula dal catalogo
+Public Class MC_FrmSelezionaFotocellula
+    Inherits Form
+
+    Public ReadOnly Property Selezionata As MC_CatalogoFotocellula
+
+    Public Sub New(db As MC_DatabaseService)
+        Me.Text            = "Seleziona fotocellula dal catalogo"
+        Me.Size            = New Size(760, 520)
+        Me.StartPosition   = FormStartPosition.CenterParent
+        Me.FormBorderStyle = FormBorderStyle.FixedDialog
+        Me.MaximizeBox     = False
+        Me.Font            = New Font("Segoe UI", 9)
+
+        ' Filtro
+        Dim pnlTop As New Panel() With {.Dock = DockStyle.Top, .Height = 40}
+        Dim lblF As New Label() With {.Text = "Cerca:", .AutoSize = True, .Location = New Point(8, 11)}
+        Dim txtF As New TextBox() With {.Location = New Point(52, 8), .Size = New Size(260, 24)}
+        pnlTop.Controls.AddRange({lblF, txtF})
+        Me.Controls.Add(pnlTop)
+
+        ' Layout split: griglia sx + preview dx
+        Dim pnlSplit As New Panel() With {.Dock = DockStyle.Fill}
+
+        Dim pnlPrev As New Panel() With {.Dock = DockStyle.Right, .Width = 240, .BackColor = Color.FromArgb(245, 245, 242), .Padding = New Padding(8)}
+        Dim pic As New PictureBox() With {.Dock = DockStyle.Fill, .SizeMode = PictureBoxSizeMode.Zoom, .BackColor = Color.FromArgb(245, 245, 242)}
+        Dim lblPrev As New Label() With {.Dock = DockStyle.Bottom, .Height = 36, .Font = New Font("Segoe UI", 8.5F), .TextAlign = ContentAlignment.MiddleCenter, .ForeColor = Color.FromArgb(60, 60, 60)}
+        pnlPrev.Controls.AddRange({pic, lblPrev})
+
+        Dim dgv As New DataGridView() With {
+            .Dock = DockStyle.Fill, .AllowUserToAddRows = False, .ReadOnly = True,
+            .SelectionMode = DataGridViewSelectionMode.FullRowSelect,
+            .AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill,
+            .RowHeadersVisible = False, .BackgroundColor = Color.White,
+            .BorderStyle = BorderStyle.FixedSingle, .Font = New Font("Segoe UI", 9.5F)
+        }
+        Dim BLUE_LIGHT As Color = Color.FromArgb(230, 241, 251)
+        Dim BLUE_DARK  As Color = Color.FromArgb(24, 95, 165)
+        dgv.ColumnHeadersDefaultCellStyle.BackColor = BLUE_LIGHT
+        dgv.ColumnHeadersDefaultCellStyle.ForeColor = BLUE_DARK
+        dgv.ColumnHeadersDefaultCellStyle.Font = New Font("Segoe UI Semibold", 9)
+        dgv.EnableHeadersVisualStyles = False
+
+        pnlSplit.Controls.Add(dgv)
+        pnlSplit.Controls.Add(pnlPrev)
+
+        ' Pulsanti
+        Dim pnlBot As New Panel() With {.Dock = DockStyle.Bottom, .Height = 46}
+        Dim btnOk  As New Button() With {.Text = "Seleziona", .Location = New Point(8, 8),   .Size = New Size(120, 30)}
+        Dim btnAnn As New Button() With {.Text = "Annulla",   .Location = New Point(136, 8), .Size = New Size(90, 30), .DialogResult = DialogResult.Cancel}
+        MC_PanelBuild.StyleButton(btnOk, True) : MC_PanelBuild.StyleButton(btnAnn, False)
+        pnlBot.Controls.AddRange({btnOk, btnAnn})
+
+        Me.Controls.Add(pnlSplit)
+        Me.Controls.Add(pnlBot)
+        Me.CancelButton = btnAnn
+
+        Dim Carica As Action = Sub()
+            dgv.Rows.Clear() : dgv.Columns.Clear()
+            For Each h In {"Codice", "Tipo"} : dgv.Columns.Add(h, h) : Next
+            Try
+                For Each c In db.GetCatalogoFotocellule(txtF.Text.Trim())
+                    dgv.Rows.Add(c.Codice, c.TipoNome)
+                    dgv.Rows(dgv.Rows.Count - 1).Tag = c
+                Next
+            Catch : End Try
+        End Sub
+
+        AddHandler dgv.SelectionChanged, Sub(s, e)
+            If dgv.SelectedRows.Count = 0 Then pic.Image = Nothing : lblPrev.Text = "" : Return
+            Dim cat = TryCast(dgv.SelectedRows(0).Tag, MC_CatalogoFotocellula) : If cat Is Nothing Then Return
+            lblPrev.Text = $"{cat.Codice}{vbLf}{cat.TipoNome}"
+            If Not String.IsNullOrEmpty(cat.PathImmagine) AndAlso IO.File.Exists(cat.PathImmagine) Then
+                Try : pic.Image = Image.FromFile(cat.PathImmagine) : Catch : pic.Image = Nothing : End Try
+            Else
+                pic.Image = Nothing
+            End If
+        End Sub
+
+        AddHandler txtF.TextChanged, Sub(s, e) Carica()
+
+        AddHandler btnOk.Click, Sub(s, e)
+            If dgv.SelectedRows.Count = 0 Then Return
+            _Selezionata = TryCast(dgv.SelectedRows(0).Tag, MC_CatalogoFotocellula)
+            Me.DialogResult = DialogResult.OK
+            Me.Close()
+        End Sub
+
+        AddHandler dgv.CellDoubleClick, Sub(s, e)
+            If dgv.SelectedRows.Count = 0 Then Return
+            _Selezionata = TryCast(dgv.SelectedRows(0).Tag, MC_CatalogoFotocellula)
+            Me.DialogResult = DialogResult.OK
+            Me.Close()
+        End Sub
+
+        Carica()
     End Sub
 End Class
 

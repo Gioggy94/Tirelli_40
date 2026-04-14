@@ -27,30 +27,62 @@ Public Class MC_AnthropicService
     End Function
 
     ' ──────────────────────────────────────────────
-    ' 1. ANALISI FILE SORGENTE PLC
+    ' 1. ANALISI COMPLETA PROGRAMMA → CAPITOLI MANUALE
     ' ──────────────────────────────────────────────
 
-    Public Async Function AnalizzaSoftwarePLC(contenutoFile As String,
-                                              nomeMacchina As String,
-                                              lingua As String) As Task(Of List(Of MC_CodiceErrore))
-        Dim prompt = $"Sei un esperto di PLC industriali e documentazione tecnica.
-Analizza il seguente codice sorgente PLC/HMI della macchina '{nomeMacchina}'.
-Individua TUTTI i codici errore/allarme presenti (es. prefissi ALM_, E_, ERR_, ALARM, ecc.).
-Per ciascuno restituisci un oggetto JSON con questi campi:
-  - CodiceErrore (string): il codice esatto
-  - Titolo (string): titolo breve dell'errore
-  - Descrizione (string): descrizione tecnica dettagliata
-  - Causa (string): possibili cause
-  - Rimedio (string): azioni correttive
-  - Gravita (string): uno tra 'Avviso', 'Allarme', 'Blocco'
-Lingua di output: {lingua}.
-Rispondi SOLO con un array JSON valido, senza testo prima o dopo, senza ```json.
+    Public Async Function AnalizzaProgrammaCompleto(contenutoFile As String,
+                                                    macchina As MC_Macchina,
+                                                    lingua As String) As Task(Of Dictionary(Of String, String))
+        Dim troncato = contenutoFile.Substring(0, Math.Min(contenutoFile.Length, 120000))
 
-CODICE SORGENTE:
-{contenutoFile.Substring(0, Math.Min(contenutoFile.Length, 80000))}"
+        Dim prompt = $"Sei un ingegnere industriale esperto di PLC/HMI e redattore di manuali tecnici per macchine da packaging.
+Hai davanti il programma completo della macchina '{macchina.NomeMacchina}' (matricola {macchina.Matricola}, modello {macchina.Modello}).
+
+COMPITO: Leggi il programma, simula mentalmente il funzionamento della macchina tracciando la logica, poi genera le seguenti sezioni del manuale USO E MANUTENZIONE esattamente nello stile Tirelli (vedi esempio):
+
+=== ESEMPIO STILE CAP 5.1 ===
+Bottles arriving on the conveyor enter the filling machine as indicated by the red arrows and accumulate between the worm screw (1) and the minimum load cell B2. After a short delay from the arrival of bottles in front of B2, the machine starts. The B4 cell detects the passage of the correct number of bottles and starts the filling cycle by synchronizing the movement of the sideshifter with the bottles on the belt...
+
+=== ESEMPIO STILE CAP 5.2 ===
+B4 - START CYCLE PHOTOCELL
+This photocell coordinates the movement of the sideshifter with the bottles in transit and starts the filling cycle.
+B2 - MINIMUM BOTTLE LOADING DETECTION PHOTOCELL
+This photocell detects the quantity of bottles at the infeed...
+
+=== FINE ESEMPIO ===
+
+Rispondi con un JSON con questa struttura (tutti i campi in lingua {lingua}):
+{{
+  ""operazione"": ""[testo completo del capitolo 5.1 - Descrizione funzionamento, narrativa del ciclo macchina, menzione sensori/attuatori per codice]"",
+  ""comandi"": ""[testo completo capitolo 5.2 - per ogni sensore/fotocellula/fine-corsa/attuatore: CODICE - NOME, descrizione funzione]"",
+  ""allarmi"": ""[tabella allarmi in formato testo: CODICE | DESCRIZIONE | CAUSA | RIMEDIO, una riga per allarme]"",
+  ""allarmi_json"": ""[array JSON degli allarmi: [{{\""CodiceErrore\"":\""..."",\""Titolo\"":\""..."",\""Descrizione\"":\""..."",\""Causa\"":\""..."",\""Rimedio\"":\""..."",\""Gravita\"":\""Avviso|Allarme|Blocco\""}},...]]""
+}}
+
+Rispondi SOLO con il JSON valido, senza testo prima/dopo, senza ```json.
+
+PROGRAMMA MACCHINA:
+{troncato}"
 
         Dim risposta = Await CallAPIAsync(prompt)
-        Return ParseCodiciErroreJson(risposta)
+        Return ParseRisultatoManuale(risposta)
+    End Function
+
+    Public Function ParseAllarmiJson(json As String) As List(Of MC_CodiceErrore)
+        Return ParseCodiciErroreJson(json)
+    End Function
+
+    Private Function ParseRisultatoManuale(json As String) As Dictionary(Of String, String)
+        Dim result As New Dictionary(Of String, String)
+        Try
+            Dim doc = JsonDocument.Parse(json.Trim())
+            For Each key In {"operazione", "comandi", "allarmi", "allarmi_json"}
+                Try : result(key) = doc.RootElement.GetProperty(key).GetString() : Catch : End Try
+            Next
+        Catch ex As Exception
+            result("operazione") = $"Errore parsing risposta AI: {ex.Message}{vbLf}{vbLf}{json}"
+        End Try
+        Return result
     End Function
 
     ' ──────────────────────────────────────────────
@@ -114,21 +146,16 @@ Rispondi SOLO con l'oggetto JSON, senza testo prima o dopo, senza ```json."
                                                     lingua As String) As Task(Of String)
         Dim elenco As New StringBuilder()
         For Each f In fotocellule
-            elenco.AppendLine($"- Codice: {f.Codice} | Marca: {f.Marca} | Modello: {f.Modello} | Tipo: {f.TipoRilevazione} | Posizione: {f.Posizione} | Tensione: {f.TensioneLavoro} | Uscita: {f.UscitaLogica} | Distanza: {f.DistanzaRilev}")
-            If Not String.IsNullOrEmpty(f.NoteInstallaz) Then
-                elenco.AppendLine($"  Note: {f.NoteInstallaz}")
-            End If
+            elenco.AppendLine($"- Codice: {f.Codice} | Tipo: {f.TipoNome}")
         Next
 
-        Dim prompt = $"Sei un redattore tecnico esperto di manuali per macchine da packaging industriale.
-Scrivi il capitolo 5.1 'Fotocellule' del manuale di uso e manutenzione per la macchina '{macchina.NomeMacchina}' (matricola {macchina.Matricola}).
-Usa un linguaggio tecnico preciso, adatto a un manuale industriale professionale.
+        Dim prompt = $"Sei un redattore tecnico esperto di manuali per macchine da packaging industriale (stile Tirelli).
+Scrivi il capitolo 5.2 'Comandi e fotocellule' del manuale di uso e manutenzione per la macchina '{macchina.NomeMacchina}' (matricola {macchina.Matricola}).
+Per ogni fotocellula elenca: codice, tipo, funzione tecnica nella macchina.
+Usa lo stile: 'B4 - NOME FOTOCELLULA{vbLf}Descrizione della funzione.'
 Lingua: {lingua}.
-Per ogni fotocellula scrivi: posizione, funzione, dati tecnici, note di installazione e manutenzione.
-Includi una breve introduzione generale sulle fotocellule presenti nella macchina.
-DATI FOTOCELLULE:
-{elenco}
-Formatta il testo con sotto-paragrafi per ogni fotocellula (5.1.1, 5.1.2, ecc.)."
+FOTOCELLULE INSTALLATE:
+{elenco}"
 
         Return Await CallAPIAsync(prompt)
     End Function

@@ -328,7 +328,7 @@ SET [N] = RowNum"
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
-        Process.Start("\\tirfs01\00-BRB\Herma\Contratto quadro Tirelli Herma.xlsx")
+        Process.Start("\\tirfs01\tirelli\00-BRB\Herma\Contratto quadro Tirelli Herma.xlsx")
     End Sub
 
     Private Sub ComboBox7_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox7.SelectedIndexChanged
