@@ -24,43 +24,43 @@ Partial Class ODP_Form
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ODP_Form))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle38 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle39 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle21 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle22 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle23 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle24 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle25 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle26 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle27 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle28 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle29 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle30 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle31 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle32 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle33 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle34 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle35 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle36 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle37 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle40 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle41 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle42 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle43 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle44 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle45 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle46 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle47 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle48 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle49 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle50 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle51 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle52 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle53 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle54 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle55 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle56 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle57 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle58 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle59 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle60 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle61 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle62 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle63 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle64 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle65 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle66 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle67 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle68 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.TableLayoutPanel5 = New System.Windows.Forms.TableLayoutPanel()
         Me.Cmd_Indietro = New System.Windows.Forms.Button()
@@ -102,19 +102,13 @@ Partial Class ODP_Form
         Me.Data_ordine = New System.Windows.Forms.DateTimePicker()
         Me.Data_scadenza = New System.Windows.Forms.DateTimePicker()
         Me.Data_inizio = New System.Windows.Forms.DateTimePicker()
-        Me.ComboBox3 = New System.Windows.Forms.ComboBox()
-        Me.Label15 = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
-        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
         Me.TextBox10 = New System.Windows.Forms.TextBox()
-        Me.Label14 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.TextBox11 = New System.Windows.Forms.TextBox()
-        Me.Label13 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.TextBox6 = New System.Windows.Forms.TextBox()
-        Me.Label7 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Panel8 = New System.Windows.Forms.Panel()
         Me.Button22 = New System.Windows.Forms.Button()
@@ -214,6 +208,12 @@ Partial Class ODP_Form
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Scontrino = New System.Drawing.Printing.PrintDocument()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
+        Me.TextBox7 = New System.Windows.Forms.TextBox()
         Me.Panel1.SuspendLayout()
         Me.TableLayoutPanel5.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -242,6 +242,10 @@ Partial Class ODP_Form
         Me.GroupBox8.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel5.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
+        Me.GroupBox3.SuspendLayout()
+        Me.GroupBox4.SuspendLayout()
+        Me.GroupBox5.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
@@ -643,23 +647,19 @@ Partial Class ODP_Form
         '
         'Panel7
         '
+        Me.Panel7.Controls.Add(Me.GroupBox5)
+        Me.Panel7.Controls.Add(Me.GroupBox4)
+        Me.Panel7.Controls.Add(Me.GroupBox3)
+        Me.Panel7.Controls.Add(Me.GroupBox1)
         Me.Panel7.Controls.Add(Me.ComboBox6)
         Me.Panel7.Controls.Add(Me.Data_ordine)
         Me.Panel7.Controls.Add(Me.Data_scadenza)
         Me.Panel7.Controls.Add(Me.Data_inizio)
-        Me.Panel7.Controls.Add(Me.ComboBox3)
-        Me.Panel7.Controls.Add(Me.Label15)
         Me.Panel7.Controls.Add(Me.Label12)
-        Me.Panel7.Controls.Add(Me.ComboBox2)
         Me.Panel7.Controls.Add(Me.TextBox10)
-        Me.Panel7.Controls.Add(Me.Label14)
         Me.Panel7.Controls.Add(Me.Label11)
         Me.Panel7.Controls.Add(Me.Label10)
-        Me.Panel7.Controls.Add(Me.TextBox11)
-        Me.Panel7.Controls.Add(Me.Label13)
         Me.Panel7.Controls.Add(Me.Label9)
-        Me.Panel7.Controls.Add(Me.TextBox6)
-        Me.Panel7.Controls.Add(Me.Label7)
         Me.Panel7.Controls.Add(Me.Label8)
         Me.Panel7.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel7.Location = New System.Drawing.Point(888, 3)
@@ -701,23 +701,6 @@ Partial Class ODP_Form
         Me.Data_inizio.Size = New System.Drawing.Size(189, 20)
         Me.Data_inizio.TabIndex = 37
         '
-        'ComboBox3
-        '
-        Me.ComboBox3.FormattingEnabled = True
-        Me.ComboBox3.Location = New System.Drawing.Point(199, 182)
-        Me.ComboBox3.Name = "ComboBox3"
-        Me.ComboBox3.Size = New System.Drawing.Size(81, 21)
-        Me.ComboBox3.TabIndex = 36
-        '
-        'Label15
-        '
-        Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(163, 188)
-        Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(30, 13)
-        Me.Label15.TabIndex = 35
-        Me.Label15.Text = "Fase"
-        '
         'Label12
         '
         Me.Label12.AutoSize = True
@@ -727,29 +710,12 @@ Partial Class ODP_Form
         Me.Label12.TabIndex = 18
         Me.Label12.Text = "N°"
         '
-        'ComboBox2
-        '
-        Me.ComboBox2.FormattingEnabled = True
-        Me.ComboBox2.Location = New System.Drawing.Point(80, 180)
-        Me.ComboBox2.Name = "ComboBox2"
-        Me.ComboBox2.Size = New System.Drawing.Size(81, 21)
-        Me.ComboBox2.TabIndex = 34
-        '
         'TextBox10
         '
         Me.TextBox10.Location = New System.Drawing.Point(92, 3)
         Me.TextBox10.Name = "TextBox10"
         Me.TextBox10.Size = New System.Drawing.Size(82, 20)
         Me.TextBox10.TabIndex = 19
-        '
-        'Label14
-        '
-        Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(8, 187)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(60, 13)
-        Me.Label14.TabIndex = 33
-        Me.Label14.Text = "Produzione"
         '
         'Label11
         '
@@ -771,19 +737,11 @@ Partial Class ODP_Form
         '
         'TextBox11
         '
-        Me.TextBox11.Location = New System.Drawing.Point(91, 155)
+        Me.TextBox11.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TextBox11.Location = New System.Drawing.Point(3, 16)
         Me.TextBox11.Name = "TextBox11"
-        Me.TextBox11.Size = New System.Drawing.Size(189, 20)
+        Me.TextBox11.Size = New System.Drawing.Size(131, 20)
         Me.TextBox11.TabIndex = 31
-        '
-        'Label13
-        '
-        Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(7, 160)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(39, 13)
-        Me.Label13.TabIndex = 30
-        Me.Label13.Text = "Cliente"
         '
         'Label9
         '
@@ -796,19 +754,11 @@ Partial Class ODP_Form
         '
         'TextBox6
         '
-        Me.TextBox6.Location = New System.Drawing.Point(92, 129)
+        Me.TextBox6.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TextBox6.Location = New System.Drawing.Point(3, 16)
         Me.TextBox6.Name = "TextBox6"
-        Me.TextBox6.Size = New System.Drawing.Size(139, 20)
+        Me.TextBox6.Size = New System.Drawing.Size(117, 20)
         Me.TextBox6.TabIndex = 29
-        '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(8, 134)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(58, 13)
-        Me.Label7.TabIndex = 28
-        Me.Label7.Text = "Commessa"
         '
         'Label8
         '
@@ -1103,14 +1053,14 @@ Partial Class ODP_Form
         Me.DataGridView_ODP.AllowUserToAddRows = False
         Me.DataGridView_ODP.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.DataGridView_ODP.BackgroundColor = System.Drawing.SystemColors.ActiveCaption
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ControlDark
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView_ODP.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle38.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle38.BackColor = System.Drawing.SystemColors.ControlDark
+        DataGridViewCellStyle38.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle38.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle38.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle38.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle38.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView_ODP.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle38
         Me.DataGridView_ODP.ColumnHeadersHeight = 30
         Me.DataGridView_ODP.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Presente, Me.Itemtype, Me.Tipo, Me.Codice, Me.Img, Me.Descrizione, Me.Disegno, Me.Q_base, Me.Attrezzaggio, Me.Quantità, Me.Trasferito, Me.Da_trasf, Me.MAG, Me.Azione, Me.ODP, Me.Progr, Me.Commessa, Me.Produzione, Me.Cons_ODP, Me.Compl, Me.OA, Me.Fornitore, Me.CONS_OA, Me.Linenum, Me.Visorder, Me.Stato})
         Me.DataGridView_ODP.ContextMenuStrip = Me.ContextMenuStrip1
@@ -1157,9 +1107,9 @@ Partial Class ODP_Form
         'Codice
         '
         Me.Codice.ContextMenuStrip = Me.ContextMenuStrip1
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Codice.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle39.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle39.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Codice.DefaultCellStyle = DataGridViewCellStyle39
         Me.Codice.FillWeight = 80.0!
         Me.Codice.HeaderText = "Codice"
         Me.Codice.MinimumWidth = 6
@@ -1197,9 +1147,9 @@ Partial Class ODP_Form
         'Descrizione
         '
         Me.Descrizione.ContextMenuStrip = Me.ContextMenuStrip1
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Descrizione.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Descrizione.DefaultCellStyle = DataGridViewCellStyle2
         Me.Descrizione.FillWeight = 300.0!
         Me.Descrizione.HeaderText = "Descrizione"
         Me.Descrizione.MinimumWidth = 20
@@ -1209,9 +1159,9 @@ Partial Class ODP_Form
         'Disegno
         '
         Me.Disegno.ContextMenuStrip = Me.ContextMenuStrip1
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Disegno.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Disegno.DefaultCellStyle = DataGridViewCellStyle3
         Me.Disegno.FillWeight = 120.3767!
         Me.Disegno.HeaderText = "Disegno"
         Me.Disegno.MinimumWidth = 6
@@ -1222,9 +1172,9 @@ Partial Class ODP_Form
         'Q_base
         '
         Me.Q_base.ContextMenuStrip = Me.ContextMenuStrip1
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle5.Format = "N2"
-        Me.Q_base.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle4.Format = "N2"
+        Me.Q_base.DefaultCellStyle = DataGridViewCellStyle4
         Me.Q_base.HeaderText = "Q base"
         Me.Q_base.MinimumWidth = 6
         Me.Q_base.Name = "Q_base"
@@ -1232,18 +1182,18 @@ Partial Class ODP_Form
         'Attrezzaggio
         '
         Me.Attrezzaggio.ContextMenuStrip = Me.ContextMenuStrip1
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle6.Format = "N2"
-        Me.Attrezzaggio.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle5.Format = "N2"
+        Me.Attrezzaggio.DefaultCellStyle = DataGridViewCellStyle5
         Me.Attrezzaggio.HeaderText = "Attrezzaggio"
         Me.Attrezzaggio.MinimumWidth = 6
         Me.Attrezzaggio.Name = "Attrezzaggio"
         '
         'Quantità
         '
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle7.Format = "N2"
-        Me.Quantità.DefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle6.Format = "N2"
+        Me.Quantità.DefaultCellStyle = DataGridViewCellStyle6
         Me.Quantità.FillWeight = 80.0!
         Me.Quantità.HeaderText = "Q TOT"
         Me.Quantità.MinimumWidth = 6
@@ -1252,9 +1202,9 @@ Partial Class ODP_Form
         '
         'Trasferito
         '
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle8.Format = "N2"
-        Me.Trasferito.DefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle40.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle40.Format = "N2"
+        Me.Trasferito.DefaultCellStyle = DataGridViewCellStyle40
         Me.Trasferito.FillWeight = 80.0!
         Me.Trasferito.HeaderText = "Trasferito"
         Me.Trasferito.MinimumWidth = 6
@@ -1263,9 +1213,9 @@ Partial Class ODP_Form
         '
         'Da_trasf
         '
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle9.Format = "N2"
-        Me.Da_trasf.DefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle41.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle41.Format = "N2"
+        Me.Da_trasf.DefaultCellStyle = DataGridViewCellStyle41
         Me.Da_trasf.FillWeight = 80.0!
         Me.Da_trasf.HeaderText = "Da trasf"
         Me.Da_trasf.MinimumWidth = 6
@@ -1274,8 +1224,8 @@ Partial Class ODP_Form
         '
         'MAG
         '
-        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.MAG.DefaultCellStyle = DataGridViewCellStyle10
+        DataGridViewCellStyle42.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.MAG.DefaultCellStyle = DataGridViewCellStyle42
         Me.MAG.FillWeight = 70.0!
         Me.MAG.HeaderText = "MAG"
         Me.MAG.MinimumWidth = 6
@@ -1284,8 +1234,8 @@ Partial Class ODP_Form
         '
         'Azione
         '
-        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Azione.DefaultCellStyle = DataGridViewCellStyle11
+        DataGridViewCellStyle43.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Azione.DefaultCellStyle = DataGridViewCellStyle43
         Me.Azione.FillWeight = 130.0!
         Me.Azione.HeaderText = "Azione"
         Me.Azione.MinimumWidth = 6
@@ -1302,9 +1252,9 @@ Partial Class ODP_Form
         '
         'Progr
         '
-        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle12.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Progr.DefaultCellStyle = DataGridViewCellStyle12
+        DataGridViewCellStyle44.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle44.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Progr.DefaultCellStyle = DataGridViewCellStyle44
         Me.Progr.FillWeight = 80.0!
         Me.Progr.HeaderText = "Progr"
         Me.Progr.Name = "Progr"
@@ -1312,8 +1262,8 @@ Partial Class ODP_Form
         '
         'Commessa
         '
-        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Commessa.DefaultCellStyle = DataGridViewCellStyle13
+        DataGridViewCellStyle45.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Commessa.DefaultCellStyle = DataGridViewCellStyle45
         Me.Commessa.HeaderText = "Commessa"
         Me.Commessa.MinimumWidth = 6
         Me.Commessa.Name = "Commessa"
@@ -1321,8 +1271,8 @@ Partial Class ODP_Form
         '
         'Produzione
         '
-        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Produzione.DefaultCellStyle = DataGridViewCellStyle14
+        DataGridViewCellStyle46.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Produzione.DefaultCellStyle = DataGridViewCellStyle46
         Me.Produzione.HeaderText = "Produzione"
         Me.Produzione.MinimumWidth = 6
         Me.Produzione.Name = "Produzione"
@@ -1330,10 +1280,10 @@ Partial Class ODP_Form
         '
         'Cons_ODP
         '
-        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle15.Format = "M"
-        DataGridViewCellStyle15.NullValue = Nothing
-        Me.Cons_ODP.DefaultCellStyle = DataGridViewCellStyle15
+        DataGridViewCellStyle47.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle47.Format = "M"
+        DataGridViewCellStyle47.NullValue = Nothing
+        Me.Cons_ODP.DefaultCellStyle = DataGridViewCellStyle47
         Me.Cons_ODP.HeaderText = "Cons ODP"
         Me.Cons_ODP.MinimumWidth = 6
         Me.Cons_ODP.Name = "Cons_ODP"
@@ -1341,16 +1291,16 @@ Partial Class ODP_Form
         '
         'Compl
         '
-        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Compl.DefaultCellStyle = DataGridViewCellStyle16
+        DataGridViewCellStyle48.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Compl.DefaultCellStyle = DataGridViewCellStyle48
         Me.Compl.HeaderText = "Compl"
         Me.Compl.Name = "Compl"
         Me.Compl.Visible = False
         '
         'OA
         '
-        DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.OA.DefaultCellStyle = DataGridViewCellStyle17
+        DataGridViewCellStyle49.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.OA.DefaultCellStyle = DataGridViewCellStyle49
         Me.OA.FillWeight = 80.0!
         Me.OA.HeaderText = "OA"
         Me.OA.MinimumWidth = 6
@@ -1359,9 +1309,9 @@ Partial Class ODP_Form
         '
         'Fornitore
         '
-        DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle18.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Fornitore.DefaultCellStyle = DataGridViewCellStyle18
+        DataGridViewCellStyle50.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle50.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Fornitore.DefaultCellStyle = DataGridViewCellStyle50
         Me.Fornitore.FillWeight = 150.0!
         Me.Fornitore.HeaderText = "Fornitore"
         Me.Fornitore.MinimumWidth = 6
@@ -1370,10 +1320,10 @@ Partial Class ODP_Form
         '
         'CONS_OA
         '
-        DataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle19.Format = "M"
-        DataGridViewCellStyle19.NullValue = Nothing
-        Me.CONS_OA.DefaultCellStyle = DataGridViewCellStyle19
+        DataGridViewCellStyle51.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle51.Format = "M"
+        DataGridViewCellStyle51.NullValue = Nothing
+        Me.CONS_OA.DefaultCellStyle = DataGridViewCellStyle51
         Me.CONS_OA.HeaderText = "Cons OA"
         Me.CONS_OA.MinimumWidth = 6
         Me.CONS_OA.Name = "CONS_OA"
@@ -1395,9 +1345,9 @@ Partial Class ODP_Form
         '
         'Stato
         '
-        DataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle20.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Stato.DefaultCellStyle = DataGridViewCellStyle20
+        DataGridViewCellStyle52.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle52.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Stato.DefaultCellStyle = DataGridViewCellStyle52
         Me.Stato.FillWeight = 50.0!
         Me.Stato.HeaderText = "Stato"
         Me.Stato.MinimumWidth = 6
@@ -1423,14 +1373,14 @@ Partial Class ODP_Form
         Me.DataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.DataGridView2.BackgroundColor = System.Drawing.Color.White
         Me.DataGridView2.BorderStyle = System.Windows.Forms.BorderStyle.None
-        DataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle21.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle21.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle21.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle21.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle21.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView2.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle21
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView2.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.DataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Regola, Me.Livello, Me.Docnum, Me.Cardcode, Me.Cardname, Me.Final_bp, Me.Causale, Me.Reparto, Me.Data_I, Me.Data_C, Me.Itemcode, Me.BRB_Code, Me.DataGridViewTextBoxColumn20, Me.DataGridViewTextBoxColumn21, Me.Q, Me.Prezzo, Me.Status, Me.Trasf, Me.Da_trasfe, Me.A_Mag, Me.Ord, Me.Disp, Me.DataGridViewButtonColumn3, Me.DataGridViewTextBoxColumn24, Me.Consegna, Me.DataGridViewButtonColumn4, Me.U_prod, Me.DataGridViewTextBoxColumn25, Me.Comm_ODP})
         Me.DataGridView2.Dock = System.Windows.Forms.DockStyle.Fill
@@ -1527,71 +1477,71 @@ Partial Class ODP_Form
         '
         'Q
         '
-        DataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle22.Format = "N2"
-        DataGridViewCellStyle22.NullValue = Nothing
-        Me.Q.DefaultCellStyle = DataGridViewCellStyle22
+        DataGridViewCellStyle53.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle53.Format = "N2"
+        DataGridViewCellStyle53.NullValue = Nothing
+        Me.Q.DefaultCellStyle = DataGridViewCellStyle53
         Me.Q.HeaderText = "Q"
         Me.Q.Name = "Q"
         '
         'Prezzo
         '
-        DataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle23.Format = "C0"
-        DataGridViewCellStyle23.NullValue = Nothing
-        Me.Prezzo.DefaultCellStyle = DataGridViewCellStyle23
+        DataGridViewCellStyle54.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle54.Format = "C0"
+        DataGridViewCellStyle54.NullValue = Nothing
+        Me.Prezzo.DefaultCellStyle = DataGridViewCellStyle54
         Me.Prezzo.HeaderText = "Prezzo"
         Me.Prezzo.Name = "Prezzo"
         '
         'Status
         '
-        DataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Status.DefaultCellStyle = DataGridViewCellStyle24
+        DataGridViewCellStyle55.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Status.DefaultCellStyle = DataGridViewCellStyle55
         Me.Status.HeaderText = "Stato"
         Me.Status.Name = "Status"
         '
         'Trasf
         '
-        DataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle25.Format = "N2"
-        DataGridViewCellStyle25.NullValue = Nothing
-        Me.Trasf.DefaultCellStyle = DataGridViewCellStyle25
+        DataGridViewCellStyle56.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle56.Format = "N2"
+        DataGridViewCellStyle56.NullValue = Nothing
+        Me.Trasf.DefaultCellStyle = DataGridViewCellStyle56
         Me.Trasf.HeaderText = "Trasf"
         Me.Trasf.Name = "Trasf"
         '
         'Da_trasfe
         '
-        DataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle26.Format = "N2"
-        DataGridViewCellStyle26.NullValue = Nothing
-        Me.Da_trasfe.DefaultCellStyle = DataGridViewCellStyle26
+        DataGridViewCellStyle57.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle57.Format = "N2"
+        DataGridViewCellStyle57.NullValue = Nothing
+        Me.Da_trasfe.DefaultCellStyle = DataGridViewCellStyle57
         Me.Da_trasfe.HeaderText = "Da trasf"
         Me.Da_trasfe.Name = "Da_trasfe"
         '
         'A_Mag
         '
-        DataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle27.Format = "N0"
-        DataGridViewCellStyle27.NullValue = Nothing
-        Me.A_Mag.DefaultCellStyle = DataGridViewCellStyle27
+        DataGridViewCellStyle58.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle58.Format = "N0"
+        DataGridViewCellStyle58.NullValue = Nothing
+        Me.A_Mag.DefaultCellStyle = DataGridViewCellStyle58
         Me.A_Mag.HeaderText = "A Mag"
         Me.A_Mag.Name = "A_Mag"
         '
         'Ord
         '
-        DataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle28.Format = "N0"
-        DataGridViewCellStyle28.NullValue = Nothing
-        Me.Ord.DefaultCellStyle = DataGridViewCellStyle28
+        DataGridViewCellStyle59.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle59.Format = "N0"
+        DataGridViewCellStyle59.NullValue = Nothing
+        Me.Ord.DefaultCellStyle = DataGridViewCellStyle59
         Me.Ord.HeaderText = "Ord"
         Me.Ord.Name = "Ord"
         '
         'Disp
         '
-        DataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle29.Format = "N0"
-        DataGridViewCellStyle29.NullValue = Nothing
-        Me.Disp.DefaultCellStyle = DataGridViewCellStyle29
+        DataGridViewCellStyle60.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle60.Format = "N0"
+        DataGridViewCellStyle60.NullValue = Nothing
+        Me.Disp.DefaultCellStyle = DataGridViewCellStyle60
         Me.Disp.HeaderText = "Disp"
         Me.Disp.Name = "Disp"
         '
@@ -1609,9 +1559,9 @@ Partial Class ODP_Form
         '
         'Consegna
         '
-        DataGridViewCellStyle30.Format = "d"
-        DataGridViewCellStyle30.NullValue = Nothing
-        Me.Consegna.DefaultCellStyle = DataGridViewCellStyle30
+        DataGridViewCellStyle61.Format = "d"
+        DataGridViewCellStyle61.NullValue = Nothing
+        Me.Consegna.DefaultCellStyle = DataGridViewCellStyle61
         Me.Consegna.HeaderText = "Consegna"
         Me.Consegna.Name = "Consegna"
         '
@@ -1629,17 +1579,17 @@ Partial Class ODP_Form
         '
         'DataGridViewTextBoxColumn25
         '
-        DataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle31.Format = "d"
-        DataGridViewCellStyle31.NullValue = Nothing
-        Me.DataGridViewTextBoxColumn25.DefaultCellStyle = DataGridViewCellStyle31
+        DataGridViewCellStyle62.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle62.Format = "d"
+        DataGridViewCellStyle62.NullValue = Nothing
+        Me.DataGridViewTextBoxColumn25.DefaultCellStyle = DataGridViewCellStyle62
         Me.DataGridViewTextBoxColumn25.HeaderText = "Consegna"
         Me.DataGridViewTextBoxColumn25.Name = "DataGridViewTextBoxColumn25"
         '
         'Comm_ODP
         '
-        DataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Comm_ODP.DefaultCellStyle = DataGridViewCellStyle32
+        DataGridViewCellStyle63.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Comm_ODP.DefaultCellStyle = DataGridViewCellStyle63
         Me.Comm_ODP.HeaderText = "Comm ODP"
         Me.Comm_ODP.Name = "Comm_ODP"
         '
@@ -1674,14 +1624,14 @@ Partial Class ODP_Form
         Me.DataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.DataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight
         Me.DataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None
-        DataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle33.BackColor = System.Drawing.SystemColors.ControlDark
-        DataGridViewCellStyle33.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle33.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle33.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle33.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle33.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle33
+        DataGridViewCellStyle64.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle64.BackColor = System.Drawing.SystemColors.ControlDark
+        DataGridViewCellStyle64.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle64.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle64.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle64.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle64.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle64
         Me.DataGridView1.ColumnHeadersHeight = 30
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Code_fase, Me.DataGridViewTextBoxColumn17, Me.ATT_, Me.LAV__, Me.Stato_})
         Me.DataGridView1.Dock = System.Windows.Forms.DockStyle.Fill
@@ -1702,9 +1652,9 @@ Partial Class ODP_Form
         '
         'DataGridViewTextBoxColumn17
         '
-        DataGridViewCellStyle34.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle34.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridViewTextBoxColumn17.DefaultCellStyle = DataGridViewCellStyle34
+        DataGridViewCellStyle65.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle65.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridViewTextBoxColumn17.DefaultCellStyle = DataGridViewCellStyle65
         Me.DataGridViewTextBoxColumn17.FillWeight = 180.0!
         Me.DataGridViewTextBoxColumn17.HeaderText = "Fase"
         Me.DataGridViewTextBoxColumn17.MinimumWidth = 6
@@ -1712,27 +1662,27 @@ Partial Class ODP_Form
         '
         'ATT_
         '
-        DataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle35.Format = "N0"
-        DataGridViewCellStyle35.NullValue = Nothing
-        Me.ATT_.DefaultCellStyle = DataGridViewCellStyle35
+        DataGridViewCellStyle66.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle66.Format = "N0"
+        DataGridViewCellStyle66.NullValue = Nothing
+        Me.ATT_.DefaultCellStyle = DataGridViewCellStyle66
         Me.ATT_.HeaderText = "ATT"
         Me.ATT_.MinimumWidth = 6
         Me.ATT_.Name = "ATT_"
         '
         'LAV__
         '
-        DataGridViewCellStyle36.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle36.Format = "N0"
-        Me.LAV__.DefaultCellStyle = DataGridViewCellStyle36
+        DataGridViewCellStyle67.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle67.Format = "N0"
+        Me.LAV__.DefaultCellStyle = DataGridViewCellStyle67
         Me.LAV__.HeaderText = "LAV"
         Me.LAV__.MinimumWidth = 6
         Me.LAV__.Name = "LAV__"
         '
         'Stato_
         '
-        DataGridViewCellStyle37.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Stato_.DefaultCellStyle = DataGridViewCellStyle37
+        DataGridViewCellStyle68.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Stato_.DefaultCellStyle = DataGridViewCellStyle68
         Me.Stato_.HeaderText = "Stato"
         Me.Stato_.MinimumWidth = 6
         Me.Stato_.Name = "Stato_"
@@ -1771,6 +1721,65 @@ Partial Class ODP_Form
         '
         'Scontrino
         '
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.TextBox6)
+        Me.GroupBox1.Location = New System.Drawing.Point(10, 130)
+        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(0)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(123, 38)
+        Me.GroupBox1.TabIndex = 41
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Commessa"
+        '
+        'GroupBox3
+        '
+        Me.GroupBox3.Controls.Add(Me.TextBox11)
+        Me.GroupBox3.Location = New System.Drawing.Point(143, 166)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(137, 38)
+        Me.GroupBox3.TabIndex = 42
+        Me.GroupBox3.TabStop = False
+        Me.GroupBox3.Text = "Cliente"
+        '
+        'GroupBox4
+        '
+        Me.GroupBox4.Controls.Add(Me.TextBox2)
+        Me.GroupBox4.Location = New System.Drawing.Point(146, 128)
+        Me.GroupBox4.Margin = New System.Windows.Forms.Padding(0)
+        Me.GroupBox4.Name = "GroupBox4"
+        Me.GroupBox4.Size = New System.Drawing.Size(123, 38)
+        Me.GroupBox4.TabIndex = 43
+        Me.GroupBox4.TabStop = False
+        Me.GroupBox4.Text = "SottoCommessa"
+        '
+        'TextBox2
+        '
+        Me.TextBox2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TextBox2.Location = New System.Drawing.Point(3, 16)
+        Me.TextBox2.Name = "TextBox2"
+        Me.TextBox2.Size = New System.Drawing.Size(117, 20)
+        Me.TextBox2.TabIndex = 29
+        '
+        'GroupBox5
+        '
+        Me.GroupBox5.Controls.Add(Me.TextBox7)
+        Me.GroupBox5.Location = New System.Drawing.Point(7, 166)
+        Me.GroupBox5.Margin = New System.Windows.Forms.Padding(0)
+        Me.GroupBox5.Name = "GroupBox5"
+        Me.GroupBox5.Size = New System.Drawing.Size(123, 38)
+        Me.GroupBox5.TabIndex = 44
+        Me.GroupBox5.TabStop = False
+        Me.GroupBox5.Text = "Matricola"
+        '
+        'TextBox7
+        '
+        Me.TextBox7.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TextBox7.Location = New System.Drawing.Point(3, 16)
+        Me.TextBox7.Name = "TextBox7"
+        Me.TextBox7.Size = New System.Drawing.Size(117, 20)
+        Me.TextBox7.TabIndex = 29
         '
         'ODP_Form
         '
@@ -1820,6 +1829,14 @@ Partial Class ODP_Form
         Me.GroupBox8.ResumeLayout(False)
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel5.ResumeLayout(False)
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
+        Me.GroupBox3.ResumeLayout(False)
+        Me.GroupBox3.PerformLayout()
+        Me.GroupBox4.ResumeLayout(False)
+        Me.GroupBox4.PerformLayout()
+        Me.GroupBox5.ResumeLayout(False)
+        Me.GroupBox5.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1829,14 +1846,8 @@ Partial Class ODP_Form
     Friend WithEvents Panel3 As Panel
     Friend WithEvents TextBox1 As TextBox
     Friend WithEvents Label1 As Label
-    Friend WithEvents ComboBox3 As ComboBox
-    Friend WithEvents Label15 As Label
-    Friend WithEvents ComboBox2 As ComboBox
-    Friend WithEvents Label14 As Label
     Friend WithEvents TextBox11 As TextBox
-    Friend WithEvents Label13 As Label
     Friend WithEvents TextBox6 As TextBox
-    Friend WithEvents Label7 As Label
     Friend WithEvents Label8 As Label
     Friend WithEvents Label9 As Label
     Friend WithEvents Label10 As Label
@@ -1978,4 +1989,10 @@ Partial Class ODP_Form
     Friend WithEvents Linenum As DataGridViewTextBoxColumn
     Friend WithEvents Visorder As DataGridViewTextBoxColumn
     Friend WithEvents Stato As DataGridViewTextBoxColumn
+    Friend WithEvents GroupBox5 As GroupBox
+    Friend WithEvents TextBox7 As TextBox
+    Friend WithEvents GroupBox4 As GroupBox
+    Friend WithEvents TextBox2 As TextBox
+    Friend WithEvents GroupBox3 As GroupBox
+    Friend WithEvents GroupBox1 As GroupBox
 End Class

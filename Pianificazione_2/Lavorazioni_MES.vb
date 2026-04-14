@@ -180,7 +180,7 @@ values (" & id & ",'OC'," & FORM6.ODP & ",'" & par_dipendente & "','" & Pianific
 
 
 
-                    FORM6.Cambia_stato_ODP()
+                    '   FORM6.Cambia_stato_ODP()
                     FORM6.DataGridView_ODP.Rows(FORM6.riga).Cells(6).Value = "In_esecuzione"
                 Catch ex As Exception
 
@@ -289,7 +289,7 @@ values (" & id & ",'ODP'," & Dashboard_MU_New.docnum & ",'" & par_dipendente & "
                     FORM6.stato_lavorazione = "In_esecuzione"
 
                     Try
-                        FORM6.Cambia_stato_ODP()
+                        'FORM6.Cambia_stato_ODP()
                         FORM6.DataGridView_ODP.Rows(FORM6.riga).Cells(6).Value = "In_esecuzione"
                     Catch ex As Exception
 

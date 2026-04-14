@@ -764,6 +764,7 @@ Partial Class Form_campione_visualizza
         Me.GroupBox124.TabIndex = 178
         Me.GroupBox124.TabStop = False
         Me.GroupBox124.Text = "Codice SAP"
+        Me.GroupBox124.Visible = False
         '
         'TextBox114
         '

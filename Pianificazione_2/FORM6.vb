@@ -103,22 +103,22 @@ Public Class FORM6
         'If DataGridView_ODP.Rows(e.RowIndex).Cells(columnName:="TK").Value > 0 Then
         '    DataGridView_ODP.Rows(e.RowIndex).DefaultCellStyle.BackColor = Color.LightSlateGray
         'Else
-        If Not DataGridView_ODP.Rows(e.RowIndex).Cells(columnName:="STATO").Value Is System.DBNull.Value Then
-                If DataGridView_ODP.Rows(e.RowIndex).Cells(columnName:="STATO").Value = "Completato" Then
-                    DataGridView_ODP.Rows(e.RowIndex).DefaultCellStyle.BackColor = Color.Lime
-                ElseIf DataGridView_ODP.Rows(e.RowIndex).Cells(columnName:="STATO").Value = "In_esecuzione" Then
-                    DataGridView_ODP.Rows(e.RowIndex).DefaultCellStyle.BackColor = Color.Khaki
-                Else
-                    DataGridView_ODP.Rows(e.RowIndex).DefaultCellStyle.BackColor = Color.White
-                End If
+        If Not DataGridView_ODP.Rows(e.RowIndex).Cells(columnName:="Completato").Value Is System.DBNull.Value Then
+            If DataGridView_ODP.Rows(e.RowIndex).Cells(columnName:="Completato").Value = "C" Then
+                DataGridView_ODP.Rows(e.RowIndex).DefaultCellStyle.BackColor = Color.Lime
+                'ElseIf DataGridView_ODP.Rows(e.RowIndex).Cells(columnName:="STATO").Value = "In_esecuzione" Then
+                '    DataGridView_ODP.Rows(e.RowIndex).DefaultCellStyle.BackColor = Color.Khaki
+                'Else
+                '    DataGridView_ODP.Rows(e.RowIndex).DefaultCellStyle.BackColor = Color.White
             End If
+        End If
         'End If
 
 
     End Sub
 
 
-    Sub Cambia_stato_ODP()
+    Sub Cambia_stato_ODP(par_docnum As String, par_utente As String, par_stato As String)
         Dim CNN As New SqlConnection
         CNN.ConnectionString = Homepage.sap_tirelli
         CNN.Open()
@@ -127,9 +127,30 @@ Public Class FORM6
 
         CMD_SAP_7.Connection = CNN
 
-        CMD_SAP_7.CommandText = "update t0 
-set T0.u_stato= '" & stato_lavorazione & "' 
-from owor t0 where t0.docnum= '" & ODP & "'"
+        If par_stato = "C" Then
+            CMD_SAP_7.CommandText = "
+delete t0 
+from [Tirelli_40].dbo.[Ordini_produzione_dati] t0 where t0.docnum ='" & par_docnum & "'
+
+INSERT INTO [dbo].[Ordini_produzione_dati]
+           ([Docnum]
+           ,[empid]
+           ,[Docdate]
+           ,[Stato])
+     VALUES
+           ('" & par_docnum & "'
+           ,'" & par_utente & "'
+           ,getdate()
+           ,'" & par_stato & "')
+"
+        Else
+            CMD_SAP_7.CommandText = "
+delete t0 
+from [Tirelli_40].dbo.[Ordini_produzione_dati] t0 where t0.docnum ='" & par_docnum & "'
+"
+        End If
+
+
 
         CMD_SAP_7.ExecuteNonQuery()
 
@@ -230,7 +251,7 @@ group by t40.[N ODP],t40.Progressivo_commessa , t40.[Stato ODP], t40.Codice , t4
 
 order by t40.Progressivo_commessa, T40.TIPO, t40.[Codice Fase],  t40.[N ODP]"
         Else
-            CMD_SAP_1.CommandText = "select 
+            CMD_SAP_1.CommandText = "  select 
 t10.numodp as 'N ODP'
 ,t10.posizione as 'Progressivo_commessa'
 ,TRIM(t10.codart) as 'Codice'
@@ -249,13 +270,17 @@ t10.numodp as 'N ODP'
 ,0 as 'News'
 ,0 as 'ID_ticket'
 ,'' as 'Reparto_ticket'
+,coalesce(t11.stato,'') as  'Completato'
+
 
 FROM OPENQUERY(AS400, '
     SELECT *
     FROM TIR90VIS.JGALODP t0
 	where matricola=''" & par_commessa & "'' " & filtro_odp & filtro_codice & filtro_descrizione & "
  and mag_ver<>''TCP''
-') T10"
+') T10
+LEFT JOIN [Tirelli_40].[dbo].[Ordini_produzione_dati] t11 
+    ON t10.[NumODP] COLLATE DATABASE_DEFAULT = t11.docnum COLLATE DATABASE_DEFAULT"
 
         End If
         cmd_SAP_reader_1 = CMD_SAP_1.ExecuteReader
@@ -284,7 +309,8 @@ FROM OPENQUERY(AS400, '
                 Math.Round(cmd_SAP_reader_1("Quantita")),
                 cmd_SAP_reader_1("Stato"),
                 cmd_SAP_reader_1("Fase"),
-                cmd_SAP_reader_1("trasferiti") / cmd_SAP_reader_1("N") * 100
+                cmd_SAP_reader_1("trasferiti") / cmd_SAP_reader_1("N") * 100,
+                cmd_SAP_reader_1("Completato")
             )
 
             ' Riduci altezza SOLO se non c'è immagine
@@ -368,7 +394,7 @@ where t0.docnum=" & ODP & " and (t0.stop is null or t0.stop ='') and (t0.consunt
 
         If Not cmd_SAP_reader_2.Read() = True Then
             stato_lavorazione = ""
-            Cambia_stato_ODP()
+            ' Cambia_stato_ODP()
 
         End If
 
@@ -420,33 +446,38 @@ where t0.docnum=" & ODP & " and (t0.stop is null or t0.stop ='') and (t0.consunt
     End Sub
 
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
-        If DataGridView_ODP.Rows(riga).Cells(columnName:="STATO").Value Is System.DBNull.Value Then
-            stato_lavorazione = "Completato"
-            Cambia_stato_ODP()
-            DataGridView_ODP.Rows(riga).Cells(columnName:="STATO").Value = "Completato"
-            ' completamento_gruppi_preassemblaggio_assemblaggio()
-        ElseIf DataGridView_ODP.Rows(riga).Cells(columnName:="STATO").Value = "In_esecuzione" Then
-            MsgBox("Risulta una lavorazione aperta, chiudere tutte le lavorazioni per poter completare l'operazione")
 
-        Else
-            stato_lavorazione = "Completato"
-            Cambia_stato_ODP()
-            DataGridView_ODP.Rows(riga).Cells(columnName:="STATO").Value = "Completato"
-            ' completamento_gruppi_preassemblaggio_assemblaggio()
-        End If
+        Cambia_stato_ODP(ODP, Homepage.ID_SALVATO, "C")
+        elenco_ODP_commessa(Pianificazione.commessa, DataGridView_ODP)
+        'If DataGridView_ODP.Rows(riga).Cells(columnName:="STATO").Value Is System.DBNull.Value Then
+        '    stato_lavorazione = "Completato"
+        '    Cambia_stato_ODP(ODP, Homepage.ID_SALVATO, "C")
+        '    DataGridView_ODP.Rows(riga).Cells(columnName:="STATO").Value = "Completato"
+        '    ' completamento_gruppi_preassemblaggio_assemblaggio()
+        'ElseIf DataGridView_ODP.Rows(riga).Cells(columnName:="STATO").Value = "In_esecuzione" Then
+        '    MsgBox("Risulta una lavorazione aperta, chiudere tutte le lavorazioni per poter completare l'operazione")
+
+        'Else
+        '    stato_lavorazione = "Completato"
+        '    Cambia_stato_ODP()
+        '    DataGridView_ODP.Rows(riga).Cells(columnName:="STATO").Value = "Completato"
+        '    ' completamento_gruppi_preassemblaggio_assemblaggio()
+        'End If
     End Sub
 
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
-        Try
-            If DataGridView_ODP.Rows(riga).Cells(columnName:="STATO").Value = "Completato" Then
-                stato_lavorazione = ""
-                Cambia_stato_ODP()
-                DataGridView_ODP.Rows(riga).Cells(columnName:="STATO").Value = ""
-                '  completamento_gruppi_preassemblaggio_assemblaggio()
-            End If
-        Catch ex As Exception
+        Cambia_stato_ODP(ODP, Homepage.ID_SALVATO, "X")
+        elenco_ODP_commessa(Pianificazione.commessa, DataGridView_ODP)
+        'Try
+        '    If DataGridView_ODP.Rows(riga).Cells(columnName:="STATO").Value = "Completato" Then
+        '        stato_lavorazione = ""
+        '        Cambia_stato_ODP()
+        '        DataGridView_ODP.Rows(riga).Cells(columnName:="STATO").Value = ""
+        '        '  completamento_gruppi_preassemblaggio_assemblaggio()
+        '    End If
+        'Catch ex As Exception
 
-        End Try
+        'End Try
 
     End Sub
 
@@ -932,7 +963,7 @@ where t0.docnum=" & ODP & " and (t0.stop is null or t0.stop ='') and (t0.consunt
     End Sub
 
     Private Sub FORM6_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        DataGridView_ODP.AlternatingRowsDefaultCellStyle.BackColor = Color.AliceBlue
     End Sub
 
     Sub inizializza_form(par_commessa As String)

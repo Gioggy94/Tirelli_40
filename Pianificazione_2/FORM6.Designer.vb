@@ -52,6 +52,15 @@ Partial Class FORM6
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.TLP_InfoCommessa = New System.Windows.Forms.TableLayoutPanel()
+        Me.Label_t_nome = New System.Windows.Forms.Label()
+        Me.Label_t_ordine = New System.Windows.Forms.Label()
+        Me.Label_t_cliente = New System.Windows.Forms.Label()
+        Me.Label_t_clientefinale = New System.Windows.Forms.Label()
+        Me.Label_t_consegna = New System.Windows.Forms.Label()
+        Me.Panel_sep1 = New System.Windows.Forms.Panel()
+        Me.Panel_sep2 = New System.Windows.Forms.Panel()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Panel24 = New System.Windows.Forms.Panel()
         Me.GroupBox10 = New System.Windows.Forms.GroupBox()
@@ -113,17 +122,6 @@ Partial Class FORM6
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.DataGridView_ODP = New System.Windows.Forms.DataGridView()
-        Me.N_ODP = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.IMG = New System.Windows.Forms.DataGridViewImageColumn()
-        Me.Posizione = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Codice = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Descrizione = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Disegno = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Disegno_3d = New System.Windows.Forms.DataGridViewButtonColumn()
-        Me.Quantità = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Stato = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Fase = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.MAG = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Button10 = New System.Windows.Forms.Button()
         Me.Button14 = New System.Windows.Forms.Button()
         Me.Panel13 = New System.Windows.Forms.Panel()
@@ -158,11 +156,24 @@ Partial Class FORM6
         Me.Button13 = New System.Windows.Forms.Button()
         Me.Button15 = New System.Windows.Forms.Button()
         Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.N_ODP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.IMG = New System.Windows.Forms.DataGridViewImageColumn()
+        Me.Posizione = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Codice = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Descrizione = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Disegno = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Disegno_3d = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.Quantità = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Stato = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Fase = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.MAG = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Completato = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
+        Me.TLP_InfoCommessa.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Panel24.SuspendLayout()
         Me.GroupBox10.SuspendLayout()
@@ -216,58 +227,61 @@ Partial Class FORM6
         '
         'Label_consegna
         '
-        Me.Label_consegna.AutoSize = True
-        Me.Label_consegna.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        '
+        'Label_consegna (valore — dentro TLP_InfoCommessa)
+        '
+        Me.Label_consegna.AutoSize = False
+        Me.Label_consegna.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label_consegna.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label_consegna.ForeColor = System.Drawing.Color.White
-        Me.Label_consegna.Location = New System.Drawing.Point(65, 7)
         Me.Label_consegna.Name = "Label_consegna"
-        Me.Label_consegna.Size = New System.Drawing.Size(119, 26)
         Me.Label_consegna.TabIndex = 104
-        Me.Label_consegna.Text = "Consegna"
+        Me.Label_consegna.Text = "—"
+        Me.Label_consegna.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'Label_ordine_cliente
+        'Label_ordine_cliente (valore — dentro TLP_InfoCommessa)
         '
-        Me.Label_ordine_cliente.AutoSize = True
+        Me.Label_ordine_cliente.AutoSize = False
+        Me.Label_ordine_cliente.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label_ordine_cliente.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label_ordine_cliente.ForeColor = System.Drawing.Color.White
-        Me.Label_ordine_cliente.Location = New System.Drawing.Point(80, 12)
         Me.Label_ordine_cliente.Name = "Label_ordine_cliente"
-        Me.Label_ordine_cliente.Size = New System.Drawing.Size(86, 13)
         Me.Label_ordine_cliente.TabIndex = 102
-        Me.Label_ordine_cliente.Text = "Ordine cliente"
+        Me.Label_ordine_cliente.Text = "—"
+        Me.Label_ordine_cliente.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'Label_cliente_finale
+        'Label_cliente_finale (valore — dentro TLP_InfoCommessa)
         '
-        Me.Label_cliente_finale.AutoSize = True
-        Me.Label_cliente_finale.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label_cliente_finale.AutoSize = False
+        Me.Label_cliente_finale.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label_cliente_finale.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label_cliente_finale.ForeColor = System.Drawing.Color.White
-        Me.Label_cliente_finale.Location = New System.Drawing.Point(9, 15)
         Me.Label_cliente_finale.Name = "Label_cliente_finale"
-        Me.Label_cliente_finale.Size = New System.Drawing.Size(72, 12)
         Me.Label_cliente_finale.TabIndex = 100
-        Me.Label_cliente_finale.Text = "Cliente finale"
+        Me.Label_cliente_finale.Text = "—"
+        Me.Label_cliente_finale.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'Label_cliente
+        'Label_cliente (valore — dentro TLP_InfoCommessa)
         '
-        Me.Label_cliente.AutoSize = True
-        Me.Label_cliente.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label_cliente.AutoSize = False
+        Me.Label_cliente.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label_cliente.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label_cliente.ForeColor = System.Drawing.Color.White
-        Me.Label_cliente.Location = New System.Drawing.Point(12, 15)
         Me.Label_cliente.Name = "Label_cliente"
-        Me.Label_cliente.Size = New System.Drawing.Size(41, 12)
         Me.Label_cliente.TabIndex = 98
-        Me.Label_cliente.Text = "Cliente"
+        Me.Label_cliente.Text = "—"
+        Me.Label_cliente.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'Label_descrizione
+        'Label_descrizione (valore — dentro TLP_InfoCommessa)
         '
-        Me.Label_descrizione.AutoSize = True
-        Me.Label_descrizione.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label_descrizione.AutoSize = False
+        Me.Label_descrizione.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label_descrizione.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label_descrizione.ForeColor = System.Drawing.Color.White
-        Me.Label_descrizione.Location = New System.Drawing.Point(6, 14)
         Me.Label_descrizione.Name = "Label_descrizione"
-        Me.Label_descrizione.Size = New System.Drawing.Size(57, 9)
         Me.Label_descrizione.TabIndex = 96
-        Me.Label_descrizione.Text = "Descrizione"
+        Me.Label_descrizione.Text = "—"
+        Me.Label_descrizione.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'Label19
         '
@@ -279,67 +293,148 @@ Partial Class FORM6
         Me.Label19.TabIndex = 148
         Me.Label19.Text = "PDF NON DISPONIBILE"
         '
-        'GroupBox1
+        'GroupBox1-5 mantenuti come dichiarazioni per compatibilità, non usati visivamente
         '
-        Me.GroupBox1.Controls.Add(Me.Label_descrizione)
-        Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox1.Location = New System.Drawing.Point(8, 17)
+        Me.GroupBox1.Visible = False
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(264, 30)
         Me.GroupBox1.TabIndex = 149
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Nome"
         '
-        'GroupBox2
-        '
-        Me.GroupBox2.Controls.Add(Me.Label_ordine_cliente)
-        Me.GroupBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox2.Location = New System.Drawing.Point(8, 47)
+        Me.GroupBox2.Visible = False
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(263, 30)
         Me.GroupBox2.TabIndex = 150
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Ordine cliente"
         '
-        'GroupBox3
-        '
-        Me.GroupBox3.Controls.Add(Me.Label_cliente)
-        Me.GroupBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox3.Location = New System.Drawing.Point(8, 80)
+        Me.GroupBox3.Visible = False
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(264, 30)
         Me.GroupBox3.TabIndex = 151
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Cliente"
         '
-        'GroupBox4
-        '
-        Me.GroupBox4.Controls.Add(Me.Label_cliente_finale)
-        Me.GroupBox4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox4.Location = New System.Drawing.Point(8, 114)
+        Me.GroupBox4.Visible = False
         Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(264, 30)
         Me.GroupBox4.TabIndex = 152
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Cliente finale"
         '
-        'GroupBox5
-        '
-        Me.GroupBox5.Controls.Add(Me.Label_consegna)
-        Me.GroupBox5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox5.Location = New System.Drawing.Point(8, 144)
+        Me.GroupBox5.Visible = False
         Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Size = New System.Drawing.Size(261, 36)
-        Me.GroupBox5.TabIndex = 152
+        Me.GroupBox5.TabIndex = 153
         Me.GroupBox5.TabStop = False
         Me.GroupBox5.Text = "Consegna"
+        '
+        'Label_t_nome (titolo fisso)
+        '
+        Me.Label_t_nome.AutoSize = False
+        Me.Label_t_nome.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label_t_nome.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label_t_nome.ForeColor = System.Drawing.Color.LightSkyBlue
+        Me.Label_t_nome.Name = "Label_t_nome"
+        Me.Label_t_nome.TabIndex = 160
+        Me.Label_t_nome.Text = "Nome:"
+        Me.Label_t_nome.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label_t_ordine (titolo fisso)
+        '
+        Me.Label_t_ordine.AutoSize = False
+        Me.Label_t_ordine.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label_t_ordine.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label_t_ordine.ForeColor = System.Drawing.Color.LightSkyBlue
+        Me.Label_t_ordine.Name = "Label_t_ordine"
+        Me.Label_t_ordine.TabIndex = 161
+        Me.Label_t_ordine.Text = "Ord. cliente:"
+        Me.Label_t_ordine.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label_t_cliente (titolo fisso)
+        '
+        Me.Label_t_cliente.AutoSize = False
+        Me.Label_t_cliente.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label_t_cliente.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label_t_cliente.ForeColor = System.Drawing.Color.LightSkyBlue
+        Me.Label_t_cliente.Name = "Label_t_cliente"
+        Me.Label_t_cliente.TabIndex = 162
+        Me.Label_t_cliente.Text = "Cliente:"
+        Me.Label_t_cliente.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label_t_clientefinale (titolo fisso)
+        '
+        Me.Label_t_clientefinale.AutoSize = False
+        Me.Label_t_clientefinale.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label_t_clientefinale.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label_t_clientefinale.ForeColor = System.Drawing.Color.LightSkyBlue
+        Me.Label_t_clientefinale.Name = "Label_t_clientefinale"
+        Me.Label_t_clientefinale.TabIndex = 163
+        Me.Label_t_clientefinale.Text = "Cl. finale:"
+        Me.Label_t_clientefinale.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label_t_consegna (titolo fisso)
+        '
+        Me.Label_t_consegna.AutoSize = False
+        Me.Label_t_consegna.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label_t_consegna.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label_t_consegna.ForeColor = System.Drawing.Color.LightSkyBlue
+        Me.Label_t_consegna.Name = "Label_t_consegna"
+        Me.Label_t_consegna.TabIndex = 164
+        Me.Label_t_consegna.Text = "Consegna:"
+        Me.Label_t_consegna.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'TLP_InfoCommessa
+        '
+        Me.TLP_InfoCommessa.BackColor = System.Drawing.Color.Transparent
+        Me.TLP_InfoCommessa.ColumnCount = 2
+        Me.TLP_InfoCommessa.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 38.0!))
+        Me.TLP_InfoCommessa.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 62.0!))
+        Me.TLP_InfoCommessa.Controls.Add(Me.Label_t_nome, 0, 0)
+        Me.TLP_InfoCommessa.Controls.Add(Me.Label_descrizione, 1, 0)
+        Me.TLP_InfoCommessa.Controls.Add(Me.Label_t_ordine, 0, 1)
+        Me.TLP_InfoCommessa.Controls.Add(Me.Label_ordine_cliente, 1, 1)
+        Me.TLP_InfoCommessa.Controls.Add(Me.Label_t_cliente, 0, 2)
+        Me.TLP_InfoCommessa.Controls.Add(Me.Label_cliente, 1, 2)
+        Me.TLP_InfoCommessa.Controls.Add(Me.Label_t_clientefinale, 0, 3)
+        Me.TLP_InfoCommessa.Controls.Add(Me.Label_cliente_finale, 1, 3)
+        Me.TLP_InfoCommessa.Controls.Add(Me.Label_t_consegna, 0, 4)
+        Me.TLP_InfoCommessa.Controls.Add(Me.Label_consegna, 1, 4)
+        Me.TLP_InfoCommessa.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TLP_InfoCommessa.Location = New System.Drawing.Point(0, 0)
+        Me.TLP_InfoCommessa.Name = "TLP_InfoCommessa"
+        Me.TLP_InfoCommessa.Padding = New System.Windows.Forms.Padding(6, 4, 6, 4)
+        Me.TLP_InfoCommessa.RowCount = 5
+        Me.TLP_InfoCommessa.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
+        Me.TLP_InfoCommessa.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
+        Me.TLP_InfoCommessa.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
+        Me.TLP_InfoCommessa.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
+        Me.TLP_InfoCommessa.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
+        Me.TLP_InfoCommessa.Size = New System.Drawing.Size(287, 185)
+        Me.TLP_InfoCommessa.TabIndex = 170
+        '
+        'Panel_sep1 (separatore tra Button_commessa e Panel16)
+        '
+        Me.Panel_sep1.BackColor = System.Drawing.Color.FromArgb(CType(100, Byte), CType(149, Byte), CType(237, Byte))
+        Me.Panel_sep1.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel_sep1.Location = New System.Drawing.Point(0, 56)
+        Me.Panel_sep1.Name = "Panel_sep1"
+        Me.Panel_sep1.Size = New System.Drawing.Size(287, 2)
+        Me.Panel_sep1.TabIndex = 171
+        '
+        'Panel_sep2 (separatore tra Panel16 e Panel17)
+        '
+        Me.Panel_sep2.BackColor = System.Drawing.Color.FromArgb(CType(100, Byte), CType(149, Byte), CType(237, Byte))
+        Me.Panel_sep2.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel_sep2.Location = New System.Drawing.Point(0, 243)
+        Me.Panel_sep2.Name = "Panel_sep2"
+        Me.Panel_sep2.Size = New System.Drawing.Size(287, 2)
+        Me.Panel_sep2.TabIndex = 172
         '
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.SteelBlue
         Me.Panel1.Controls.Add(Me.Panel24)
         Me.Panel1.Controls.Add(Me.Panel17)
+        Me.Panel1.Controls.Add(Me.Panel_sep2)
         Me.Panel1.Controls.Add(Me.Panel16)
+        Me.Panel1.Controls.Add(Me.Panel_sep1)
         Me.Panel1.Controls.Add(Me.Button_commessa)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Left
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
@@ -478,7 +573,7 @@ Partial Class FORM6
         '
         'Panel18
         '
-        Me.Panel18.BackColor = System.Drawing.Color.Gray
+        Me.Panel18.BackColor = System.Drawing.Color.SlateGray
         Me.Panel18.Controls.Add(Me.TableLayoutPanel3)
         Me.Panel18.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel18.Location = New System.Drawing.Point(0, 179)
@@ -952,15 +1047,11 @@ Partial Class FORM6
         '
         'Panel16
         '
-        Me.Panel16.Controls.Add(Me.GroupBox1)
-        Me.Panel16.Controls.Add(Me.GroupBox2)
-        Me.Panel16.Controls.Add(Me.GroupBox5)
-        Me.Panel16.Controls.Add(Me.GroupBox3)
-        Me.Panel16.Controls.Add(Me.GroupBox4)
+        Me.Panel16.Controls.Add(Me.TLP_InfoCommessa)
         Me.Panel16.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Panel16.Location = New System.Drawing.Point(0, 56)
+        Me.Panel16.Location = New System.Drawing.Point(0, 58)
         Me.Panel16.Name = "Panel16"
-        Me.Panel16.Size = New System.Drawing.Size(287, 197)
+        Me.Panel16.Size = New System.Drawing.Size(287, 185)
         Me.Panel16.TabIndex = 155
         '
         'Button_commessa
@@ -1037,15 +1128,15 @@ Partial Class FORM6
         Me.DataGridView_ODP.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.DataGridView_ODP.BackgroundColor = System.Drawing.SystemColors.ActiveCaption
         DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.ControlDark
-        DataGridViewCellStyle8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(CType(CType(30, Byte), Integer), CType(CType(87, Byte), Integer), CType(CType(153, Byte), Integer))
+        DataGridViewCellStyle8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle8.ForeColor = System.Drawing.Color.White
         DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight
         DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.DataGridView_ODP.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle8
         Me.DataGridView_ODP.ColumnHeadersHeight = 40
-        Me.DataGridView_ODP.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.N_ODP, Me.IMG, Me.Posizione, Me.Codice, Me.Descrizione, Me.Disegno, Me.Disegno_3d, Me.Quantità, Me.Stato, Me.Fase, Me.MAG})
+        Me.DataGridView_ODP.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.N_ODP, Me.IMG, Me.Posizione, Me.Codice, Me.Descrizione, Me.Disegno, Me.Disegno_3d, Me.Quantità, Me.Stato, Me.Fase, Me.MAG, Me.Completato})
         Me.DataGridView_ODP.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DataGridView_ODP.GridColor = System.Drawing.Color.DarkGray
         Me.DataGridView_ODP.ImeMode = System.Windows.Forms.ImeMode.NoControl
@@ -1065,109 +1156,6 @@ Partial Class FORM6
         Me.DataGridView_ODP.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DataGridView_ODP.Size = New System.Drawing.Size(693, 789)
         Me.DataGridView_ODP.TabIndex = 92
-        '
-        'N_ODP
-        '
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle9.BackColor = System.Drawing.Color.FloralWhite
-        DataGridViewCellStyle9.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.N_ODP.DefaultCellStyle = DataGridViewCellStyle9
-        Me.N_ODP.FillWeight = 88.50478!
-        Me.N_ODP.HeaderText = "N° ODP"
-        Me.N_ODP.MinimumWidth = 6
-        Me.N_ODP.Name = "N_ODP"
-        Me.N_ODP.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        '
-        'IMG
-        '
-        Me.IMG.HeaderText = "IMG"
-        Me.IMG.Image = Global.Tirelli.My.Resources.Resources.Bianco
-        Me.IMG.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom
-        Me.IMG.Name = "IMG"
-        '
-        'Posizione
-        '
-        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle10.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Posizione.DefaultCellStyle = DataGridViewCellStyle10
-        Me.Posizione.HeaderText = "Posizione"
-        Me.Posizione.Name = "Posizione"
-        '
-        'Codice
-        '
-        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle11.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Codice.DefaultCellStyle = DataGridViewCellStyle11
-        Me.Codice.FillWeight = 78.97267!
-        Me.Codice.HeaderText = "Codice"
-        Me.Codice.MinimumWidth = 6
-        Me.Codice.Name = "Codice"
-        '
-        'Descrizione
-        '
-        Me.Descrizione.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        DataGridViewCellStyle12.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Descrizione.DefaultCellStyle = DataGridViewCellStyle12
-        Me.Descrizione.FillWeight = 480.0!
-        Me.Descrizione.HeaderText = "Descrizione"
-        Me.Descrizione.MinimumWidth = 20
-        Me.Descrizione.Name = "Descrizione"
-        '
-        'Disegno
-        '
-        DataGridViewCellStyle13.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Disegno.DefaultCellStyle = DataGridViewCellStyle13
-        Me.Disegno.FillWeight = 71.96342!
-        Me.Disegno.HeaderText = "Disegno"
-        Me.Disegno.MinimumWidth = 6
-        Me.Disegno.Name = "Disegno"
-        Me.Disegno.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        '
-        'Disegno_3d
-        '
-        Me.Disegno_3d.FillWeight = 32.12028!
-        Me.Disegno_3d.HeaderText = "3D"
-        Me.Disegno_3d.MinimumWidth = 6
-        Me.Disegno_3d.Name = "Disegno_3d"
-        Me.Disegno_3d.Visible = False
-        '
-        'Quantità
-        '
-        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle14.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Quantità.DefaultCellStyle = DataGridViewCellStyle14
-        Me.Quantità.FillWeight = 70.10452!
-        Me.Quantità.HeaderText = "Quantità"
-        Me.Quantità.MinimumWidth = 6
-        Me.Quantità.Name = "Quantità"
-        '
-        'Stato
-        '
-        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Stato.DefaultCellStyle = DataGridViewCellStyle15
-        Me.Stato.FillWeight = 70.0!
-        Me.Stato.HeaderText = "Stato"
-        Me.Stato.MinimumWidth = 6
-        Me.Stato.Name = "Stato"
-        Me.Stato.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        '
-        'Fase
-        '
-        Me.Fase.FillWeight = 88.60177!
-        Me.Fase.HeaderText = "Fase"
-        Me.Fase.MinimumWidth = 6
-        Me.Fase.Name = "Fase"
-        '
-        'MAG
-        '
-        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle16.Format = "N0"
-        DataGridViewCellStyle16.NullValue = Nothing
-        Me.MAG.DefaultCellStyle = DataGridViewCellStyle16
-        Me.MAG.FillWeight = 74.75623!
-        Me.MAG.HeaderText = "MAG"
-        Me.MAG.MinimumWidth = 6
-        Me.MAG.Name = "MAG"
         '
         'Button10
         '
@@ -1390,7 +1378,7 @@ Partial Class FORM6
         Me.GroupBox113.Controls.Add(Me.PictureBox3)
         Me.GroupBox113.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupBox113.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox113.ForeColor = System.Drawing.SystemColors.Control
+        Me.GroupBox113.ForeColor = System.Drawing.Color.White
         Me.GroupBox113.Location = New System.Drawing.Point(3, 93)
         Me.GroupBox113.Name = "GroupBox113"
         Me.GroupBox113.Size = New System.Drawing.Size(278, 149)
@@ -1428,6 +1416,7 @@ Partial Class FORM6
         '
         'Button6
         '
+        Me.Button6.BackColor = System.Drawing.Color.FromArgb(CType(CType(197, Byte), Integer), CType(CType(15, Byte), Integer), CType(CType(31, Byte), Integer))
         Me.Button6.Cursor = System.Windows.Forms.Cursors.Hand
         Me.Button6.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -1439,10 +1428,11 @@ Partial Class FORM6
         Me.Button6.TabIndex = 3
         Me.Button6.Text = "ANNULLA"
         Me.Button6.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage
-        Me.Button6.UseVisualStyleBackColor = True
+        Me.Button6.UseVisualStyleBackColor = False
         '
         'Button5
         '
+        Me.Button5.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(120, Byte), Integer), CType(CType(212, Byte), Integer))
         Me.Button5.Cursor = System.Windows.Forms.Cursors.Hand
         Me.Button5.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -1455,10 +1445,11 @@ Partial Class FORM6
         Me.Button5.TabIndex = 2
         Me.Button5.Text = "COMPLETATO"
         Me.Button5.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage
-        Me.Button5.UseVisualStyleBackColor = True
+        Me.Button5.UseVisualStyleBackColor = False
         '
         'Button2
         '
+        Me.Button2.BackColor = System.Drawing.Color.FromArgb(CType(CType(16, Byte), Integer), CType(CType(124, Byte), Integer), CType(CType(16, Byte), Integer))
         Me.Button2.Cursor = System.Windows.Forms.Cursors.Hand
         Me.Button2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -1470,11 +1461,12 @@ Partial Class FORM6
         Me.Button2.TabIndex = 0
         Me.Button2.Text = "START"
         Me.Button2.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.Button2.UseVisualStyleBackColor = False
         Me.Button2.Visible = False
         '
         'Button4
         '
+        Me.Button4.BackColor = System.Drawing.Color.FromArgb(CType(CType(216, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(1, Byte), Integer))
         Me.Button4.Cursor = System.Windows.Forms.Cursors.Hand
         Me.Button4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -1486,7 +1478,7 @@ Partial Class FORM6
         Me.Button4.TabIndex = 1
         Me.Button4.Text = "STOP"
         Me.Button4.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage
-        Me.Button4.UseVisualStyleBackColor = True
+        Me.Button4.UseVisualStyleBackColor = False
         Me.Button4.Visible = False
         '
         'TableLayoutPanel16
@@ -1510,7 +1502,7 @@ Partial Class FORM6
         Me.Button7.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button7.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button7.ForeColor = System.Drawing.Color.Maroon
+        Me.Button7.ForeColor = System.Drawing.Color.White
         Me.Button7.Image = CType(resources.GetObject("Button7.Image"), System.Drawing.Image)
         Me.Button7.Location = New System.Drawing.Point(142, 3)
         Me.Button7.Name = "Button7"
@@ -1526,7 +1518,7 @@ Partial Class FORM6
         Me.Button8.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button8.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button8.ForeColor = System.Drawing.Color.Maroon
+        Me.Button8.ForeColor = System.Drawing.Color.White
         Me.Button8.Image = CType(resources.GetObject("Button8.Image"), System.Drawing.Image)
         Me.Button8.Location = New System.Drawing.Point(3, 3)
         Me.Button8.Name = "Button8"
@@ -1538,12 +1530,12 @@ Partial Class FORM6
         '
         'Button11
         '
-        Me.Button11.BackColor = System.Drawing.Color.Lime
+        Me.Button11.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(70, Byte), Integer), CType(CType(127, Byte), Integer))
         Me.Button11.Cursor = System.Windows.Forms.Cursors.Hand
         Me.Button11.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Button11.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button11.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button11.ForeColor = System.Drawing.Color.Maroon
+        Me.Button11.ForeColor = System.Drawing.Color.White
         Me.Button11.Image = CType(resources.GetObject("Button11.Image"), System.Drawing.Image)
         Me.Button11.Location = New System.Drawing.Point(3, 338)
         Me.Button11.Name = "Button11"
@@ -1638,6 +1630,115 @@ Partial Class FORM6
         Me.Panel3.Size = New System.Drawing.Size(284, 845)
         Me.Panel3.TabIndex = 157
         '
+        'N_ODP
+        '
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle9.BackColor = System.Drawing.Color.FloralWhite
+        DataGridViewCellStyle9.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.N_ODP.DefaultCellStyle = DataGridViewCellStyle9
+        Me.N_ODP.FillWeight = 88.50478!
+        Me.N_ODP.HeaderText = "N° ODP"
+        Me.N_ODP.MinimumWidth = 6
+        Me.N_ODP.Name = "N_ODP"
+        Me.N_ODP.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        '
+        'IMG
+        '
+        Me.IMG.HeaderText = "IMG"
+        Me.IMG.Image = Global.Tirelli.My.Resources.Resources.Bianco
+        Me.IMG.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom
+        Me.IMG.Name = "IMG"
+        '
+        'Posizione
+        '
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle10.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Posizione.DefaultCellStyle = DataGridViewCellStyle10
+        Me.Posizione.HeaderText = "Posizione"
+        Me.Posizione.Name = "Posizione"
+        '
+        'Codice
+        '
+        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle11.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Codice.DefaultCellStyle = DataGridViewCellStyle11
+        Me.Codice.FillWeight = 78.97267!
+        Me.Codice.HeaderText = "Codice"
+        Me.Codice.MinimumWidth = 6
+        Me.Codice.Name = "Codice"
+        '
+        'Descrizione
+        '
+        Me.Descrizione.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        DataGridViewCellStyle12.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Descrizione.DefaultCellStyle = DataGridViewCellStyle12
+        Me.Descrizione.FillWeight = 480.0!
+        Me.Descrizione.HeaderText = "Descrizione"
+        Me.Descrizione.MinimumWidth = 20
+        Me.Descrizione.Name = "Descrizione"
+        '
+        'Disegno
+        '
+        DataGridViewCellStyle13.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Disegno.DefaultCellStyle = DataGridViewCellStyle13
+        Me.Disegno.FillWeight = 71.96342!
+        Me.Disegno.HeaderText = "Disegno"
+        Me.Disegno.MinimumWidth = 6
+        Me.Disegno.Name = "Disegno"
+        Me.Disegno.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        '
+        'Disegno_3d
+        '
+        Me.Disegno_3d.FillWeight = 32.12028!
+        Me.Disegno_3d.HeaderText = "3D"
+        Me.Disegno_3d.MinimumWidth = 6
+        Me.Disegno_3d.Name = "Disegno_3d"
+        Me.Disegno_3d.Visible = False
+        '
+        'Quantità
+        '
+        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle14.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Quantità.DefaultCellStyle = DataGridViewCellStyle14
+        Me.Quantità.FillWeight = 70.10452!
+        Me.Quantità.HeaderText = "Quantità"
+        Me.Quantità.MinimumWidth = 6
+        Me.Quantità.Name = "Quantità"
+        '
+        'Stato
+        '
+        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Stato.DefaultCellStyle = DataGridViewCellStyle15
+        Me.Stato.FillWeight = 70.0!
+        Me.Stato.HeaderText = "Stato"
+        Me.Stato.MinimumWidth = 6
+        Me.Stato.Name = "Stato"
+        Me.Stato.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        '
+        'Fase
+        '
+        Me.Fase.FillWeight = 88.60177!
+        Me.Fase.HeaderText = "Fase"
+        Me.Fase.MinimumWidth = 6
+        Me.Fase.Name = "Fase"
+        '
+        'MAG
+        '
+        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle16.Format = "N0"
+        DataGridViewCellStyle16.NullValue = Nothing
+        Me.MAG.DefaultCellStyle = DataGridViewCellStyle16
+        Me.MAG.FillWeight = 74.75623!
+        Me.MAG.HeaderText = "MAG"
+        Me.MAG.MinimumWidth = 6
+        Me.MAG.Name = "MAG"
+        '
+        'Completato
+        '
+        Me.Completato.HeaderText = "Completato"
+        Me.Completato.Name = "Completato"
+        Me.Completato.Visible = False
+        '
         'FORM6
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1707,6 +1808,7 @@ Partial Class FORM6
         Me.GroupBox20.ResumeLayout(False)
         Me.GroupBox20.PerformLayout()
         Me.Panel16.ResumeLayout(False)
+        Me.TLP_InfoCommessa.ResumeLayout(False)
         Me.ContextMenuStrip1.ResumeLayout(False)
         CType(Me.DataGridView_ODP, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel13.ResumeLayout(False)
@@ -1730,6 +1832,23 @@ Partial Class FORM6
         Me.TableLayoutPanel16.ResumeLayout(False)
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.Panel3.ResumeLayout(False)
+        '
+        'ToolTip1
+        '
+        Me.ToolTip1.SetToolTip(Me.Button_commessa, "Torna al riepilogo commesse")
+        Me.ToolTip1.SetToolTip(Me.Button2, "Avvia nuova lavorazione MES")
+        Me.ToolTip1.SetToolTip(Me.Button4, "Chiudi lavorazione in corso")
+        Me.ToolTip1.SetToolTip(Me.Button5, "Segna ODP come completato")
+        Me.ToolTip1.SetToolTip(Me.Button6, "Annulla stato completato")
+        Me.ToolTip1.SetToolTip(Me.Button7, "Apri modello 3D (.dwf)")
+        Me.ToolTip1.SetToolTip(Me.Button8, "Apri disegno PDF")
+        Me.ToolTip1.SetToolTip(Me.Button11, "Visualizza dettaglio ordine di produzione")
+        Me.ToolTip1.SetToolTip(Me.Button13, "Apri nuovo ticket")
+        Me.ToolTip1.SetToolTip(Me.Button12, "Visualizza ticket collegato all'ODP")
+        Me.ToolTip1.SetToolTip(Me.Button10, "Esporta griglia in Excel")
+        Me.ToolTip1.SetToolTip(Me.Button14, "Controlla presenza disegni PDF")
+        Me.ToolTip1.SetToolTip(Me.Button1, "Minimizza finestra")
+        Me.ToolTip1.SetToolTip(Me.Button3, "Chiudi finestra")
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1851,4 +1970,14 @@ Partial Class FORM6
     Friend WithEvents Stato As DataGridViewTextBoxColumn
     Friend WithEvents Fase As DataGridViewTextBoxColumn
     Friend WithEvents MAG As DataGridViewTextBoxColumn
+    Friend WithEvents Completato As DataGridViewTextBoxColumn
+    Friend WithEvents ToolTip1 As ToolTip
+    Friend WithEvents TLP_InfoCommessa As TableLayoutPanel
+    Friend WithEvents Label_t_nome As Label
+    Friend WithEvents Label_t_ordine As Label
+    Friend WithEvents Label_t_cliente As Label
+    Friend WithEvents Label_t_clientefinale As Label
+    Friend WithEvents Label_t_consegna As Label
+    Friend WithEvents Panel_sep1 As Panel
+    Friend WithEvents Panel_sep2 As Panel
 End Class

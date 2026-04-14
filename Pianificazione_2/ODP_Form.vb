@@ -282,9 +282,12 @@ left join [Tirelli_40].[dbo].[Layout_CAP1_nomi] t12
         ComboBox1.Text = info.stato
         Button11.Text = info.itemcode
         TextBox3.Text = info.descrizione
-        TextBox6.Text = info.matricola
+        TextBox6.Text = info.commessa
+        TextBox2.Text = info.sottocommessa
+        TextBox7.Text = info.commessa
+
+
         Button5.Text = info.disegno
-        ComboBox3.Text = info.fase
         TextBox13.Text = info.lavorazione
         ComboBox4.Text = info.u_stato
         TextBox4.Text = info.quantità
@@ -307,7 +310,7 @@ left join [Tirelli_40].[dbo].[Layout_CAP1_nomi] t12
         TextBox1.Text = info.type
         TextBox5.Text = info.warehouse
         TextBox11.Text = info.u_utilizz
-        ComboBox2.Text = info.descr
+
 
         ' 6. Gestione variabile globale/di modulo e immagine
         numerone = info.numerone
@@ -345,12 +348,8 @@ left join [Tirelli_40].[dbo].[Layout_CAP1_nomi] t12
     Sub riempi_datagridview_ODP(par_datagridview As DataGridView, par_docnum_odp As String, par_commessa As String)
 
         Dim filtro_risorse As String = ""
-            If Mid(ComboBox2.Text, 1, 3) = "INT" Then
-                filtro_risorse = "or t3.restype='L'"
-            Else
-                filtro_risorse = ""
-            End If
-            par_datagridview.Rows.Clear()
+
+        par_datagridview.Rows.Clear()
 
             Dim Cnn1 As New SqlConnection
             Cnn1.ConnectionString = Homepage.sap_tirelli
@@ -646,11 +645,7 @@ where odp=''" & par_docnum_odp & "''
 
     Sub new_riempi_datagridview_ODP(par_datagridview As DataGridView, par_docnum_odp As Integer, par_commessa As String, par_operazione As String, par_centro_di_costo As String)
         Dim filtro_risorse As String = ""
-        If Mid(ComboBox2.Text, 1, 3) = "INT" Then
-            filtro_risorse = "or t3.restype='L'"
-        Else
-            filtro_risorse = ""
-        End If
+
         par_datagridview.Rows.Clear()
 
         Dim Cnn1 As New SqlConnection
@@ -1154,72 +1149,9 @@ select t0.itemcode from wor1 t0 where t0.U_ODP_integrato=@odp "
 
     '    End Sub
 
-    Sub Inserimento_items_combobox_produzione()
-        If Homepage.ERP_provenienza = "SAP" Then
-
-
-            ComboBox2.Items.Clear()
-            Dim Cnn As New SqlConnection
-            Cnn.ConnectionString = Homepage.sap_tirelli
-            Cnn.Open()
 
 
 
-            Dim CMD_SAP As New SqlCommand
-            Dim cmd_SAP_reader As SqlDataReader
-
-            CMD_SAP.Connection = Cnn
-            CMD_SAP.CommandText = "SELECT *
-from ufd1
-where tableid='OWOR' and fieldid=2
-order by indexid "
-
-            cmd_SAP_reader = CMD_SAP.ExecuteReader
-
-            Dim Indice As Integer
-            Indice = 0
-            Do While cmd_SAP_reader.Read()
-
-                Elenco_produzione(Indice) = cmd_SAP_reader("fldvalue")
-                ComboBox2.Items.Add(cmd_SAP_reader("Descr"))
-                Indice = Indice + 1
-            Loop
-            cmd_SAP_reader.Close()
-            Cnn.Close()
-        End If
-    End Sub
-
-    Sub Inserimento_items_combobox_fase()
-
-        ComboBox3.Items.Clear()
-        Dim Cnn As New SqlConnection
-        Cnn.ConnectionString = Homepage.sap_tirelli
-        Cnn.Open()
-
-
-        Dim CMD_SAP As New SqlCommand
-        Dim cmd_SAP_reader As SqlDataReader
-
-        CMD_SAP.Connection = Cnn
-        CMD_SAP.CommandText = "SELECT  [Code]
-      ,[Name]
-  FROM [TIRELLISRLDB].[dbo].[@FASE]
-  order by Code "
-
-        cmd_SAP_reader = CMD_SAP.ExecuteReader
-
-        Dim Indice As Integer
-        Indice = 0
-        Do While cmd_SAP_reader.Read()
-
-            Elenco_fase(Indice) = cmd_SAP_reader("code")
-            ComboBox3.Items.Add(cmd_SAP_reader("Name"))
-            Indice = Indice + 1
-        Loop
-        cmd_SAP_reader.Close()
-        Cnn.Close()
-
-    End Sub
 
     Sub TROVA_MAX_LINENUM_E_MAX_VISORDER(PAR_DOCNUM_odp As Integer)
         If Homepage.ERP_provenienza = "SAP" Then
@@ -1876,48 +1808,48 @@ where t0.docnum=" & par_docnum_odp & ""
 
 
 
-    Sub aggiorna_odp()
+    'Sub aggiorna_odp()
 
 
-        Dim password = InputBox("Inserire password")
+    '    Dim password = InputBox("Inserire password")
 
-        If ottieni_informazioni_odp("Numero", 0, TextBox10.Text).stato = "P" Or ottieni_informazioni_odp("Numero", 0, TextBox10.Text).stato = "R" Then
+    '    If ottieni_informazioni_odp("Numero", 0, TextBox10.Text).stato = "P" Or ottieni_informazioni_odp("Numero", 0, TextBox10.Text).stato = "R" Then
 
-            ' If ottieni_informazioni_odp(TextBox10.Text).q_comp < ottieni_informazioni_odp(TextBox10.Text).quantità Then
-
-
-            If UCase(password) = "-" Or UCase(password) = "." Then
-                'inserisci_record_modifica_odp(Homepage.ID_SALVATO, TextBox10.Text)
-                'aggiorna_odp_doc(TextBox10.Text, Elenco_stati_odp(ComboBox1.SelectedIndex), Replace(TextBox4.Text, ",", "."), TextBox13.Text, ComboBox4.Text, ComboBox5.Text, TextBox6.Text, TextBox11.Text, Elenco_produzione(ComboBox2.SelectedIndex), Elenco_fase(ComboBox3.SelectedIndex), Data_inizio.Value, Data_scadenza.Value)
-                inserisci_record_modifica_odp(Homepage.ID_SALVATO, TextBox10.Text)
-                aggiorna_odp_doc(TextBox10.Text, Elenco_stati_odp(ComboBox1.SelectedIndex), Replace(TextBox4.Text, ",", "."), TextBox13.Text, ComboBox4.Text, ComboBox5.Text, TextBox6.Text, TextBox11.Text, Elenco_produzione(ComboBox2.SelectedIndex), Elenco_fase(ComboBox3.SelectedIndex), Data_inizio.Value, Data_scadenza.Value)
-
-                memorizza_codici(TextBox10.Text)
-                cancella_righe_odp(TextBox10.Text)
-                new_aggiornamento_righe()
-                AWOR(TextBox10.Text, Homepage.trova_Dettagli_dipendente(Homepage.ID_SALVATO).utente_sap_salvato)
-                AWO1(TextBox10.Text)
-
-                ripara_confermati_vecchi()
-
-                MsgBox("Documento aggiornato con successo")
-
-                formatta_form(docnum_odp)
-                riempi_datagridview_ODP(DataGridView_ODP, docnum_odp, TextBox6.Text)
+    '        ' If ottieni_informazioni_odp(TextBox10.Text).q_comp < ottieni_informazioni_odp(TextBox10.Text).quantità Then
 
 
-                controlli()
-            Else
-                MsgBox("Password errata")
-            End If
-            ' Else
-            '  MsgBox("Quantità completata >= di quantità pianificata")
-            'End If
-        Else
-            MsgBox("Non è possibile apportare modifiche ad un ODP chiuso")
-        End If
+    '        If UCase(password) = "-" Or UCase(password) = "." Then
+    '            'inserisci_record_modifica_odp(Homepage.ID_SALVATO, TextBox10.Text)
+    '            'aggiorna_odp_doc(TextBox10.Text, Elenco_stati_odp(ComboBox1.SelectedIndex), Replace(TextBox4.Text, ",", "."), TextBox13.Text, ComboBox4.Text, ComboBox5.Text, TextBox6.Text, TextBox11.Text, Elenco_produzione(ComboBox2.SelectedIndex), Elenco_fase(ComboBox3.SelectedIndex), Data_inizio.Value, Data_scadenza.Value)
+    '            inserisci_record_modifica_odp(Homepage.ID_SALVATO, TextBox10.Text)
+    '            ' aggiorna_odp_doc(TextBox10.Text, Elenco_stati_odp(ComboBox1.SelectedIndex), Replace(TextBox4.Text, ",", "."), TextBox13.Text, ComboBox4.Text, ComboBox5.Text, TextBox6.Text, TextBox11.Text, Elenco_produzione(ComboBox2.SelectedIndex), Elenco_fase(ComboBox3.SelectedIndex), Data_inizio.Value, Data_scadenza.Value)
 
-    End Sub
+    '            memorizza_codici(TextBox10.Text)
+    '            cancella_righe_odp(TextBox10.Text)
+    '            new_aggiornamento_righe()
+    '            AWOR(TextBox10.Text, Homepage.trova_Dettagli_dipendente(Homepage.ID_SALVATO).utente_sap_salvato)
+    '            AWO1(TextBox10.Text)
+
+    '            ripara_confermati_vecchi()
+
+    '            MsgBox("Documento aggiornato con successo")
+
+    '            formatta_form(docnum_odp)
+    '            riempi_datagridview_ODP(DataGridView_ODP, docnum_odp, TextBox6.Text)
+
+
+    '            controlli()
+    '        Else
+    '            MsgBox("Password errata")
+    '        End If
+    '        ' Else
+    '        '  MsgBox("Quantità completata >= di quantità pianificata")
+    '        'End If
+    '    Else
+    '        MsgBox("Non è possibile apportare modifiche ad un ODP chiuso")
+    '    End If
+
+    'End Sub
 
     Sub ripara_confermati_vecchi()
         Dim c As Integer = 0
@@ -1967,42 +1899,7 @@ group by t1.itemcode"
 
     End Sub
 
-    Sub old_aggiorna_odp()
 
-
-        Dim cognome = InputBox("Inserire password")
-
-        If ottieni_informazioni_odp("Numero", 0, TextBox10.Text).stato = "P" Or ottieni_informazioni_odp("Numero", 0, TextBox10.Text).stato = "R" Then
-
-            If ottieni_informazioni_odp("Numero", 0, TextBox10.Text).q_comp < ottieni_informazioni_odp("Numero", 0, TextBox10.Text).quantità Then
-
-
-                If UCase(cognome) = "-" Or UCase(cognome) = "." Then
-                    inserisci_record_modifica_odp(Homepage.ID_SALVATO, TextBox10.Text)
-                    aggiorna_odp_doc(TextBox10.Text, Elenco_stati_odp(ComboBox1.SelectedIndex), Replace(TextBox4.Text, ",", "."), TextBox13.Text, ComboBox4.Text, ComboBox5.Text, TextBox6.Text, TextBox11.Text, Elenco_produzione(ComboBox2.SelectedIndex), Elenco_fase(ComboBox3.SelectedIndex), Data_inizio.Value, Data_scadenza.Value)
-                    cancella_righe_DB(TextBox10.Text)
-                    aggiornamento_righe()
-                    AWOR(TextBox10.Text, Homepage.trova_Dettagli_dipendente(Homepage.ID_SALVATO).utente_sap_salvato)
-                    AWO1(TextBox10.Text)
-
-                    MsgBox("Documento aggiornato con successo")
-
-                    formatta_form(docnum_odp)
-                    riempi_datagridview_ODP(DataGridView_ODP, docnum_odp, TextBox6.Text)
-                    'riempi_datagridview_ODP_integrato(docnum_odp)
-
-                    controlli()
-                Else
-                    MsgBox("Password errata")
-                End If
-            Else
-                MsgBox("Quantità completata >= di quantità pianificata")
-            End If
-        Else
-            MsgBox("Non è possibile apportare modifiche ad un ODP chiuso")
-        End If
-
-    End Sub
 
     Sub aggiorna_odp_doc(par_numero_odp As String, par_status As String, par_quantity As String, par_lavorazione As String, par_stato As String, par_aggiorna_db As String, par_commessa As String, par_utilizzatore As String, par_produzione As String, par_fase As String, par_data_inizio As String, par_data_fine As String)
         Dim Cnn As New SqlConnection
@@ -3116,8 +3013,8 @@ values (@id_modifica,getdate(),convert(varchar, getdate(), 108),'" & par_utente 
         'End If
 
         Inserimento_stati_odp_combobox()
-        Inserimento_items_combobox_produzione()
-        Inserimento_items_combobox_fase()
+        ' Inserimento_items_combobox_produzione()
+        ' Inserimento_items_combobox_fase()
         Inserimento_items_combobox_stato_lav()
         Inserimento_magazzini_righe()
     End Sub
@@ -3365,7 +3262,7 @@ values (@id_modifica,getdate(),convert(varchar, getdate(), 108),'" & par_utente 
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        aggiorna_odp()
+        ' aggiorna_odp()
     End Sub
 
     Private Sub DataGridView_ODP_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView_ODP.CellContentClick

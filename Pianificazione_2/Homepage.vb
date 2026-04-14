@@ -444,15 +444,15 @@ as t10 left join TIRELLISRLDB.DBO.rdr1 t11 on t11.docentry=t10.docentry and t11.
 
 
     Sub assegna_dati_dipendente_a_label()
-        Label2.Text = trova_DETTAGLI_dipendente(ID_SALVATO).nome
-        Label3.Text = trova_Dettagli_dipendente(ID_SALVATO).cognome
+        Dim d = trova_Dettagli_dipendente(ID_SALVATO)
+        Label2.Text = d.nome
+        Label3.Text = d.cognome
         Label6.Text = ID_SALVATO
-        Label9.Text = trova_Dettagli_dipendente(ID_SALVATO).utente_galileo
-        Label4.Text = trova_Dettagli_dipendente(ID_SALVATO).NOME_REPARTO
-        Label7.Text = trova_Dettagli_dipendente(ID_SALVATO).codice_reparto
-        Label8.Text = trova_Dettagli_dipendente(ID_SALVATO).id_reparto_ticket
-        Form_cambia_dipendente.Combo_dipendenti.Text = trova_Dettagli_dipendente(ID_SALVATO).cognome & " " & trova_Dettagli_dipendente(ID_SALVATO).nome
-
+        Label9.Text = d.utente_galileo
+        Label4.Text = d.NOME_REPARTO
+        Label7.Text = d.codice_reparto
+        Label8.Text = d.id_reparto_ticket
+        Form_cambia_dipendente.Combo_dipendenti.Text = d.cognome & " " & d.nome
     End Sub
     Public Function trova_Dettagli_dipendente(par_id As String)
         Dim dettagli As New Dettaglidipendente()
@@ -616,7 +616,8 @@ where t0.cod_dip='" & "T" & par_id.ToString("000") & "' OR t0.cod_dip='" & par_i
         Lavorazioni_MES.inserimento_dipendenti_MES(Consuntivo1.ComboBox_dipendente, Consuntivo1.Elenco_dipendenti)
         Consuntivo1.Inserimento_risorse()
         If totem = "N" Then
-            Consuntivo1.ComboBox_dipendente.Text = trova_Dettagli_dipendente(ID_SALVATO).cognome & " " & trova_Dettagli_dipendente(ID_SALVATO).nome
+            Dim d = trova_Dettagli_dipendente(ID_SALVATO)
+            Consuntivo1.ComboBox_dipendente.Text = d.cognome & " " & d.nome
         End If
 
         Consuntivo1.Show()
@@ -667,7 +668,7 @@ where t0.cod_dip='" & "T" & par_id.ToString("000") & "' OR t0.cod_dip='" & par_i
 
                 If Str_Lettura.StartsWith("[SAP_TIRELLI]=") Then
 
-                    sap_tirelli = Str_Lettura.Remove(0, Str_Lettura.IndexOf("=") + 1)
+                    sap_tirelli = ValoreINI(Str_Lettura)
                     ' sap_tirelli = "Data Source=srvtirsap01.corp.arol-group.com;Initial Catalog=TIRELLISRLDB;Persist Security Info=True;User ID=sa;Password=123B1Admin"
 
                     Pianificazione.ConfigDictionary.Add("SAP_TIRELLI", sap_tirelli)
@@ -675,27 +676,27 @@ where t0.cod_dip='" & "T" & par_id.ToString("000") & "' OR t0.cod_dip='" & par_i
 
                 If Str_Lettura.StartsWith("[JPM_TIRELLI]=") Then
 
-                    JPM_tirelli = Str_Lettura.Remove(0, Str_Lettura.IndexOf("=") + 1)
+                    JPM_tirelli = ValoreINI(Str_Lettura)
 
 
                     Pianificazione.ConfigDictionary.Add("JPM_TIRELLI", JPM_TIRELLI)
                 End If
 
                 If Str_Lettura.StartsWith("[SAP_4LIFE]=") Then
-                    sap_4life = Str_Lettura.Remove(0, Str_Lettura.IndexOf("=") + 1)
+                    sap_4life = ValoreINI(Str_Lettura)
 
                     Pianificazione.ConfigDictionary.Add("SAP_4LIFE", sap_4life)
                 End If
 
                 If Str_Lettura.StartsWith("[SAP_PROVA]=") Then
-                    sap_prova = Str_Lettura.Remove(0, Str_Lettura.IndexOf("=") + 1)
+                    sap_prova = ValoreINI(Str_Lettura)
 
                     Pianificazione.ConfigDictionary.Add("SAP_PROVA", sap_prova)
                 End If
 
                 If Str_Lettura.StartsWith("[PWD]=") Then
 
-                    password_mail = Str_Lettura.Remove(0, Str_Lettura.IndexOf("=") + 1)
+                    password_mail = ValoreINI(Str_Lettura)
 
                     Pianificazione.ConfigDictionary.Add("PWD", password_mail)
 
@@ -704,7 +705,7 @@ where t0.cod_dip='" & "T" & par_id.ToString("000") & "' OR t0.cod_dip='" & par_i
 
 
                 If Str_Lettura.StartsWith("[DB]=") Then
-                    stringa_connessione = Str_Lettura.Remove(0, Str_Lettura.IndexOf("=") + 1)
+                    stringa_connessione = ValoreINI(Str_Lettura)
 
                     Pianificazione.ConfigDictionary.Add("DB", stringa_connessione)
 
@@ -712,49 +713,49 @@ where t0.cod_dip='" & "T" & par_id.ToString("000") & "' OR t0.cod_dip='" & par_i
 
 
                 If Str_Lettura.StartsWith("[IMG]=") Then
-                    Percorso_immagini = Str_Lettura.Remove(0, Str_Lettura.IndexOf("=") + 1)
+                    Percorso_immagini = ValoreINI(Str_Lettura)
 
                     Pianificazione.ConfigDictionary.Add("IMG", Percorso_immagini)
 
                 End If
 
                 If Str_Lettura.StartsWith("[IMG_TICKETS]=") Then
-                    Percorso_Immagini_TICKETS = Str_Lettura.Remove(0, Str_Lettura.IndexOf("=") + 1)
+                    Percorso_Immagini_TICKETS = ValoreINI(Str_Lettura)
 
                     Pianificazione.ConfigDictionary.Add("IMG_TICKETS", Percorso_Immagini_TICKETS)
 
                 End If
 
                 If Str_Lettura.StartsWith("[IMG_TICKETS_HELPDESK]=") Then
-                    Percorso_Immagini_TICKETS_HELPDESK = Str_Lettura.Remove(0, Str_Lettura.IndexOf("=") + 1)
+                    Percorso_Immagini_TICKETS_HELPDESK = ValoreINI(Str_Lettura)
 
                     Pianificazione.ConfigDictionary.Add("IMG_TICKETS_HELPDESK", Percorso_Immagini_TICKETS_HELPDESK)
 
                 End If
 
                 If Str_Lettura.StartsWith("[FILE_TICKETS_HELPDESK]=") Then
-                    Percorso_FILE_TICKETS_HELPDESK = Str_Lettura.Remove(0, Str_Lettura.IndexOf("=") + 1)
+                    Percorso_FILE_TICKETS_HELPDESK = ValoreINI(Str_Lettura)
 
                     Pianificazione.ConfigDictionary.Add("FILE_TICKETS_HELPDESK", Percorso_FILE_TICKETS_HELPDESK)
 
                 End If
 
                 If Str_Lettura.StartsWith("[SCH]=") Then
-                    Percorso_Schede = Str_Lettura.Remove(0, Str_Lettura.IndexOf("=") + 1)
+                    Percorso_Schede = ValoreINI(Str_Lettura)
 
                     Pianificazione.ConfigDictionary.Add("SCH", Percorso_Schede)
 
                 End If
 
                 If Str_Lettura.StartsWith("[EML]=") Then
-                    Mittente_Mail = Str_Lettura.Remove(0, Str_Lettura.IndexOf("=") + 1)
+                    Mittente_Mail = ValoreINI(Str_Lettura)
 
                     Pianificazione.ConfigDictionary.Add("EML", Mittente_Mail)
 
                 End If
 
                 If Str_Lettura.StartsWith("[PERCORSO_PROCEDURE]=") Then
-                    Percorso_procedure = Str_Lettura.Remove(0, Str_Lettura.IndexOf("=") + 1)
+                    Percorso_procedure = ValoreINI(Str_Lettura)
 
                     Pianificazione.ConfigDictionary.Add("PERCORSO_PROCEDURE", Percorso_procedure)
 
@@ -762,42 +763,42 @@ where t0.cod_dip='" & "T" & par_id.ToString("000") & "' OR t0.cod_dip='" & par_i
                 End If
 
                 If Str_Lettura.StartsWith("[PROGRAMMA]=") Then
-                    PROGRAMMA = Str_Lettura.Remove(0, Str_Lettura.IndexOf("=") + 1)
+                    PROGRAMMA = ValoreINI(Str_Lettura)
 
                     Pianificazione.ConfigDictionary.Add("PROGRAMMA", PROGRAMMA)
 
                 End If
 
                 If Str_Lettura.StartsWith("[PERCORSO_SERVER]=") Then
-                    percorso_server = Str_Lettura.Remove(0, Str_Lettura.IndexOf("=") + 1)
+                    percorso_server = ValoreINI(Str_Lettura)
 
                     Pianificazione.ConfigDictionary.Add("PERCORSO_SERVER", percorso_server)
 
                 End If
 
                 If Str_Lettura.StartsWith("[PERCORSO_DISEGNI_GENERICO]=") Then
-                    percorso_disegni_generico = Str_Lettura.Remove(0, Str_Lettura.IndexOf("=") + 1)
+                    percorso_disegni_generico = ValoreINI(Str_Lettura)
 
                     Pianificazione.ConfigDictionary.Add("PERCORSO_DISEGNI_GENERICO", percorso_disegni_generico)
 
                 End If
 
                 If Str_Lettura.StartsWith("[PERCORSO_CARTELLE_MACCHINE]=") Then
-                    percorso_cartelle_macchine = Str_Lettura.Remove(0, Str_Lettura.IndexOf("=") + 1)
+                    percorso_cartelle_macchine = ValoreINI(Str_Lettura)
 
                     Pianificazione.ConfigDictionary.Add("PERCORSO_CARTELLE_MACCHINE", percorso_cartelle_macchine)
 
                 End If
 
                 If Str_Lettura.StartsWith("[PERCORSO_PROGETTI]=") Then
-                    percorso_progetti = Str_Lettura.Remove(0, Str_Lettura.IndexOf("=") + 1)
+                    percorso_progetti = ValoreINI(Str_Lettura)
 
                     Pianificazione.ConfigDictionary.Add("PERCORSO_PROGETTI", percorso_progetti)
 
                 End If
 
                 'If Str_Lettura.StartsWith("[PERCORSO_OFF]=") Then
-                '    percorso_OFF = Str_Lettura.Remove(0, Str_Lettura.IndexOf("=") + 1)
+                '    percorso_OFF = ValoreINI(Str_Lettura)
 
                 '    Pianificazione.ConfigDictionary.Add("PERCORSO_OFF", percorso_OFF)
 
@@ -805,83 +806,83 @@ where t0.cod_dip='" & "T" & par_id.ToString("000") & "' OR t0.cod_dip='" & par_i
 
 
                 If Str_Lettura.StartsWith("[PERCORSO_DXF]=") Then
-                    percorso_DXF = Str_Lettura.Remove(0, Str_Lettura.IndexOf("=") + 1)
+                    percorso_DXF = ValoreINI(Str_Lettura)
 
                     Pianificazione.ConfigDictionary.Add("PERCORSO_DXF", percorso_DXF)
 
                 End If
 
                 If Str_Lettura.StartsWith("[PERCORSO_ODA]=") Then
-                    percorso_ODA = Str_Lettura.Remove(0, Str_Lettura.IndexOf("=") + 1)
+                    percorso_ODA = ValoreINI(Str_Lettura)
 
                     Pianificazione.ConfigDictionary.Add("PERCORSO_ODA", percorso_ODA)
 
                 End If
 
                 If Str_Lettura.StartsWith("[PERCORSO_DISEGNI]=") Then
-                    percorso_disegni = Str_Lettura.Remove(0, Str_Lettura.IndexOf("=") + 1)
+                    percorso_disegni = ValoreINI(Str_Lettura)
 
                     Pianificazione.ConfigDictionary.Add("PERCORSO_DISEGNI", percorso_disegni)
 
                 End If
 
                 If Str_Lettura.StartsWith("[PERCORSO_DWF]=") Then
-                    percorso_DWF = Str_Lettura.Remove(0, Str_Lettura.IndexOf("=") + 1)
+                    percorso_DWF = ValoreINI(Str_Lettura)
 
                     Pianificazione.ConfigDictionary.Add("PERCORSO_DWF", percorso_DWF)
 
                 End If
 
                 If Str_Lettura.StartsWith("[PERCORSO_OFFERTE_VENDITA]=") Then
-                    percorso_offerte_vendita = Str_Lettura.Remove(0, Str_Lettura.IndexOf("=") + 1)
+                    percorso_offerte_vendita = ValoreINI(Str_Lettura)
 
                     Pianificazione.ConfigDictionary.Add("PERCORSO_OFFERTE_VENDITA", percorso_offerte_vendita)
 
                 End If
 
                 If Str_Lettura.StartsWith("[PERCORSO_ACQUISTI]=") Then
-                    percorso_acquisti = Str_Lettura.Remove(0, Str_Lettura.IndexOf("=") + 1)
+                    percorso_acquisti = ValoreINI(Str_Lettura)
 
                     Pianificazione.ConfigDictionary.Add("PERCORSO_ACQUISTI", percorso_acquisti)
 
                 End If
                 If Str_Lettura.StartsWith("[PERCORSO_DOCUMENTO_ODP]=") Then
-                    PERCORSO_DOCUMENTO_ODP = Str_Lettura.Remove(0, Str_Lettura.IndexOf("=") + 1)
+                    PERCORSO_DOCUMENTO_ODP = ValoreINI(Str_Lettura)
 
                     Pianificazione.ConfigDictionary.Add("PERCORSO_DOCUMENTO_ODP", PERCORSO_DOCUMENTO_ODP)
 
                 End If
 
                 If Str_Lettura.StartsWith("[PERCORSO_DOCUMENTO_ODP_ETICHETTA]=") Then
-                    PERCORSO_DOCUMENTO_ODP_ETICHETTA = Str_Lettura.Remove(0, Str_Lettura.IndexOf("=") + 1)
+                    PERCORSO_DOCUMENTO_ODP_ETICHETTA = ValoreINI(Str_Lettura)
 
                     Pianificazione.ConfigDictionary.Add("PERCORSO_DOCUMENTO_ODP_ETICHETTA", PERCORSO_DOCUMENTO_ODP_ETICHETTA)
 
                 End If
 
                 If Str_Lettura.StartsWith("[PERCORSO_CARTELLE_OPPORTUNITA]=") Then
-                    PERCORSO_CARTELLE_OPPORTUNITà = Str_Lettura.Remove(0, Str_Lettura.IndexOf("=") + 1)
+                    PERCORSO_CARTELLE_OPPORTUNITà = ValoreINI(Str_Lettura)
 
                     Pianificazione.ConfigDictionary.Add("PERCORSO_CARTELLE_OPPORTUNITA", PERCORSO_CARTELLE_OPPORTUNITà)
 
                 End If
 
                 If Str_Lettura.StartsWith("[PERCORSO_QUALITA]=") Then
-                    PERCORSO_QUALITA = Str_Lettura.Remove(0, Str_Lettura.IndexOf("=") + 1)
+                    PERCORSO_QUALITA = ValoreINI(Str_Lettura)
 
                     Pianificazione.ConfigDictionary.Add("PERCORSO_QUALITA", PERCORSO_QUALITA)
 
                 End If
 
                 If Str_Lettura.StartsWith("[PERCORSO_DOCUMENTO_OC]=") Then
-                    PERCORSO_DOCUMENTO_OC = Str_Lettura.Remove(0, Str_Lettura.IndexOf("=") + 1)
+                    PERCORSO_DOCUMENTO_OC = ValoreINI(Str_Lettura)
 
                     Pianificazione.ConfigDictionary.Add("PERCORSO_DOCUMENTO_OC", PERCORSO_DOCUMENTO_OC)
 
                 End If
 
                 If Str_Lettura.StartsWith("[PERCORSO_STATISTICHE_LAVORAZIONI]=") Then
-                    PERCORSO_statistiche_lavorazioni = Str_Lettura.Remove(0, Str_Lettura.IndexOf("=") + 1)
+                    PERCORSO_statistiche_lavorazioni = ValoreINI(Str_Lettura)
 
                     Pianificazione.ConfigDictionary.Add("PERCORSO_STATISTICHE_LAVORAZIONI", PERCORSO_statistiche_lavorazioni)
 
@@ -889,7 +890,7 @@ where t0.cod_dip='" & "T" & par_id.ToString("000") & "' OR t0.cod_dip='" & par_i
 
                 If Str_Lettura.StartsWith("[PERCORSO_PDM_BRB]=") Then
 
-                    percorso_PDM_BRB = Str_Lettura.Remove(0, Str_Lettura.IndexOf("=") + 1)
+                    percorso_PDM_BRB = ValoreINI(Str_Lettura)
 
                     Pianificazione.ConfigDictionary.Add("PERCORSO_PDM_BRB", percorso_PDM_BRB)
 
@@ -897,7 +898,7 @@ where t0.cod_dip='" & "T" & par_id.ToString("000") & "' OR t0.cod_dip='" & par_i
 
                 If Str_Lettura.StartsWith("[COSTIFICATORE_SENG]=") Then
 
-                    percorso_costificatore_seng = Str_Lettura.Remove(0, Str_Lettura.IndexOf("=") + 1)
+                    percorso_costificatore_seng = ValoreINI(Str_Lettura)
 
                     Pianificazione.ConfigDictionary.Add("COSTIFICATORE_SENG", percorso_costificatore_seng)
 
@@ -913,6 +914,11 @@ where t0.cod_dip='" & "T" & par_id.ToString("000") & "' OR t0.cod_dip='" & par_i
 
 
     End Sub
+
+    ' Estrae il valore dopo il primo "=" in una riga INI (es. "[KEY]=valore" → "valore")
+    Private Shared Function ValoreINI(riga As String) As String
+        Return riga.Remove(0, riga.IndexOf("=") + 1)
+    End Function
 
     ''test encrypt
 
@@ -1043,21 +1049,21 @@ where t0.cod_dip='" & "T" & par_id.ToString("000") & "' OR t0.cod_dip='" & par_i
             Str_Lettura = File_INI_Stream.ReadLine
             Do While Not Str_Lettura Is Nothing
                 If Str_Lettura.StartsWith("[ORARIO_CHIUSURA]=") Then
-                    orario_chiusura = Str_Lettura.Remove(0, Str_Lettura.IndexOf("=") + 1)
+                    orario_chiusura = ValoreINI(Str_Lettura)
 
                 End If
                 If Str_Lettura.StartsWith("[ORA_SPEGNIMENTO]=") Then
-                    ora_spegnimento = Str_Lettura.Remove(0, Str_Lettura.IndexOf("=") + 1)
+                    ora_spegnimento = ValoreINI(Str_Lettura)
 
                 End If
 
                 If Str_Lettura.StartsWith("[MINUTO_SPEGNIMENTO]=") Then
-                    MINUTO_spegnimento = Str_Lettura.Remove(0, Str_Lettura.IndexOf("=") + 1)
+                    MINUTO_spegnimento = ValoreINI(Str_Lettura)
 
                 End If
 
                 If Str_Lettura.StartsWith("[ORARIO_CHIUSURA_FINE]=") Then
-                    orario_chiusura_FINE = Str_Lettura.Remove(0, Str_Lettura.IndexOf("=") + 1)
+                    orario_chiusura_FINE = ValoreINI(Str_Lettura)
 
                 End If
 
@@ -1085,31 +1091,31 @@ where t0.cod_dip='" & "T" & par_id.ToString("000") & "' OR t0.cod_dip='" & par_i
 
                 If Str_Lettura.StartsWith("[COMMESSA]=") Then
 
-                    Pianificazione.commessa = Str_Lettura.Remove(0, Str_Lettura.IndexOf("=") + 1)
+                    Pianificazione.commessa = ValoreINI(Str_Lettura)
 
                 End If
 
                 If Str_Lettura.StartsWith("[DASHBOARD]=") Then
 
-                    dashboard = Str_Lettura.Remove(0, Str_Lettura.IndexOf("=") + 1)
+                    dashboard = ValoreINI(Str_Lettura)
 
                 End If
 
                 If Str_Lettura.StartsWith("[TOTEM]=") Then
 
-                    totem = Str_Lettura.Remove(0, Str_Lettura.IndexOf("=") + 1)
+                    totem = ValoreINI(Str_Lettura)
 
                 End If
 
                 If Str_Lettura.StartsWith("[ID_SALVATO]=") Then
 
-                    ID_SALVATO = Str_Lettura.Remove(0, Str_Lettura.IndexOf("=") + 1)
+                    ID_SALVATO = ValoreINI(Str_Lettura)
 
                 End If
 
                 ' If Str_Lettura.StartsWith("[UTENTE_SALVATO]=") Then
 
-                'UTENTE_NOME_SALVATO = Str_Lettura.Remove(0, Str_Lettura.IndexOf("=") + 1)
+                'UTENTE_NOME_SALVATO = ValoreINI(Str_Lettura)
 
                 '  End If
 
@@ -1118,21 +1124,21 @@ where t0.cod_dip='" & "T" & par_id.ToString("000") & "' OR t0.cod_dip='" & par_i
 
                 'If Str_Lettura.StartsWith("[CODICE_REPARTO]=") Then
 
-                '    codice_reparto = Str_Lettura.Remove(0, Str_Lettura.IndexOf("=") + 1)
+                '    codice_reparto = ValoreINI(Str_Lettura)
 
                 'End If
 
                 If Str_Lettura.StartsWith("[BUSINESS]=") Then
-                    business = Str_Lettura.Remove(0, Str_Lettura.IndexOf("=") + 1)
+                    business = ValoreINI(Str_Lettura)
                 End If
 
                 If Str_Lettura.StartsWith("[TEMPO_TIMER_STAMPE_SCONTRINI]=") Then
-                    tempo_stampe_scontrini = Str_Lettura.Remove(0, Str_Lettura.IndexOf("=") + 1)
+                    tempo_stampe_scontrini = ValoreINI(Str_Lettura)
                 End If
 
 
                 'If Str_Lettura.StartsWith("[UTENTE_SAP_SALVATO]=") Then
-                '    UTENTE_sap_SALVATO = Str_Lettura.Remove(0, Str_Lettura.IndexOf("=") + 1)
+                '    UTENTE_sap_SALVATO = ValoreINI(Str_Lettura)
                 'End If
 
                 Str_Lettura = File_INI_Stream.ReadLine
@@ -1485,7 +1491,7 @@ where t0.cod_dip='" & "T" & par_id.ToString("000") & "' OR t0.cod_dip='" & par_i
             sap_tirelli = sap_4life
             azienda = "4LIFE"
             colore_sfondo = Color.YellowGreen
-            logo_azienda = "\\tirfs01\00-Tirelli 4.0\Immagini generiche\Logo 4 Life.jpg"
+            logo_azienda = "\\tirfs01\TIRELLI\00-Tirelli 4.0\Immagini generiche\Logo 4 Life.jpg"
 
 
 
@@ -1506,7 +1512,7 @@ where t0.cod_dip='" & "T" & par_id.ToString("000") & "' OR t0.cod_dip='" & par_i
             sap_tirelli = sap_prova
             azienda = "PROVASRL"
             colore_sfondo = Color.Aqua
-            logo_azienda = "\\tirfs01\00-Tirelli 4.0\Immagini generiche\Prova.jpg"
+            logo_azienda = "\\tirfs01\TIRELLI\00-Tirelli 4.0\Immagini generiche\Prova.jpg"
 
         End If
         PictureBox1.Image = Image.FromFile(logo_azienda)
@@ -1525,7 +1531,7 @@ where t0.cod_dip='" & "T" & par_id.ToString("000") & "' OR t0.cod_dip='" & par_i
             End If
 
             Try
-                logo_azienda = "\\tirfs01\00-Tirelli 4.0\Immagini generiche\TIRELLI_trasp_nopayoff_360x250.png"
+                logo_azienda = "\\tirfs01\TIRELLI\00-Tirelli 4.0\Immagini generiche\TIRELLI_trasp_nopayoff_360x250.png"
             Catch ex As Exception
 
             End Try
@@ -1566,7 +1572,7 @@ where t0.cod_dip='" & "T" & par_id.ToString("000") & "' OR t0.cod_dip='" & par_i
         Dim stopwatch As New Stopwatch()
         stopwatch.Start()
 
-        Dim filePath As String = "\\tirfs01\12-Engineering\Mechanical\Disegni Meccanici\pdf-dxf\pdf\000077.pdf"
+        Dim filePath As String = "\\tirfs01\TIRELLI\12-Engineering\Mechanical\Disegni Meccanici\pdf-dxf\pdf\000077.pdf"
 
         ' Verifica se il file esiste prima di tentare di aprirlo
         If System.IO.File.Exists(filePath) Then
@@ -1819,7 +1825,7 @@ TEMOYP) VALUES('TIR40', 20260114, '01', 20260114, 400, 2, 20260113,
     End Sub
 
     Private Sub Button24_Click(sender As Object, e As EventArgs) Handles Button24.Click
-        Process.Start("\\tirfs01\00-Tirelli 4.0\Guida Galileo.docx")
+        Process.Start("\\tirfs01\TIRELLI\00-Tirelli 4.0\Guida Galileo.docx")
     End Sub
 
     Private Sub Button25_Click(sender As Object, e As EventArgs) Handles Button25.Click
