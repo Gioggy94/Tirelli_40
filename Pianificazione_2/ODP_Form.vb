@@ -3006,17 +3006,161 @@ values (@id_modifica,getdate(),convert(varchar, getdate(), 108),'" & par_utente 
     End Sub
 
     Private Sub ODP_Form_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'If Homepage.Centro_di_costo = "BRB01" Then
-        '    operazione = "="
-        'Else
-        '    operazione = "<>"
-        'End If
-
         Inserimento_stati_odp_combobox()
-        ' Inserimento_items_combobox_produzione()
-        ' Inserimento_items_combobox_fase()
         Inserimento_items_combobox_stato_lav()
         Inserimento_magazzini_righe()
+        ApplicaStile()
+    End Sub
+
+    ' ═══════════════════════════════════════════════════════════════════════
+    '  TEMA TIRELLI — coerente con Homepage e Magazzino
+    ' ═══════════════════════════════════════════════════════════════════════
+    Private Sub ApplicaStile()
+
+        ' ── Palette ───────────────────────────────────────────────────────
+        Dim navy As Color = Color.FromArgb(22, 45, 84)
+        Dim navyDark As Color = Color.FromArgb(10, 26, 55)
+        Dim navyHover As Color = Color.FromArgb(30, 63, 122)
+        Dim bgApp As Color = Color.FromArgb(238, 242, 247)
+        Dim textColor As Color = Color.FromArgb(40, 60, 90)
+        Dim fontUI As String = "Segoe UI"
+
+        ' ── Form ──────────────────────────────────────────────────────────
+        Me.BackColor = bgApp
+
+        ' ── Layout: Panel4 riempie lo spazio residuo ──────────────────────
+        Panel4.Dock = DockStyle.Fill
+
+        ' ── Toolbar (Panel1) ──────────────────────────────────────────────
+        Panel1.BackColor = navy
+        TableLayoutPanel5.BackColor = navy
+        For Each btn As Button In {Cmd_Indietro, Cmd_Avanti, Button9, Button10, Button6}
+            btn.FlatStyle = FlatStyle.Flat
+            btn.ForeColor = Color.White
+            btn.BackColor = Color.Transparent
+            btn.FlatAppearance.BorderSize = 0
+            btn.FlatAppearance.MouseOverBackColor = navyHover
+            btn.FlatAppearance.MouseDownBackColor = navyDark
+            btn.Font = New Font(fontUI, 10F, FontStyle.Bold)
+        Next
+
+        ' ── Separatore (Panel2) ───────────────────────────────────────────
+        Panel2.BackColor = navyDark
+
+        ' ── Header info (Panel3) ──────────────────────────────────────────
+        Panel3.BackColor = bgApp
+        TableLayoutPanel1.BackColor = bgApp
+        TableLayoutPanel4.BackColor = bgApp
+        TableLayoutPanel6.BackColor = bgApp
+        Panel36.BackColor = bgApp
+        Panel6.BackColor = bgApp
+        Panel7.BackColor = bgApp
+        Panel8.BackColor = bgApp
+
+        ' GroupBox
+        Dim gbFont As New Font(fontUI, 8.5F, FontStyle.Bold)
+        For Each gb As GroupBox In {GroupBox1, GroupBox2, GroupBox3, GroupBox4, GroupBox5, GroupBox8}
+            gb.Font = gbFont
+            gb.ForeColor = navy
+            gb.BackColor = Color.White
+        Next
+
+        ' Label
+        Dim lblFont As New Font(fontUI, 8.5F, FontStyle.Regular)
+        For Each lbl As Label In {Label1, Label2, Label3, Label4, Label5, Label6,
+                                   Label8, Label9, Label10, Label11, Label12,
+                                   Label16, Label17, Label18, Label19, Label20}
+            lbl.Font = lblFont
+            lbl.ForeColor = textColor
+            lbl.BackColor = Color.Transparent
+        Next
+
+        ' TextBox
+        Dim tbFont As New Font(fontUI, 9F, FontStyle.Regular)
+        For Each tb As TextBox In {TextBox1, TextBox2, TextBox3, TextBox4, TextBox5,
+                                    TextBox6, TextBox7, TextBox10, TextBox11, TextBox13,
+                                    Altezza, Larghezza}
+            tb.Font = tbFont
+            tb.BackColor = Color.White
+            tb.BorderStyle = BorderStyle.FixedSingle
+        Next
+
+        ' ComboBox
+        For Each cb As ComboBox In {ComboBox1, ComboBox4, ComboBox5, ComboBox6}
+            cb.Font = tbFont
+            cb.BackColor = Color.White
+            cb.FlatStyle = FlatStyle.Flat
+        Next
+
+        ' DateTimePicker
+        For Each dtp As DateTimePicker In {Data_ordine, Data_inizio, Data_scadenza}
+            dtp.Font = tbFont
+            dtp.CalendarForeColor = navy
+            dtp.CalendarTitleBackColor = navy
+            dtp.CalendarTitleForeColor = Color.White
+        Next
+
+        ' Pulsanti azione principali (Aggiornare / Interrompere)
+        For Each btn As Button In {Button1, Button2}
+            btn.BackColor = navy
+            btn.ForeColor = Color.White
+            btn.FlatStyle = FlatStyle.Flat
+            btn.FlatAppearance.BorderSize = 0
+            btn.FlatAppearance.MouseOverBackColor = navyHover
+            btn.FlatAppearance.MouseDownBackColor = navyDark
+            btn.Font = New Font(fontUI, 9F, FontStyle.Bold)
+        Next
+        Panel5.BackColor = bgApp
+
+        ' ── DataGridView: header navy, font Segoe UI ──────────────────────
+        Dim dgvHeaderStyle As New DataGridViewCellStyle With {
+            .Font = New Font(fontUI, 9F, FontStyle.Bold),
+            .BackColor = navy,
+            .ForeColor = Color.White,
+            .SelectionBackColor = navyDark,
+            .SelectionForeColor = Color.White,
+            .Alignment = DataGridViewContentAlignment.MiddleLeft,
+            .WrapMode = DataGridViewTriState.[True]
+        }
+        Dim dgvRowFont As New Font(fontUI, 8.5F, FontStyle.Regular)
+        Dim altRowColor As Color = Color.FromArgb(248, 250, 253)
+        Dim gridColor As Color = Color.FromArgb(210, 220, 235)
+
+        For Each dgv As DataGridView In {DataGridView_ODP, DataGridView2, DataGridView1}
+            dgv.ColumnHeadersDefaultCellStyle = dgvHeaderStyle
+            dgv.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single
+            dgv.EnableHeadersVisualStyles = False
+            dgv.BackgroundColor = bgApp
+            dgv.GridColor = gridColor
+            dgv.Font = dgvRowFont
+            dgv.AlternatingRowsDefaultCellStyle.BackColor = altRowColor
+            dgv.BorderStyle = BorderStyle.None
+        Next
+
+        ' ── Anchoring controlli in Panel6 ─────────────────────────────────
+        ' I controlli sono a posizione assoluta: ancoro Left+Right+Top
+        ' così si allargano quando il pannello cresce col ridimensionamento
+        For Each c As Control In {TextBox1, ComboBox1, Button11, TextBox3,
+                                   Button5, TextBox4, TextBox5}
+            c.Anchor = AnchorStyles.Left Or AnchorStyles.Right Or AnchorStyles.Top
+        Next
+
+        ' ── Anchoring controlli in Panel7 ─────────────────────────────────
+        For Each c As Control In {TextBox10, Data_ordine, Data_inizio,
+                                   Data_scadenza, ComboBox6}
+            c.Anchor = AnchorStyles.Left Or AnchorStyles.Right Or AnchorStyles.Top
+        Next
+        ' GroupBox dentro Panel7 con anchoring orizzontale
+        For Each c As Control In {GroupBox1, GroupBox3, GroupBox4, GroupBox5}
+            c.Anchor = AnchorStyles.Left Or AnchorStyles.Right Or AnchorStyles.Top
+        Next
+
+        ' ── Anchoring controlli in Panel8 ─────────────────────────────────
+        For Each c As Control In {TextBox13, ComboBox4, ComboBox5,
+                                   Altezza, Larghezza, Button7, Button22}
+            c.Anchor = AnchorStyles.Left Or AnchorStyles.Right Or AnchorStyles.Top
+        Next
+
     End Sub
 
 

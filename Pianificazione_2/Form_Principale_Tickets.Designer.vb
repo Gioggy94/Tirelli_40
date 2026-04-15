@@ -138,6 +138,13 @@ Partial Class Pianificazione_Tickets
         Me.Ora_chiusura = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox15 = New System.Windows.Forms.GroupBox()
         Me.TextBox11 = New System.Windows.Forms.TextBox()
+        Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.DataGridView3 = New System.Windows.Forms.DataGridView()
+        Me.Stat_Reparto = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Stat_Ticket_Aperti = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Stat_Giorni_Medi = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TLP_Content = New System.Windows.Forms.TableLayoutPanel()
+        Me.Panel_Dashboard = New System.Windows.Forms.Panel()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
         Me.GroupBox7.SuspendLayout()
@@ -164,6 +171,10 @@ Partial Class Pianificazione_Tickets
         Me.TabPage2.SuspendLayout()
         CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox15.SuspendLayout()
+        Me.TabPage3.SuspendLayout()
+        CType(Me.DataGridView3, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TLP_Content.SuspendLayout()
+        Me.Panel_Dashboard.SuspendLayout()
         Me.SuspendLayout()
         '
         'TableLayoutPanel1
@@ -172,7 +183,7 @@ Partial Class Pianificazione_Tickets
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel1.Controls.Add(Me.TableLayoutPanel2, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.TableLayoutPanel4, 0, 2)
-        Me.TableLayoutPanel1.Controls.Add(Me.TabControl1, 0, 1)
+        Me.TableLayoutPanel1.Controls.Add(Me.TLP_Content, 0, 1)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
@@ -721,6 +732,7 @@ Partial Class Pianificazione_Tickets
         '
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Controls.Add(Me.TabPage2)
+        Me.TabControl1.Controls.Add(Me.TabPage3)
         Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabControl1.Location = New System.Drawing.Point(3, 71)
         Me.TabControl1.Name = "TabControl1"
@@ -1140,6 +1152,80 @@ Partial Class Pianificazione_Tickets
         Me.TextBox11.Size = New System.Drawing.Size(81, 20)
         Me.TextBox11.TabIndex = 0
         '
+        'TLP_Content
+        '
+        Me.TLP_Content.ColumnCount = 2
+        Me.TLP_Content.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 220.0!))
+        Me.TLP_Content.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TLP_Content.Controls.Add(Me.Panel_Dashboard, 0, 0)
+        Me.TLP_Content.Controls.Add(Me.TabControl1, 1, 0)
+        Me.TLP_Content.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TLP_Content.Location = New System.Drawing.Point(0, 68)
+        Me.TLP_Content.Margin = New System.Windows.Forms.Padding(0)
+        Me.TLP_Content.Name = "TLP_Content"
+        Me.TLP_Content.RowCount = 1
+        Me.TLP_Content.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TLP_Content.Size = New System.Drawing.Size(1828, 645)
+        Me.TLP_Content.TabIndex = 200
+        '
+        'Panel_Dashboard
+        '
+        Me.Panel_Dashboard.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel_Dashboard.Location = New System.Drawing.Point(0, 0)
+        Me.Panel_Dashboard.Margin = New System.Windows.Forms.Padding(0)
+        Me.Panel_Dashboard.Name = "Panel_Dashboard"
+        Me.Panel_Dashboard.Size = New System.Drawing.Size(220, 645)
+        Me.Panel_Dashboard.TabIndex = 0
+        '
+        'TabPage3
+        '
+        Me.TabPage3.Controls.Add(Me.DataGridView3)
+        Me.TabPage3.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage3.Name = "TabPage3"
+        Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage3.Size = New System.Drawing.Size(1814, 613)
+        Me.TabPage3.TabIndex = 2
+        Me.TabPage3.Text = "Statistiche"
+        Me.TabPage3.UseVisualStyleBackColor = True
+        '
+        'DataGridView3
+        '
+        Me.DataGridView3.AllowUserToAddRows = False
+        Me.DataGridView3.AllowUserToDeleteRows = False
+        Me.DataGridView3.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.DataGridView3.ColumnHeadersHeight = 40
+        Me.DataGridView3.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Stat_Reparto, Me.Stat_Ticket_Aperti, Me.Stat_Giorni_Medi})
+        Me.DataGridView3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.DataGridView3.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
+        Me.DataGridView3.Location = New System.Drawing.Point(3, 3)
+        Me.DataGridView3.Name = "DataGridView3"
+        Me.DataGridView3.RowHeadersVisible = False
+        Me.DataGridView3.RowTemplate.Height = 35
+        Me.DataGridView3.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.DataGridView3.Size = New System.Drawing.Size(1808, 607)
+        Me.DataGridView3.TabIndex = 0
+        '
+        'Stat_Reparto
+        '
+        Me.Stat_Reparto.FillWeight = 250.0!
+        Me.Stat_Reparto.HeaderText = "Reparto"
+        Me.Stat_Reparto.MinimumWidth = 6
+        Me.Stat_Reparto.Name = "Stat_Reparto"
+        '
+        'Stat_Ticket_Aperti
+        '
+        Me.Stat_Ticket_Aperti.FillWeight = 100.0!
+        Me.Stat_Ticket_Aperti.HeaderText = "Ticket Aperti"
+        Me.Stat_Ticket_Aperti.MinimumWidth = 6
+        Me.Stat_Ticket_Aperti.Name = "Stat_Ticket_Aperti"
+        '
+        'Stat_Giorni_Medi
+        '
+        Me.Stat_Giorni_Medi.FillWeight = 100.0!
+        Me.Stat_Giorni_Medi.HeaderText = "Giorni Medi Apertura"
+        Me.Stat_Giorni_Medi.MinimumWidth = 6
+        Me.Stat_Giorni_Medi.Name = "Stat_Giorni_Medi"
+        '
         'Pianificazione_Tickets
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1189,6 +1275,10 @@ Partial Class Pianificazione_Tickets
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage2.ResumeLayout(False)
         CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabPage3.ResumeLayout(False)
+        CType(Me.DataGridView3, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TLP_Content.ResumeLayout(False)
+        Me.Panel_Dashboard.ResumeLayout(False)
         Me.GroupBox15.ResumeLayout(False)
         Me.GroupBox15.PerformLayout()
         Me.ResumeLayout(False)
@@ -1284,4 +1374,11 @@ Partial Class Pianificazione_Tickets
     Friend WithEvents RichTextBox1 As RichTextBox
     Friend WithEvents GroupBox15 As GroupBox
     Friend WithEvents TextBox11 As TextBox
+    Friend WithEvents TabPage3 As TabPage
+    Friend WithEvents DataGridView3 As DataGridView
+    Friend WithEvents Stat_Reparto As DataGridViewTextBoxColumn
+    Friend WithEvents Stat_Ticket_Aperti As DataGridViewTextBoxColumn
+    Friend WithEvents Stat_Giorni_Medi As DataGridViewTextBoxColumn
+    Friend WithEvents TLP_Content As TableLayoutPanel
+    Friend WithEvents Panel_Dashboard As Panel
 End Class

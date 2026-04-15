@@ -47,14 +47,414 @@ Public Class Pianificazione_Tickets
 
     Private Sub Pianificazione_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.BackColor = Homepage.colore_sfondo
+        ApplicaStile()
+    End Sub
+
+    Private Sub ApplicaStile()
+        Dim navy As Color = Color.FromArgb(22, 45, 84)
+        Dim navyDark As Color = Color.FromArgb(10, 26, 55)
+        Dim navyHover As Color = Color.FromArgb(30, 63, 122)
+        Dim bgApp As Color = Color.FromArgb(238, 242, 247)
+        Dim textColor As Color = Color.FromArgb(40, 60, 90)
+        Dim fontBold As New Font("Segoe UI", 8.5, FontStyle.Bold)
+        Dim fontUI As New Font("Segoe UI", 8.5, FontStyle.Regular)
+        Dim fontSmall As New Font("Segoe UI", 8, FontStyle.Regular)
+
+        Me.BackColor = bgApp
+        TableLayoutPanel2.BackColor = navy
+        TableLayoutPanel4.BackColor = navyDark
+
+        ' GroupBox nei filtri
+        For Each gb As GroupBox In New GroupBox() {Grp_Reparto, GroupBox2, GroupBox3, GroupBox4,
+            GroupBox5, GroupBox6, GroupBox7, GroupBox8, GroupBox9, GroupBox10,
+            GroupBox11, GroupBox12, GroupBox13, GroupBox14, GroupBox15, GroupBox1}
+            gb.BackColor = navy
+            gb.ForeColor = Color.White
+            gb.Font = fontBold
+        Next
+
+        ' RadioButton stato (GroupBox5) — toggle button
+        For Each rb As RadioButton In New RadioButton() {RadioButton1, RadioButton2, RadioButton3}
+            rb.Appearance = Appearance.Button
+            rb.FlatStyle = FlatStyle.Flat
+            rb.BackColor = Color.FromArgb(14, 32, 68)
+            rb.ForeColor = Color.FromArgb(180, 205, 235)
+            rb.Font = New Font("Segoe UI", 7.5, FontStyle.Bold)
+            rb.TextAlign = ContentAlignment.MiddleCenter
+            rb.FlatAppearance.CheckedBackColor = navyHover
+            rb.FlatAppearance.BorderColor = Color.FromArgb(40, 70, 130)
+            rb.FlatAppearance.MouseOverBackColor = Color.FromArgb(30, 58, 115)
+        Next
+
+        ' RadioButton visualizzazione (GroupBox11: Reparto / Tutti) — toggle button
+        GroupBox11.BackColor = Color.FromArgb(14, 32, 68)
+        GroupBox11.ForeColor = Color.FromArgb(180, 205, 235)
+        GroupBox11.Font = fontBold
+        For Each rb As RadioButton In New RadioButton() {RadioButton4, RadioButton5}
+            rb.Appearance = Appearance.Button
+            rb.FlatStyle = FlatStyle.Flat
+            rb.BackColor = Color.FromArgb(10, 24, 52)
+            rb.ForeColor = Color.White
+            rb.Font = New Font("Segoe UI", 8, FontStyle.Bold)
+            rb.TextAlign = ContentAlignment.MiddleCenter
+            rb.FlatAppearance.CheckedBackColor = navyHover
+            rb.FlatAppearance.BorderColor = Color.FromArgb(40, 70, 130)
+            rb.FlatAppearance.MouseOverBackColor = Color.FromArgb(30, 58, 115)
+        Next
+
+        ' TextBox
+        For Each tb As TextBox In New TextBox() {TextBox1, TextBox2, TextBox3, TextBox4, TextBox5,
+            TextBox6, TextBox7, TextBox8, TextBox9, TextBox10, TextBox11}
+            tb.BackColor = Color.White
+            tb.ForeColor = textColor
+            tb.Font = New Font("Segoe UI", 9)
+            tb.BorderStyle = BorderStyle.FixedSingle
+        Next
+
+        RichTextBox1.BackColor = Color.White
+        RichTextBox1.ForeColor = textColor
+        RichTextBox1.Font = New Font("Segoe UI", 9)
+        RichTextBox1.BorderStyle = BorderStyle.FixedSingle
+
+        Lbl_Nome_Reparto.ForeColor = Color.White
+        Lbl_Nome_Reparto.Font = fontBold
+        Lbl_Nome_Reparto.BackColor = Color.Transparent
+        Label1.ForeColor = Color.White
+        Label1.Font = fontBold
+        Label1.BackColor = Color.Transparent
+
+        ' Pulsanti barra superiore
+        For Each btn As Button In New Button() {Button1, Button3}
+            btn.BackColor = navyDark
+            btn.ForeColor = Color.White
+            btn.FlatStyle = FlatStyle.Flat
+            btn.FlatAppearance.BorderColor = navyHover
+            btn.FlatAppearance.MouseOverBackColor = navyHover
+            btn.Font = fontBold
+        Next
+
+        Cmd_Cambia.BackColor = navyHover
+        Cmd_Cambia.ForeColor = Color.White
+        Cmd_Cambia.FlatStyle = FlatStyle.Flat
+        Cmd_Cambia.FlatAppearance.BorderColor = navy
+        Cmd_Cambia.FlatAppearance.MouseOverBackColor = Color.FromArgb(50, 85, 150)
+        Cmd_Cambia.Font = fontUI
+
+        ' Pulsanti barra inferiore
+        For Each btn As Button In New Button() {Button2, Button4, Button5, Button15, Cmd_Nuovo}
+            btn.BackColor = navy
+            btn.ForeColor = Color.White
+            btn.FlatStyle = FlatStyle.Flat
+            btn.FlatAppearance.BorderColor = navyHover
+            btn.FlatAppearance.MouseOverBackColor = navyHover
+            btn.Font = fontUI
+        Next
+
+        TabControl1.BackColor = bgApp
+        TabControl1.Font = fontBold
+
+        ' DataGridView1
+        With DataGridView1
+            .BackgroundColor = bgApp
+            .BorderStyle = BorderStyle.None
+            .GridColor = Color.FromArgb(200, 210, 225)
+            .EnableHeadersVisualStyles = False
+            .ColumnHeadersDefaultCellStyle.BackColor = navy
+            .ColumnHeadersDefaultCellStyle.ForeColor = Color.White
+            .ColumnHeadersDefaultCellStyle.Font = fontBold
+            .ColumnHeadersDefaultCellStyle.Padding = New Padding(4, 0, 0, 0)
+            .AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(245, 248, 252)
+            .DefaultCellStyle.Font = fontSmall
+            .DefaultCellStyle.SelectionBackColor = navyHover
+            .DefaultCellStyle.SelectionForeColor = Color.White
+        End With
+
+        ' DataGridView2
+        With DataGridView2
+            .BackgroundColor = bgApp
+            .BorderStyle = BorderStyle.None
+            .GridColor = Color.FromArgb(200, 210, 225)
+            .EnableHeadersVisualStyles = False
+            .ColumnHeadersDefaultCellStyle.BackColor = navy
+            .ColumnHeadersDefaultCellStyle.ForeColor = Color.White
+            .ColumnHeadersDefaultCellStyle.Font = fontBold
+            .ColumnHeadersDefaultCellStyle.Padding = New Padding(4, 0, 0, 0)
+            .AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(245, 248, 252)
+            .DefaultCellStyle.Font = fontSmall
+            .DefaultCellStyle.SelectionBackColor = navyHover
+            .DefaultCellStyle.SelectionForeColor = Color.White
+        End With
+
+        ' DataGridView3 (Statistiche)
+        With DataGridView3
+            .BackgroundColor = bgApp
+            .BorderStyle = BorderStyle.None
+            .GridColor = Color.FromArgb(200, 210, 225)
+            .EnableHeadersVisualStyles = False
+            .ColumnHeadersDefaultCellStyle.BackColor = navy
+            .ColumnHeadersDefaultCellStyle.ForeColor = Color.White
+            .ColumnHeadersDefaultCellStyle.Font = fontBold
+            .AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(245, 248, 252)
+            .DefaultCellStyle.Font = New Font("Segoe UI", 10)
+            .DefaultCellStyle.SelectionBackColor = navyHover
+            .DefaultCellStyle.SelectionForeColor = Color.White
+        End With
+
+        ' Dashboard panel
+        Panel_Dashboard.BackColor = navyDark
+        Panel_Dashboard.Padding = New Padding(0)
+
+        ' Separa dashboard dal TabControl con un bordo sottile a destra
+        Panel_Dashboard.Margin = New Padding(0, 0, 2, 0)
+    End Sub
+
+    ' ----------------------------------------------------------------
+    ' Dashboard reparto
+    ' ----------------------------------------------------------------
+    Private _dashBuilt As Boolean = False
+    Private _lblDashReparto As Label
+    Private _lblDashTicketNum As Label
+    Private _lblDashGiorniNum As Label
+    Private _barTicket As Panel   ' barra accent colorata ticket
+    Private _barGiorni As Panel   ' barra accent colorata giorni
+
+    Sub AggiornaDashboard()
+        If Not _dashBuilt Then
+            CostribuisciDashboard()
+            _dashBuilt = True
+        End If
+
+        Dim ticketAperti As Integer = 0
+        Dim giorniMedi As Integer = 0
+
+        Dim cnn As New SqlConnection(Homepage.sap_tirelli)
+        Try
+            cnn.Open()
+            Dim cmd As New SqlCommand(
+                "SELECT COUNT(*) AS Ticket_Aperti,
+                        COALESCE(AVG(DATEDIFF(day, t0.Data_Creazione, GETDATE())), 0) AS Giorni_Medi
+                 FROM [TIRELLI_40].[DBO].coll_tickets t0
+                 WHERE t0.aperto = 1 AND t0.destinatario = @rep", cnn)
+            cmd.Parameters.AddWithValue("@rep", CODICE_REPARTO)
+            Dim r As SqlDataReader = cmd.ExecuteReader()
+            If r.Read() Then
+                ticketAperti = CInt(r("Ticket_Aperti"))
+                giorniMedi = CInt(r("Giorni_Medi"))
+            End If
+            r.Close()
+        Catch
+        Finally
+            cnn.Close()
+        End Try
+
+        _lblDashReparto.Text = Homepage.trova_Dettagli_dipendente(Homepage.ID_SALVATO).nome_reparto
+        _lblDashTicketNum.Text = ticketAperti.ToString()
+        _lblDashGiorniNum.Text = giorniMedi.ToString()
+
+        ' Colore adattivo sui giorni medi
+        Dim colGiorni As Color
+        If giorniMedi <= 2 Then
+            colGiorni = Color.FromArgb(60, 210, 120)        ' verde
+        ElseIf giorniMedi <= 4 Then
+            colGiorni = Color.FromArgb(255, 215, 50)        ' giallo
+        ElseIf giorniMedi <= 5 Then
+            colGiorni = Color.FromArgb(255, 145, 30)        ' arancione
+        Else
+            colGiorni = Color.FromArgb(240, 65, 65)         ' rosso
+        End If
+        _lblDashGiorniNum.ForeColor = colGiorni
+        _barGiorni.BackColor = colGiorni
+    End Sub
+
+    Private Sub CostribuisciDashboard()
+        ' ── Palette ──────────────────────────────────────────────
+        Dim bg As Color = Color.FromArgb(11, 22, 46)
+        Dim cardBg As Color = Color.FromArgb(18, 38, 74)
+        Dim cardBgAlt As Color = Color.FromArgb(14, 28, 58)
+        Dim accentBlue As Color = Color.FromArgb(70, 158, 255)
+        Dim accentAmber As Color = Color.FromArgb(255, 168, 40)
+        Dim muted As Color = Color.FromArgb(110, 145, 190)
+        Dim divider As Color = Color.FromArgb(22, 44, 84)
+
+        Panel_Dashboard.BackColor = bg
+        Panel_Dashboard.Controls.Clear()
+
+        ' ── HEADER ───────────────────────────────────────────────
+        Dim pHeader As New Panel With {
+            .Dock = DockStyle.Top,
+            .Height = 64,
+            .BackColor = Color.FromArgb(7, 14, 34),
+            .Padding = New Padding(16, 10, 10, 6)
+        }
+        Dim lblCaption As New Label With {
+            .Text = "IL MIO REPARTO",
+            .Font = New Font("Segoe UI", 7, FontStyle.Bold),
+            .ForeColor = accentBlue,
+            .AutoSize = False,
+            .Dock = DockStyle.Top,
+            .Height = 18,
+            .TextAlign = ContentAlignment.BottomLeft
+        }
+        _lblDashReparto = New Label With {
+            .Text = "—",
+            .Font = New Font("Segoe UI", 12, FontStyle.Bold),
+            .ForeColor = Color.White,
+            .AutoSize = False,
+            .Dock = DockStyle.Fill,
+            .TextAlign = ContentAlignment.MiddleLeft
+        }
+        pHeader.Controls.Add(_lblDashReparto)
+        pHeader.Controls.Add(lblCaption)
+        Panel_Dashboard.Controls.Add(pHeader)
+
+        Panel_Dashboard.Controls.Add(New Panel With {.Dock = DockStyle.Top, .Height = 1, .BackColor = divider})
+
+        ' ── CARD TICKET APERTI ───────────────────────────────────
+        Dim pCard1 As New Panel With {
+            .Dock = DockStyle.Top,
+            .Height = 148,
+            .BackColor = cardBg
+        }
+        _barTicket = New Panel With {
+            .Dock = DockStyle.Left,
+            .Width = 5,
+            .BackColor = accentBlue
+        }
+        Dim pC1Inner As New Panel With {
+            .Dock = DockStyle.Fill,
+            .BackColor = Color.Transparent,
+            .Padding = New Padding(14, 12, 14, 6)
+        }
+        Dim lbl1Cap As New Label With {
+            .Text = "TICKET APERTI",
+            .Font = New Font("Segoe UI", 7.5, FontStyle.Bold),
+            .ForeColor = muted,
+            .AutoSize = False,
+            .Dock = DockStyle.Top,
+            .Height = 22,
+            .TextAlign = ContentAlignment.MiddleLeft
+        }
+        _lblDashTicketNum = New Label With {
+            .Text = "—",
+            .Font = New Font("Segoe UI", 52, FontStyle.Bold),
+            .ForeColor = Color.White,
+            .AutoSize = False,
+            .Dock = DockStyle.Fill,
+            .TextAlign = ContentAlignment.MiddleCenter
+        }
+        pC1Inner.Controls.Add(_lblDashTicketNum)
+        pC1Inner.Controls.Add(lbl1Cap)
+        pCard1.Controls.Add(pC1Inner)
+        pCard1.Controls.Add(_barTicket)
+        Panel_Dashboard.Controls.Add(pCard1)
+
+        Panel_Dashboard.Controls.Add(New Panel With {.Dock = DockStyle.Top, .Height = 1, .BackColor = divider})
+
+        ' ── CARD GIORNI MEDI ─────────────────────────────────────
+        Dim pCard2 As New Panel With {
+            .Dock = DockStyle.Top,
+            .Height = 148,
+            .BackColor = cardBg
+        }
+        _barGiorni = New Panel With {
+            .Dock = DockStyle.Left,
+            .Width = 5,
+            .BackColor = accentAmber
+        }
+        Dim pC2Inner As New Panel With {
+            .Dock = DockStyle.Fill,
+            .BackColor = Color.Transparent,
+            .Padding = New Padding(14, 12, 14, 6)
+        }
+        Dim lbl2Cap As New Label With {
+            .Text = "GIORNI MEDI APERTURA",
+            .Font = New Font("Segoe UI", 7.5, FontStyle.Bold),
+            .ForeColor = muted,
+            .AutoSize = False,
+            .Dock = DockStyle.Top,
+            .Height = 22,
+            .TextAlign = ContentAlignment.MiddleLeft
+        }
+        _lblDashGiorniNum = New Label With {
+            .Text = "—",
+            .Font = New Font("Segoe UI", 52, FontStyle.Bold),
+            .ForeColor = accentAmber,
+            .AutoSize = False,
+            .Dock = DockStyle.Fill,
+            .TextAlign = ContentAlignment.MiddleCenter
+        }
+        pC2Inner.Controls.Add(_lblDashGiorniNum)
+        pC2Inner.Controls.Add(lbl2Cap)
+        pCard2.Controls.Add(pC2Inner)
+        pCard2.Controls.Add(_barGiorni)
+        Panel_Dashboard.Controls.Add(pCard2)
+
+        Panel_Dashboard.Controls.Add(New Panel With {.Dock = DockStyle.Top, .Height = 1, .BackColor = divider})
+
+        ' ── LEGENDA ──────────────────────────────────────────────
+        Dim pLeg As New Panel With {
+            .Dock = DockStyle.Top,
+            .Height = 68,
+            .BackColor = cardBgAlt,
+            .Padding = New Padding(16, 8, 14, 6)
+        }
+        Dim lblLegTitle As New Label With {
+            .Text = "SCALA TEMPI",
+            .Font = New Font("Segoe UI", 7, FontStyle.Bold),
+            .ForeColor = muted,
+            .AutoSize = False,
+            .Dock = DockStyle.Top,
+            .Height = 18,
+            .TextAlign = ContentAlignment.BottomLeft
+        }
+        Dim pLegDots As New FlowLayoutPanel With {
+            .Dock = DockStyle.Fill,
+            .BackColor = Color.Transparent,
+            .FlowDirection = FlowDirection.LeftToRight,
+            .WrapContents = True,
+            .Padding = New Padding(0, 2, 0, 0)
+        }
+        For Each entry In New (String, Color)() {
+            ("≤2 gg",  Color.FromArgb(60, 210, 120)),
+            ("≤4 gg",  Color.FromArgb(255, 215, 50)),
+            ("≤5 gg",  Color.FromArgb(255, 145, 30)),
+            (">5 gg",   Color.FromArgb(240, 65, 65))}
+            Dim dot As New Label With {
+                .Text = "● " & entry.Item1,
+                .Font = New Font("Segoe UI", 7.5, FontStyle.Regular),
+                .ForeColor = entry.Item2,
+                .AutoSize = True,
+                .Margin = New Padding(0, 0, 8, 0)
+            }
+            pLegDots.Controls.Add(dot)
+        Next
+        pLeg.Controls.Add(pLegDots)
+        pLeg.Controls.Add(lblLegTitle)
+        Panel_Dashboard.Controls.Add(pLeg)
+
+        ' ── PULSANTE AGGIORNA ────────────────────────────────────
+        Dim btnRicarica As New Button With {
+            .Text = "↻   Aggiorna",
+            .Dock = DockStyle.Bottom,
+            .Height = 44,
+            .BackColor = Color.FromArgb(30, 63, 122),
+            .ForeColor = Color.White,
+            .FlatStyle = FlatStyle.Flat,
+            .Font = New Font("Segoe UI", 9.5, FontStyle.Bold),
+            .Cursor = Cursors.Hand
+        }
+        btnRicarica.FlatAppearance.BorderSize = 0
+        btnRicarica.FlatAppearance.MouseOverBackColor = Color.FromArgb(48, 92, 160)
+        AddHandler btnRicarica.Click, Sub(s, ev) AggiornaDashboard()
+        Panel_Dashboard.Controls.Add(btnRicarica)
     End Sub
 
     Sub inizializzazione_form()
-
         variabile_iniziazione = 1
         Lbl_Nome_Reparto.Text = Homepage.trova_Dettagli_dipendente(Homepage.ID_SALVATO).nome_reparto
         Carica_Reparti()
         riempi_tickets(DataGridView1)
+        AggiornaDashboard()
         variabile_iniziazione = 1
     End Sub
 
@@ -244,27 +644,53 @@ as t10
 
 
     Private Sub DataGridView1_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles DataGridView1.CellFormatting
+        If e.RowIndex < 0 Then Return
+        Dim row As DataGridViewRow = DataGridView1.Rows(e.RowIndex)
 
-        If DataGridView1.Rows(e.RowIndex).Cells(columnName:="Causale").Value = "Richiesta di Miglioria" Then
-            DataGridView1.Rows(e.RowIndex).DefaultCellStyle.BackColor = Color.Gray
-
+        ' Riga "Richiesta di Miglioria" → sfondo grigio
+        If row.Cells("Causale").Value?.ToString() = "Richiesta di Miglioria" Then
+            row.DefaultCellStyle.BackColor = Color.LightGray
+            row.DefaultCellStyle.ForeColor = Color.DimGray
         End If
-        If DataGridView1.Rows(e.RowIndex).Cells(columnName:="Open").Value = "Y" Then
-            DataGridView1.Rows(e.RowIndex).Cells(columnName:="Open").Style.BackColor = Color.OrangeRed
-        Else
-            DataGridView1.Rows(e.RowIndex).Cells(columnName:="Open").Style.BackColor = Color.Lime
 
+        ' Colonna stato aperto/chiuso
+        If e.ColumnIndex = DataGridView1.Columns("Open").Index Then
+            If row.Cells("Open").Value?.ToString() = "Y" Then
+                e.CellStyle.BackColor = Color.FromArgb(220, 60, 60)
+                e.CellStyle.ForeColor = Color.White
+            Else
+                e.CellStyle.BackColor = Color.FromArgb(50, 170, 80)
+                e.CellStyle.ForeColor = Color.White
+            End If
+        End If
+
+        ' Colonna giorni: verde → giallo → arancione → rosso in base all'età
+        If e.ColumnIndex = DataGridView1.Columns("Giorni").Index Then
+            Dim giorni As Integer
+            If Integer.TryParse(row.Cells("Giorni").Value?.ToString(), giorni) Then
+                If giorni <= 2 Then
+                    e.CellStyle.BackColor = Color.FromArgb(144, 238, 144)
+                ElseIf giorni <= 4 Then
+                    e.CellStyle.BackColor = Color.FromArgb(255, 230, 80)
+                ElseIf giorni <= 5 Then
+                    e.CellStyle.BackColor = Color.FromArgb(255, 160, 20)
+                    e.CellStyle.ForeColor = Color.White
+                Else
+                    e.CellStyle.BackColor = Color.FromArgb(200, 40, 40)
+                    e.CellStyle.ForeColor = Color.White
+                End If
+            End If
         End If
     End Sub
 
-    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
-        If TextBox1.Text = Nothing Then
-            filtro_commessa = ""
-        Else
-
-            filtro_commessa = "and t0.commessa Like '%%" & TextBox1.Text & "%%'"
-        End If
+    ''' <summary>Imposta un filtro LIKE e ricarica la griglia.</summary>
+    Private Sub ApplicaFiltroLike(ByRef filtro As String, ByVal valore As String, ByVal campo As String)
+        filtro = If(String.IsNullOrEmpty(valore), "", "and " & campo & " Like '%%" & valore & "%%'")
         riempi_tickets(DataGridView1)
+    End Sub
+
+    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
+        ApplicaFiltroLike(filtro_commessa, TextBox1.Text, "t0.commessa")
     End Sub
 
 
@@ -320,12 +746,7 @@ as t10
     End Sub
 
     Private Sub TextBox2_TextChanged(sender As Object, e As EventArgs) Handles TextBox2.TextChanged
-        If TextBox2.Text = Nothing Then
-            filtro_cliente = ""
-        Else
-            filtro_cliente = "and t10.cliente Like '%%" & TextBox2.Text & "%%'"
-        End If
-        riempi_tickets(DataGridView1)
+        ApplicaFiltroLike(filtro_cliente, TextBox2.Text, "t10.cliente")
     End Sub
 
     Private Sub RadioButton1_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton1.CheckedChanged
@@ -352,52 +773,23 @@ as t10
 
 
     Private Sub TextBox3_TextChanged(sender As Object, e As EventArgs) Handles TextBox3.TextChanged
-        If TextBox3.Text = Nothing Then
-            filtro_mittente_padre = ""
-        Else
-            filtro_mittente_padre = "and t10.mittente_padre Like '%%" & TextBox3.Text & "%%'"
-        End If
-        riempi_tickets(DataGridView1)
+        ApplicaFiltroLike(filtro_mittente_padre, TextBox3.Text, "t10.mittente_padre")
     End Sub
 
     Private Sub TextBox4_TextChanged(sender As Object, e As EventArgs) Handles TextBox4.TextChanged
-        If TextBox4.Text = Nothing Then
-            filtro_id = ""
-        Else
-
-            filtro_id = "and t0.[Id_Ticket] Like '%%" & TextBox4.Text & "%%'"
-        End If
-        riempi_tickets(DataGridView1)
+        ApplicaFiltroLike(filtro_id, TextBox4.Text, "t0.[Id_Ticket]")
     End Sub
 
     Private Sub TextBox5_TextChanged(sender As Object, e As EventArgs) Handles TextBox5.TextChanged
-        If TextBox5.Text = Nothing Then
-            filtro_business = ""
-        Else
-            filtro_business = "and t10.business Like '%%" & TextBox5.Text & "%%'"
-        End If
-        riempi_tickets(DataGridView1)
+        ApplicaFiltroLike(filtro_business, TextBox5.Text, "t10.business")
     End Sub
 
     Private Sub TextBox6_TextChanged(sender As Object, e As EventArgs) Handles TextBox6.TextChanged
-        If TextBox6.Text = Nothing Then
-            filtro_id_padre = ""
-        Else
-
-            filtro_id_padre = "and t0.[Id_padre] Like '%%" & TextBox6.Text & "%%'"
-        End If
-        riempi_tickets(DataGridView1)
+        ApplicaFiltroLike(filtro_id_padre, TextBox6.Text, "t0.[Id_padre]")
     End Sub
 
-
-
     Private Sub TextBox7_TextChanged(sender As Object, e As EventArgs) Handles TextBox7.TextChanged
-        If TextBox7.Text = Nothing Then
-            filtro_utente_padre = ""
-        Else
-            filtro_utente_padre = "and t10.Utente_padre Like '%%" & TextBox7.Text & "%%'"
-        End If
-        riempi_tickets(DataGridView1)
+        ApplicaFiltroLike(filtro_utente_padre, TextBox7.Text, "t10.Utente_padre")
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
@@ -468,8 +860,40 @@ group by t0.oc) A on A.linenum=t0.Linenum and t0.oc=a.oc where 0=0 " & filtro_re
 
     Private Sub tabpage2_Click(sender As Object, e As EventArgs) Handles TabPage2.Enter
         riempi_tasks()
-        form_visualizzato ="task"
+        form_visualizzato = "task"
+    End Sub
 
+    Private Sub TabPage3_Enter(sender As Object, e As EventArgs) Handles TabPage3.Enter
+        riempi_statistiche()
+    End Sub
+
+    Sub riempi_statistiche()
+        DataGridView3.Rows.Clear()
+        Dim Cnn1 As New SqlConnection
+        Cnn1.ConnectionString = Homepage.sap_tirelli
+        Try
+            Cnn1.Open()
+            Dim cmd As New SqlCommand
+            cmd.Connection = Cnn1
+            cmd.CommandText = "
+SELECT coalesce(t2.Descrizione, '(Senza reparto)') AS Reparto,
+       COUNT(*) AS Ticket_Aperti,
+       AVG(DATEDIFF(day, t0.Data_Creazione, GETDATE())) AS Giorni_Medi
+FROM [TIRELLI_40].[DBO].coll_tickets t0
+LEFT JOIN [TIRELLI_40].[DBO].COLL_Reparti t2 ON t2.Id_Reparto = t0.destinatario
+WHERE t0.aperto = 1
+GROUP BY t0.destinatario, t2.Descrizione
+ORDER BY COUNT(*) DESC"
+            Dim reader As SqlDataReader = cmd.ExecuteReader()
+            Do While reader.Read()
+                DataGridView3.Rows.Add(reader("Reparto"), reader("Ticket_Aperti"), reader("Giorni_Medi"))
+            Loop
+            reader.Close()
+        Catch ex As Exception
+            MessageBox.Show("Errore caricamento statistiche: " & ex.Message, "Errore", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        Finally
+            Cnn1.Close()
+        End Try
     End Sub
 
 
@@ -491,12 +915,7 @@ group by t0.oc) A on A.linenum=t0.Linenum and t0.oc=a.oc where 0=0 " & filtro_re
 
 
     Private Sub TextBox8_TextChanged(sender As Object, e As EventArgs) Handles TextBox8.TextChanged
-        If TextBox8.Text = Nothing Then
-            filtro_utente = ""
-        Else
-            filtro_utente = "and t10.nome_Utente Like '%%" & TextBox8.Text & "%%'"
-        End If
-        riempi_tickets(DataGridView1)
+        ApplicaFiltroLike(filtro_utente, TextBox8.Text, "t10.nome_Utente")
     End Sub
 
 
@@ -582,11 +1001,7 @@ group by t0.oc) A on A.linenum=t0.Linenum and t0.oc=a.oc where 0=0 " & filtro_re
     End Sub
 
     Private Sub TextBox9_TextChanged(sender As Object, e As EventArgs) Handles TextBox9.TextChanged
-        If TextBox9.Text = Nothing Then
-            filtro_riunione = ""
-        Else
-            filtro_riunione = "and coalesce(t10.riunione,'') Like '%%" & TextBox9.Text & "%%'"
-        End If
+        filtro_riunione = If(String.IsNullOrEmpty(TextBox9.Text), "", "and coalesce(t10.riunione,'') Like '%%" & TextBox9.Text & "%%'")
         riempi_tickets(DataGridView1)
     End Sub
 
@@ -595,30 +1010,15 @@ group by t0.oc) A on A.linenum=t0.Linenum and t0.oc=a.oc where 0=0 " & filtro_re
     End Sub
 
     Private Sub TextBox10_TextChanged(sender As Object, e As EventArgs) Handles TextBox10.TextChanged
-        If TextBox10.Text = Nothing Then
-            filtro_articolo = ""
-        Else
-            filtro_articolo = " inner join [Tirelli_40].[dbo].[COLL_Riferimenti] t13 on t13.codice_sap Like '%%" & TextBox10.Text & "%%' and t13.Rif_Ticket=t0.[Id_Ticket] "
-        End If
+        filtro_articolo = If(String.IsNullOrEmpty(TextBox10.Text), "", " inner join [Tirelli_40].[dbo].[COLL_Riferimenti] t13 on t13.codice_sap Like '%%" & TextBox10.Text & "%%' and t13.Rif_Ticket=t0.[Id_Ticket] ")
         riempi_tickets(DataGridView1)
     End Sub
 
     Private Sub RichTextBox1_TextChanged(sender As Object, e As EventArgs) Handles RichTextBox1.TextChanged
-        If RichTextBox1.Text = Nothing Then
-            filtro_contenuto = ""
-        Else
-            filtro_contenuto = "and t10.descrizione Like '%%" & RichTextBox1.Text & "%%'"
-        End If
-
-        riempi_tickets(DataGridView1)
+        ApplicaFiltroLike(filtro_contenuto, RichTextBox1.Text, "t10.descrizione")
     End Sub
 
     Private Sub TextBox11_TextChanged(sender As Object, e As EventArgs) Handles TextBox11.TextChanged
-        If TextBox11.Text = Nothing Then
-            filtro_assegnato = ""
-        Else
-            filtro_assegnato = " and t10.Assegnato Like '%%" & TextBox11.Text & "%%' "
-        End If
-        riempi_tickets(DataGridView1)
+        ApplicaFiltroLike(filtro_assegnato, TextBox11.Text, "t10.Assegnato")
     End Sub
 End Class

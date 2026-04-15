@@ -64,9 +64,200 @@ Public Class Form_Visualizza_Ticket
         Form_nuovo_ticket.riempi_combobox_descrizioni_NC(ComboBox5)
         Combo_Riferimenti.SelectedIndex = 0
         Me.BackColor = Homepage.colore_sfondo
+        ApplicaStile()
 
+    End Sub
 
+    Private Sub ApplicaStile()
+        Dim navy As Color = Color.FromArgb(22, 45, 84)
+        Dim navyDark As Color = Color.FromArgb(10, 26, 55)
+        Dim navyHover As Color = Color.FromArgb(30, 63, 122)
+        Dim bgApp As Color = Color.FromArgb(238, 242, 247)
+        Dim textColor As Color = Color.FromArgb(40, 60, 90)
+        Dim mutedHdr As Color = Color.FromArgb(170, 195, 230)
+        Dim fontBold As New Font("Segoe UI", 8.5, FontStyle.Bold)
+        Dim fontUI As New Font("Segoe UI", 8.5, FontStyle.Regular)
 
+        Me.BackColor = bgApp
+
+        ' ── BARRA SUPERIORE (Panel2/4/5/6/7) ─────────────────────
+        For Each p As Panel In New Panel() {Panel2, Panel4, Panel5, Panel6, Panel7}
+            p.BackColor = navy
+        Next
+        ' seconda fila (commessa/business)
+        For Each p As Panel In New Panel() {Panel8, Panel9, Panel10, Panel11}
+            p.BackColor = Color.FromArgb(16, 34, 70)
+        Next
+        ' terza fila (data / TPR)
+        For Each p As Panel In New Panel() {Panel12, Panel13, Panel14, Panel15}
+            p.BackColor = Color.FromArgb(12, 26, 56)
+        Next
+
+        ' GroupBox nella barra top: sfondo trasparente, testo muted
+        For Each gb As GroupBox In New GroupBox() {
+            GroupBox1, GroupBox2, GroupBox3, GroupBox4, GroupBox10,
+            GroupBox13, GroupBox14, GroupBox15, GroupBox16, GroupBox17,
+            GroupBox18, GroupBox20, GroupBox22}
+            gb.BackColor = Color.Transparent
+            gb.ForeColor = mutedHdr
+            gb.Font = fontBold
+        Next
+
+        Lbl_Mittente_Padre.Font = New Font("Segoe UI", 13, FontStyle.Bold)
+        Lbl_Mittente_Padre.ForeColor = Color.White
+
+        CheckBox1.BackColor = Color.Transparent
+        CheckBox1.ForeColor = Color.FromArgb(255, 200, 60)
+        CheckBox1.Font = New Font("Segoe UI", 11, FontStyle.Bold)
+
+        ' ── PANNELLO DESTRO (Panel1/19/20) ──────────────────────
+        For Each p As Panel In New Panel() {Panel1, Panel19, Panel20}
+            p.BackColor = navyDark
+        Next
+        For Each gb As GroupBox In New GroupBox() {
+            GroupBox6, GroupBox7, GroupBox11, GroupBox12,
+            GroupBox19, GroupBox23, GroupBox24}
+            gb.BackColor = Color.Transparent
+            gb.ForeColor = mutedHdr
+            gb.Font = fontBold
+        Next
+        Label2.Font = New Font("Segoe UI", 9, FontStyle.Bold)
+        Label2.ForeColor = Color.White
+        Label3.ForeColor = Color.FromArgb(200, 220, 240)
+        Label3.Font = fontUI
+        Label4.ForeColor = Color.FromArgb(200, 220, 240)
+        Label4.Font = fontUI
+
+        ' Pulsanti azione nel pannello destro
+        Cmd_Aggiorna_Ticket.BackColor = navy
+        Cmd_Aggiorna_Ticket.ForeColor = Color.White
+        Cmd_Aggiorna_Ticket.FlatStyle = FlatStyle.Flat
+        Cmd_Aggiorna_Ticket.FlatAppearance.BorderColor = navyHover
+        Cmd_Aggiorna_Ticket.FlatAppearance.MouseOverBackColor = navyHover
+        Cmd_Aggiorna_Ticket.Font = fontBold
+
+        Cmd_Inoltra.BackColor = navy
+        Cmd_Inoltra.ForeColor = Color.White
+        Cmd_Inoltra.FlatStyle = FlatStyle.Flat
+        Cmd_Inoltra.FlatAppearance.BorderColor = navyHover
+        Cmd_Inoltra.FlatAppearance.MouseOverBackColor = navyHover
+        Cmd_Inoltra.Font = fontBold
+
+        Cmd_Chiudi.BackColor = Color.FromArgb(35, 125, 70)
+        Cmd_Chiudi.ForeColor = Color.White
+        Cmd_Chiudi.FlatStyle = FlatStyle.Flat
+        Cmd_Chiudi.FlatAppearance.BorderColor = Color.FromArgb(50, 160, 95)
+        Cmd_Chiudi.FlatAppearance.MouseOverBackColor = Color.FromArgb(50, 160, 95)
+        Cmd_Chiudi.Font = fontBold
+
+        Cmd_Annulla.BackColor = Color.FromArgb(55, 60, 80)
+        Cmd_Annulla.ForeColor = Color.White
+        Cmd_Annulla.FlatStyle = FlatStyle.Flat
+        Cmd_Annulla.FlatAppearance.BorderColor = Color.FromArgb(75, 82, 110)
+        Cmd_Annulla.FlatAppearance.MouseOverBackColor = Color.FromArgb(75, 82, 110)
+        Cmd_Annulla.Font = fontBold
+
+        Button4.BackColor = Color.FromArgb(150, 35, 35)
+        Button4.ForeColor = Color.White
+        Button4.FlatStyle = FlatStyle.Flat
+        Button4.FlatAppearance.BorderColor = Color.FromArgb(190, 55, 55)
+        Button4.FlatAppearance.MouseOverBackColor = Color.FromArgb(190, 55, 55)
+        Button4.Font = fontBold
+
+        ' Pulsante X chiudi form
+        Button3.BackColor = Color.FromArgb(150, 35, 35)
+        Button3.ForeColor = Color.White
+        Button3.FlatStyle = FlatStyle.Flat
+        Button3.FlatAppearance.BorderColor = Color.FromArgb(190, 55, 55)
+        Button3.FlatAppearance.MouseOverBackColor = Color.FromArgb(190, 55, 55)
+        Button3.Font = New Font("Segoe UI", 14, FontStyle.Bold)
+
+        Cmd_Zoom.BackColor = navyHover
+        Cmd_Zoom.ForeColor = Color.White
+        Cmd_Zoom.FlatStyle = FlatStyle.Flat
+        Cmd_Zoom.FlatAppearance.BorderColor = navy
+        Cmd_Zoom.FlatAppearance.MouseOverBackColor = navy
+        Cmd_Zoom.Font = fontUI
+
+        ' ── AREA CONTENUTO (Panel3) ──────────────────────────────
+        Panel3.BackColor = bgApp
+        Panel16.BackColor = Color.White
+        Panel21.BackColor = Color.White
+        Panel17.BackColor = bgApp
+        Panel18.BackColor = bgApp
+
+        GroupBox8.BackColor = Color.White
+        GroupBox8.ForeColor = navy
+        GroupBox8.Font = fontBold
+
+        GroupBox9.BackColor = bgApp
+        GroupBox9.ForeColor = navy
+        GroupBox9.Font = fontBold
+
+        ' Area aggiungi riferimenti: sfondo scuro come pannello dx
+        TableLayoutPanel5.BackColor = Color.FromArgb(16, 34, 70)
+        For Each gb As GroupBox In New GroupBox() {GroupBox5, GroupBox21}
+            gb.BackColor = Color.Transparent
+            gb.ForeColor = mutedHdr
+            gb.Font = fontBold
+        Next
+        Label1.ForeColor = mutedHdr
+        Label1.Font = fontUI
+
+        ' Pulsanti aggiungi/rimuovi riferimento
+        Button1.BackColor = Color.FromArgb(35, 125, 70)
+        Button1.ForeColor = Color.White
+        Button1.FlatStyle = FlatStyle.Flat
+        Button1.FlatAppearance.BorderColor = Color.FromArgb(50, 160, 95)
+        Button1.FlatAppearance.MouseOverBackColor = Color.FromArgb(50, 160, 95)
+        Button1.Font = fontBold
+
+        Button2.BackColor = Color.FromArgb(150, 35, 35)
+        Button2.ForeColor = Color.White
+        Button2.FlatStyle = FlatStyle.Flat
+        Button2.FlatAppearance.BorderColor = Color.FromArgb(190, 55, 55)
+        Button2.FlatAppearance.MouseOverBackColor = Color.FromArgb(190, 55, 55)
+        Button2.Font = fontBold
+
+        ' ── TEXTBOX ──────────────────────────────────────────────
+        For Each tb As TextBox In New TextBox() {
+            Txt_Id, Txt_Id_Padre, Txt_Commessa, Txt_Data_Creazione,
+            Txt_Nuovo_Riferimento, TextBox1, TextBox2, TextBox3, TextBox4}
+            tb.BackColor = Color.White
+            tb.ForeColor = textColor
+            tb.Font = New Font("Segoe UI", 9)
+            tb.BorderStyle = BorderStyle.FixedSingle
+        Next
+
+        Txt_Descrizione.BackColor = Color.White
+        Txt_Descrizione.ForeColor = textColor
+        Txt_Descrizione.Font = New Font("Segoe UI", 11)
+        Txt_Descrizione.BorderStyle = BorderStyle.None
+
+        ' ── COMBOBOX ─────────────────────────────────────────────
+        For Each cb As ComboBox In New ComboBox() {
+            Combo_Mittente, Combo_Destinatario, Combo_Motivazione,
+            ComboBox1, ComboBox2, ComboBox3, ComboBox5, Combo_Riferimenti}
+            cb.BackColor = Color.White
+            cb.ForeColor = textColor
+            cb.Font = New Font("Segoe UI", 9)
+            cb.FlatStyle = FlatStyle.Flat
+        Next
+
+        ' ── DATAGRIDVIEW RIFERIMENTI ─────────────────────────────
+        With DataGridView
+            .BackgroundColor = bgApp
+            .BorderStyle = BorderStyle.None
+            .GridColor = Color.FromArgb(200, 210, 225)
+            .EnableHeadersVisualStyles = False
+            .ColumnHeadersDefaultCellStyle.BackColor = navy
+            .ColumnHeadersDefaultCellStyle.ForeColor = Color.White
+            .ColumnHeadersDefaultCellStyle.Font = fontBold
+            .AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(245, 248, 252)
+            .DefaultCellStyle.Font = New Font("Segoe UI", 8.5)
+            .DefaultCellStyle.SelectionBackColor = navyHover
+            .DefaultCellStyle.SelectionForeColor = Color.White
+        End With
     End Sub
 
     Sub riempi_combo_motivazioni()
@@ -198,11 +389,13 @@ WHERE t0.Id_Ticket=" & Txt_Id.Text
         ComboBox3.Text = Reader_Ticket("Riunione")
         Combo_Motivazione.Text = Reader_Ticket("Descrizione_motivo_ticket")
         If Reader_Ticket("aperto") = 0 Then
-            Label2.Text = "Chiuso"
-            GroupBox6.BackColor = Color.Red
+            Label2.Text = "● Chiuso"
+            GroupBox6.BackColor = Color.FromArgb(150, 35, 35)
+            Label2.ForeColor = Color.FromArgb(255, 180, 180)
         Else
-            Label2.Text = "Aperto"
-            GroupBox6.BackColor = Color.Lime
+            Label2.Text = "● Aperto"
+            GroupBox6.BackColor = Color.FromArgb(30, 110, 60)
+            Label2.ForeColor = Color.FromArgb(160, 240, 180)
         End If
 
         If Reader_Ticket("Descrizione_motivo") <> "" Then
@@ -607,7 +800,6 @@ where Rif_Ticket=" & Txt_Id.Text & ""
         Dim Cnn_Ticket As New SqlConnection
         Cnn_Ticket.ConnectionString = homepage.sap_tirelli
         Cnn_Ticket.Open()
-        Txt_Descrizione.Text = Replace(Txt_Descrizione.Text, "'", "''")
         Dim Cmd_Ticket As New SqlCommand
         Cmd_Ticket.Connection = Cnn_Ticket
 
@@ -733,123 +925,6 @@ left join [TIRELLI_40].[dbo].OHEM T5 ON T5.EMPID=T0.ASSEGNATO
     End Sub
 
 
-
-    'Private Sub Cmd_Mail_Click(sender As Object, e As EventArgs)
-    '    Invia_Mail(Txt_Id.Text)
-    'End Sub
-
-    Private Function Cerca_Reparto(id As Integer) As String
-        Dim Cnn_Reparto As New SqlConnection
-        Cnn_Reparto.ConnectionString = homepage.sap_tirelli
-        Cnn_Reparto.Open()
-        Dim Cmd_Reparto As New SqlCommand
-        Dim Reader_Reparto As SqlDataReader
-        Dim Risultato As String
-
-        Cmd_Reparto.Connection = Cnn_Reparto
-        Cmd_Reparto.CommandText = "SELECT Descrizione FROM [TIRELLI_40].[DBO].COLL_Reparti WHERE Id_Reparto=" & id
-        Reader_Reparto = Cmd_Reparto.ExecuteReader()
-        Reader_Reparto.Read()
-        Risultato = Reader_Reparto("Descrizione")
-        Cnn_Reparto.Close()
-        Return Risultato
-    End Function
-
-    Public Sub Invia_Mail_old(id As Integer)
-        Dim Cnn_Ticket As New SqlConnection
-
-        Cnn_Ticket.ConnectionString = Homepage.sap_tirelli
-        Cnn_Ticket.Open()
-
-        Dim Cmd_Ticket As New SqlCommand
-        Dim Reader_Ticket As SqlDataReader
-
-        Cmd_Ticket.Connection = Cnn_Ticket
-        Cmd_Ticket.CommandText = "SELECT  t0.[Id_Ticket]
-      ,t0.[Commessa]
-      ,t0.[Data_Creazione]
-      ,t0.[Data_Chiusura]
-      ,t0.[Data_Prevista_Chiusura]
-      ,t0.[Aperto]
-      ,t0.[Descrizione]
-      ,t0.[Mittente]
-      ,t0.[Destinatario]
-      ,t0.[Immagine]
-      ,t0.[Motivazione]
-      ,t0.[Id_Padre]
-      ,t0.[Business]
-      ,t0.[Utente]
-      ,t0.[Data_chiusura_totale]
-      ,t0.[Assegnato]
-      ,t0.[Riunione]
-      ,t0.[Oggetto]
-      ,t0.[TPR]
-      ,t0.[Tempo]
-      ,t0.[Costo]
-      ,t0.[Descrizione_NC]
-      ,t0.[Chiuditore]
-	  ,coalesce(t1.email,'report@tirelli.net') as 'Email'
-  FROM [Tirelli_40].[dbo].[COLL_Tickets] t0 
-  left join [TIRELLI_40].[dbo].[ohem] t1 on t0.assegnato=t1.empid
- where t0.Id_Ticket=" & id
-        Reader_Ticket = Cmd_Ticket.ExecuteReader()
-        Reader_Ticket.Read()
-
-        Dim Data_Creazione As Date
-        Data_Creazione = Reader_Ticket("Data_Creazione")
-
-        Dim Testo_Mail As String
-        Testo_Mail = "<BODY><H3>Nuovo Ticket</h3><P>"
-        Testo_Mail = Testo_Mail & "Ti è stato assegnato un nuovo ticket in riferimento alla commessa " & Reader_Ticket("Commessa")
-        Testo_Mail = Testo_Mail & "<BR><BR>Data di Creazione : " & Data_Creazione.ToString("dd/MM/yyyy")
-        Testo_Mail = Testo_Mail & "<BR>Mittente : " & Cerca_Reparto(Reader_Ticket("Mittente"))
-        Testo_Mail = Testo_Mail & "<BR>Business : " & Reader_Ticket("Business")
-        Testo_Mail = Testo_Mail & "<BR>Commessa : " & Reader_Ticket("Commessa")
-        Testo_Mail = Testo_Mail & "<BR>Descrizione : " & Reader_Ticket("Descrizione")
-        '-- '       Testo_Mail = Testo_Mail & "<BR>Tipologia : " & Reader_Ticket("Descrizione_Motivo")
-
-
-        If DataGridView.Rows.Count > 0 Then
-            Testo_Mail = Testo_Mail & "<BR><BR>Elenco dei Riferimenti :"
-            Dim i As Integer
-            For i = 0 To DataGridView.Rows.Count - 1
-                Testo_Mail = Testo_Mail & "<BR> - ODP " & DataGridView.Rows(i).Cells(columnName:="ODP").Value & " Codice " & DataGridView.Rows(i).Cells(columnName:="Codice").Value & " Descrizione " & DataGridView.Rows(i).Cells(columnName:="DESC").Value
-            Next
-        End If
-        Testo_Mail = Testo_Mail & "<BR><BR> Utilizzare l'applicazione <a href='" & Homepage.percorso_server & "\Tirelli 4.0.exe'>Tickets</a> per consultare l'elenco dei Tickets aperti e per poter inoltrare la risposta"
-        Testo_Mail = Testo_Mail & "<BR>Questo è un messaggio automatico. Non rispondere a questa mail"
-
-
-        Testo_Mail = Testo_Mail & "</P></BODY>"
-
-        Dim mySmtp As New SmtpClient
-        Dim myMail As New MailMessage()
-        mySmtp.UseDefaultCredentials = False
-        mySmtp.Credentials = New Net.NetworkCredential(Homepage.Mittente_Mail, Pianificazione_Tickets.Password_Mail)
-        mySmtp.Host = "smtp.office365.com"
-        mySmtp.Port = 587
-        mySmtp.EnableSsl = True
-        mySmtp.DeliveryMethod = SmtpDeliveryMethod.Network
-
-
-        myMail = New MailMessage()
-        myMail.From = New MailAddress(Homepage.Mittente_Mail)
-        myMail.To.Add(Reader_Ticket("eMail"))
-        'If Reader_Ticket("Mail_2").ToString.Length > 1 Then
-        '    myMail.To.Add(Reader_Ticket("Mail_2"))
-        'End If
-        myMail.Bcc.Add("report@tirelli.net")
-        myMail.Subject = Reader_Ticket("Commessa") & " - Inserimento Nuovo Ticket per "
-        myMail.IsBodyHtml = True
-        myMail.Body = Testo_Mail
-
-        Try
-            mySmtp.Send(myMail)
-        Catch ex As Exception
-            MsgBox("Errore Invio Mail" & ex.ToString)
-        End Try
-        Cnn_Ticket.Close()
-    End Sub
 
     Sub Inserimento_dipendenti()
         ComboBox1.Items.Clear()

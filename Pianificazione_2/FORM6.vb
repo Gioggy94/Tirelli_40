@@ -82,39 +82,33 @@ Public Class FORM6
     End Sub
 
     Private Sub DataGridView_ODP_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles DataGridView_ODP.CellFormatting
+        If e.RowIndex < 0 Then Return
+        Dim row = DataGridView_ODP.Rows(e.RowIndex)
 
-        'If DataGridView_ODP.Rows(e.RowIndex).Cells(columnName:="NEWS").Value > 0 Then
-
-
-
-        '    DataGridView_ODP.Rows(e.RowIndex).Cells(columnName:="NEWS").Style.BackColor = Color.Aqua
-        'Else
-        '    DataGridView_ODP.Rows(e.RowIndex).Cells(columnName:="NEWS").Value = Nothing
-        'End If
-
-        If DataGridView_ODP.Rows(e.RowIndex).Cells(columnName:="MAG").Value = 100 Then
-            DataGridView_ODP.Rows(e.RowIndex).Cells(columnName:="MAG").Style.BackColor = Color.Green
-        ElseIf DataGridView_ODP.Rows(e.RowIndex).Cells(columnName:="MAG").Value < 100 And DataGridView_ODP.Rows(e.RowIndex).Cells(columnName:="MAG").Value > 90 Then
-            DataGridView_ODP.Rows(e.RowIndex).Cells(columnName:="MAG").Style.BackColor = Color.Yellow
-        Else
-            DataGridView_ODP.Rows(e.RowIndex).Cells(columnName:="MAG").Style.BackColor = Color.Red
-        End If
-
-        'If DataGridView_ODP.Rows(e.RowIndex).Cells(columnName:="TK").Value > 0 Then
-        '    DataGridView_ODP.Rows(e.RowIndex).DefaultCellStyle.BackColor = Color.LightSlateGray
-        'Else
-        If Not DataGridView_ODP.Rows(e.RowIndex).Cells(columnName:="Completato").Value Is System.DBNull.Value Then
-            If DataGridView_ODP.Rows(e.RowIndex).Cells(columnName:="Completato").Value = "C" Then
-                DataGridView_ODP.Rows(e.RowIndex).DefaultCellStyle.BackColor = Color.Lime
-                'ElseIf DataGridView_ODP.Rows(e.RowIndex).Cells(columnName:="STATO").Value = "In_esecuzione" Then
-                '    DataGridView_ODP.Rows(e.RowIndex).DefaultCellStyle.BackColor = Color.Khaki
-                'Else
-                '    DataGridView_ODP.Rows(e.RowIndex).DefaultCellStyle.BackColor = Color.White
+        ' MAG column — disponibilità materiale
+        Dim magVal = row.Cells("MAG").Value
+        If Not magVal Is System.DBNull.Value Then
+            Dim magNum As Double
+            If Double.TryParse(magVal.ToString(), magNum) Then
+                If magNum >= 100 Then
+                    row.Cells("MAG").Style.BackColor = Color.FromArgb(144, 238, 144)
+                    row.Cells("MAG").Style.ForeColor = Color.FromArgb(10, 60, 10)
+                ElseIf magNum >= 90 Then
+                    row.Cells("MAG").Style.BackColor = Color.FromArgb(255, 220, 60)
+                    row.Cells("MAG").Style.ForeColor = Color.FromArgb(80, 50, 0)
+                Else
+                    row.Cells("MAG").Style.BackColor = Color.FromArgb(210, 80, 80)
+                    row.Cells("MAG").Style.ForeColor = Color.White
+                End If
             End If
         End If
-        'End If
 
-
+        ' Completato row — soft green overlay
+        Dim completato = row.Cells("Completato").Value
+        If Not completato Is System.DBNull.Value AndAlso completato?.ToString() = "C" Then
+            row.DefaultCellStyle.BackColor = Color.FromArgb(195, 235, 195)
+            row.DefaultCellStyle.ForeColor = Color.FromArgb(20, 70, 20)
+        End If
     End Sub
 
 
@@ -963,7 +957,150 @@ where t0.docnum=" & ODP & " and (t0.stop is null or t0.stop ='') and (t0.consunt
     End Sub
 
     Private Sub FORM6_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        DataGridView_ODP.AlternatingRowsDefaultCellStyle.BackColor = Color.AliceBlue
+        ApplicaStile()
+    End Sub
+
+    Sub ApplicaStile()
+        Dim navy As Color = Color.FromArgb(22, 45, 84)
+        Dim navyDark As Color = Color.FromArgb(10, 26, 55)
+        Dim navyMid As Color = Color.FromArgb(16, 34, 70)
+        Dim accent As Color = Color.FromArgb(70, 130, 210)
+        Dim bgApp As Color = Color.FromArgb(238, 242, 247)
+        Dim fontBase As New Font("Segoe UI", 9, FontStyle.Regular)
+        Dim fontBold As New Font("Segoe UI", 9, FontStyle.Bold)
+        Dim fontSmall As New Font("Segoe UI", 8, FontStyle.Regular)
+
+        Me.BackColor = bgApp
+
+        ' ── Left sidebar (Panel1) ──
+        Panel1.BackColor = navyDark
+        Button_commessa.BackColor = navy
+        Button_commessa.ForeColor = Color.White
+        Button_commessa.FlatStyle = FlatStyle.Flat
+        Button_commessa.FlatAppearance.BorderSize = 0
+        Button_commessa.Font = New Font("Segoe UI", 15, FontStyle.Bold)
+        Panel_sep1.BackColor = accent
+        Panel_sep2.BackColor = accent
+        Panel16.BackColor = navyDark
+        TLP_InfoCommessa.BackColor = Color.Transparent
+        For Each lbl As Label In TLP_InfoCommessa.Controls.OfType(Of Label)()
+            If lbl.Name.StartsWith("Label_t_") Then
+                lbl.ForeColor = Color.FromArgb(140, 175, 220)
+                lbl.Font = fontSmall
+            Else
+                lbl.ForeColor = Color.White
+                lbl.Font = fontBold
+            End If
+        Next
+
+        ' Premontaggio/Montaggio area
+        Panel17.BackColor = navyDark
+        Panel2.BackColor = navyMid
+        Panel18.BackColor = navyMid
+        Label1.ForeColor = Color.White
+        Label1.Font = New Font("Segoe UI", 10, FontStyle.Bold)
+        Label21.ForeColor = Color.White
+        Label21.Font = New Font("Segoe UI", 10, FontStyle.Bold)
+        Label2.ForeColor = Color.FromArgb(144, 238, 144)
+        Label_tempo_mont_XC.ForeColor = Color.FromArgb(144, 238, 144)
+        For Each gb As GroupBox In {GroupBox18, GroupBox17, GroupBox16, GroupBox20, GroupBox19,
+                                     GroupBox11, GroupBox12, GroupBox13, GroupBox14, GroupBox15}
+            gb.BackColor = navyDark
+            gb.ForeColor = Color.FromArgb(140, 175, 220)
+            gb.Font = fontSmall
+        Next
+        For Each lbl As Label In {Label10, Label8, Label7, Label12, Label11,
+                                   Label3, Label4, Label5, Label6, Label9}
+            lbl.ForeColor = Color.White
+            lbl.Font = fontBold
+        Next
+
+        ' News materiali
+        Panel24.BackColor = navyDark
+        GroupBox10.BackColor = navyDark
+        GroupBox10.ForeColor = Color.White
+        GroupBox10.Font = New Font("Segoe UI", 9, FontStyle.Bold)
+        DataGridView1.BackgroundColor = navyDark
+        DataGridView1.ColumnHeadersDefaultCellStyle.BackColor = navy
+        DataGridView1.ColumnHeadersDefaultCellStyle.ForeColor = Color.White
+        DataGridView1.ColumnHeadersDefaultCellStyle.Font = fontBold
+        DataGridView1.DefaultCellStyle.BackColor = bgApp
+        DataGridView1.DefaultCellStyle.ForeColor = Color.FromArgb(30, 40, 60)
+        DataGridView1.DefaultCellStyle.Font = New Font("Segoe UI", 8)
+        DataGridView1.AlternatingRowsDefaultCellStyle.BackColor = Color.White
+        DataGridView1.GridColor = Color.FromArgb(200, 210, 230)
+        DataGridView1.EnableHeadersVisualStyles = False
+
+        ' ── Right action panel (Panel3) ──
+        Panel3.BackColor = navyDark
+        Button1.BackColor = navy
+        Button1.ForeColor = Color.White
+        Button1.FlatStyle = FlatStyle.Flat
+        Button1.FlatAppearance.BorderColor = Color.FromArgb(40, 70, 130)
+        Button3.BackColor = Color.FromArgb(150, 35, 35)
+        Button3.ForeColor = Color.White
+        Button3.FlatStyle = FlatStyle.Flat
+        Button3.FlatAppearance.BorderSize = 0
+        Button14.BackColor = Color.FromArgb(30, 60, 110)
+        Button14.ForeColor = Color.White
+        Button14.FlatStyle = FlatStyle.Flat
+        Button14.Font = fontSmall
+        Button10.BackColor = Color.FromArgb(30, 60, 110)
+        Button10.ForeColor = Color.White
+        Button10.FlatStyle = FlatStyle.Flat
+        Button10.Font = fontSmall
+        GroupBox113.BackColor = navyMid
+        GroupBox113.ForeColor = Color.White
+        GroupBox113.Font = New Font("Segoe UI", 10, FontStyle.Bold)
+        Button13.FlatStyle = FlatStyle.Flat
+        Button13.FlatAppearance.BorderColor = accent
+        Button9.FlatStyle = FlatStyle.Flat
+        Button9.FlatAppearance.BorderColor = accent
+        Button12.BackColor = Color.FromArgb(30, 100, 60)
+        Button12.ForeColor = Color.White
+        Button12.Font = fontBold
+        Button11.BackColor = Color.FromArgb(22, 75, 155)
+        Button11.ForeColor = Color.White
+        Button11.FlatStyle = FlatStyle.Flat
+        Button11.FlatAppearance.BorderSize = 0
+        Button11.Font = New Font("Segoe UI", 12, FontStyle.Bold)
+        Button8.BackColor = Color.FromArgb(14, 50, 100)
+        Button8.ForeColor = Color.White
+        Button8.FlatStyle = FlatStyle.Flat
+        Button7.BackColor = Color.FromArgb(14, 50, 100)
+        Button7.ForeColor = Color.White
+        Button7.FlatStyle = FlatStyle.Flat
+        Button5.BackColor = Color.FromArgb(30, 110, 60)
+        Button5.ForeColor = Color.White
+        Button5.FlatStyle = FlatStyle.Flat
+        Button5.FlatAppearance.BorderSize = 0
+        Button6.FlatStyle = FlatStyle.Flat
+        Button6.FlatAppearance.BorderSize = 0
+
+        ' ── Filter bar (Panel4) ──
+        Panel4.BackColor = navyDark
+        For Each gb As GroupBox In TableLayoutPanel14.Controls.OfType(Of GroupBox)()
+            gb.BackColor = Color.Transparent
+            gb.ForeColor = Color.FromArgb(140, 175, 220)
+            gb.Font = fontSmall
+            For Each tb As TextBox In gb.Controls.OfType(Of TextBox)()
+                tb.BackColor = navyMid
+                tb.ForeColor = Color.White
+                tb.BorderStyle = BorderStyle.FixedSingle
+            Next
+        Next
+
+        ' ── DataGridView_ODP ──
+        DataGridView_ODP.BackgroundColor = bgApp
+        DataGridView_ODP.ColumnHeadersDefaultCellStyle.BackColor = navy
+        DataGridView_ODP.ColumnHeadersDefaultCellStyle.ForeColor = Color.White
+        DataGridView_ODP.ColumnHeadersDefaultCellStyle.Font = New Font("Segoe UI", 9, FontStyle.Bold)
+        DataGridView_ODP.DefaultCellStyle.BackColor = Color.White
+        DataGridView_ODP.DefaultCellStyle.ForeColor = Color.FromArgb(30, 40, 60)
+        DataGridView_ODP.DefaultCellStyle.Font = New Font("Segoe UI", 9)
+        DataGridView_ODP.AlternatingRowsDefaultCellStyle.BackColor = bgApp
+        DataGridView_ODP.GridColor = Color.FromArgb(200, 210, 230)
+        DataGridView_ODP.EnableHeadersVisualStyles = False
     End Sub
 
     Sub inizializza_form(par_commessa As String)
