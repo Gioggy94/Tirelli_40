@@ -22,7 +22,7 @@ Public Class Form_stato_commesse
         End Select
     End Function
 
-    Sub carica_datagridview_stato_commesse(par_codice_art As String, par_datagridview As DataGridView, par_label As Label, par_progetto As String, par_sottocommessa As String, par_matricola As String, par_odp_padre As String, par_stato As String, par_mag_dest As String, par_ubicazione As String, par_mag_imp As String)
+    Sub carica_datagridview_stato_commesse(par_codice_art As String, par_datagridview As DataGridView, par_label As Label, par_progetto As String, par_sottocommessa As String, par_matricola As String, par_odp_padre As String, par_stato As String, par_mag_dest As String, par_ubicazione As String, par_mag_imp As String, par_pianificato As String)
 
         Dim filtro_codice As String = ""
         If par_codice_art <> "" Then
@@ -69,6 +69,11 @@ Public Class Form_stato_commesse
             filtro_mag_impegno = " And t0.[mag_ver] Like '%%" & par_mag_imp & "%%' "
         End If
 
+        Dim filtro_pianificato As String = ""
+        If par_pianificato <> "" Then
+            filtro_pianificato = " And coalesce(t0.[pianificato],'') Like '%%" & par_pianificato & "%%' "
+        End If
+
         Dim contatore As Integer = 0
         par_datagridview.Rows.Clear()
         Dim Cnn1 As New SqlConnection
@@ -111,10 +116,11 @@ Public Class Form_stato_commesse
       ,t0.[mag_odp]
       ,CONVERT(date, coalesce(t0.data_immissione, t0.data_r), 112) AS data_immissione
       ,CONVERT(date, t0.data_i, 112) AS data_i
+      ,coalesce(t0.[pianificato],'') as 'pianificato'
   FROM [Tirelli_40].[dbo].[stato_commesse_output] t0
   left join [Tirelli_40].[dbo].[Layout_CAP1] t1 on t1.Commessa=t0.matricola and t1.Stato='O'
   left join [Tirelli_40].[dbo].[Layout_CAP1_nomi] t2 on t2.numero_baia=t1.Baia
-where 0=0 and visibile='Y'  " & filtro_codice & filtro_progetto & filtro_sottocommessa & filtro_matricola & filtro_odp_padre & filtro_stato & filtro_MAG_dEST & filtro_ubicazione & filtro_mag_impegno & "
+where 0=0 and visibile='Y'  " & filtro_codice & filtro_progetto & filtro_sottocommessa & filtro_matricola & filtro_odp_padre & filtro_stato & filtro_MAG_dEST & filtro_ubicazione & filtro_mag_impegno & filtro_pianificato & "
   ORDER BY " & GetOrderBy()
 
         cmd_SAP_reader_2 = CMD_SAP_2.ExecuteReader
@@ -140,6 +146,7 @@ where 0=0 and visibile='Y'  " & filtro_codice & filtro_progetto & filtro_sottoco
         cmd_SAP_reader_2("Disegno"),
         cmd_SAP_reader_2("documento"),
         cmd_SAP_reader_2("odp"),
+        cmd_SAP_reader_2("pianificato"),
             cmd_SAP_reader_2("data_i"),
         cmd_SAP_reader_2("itemname"),
         cmd_SAP_reader_2("oc"),
@@ -264,7 +271,7 @@ ORDER BY MAX(t0.ordine_stato) DESC, t0.matricola, t0.odp"
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         If TabControl_viste.SelectedTab Is TabPage_lista Then
-            carica_datagridview_stato_commesse(TextBox7.Text.ToUpper, DataGridView_stato_commesse, Label1, TextBox1.Text.ToUpper, TextBox15.Text.ToUpper, TextBox2.Text.ToUpper, TextBox3.Text.ToUpper, TextBox9.Text.ToUpper, TextBox5.Text.ToUpper, TextBox4.Text.ToUpper, TextBox6.Text.ToUpper)
+            carica_datagridview_stato_commesse(TextBox7.Text.ToUpper, DataGridView_stato_commesse, Label1, TextBox1.Text.ToUpper, TextBox15.Text.ToUpper, TextBox2.Text.ToUpper, TextBox3.Text.ToUpper, TextBox9.Text.ToUpper, TextBox5.Text.ToUpper, TextBox4.Text.ToUpper, TextBox6.Text.ToUpper, TextBox_StatoODP.Text.ToUpper)
         Else
             carica_datagridview_per_ODP(TextBox1.Text.ToUpper, TextBox15.Text.ToUpper, TextBox2.Text.ToUpper, TextBox3.Text.ToUpper)
         End If
@@ -575,6 +582,22 @@ ORDER BY MAX(t0.ordine_stato) DESC, t0.matricola, t0.odp"
             DataGridView_stato_commesse.Rows(e.RowIndex).DefaultCellStyle.BackColor = Color.YellowGreen
         ElseIf DataGridView_stato_commesse.Rows(e.RowIndex).Cells(columnName:=nome_colonna).Value = "0" Then
             DataGridView_stato_commesse.Rows(e.RowIndex).DefaultCellStyle.BackColor = Color.Lime
+        End If
+
+        ' Formattazione colonna Stato ODP (R / P)
+        Dim colPian As Integer = DataGridView_stato_commesse.Columns.IndexOf(Pianificato)
+        If e.ColumnIndex = colPian Then
+            Dim valPian As Object = DataGridView_stato_commesse.Rows(e.RowIndex).Cells(colPian).Value
+            If valPian IsNot Nothing AndAlso Not IsDBNull(valPian) Then
+                Select Case valPian.ToString().Trim().ToUpper()
+                    Case "R"
+                        e.CellStyle.BackColor = Color.LightCoral
+                        e.CellStyle.Font = New Font(DataGridView_stato_commesse.Font, FontStyle.Bold)
+                    Case "P"
+                        e.CellStyle.BackColor = Color.LightGreen
+                        e.CellStyle.Font = New Font(DataGridView_stato_commesse.Font, FontStyle.Bold)
+                End Select
+            End If
         End If
 
         ' Evidenzia Data_Imm e Data_I se lanciate nell'ultima settimana

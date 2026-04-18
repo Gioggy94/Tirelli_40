@@ -82,6 +82,12 @@ Partial Class Form_nuovo_ticket
         Me.Grp_Reparto = New System.Windows.Forms.GroupBox()
         Me.ComboBox2 = New System.Windows.Forms.ComboBox()
         Me.Panel7 = New System.Windows.Forms.Panel()
+        Me.pnlAvviso = New System.Windows.Forms.Panel()
+        Me.grpSottocommessa = New System.Windows.Forms.GroupBox()
+        Me.txtSottocommessa = New System.Windows.Forms.TextBox()
+        Me.grpProgetto = New System.Windows.Forms.GroupBox()
+        Me.txtProgetto = New System.Windows.Forms.TextBox()
+        Me.lblAvvisoMatricola = New System.Windows.Forms.Label()
         Me.TableLayoutPanel5 = New System.Windows.Forms.TableLayoutPanel()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.ComboBox5 = New System.Windows.Forms.ComboBox()
@@ -129,6 +135,9 @@ Partial Class Form_nuovo_ticket
         Me.GroupBox17.SuspendLayout()
         Me.Grp_Reparto.SuspendLayout()
         Me.Panel7.SuspendLayout()
+        Me.pnlAvviso.SuspendLayout()
+        Me.grpSottocommessa.SuspendLayout()
+        Me.grpProgetto.SuspendLayout()
         Me.TableLayoutPanel5.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
         Me.TableLayoutPanel4.SuspendLayout()
@@ -369,7 +378,7 @@ Partial Class Form_nuovo_ticket
         Me.GroupBox4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupBox4.Location = New System.Drawing.Point(3, 3)
         Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(335, 59)
+        Me.GroupBox4.Size = New System.Drawing.Size(335, 122)
         Me.GroupBox4.TabIndex = 53
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Data Creazione"
@@ -621,14 +630,14 @@ Partial Class Form_nuovo_ticket
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Right
         Me.Panel1.Location = New System.Drawing.Point(1010, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(293, 716)
+        Me.Panel1.Size = New System.Drawing.Size(293, 779)
         Me.Panel1.TabIndex = 156
         '
         'Panel6
         '
         Me.Panel6.Controls.Add(Me.Cmd_Inserisci)
         Me.Panel6.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel6.Location = New System.Drawing.Point(0, 640)
+        Me.Panel6.Location = New System.Drawing.Point(0, 703)
         Me.Panel6.Name = "Panel6"
         Me.Panel6.Size = New System.Drawing.Size(293, 76)
         Me.Panel6.TabIndex = 4
@@ -772,14 +781,77 @@ Partial Class Form_nuovo_ticket
         '
         'Panel7
         '
+        Me.Panel7.Controls.Add(Me.pnlAvviso)
         Me.Panel7.Controls.Add(Me.TableLayoutPanel5)
         Me.Panel7.Controls.Add(Me.TableLayoutPanel4)
         Me.Panel7.Controls.Add(Me.TableLayoutPanel3)
         Me.Panel7.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel7.Location = New System.Drawing.Point(0, 0)
         Me.Panel7.Name = "Panel7"
-        Me.Panel7.Size = New System.Drawing.Size(1010, 232)
+        Me.Panel7.Size = New System.Drawing.Size(1010, 295)
         Me.Panel7.TabIndex = 157
+        '
+        'pnlAvviso
+        '
+        Me.pnlAvviso.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(245, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.pnlAvviso.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.pnlAvviso.Controls.Add(Me.grpSottocommessa)
+        Me.pnlAvviso.Controls.Add(Me.grpProgetto)
+        Me.pnlAvviso.Controls.Add(Me.lblAvvisoMatricola)
+        Me.pnlAvviso.Location = New System.Drawing.Point(0, 232)
+        Me.pnlAvviso.Name = "pnlAvviso"
+        Me.pnlAvviso.Size = New System.Drawing.Size(1010, 63)
+        Me.pnlAvviso.TabIndex = 158
+        Me.pnlAvviso.Visible = False
+        '
+        'grpSottocommessa
+        '
+        Me.grpSottocommessa.Controls.Add(Me.txtSottocommessa)
+        Me.grpSottocommessa.Location = New System.Drawing.Point(210, 20)
+        Me.grpSottocommessa.Name = "grpSottocommessa"
+        Me.grpSottocommessa.Size = New System.Drawing.Size(200, 40)
+        Me.grpSottocommessa.TabIndex = 2
+        Me.grpSottocommessa.TabStop = False
+        Me.grpSottocommessa.Text = "Sottocommessa"
+        '
+        'txtSottocommessa
+        '
+        Me.txtSottocommessa.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtSottocommessa.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.txtSottocommessa.Location = New System.Drawing.Point(3, 16)
+        Me.txtSottocommessa.Name = "txtSottocommessa"
+        Me.txtSottocommessa.Size = New System.Drawing.Size(194, 24)
+        Me.txtSottocommessa.TabIndex = 0
+        '
+        'grpProgetto
+        '
+        Me.grpProgetto.Controls.Add(Me.txtProgetto)
+        Me.grpProgetto.Location = New System.Drawing.Point(4, 20)
+        Me.grpProgetto.Name = "grpProgetto"
+        Me.grpProgetto.Size = New System.Drawing.Size(200, 40)
+        Me.grpProgetto.TabIndex = 1
+        Me.grpProgetto.TabStop = False
+        Me.grpProgetto.Text = "Progetto"
+        '
+        'txtProgetto
+        '
+        Me.txtProgetto.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtProgetto.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.txtProgetto.Location = New System.Drawing.Point(3, 16)
+        Me.txtProgetto.Name = "txtProgetto"
+        Me.txtProgetto.Size = New System.Drawing.Size(194, 24)
+        Me.txtProgetto.TabIndex = 0
+        '
+        'lblAvvisoMatricola
+        '
+        Me.lblAvvisoMatricola.AutoSize = True
+        Me.lblAvvisoMatricola.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Bold)
+        Me.lblAvvisoMatricola.ForeColor = System.Drawing.Color.DarkRed
+        Me.lblAvvisoMatricola.Location = New System.Drawing.Point(4, 5)
+        Me.lblAvvisoMatricola.Name = "lblAvvisoMatricola"
+        Me.lblAvvisoMatricola.Size = New System.Drawing.Size(347, 13)
+        Me.lblAvvisoMatricola.TabIndex = 0
+        Me.lblAvvisoMatricola.Text = "⚠ Matricola non trovata — compilare Progetto e Sottocommessa"
         '
         'TableLayoutPanel5
         '
@@ -794,7 +866,7 @@ Partial Class Form_nuovo_ticket
         Me.TableLayoutPanel5.Name = "TableLayoutPanel5"
         Me.TableLayoutPanel5.RowCount = 1
         Me.TableLayoutPanel5.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel5.Size = New System.Drawing.Size(1010, 65)
+        Me.TableLayoutPanel5.Size = New System.Drawing.Size(1010, 128)
         Me.TableLayoutPanel5.TabIndex = 2
         '
         'GroupBox5
@@ -803,7 +875,7 @@ Partial Class Form_nuovo_ticket
         Me.GroupBox5.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupBox5.Location = New System.Drawing.Point(546, 3)
         Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Size = New System.Drawing.Size(461, 59)
+        Me.GroupBox5.Size = New System.Drawing.Size(461, 122)
         Me.GroupBox5.TabIndex = 54
         Me.GroupBox5.TabStop = False
         Me.GroupBox5.Text = "Descrizione NC"
@@ -921,7 +993,7 @@ Partial Class Form_nuovo_ticket
         Me.TableLayoutPanel7.Controls.Add(Me.GroupBox8, 0, 0)
         Me.TableLayoutPanel7.Controls.Add(Me.GroupBox9, 1, 0)
         Me.TableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel7.Location = New System.Drawing.Point(0, 232)
+        Me.TableLayoutPanel7.Location = New System.Drawing.Point(0, 295)
         Me.TableLayoutPanel7.Name = "TableLayoutPanel7"
         Me.TableLayoutPanel7.RowCount = 1
         Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
@@ -938,7 +1010,7 @@ Partial Class Form_nuovo_ticket
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1303, 716)
+        Me.ClientSize = New System.Drawing.Size(1303, 779)
         Me.ControlBox = False
         Me.Controls.Add(Me.TableLayoutPanel7)
         Me.Controls.Add(Me.Panel7)
@@ -987,6 +1059,12 @@ Partial Class Form_nuovo_ticket
         Me.GroupBox17.ResumeLayout(False)
         Me.Grp_Reparto.ResumeLayout(False)
         Me.Panel7.ResumeLayout(False)
+        Me.pnlAvviso.ResumeLayout(False)
+        Me.pnlAvviso.PerformLayout()
+        Me.grpSottocommessa.ResumeLayout(False)
+        Me.grpSottocommessa.PerformLayout()
+        Me.grpProgetto.ResumeLayout(False)
+        Me.grpProgetto.PerformLayout()
         Me.TableLayoutPanel5.ResumeLayout(False)
         Me.GroupBox5.ResumeLayout(False)
         Me.TableLayoutPanel4.ResumeLayout(False)
@@ -1022,6 +1100,12 @@ Partial Class Form_nuovo_ticket
     Friend WithEvents Txt_Data_Creazione As TextBox
     Friend WithEvents GroupBox3 As GroupBox
     Friend WithEvents Txt_Commessa As TextBox
+    Friend WithEvents pnlAvviso As Panel
+    Friend WithEvents lblAvvisoMatricola As Label
+    Friend WithEvents grpProgetto As GroupBox
+    Friend WithEvents txtProgetto As TextBox
+    Friend WithEvents grpSottocommessa As GroupBox
+    Friend WithEvents txtSottocommessa As TextBox
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents Combo_Destinatario As ComboBox
     Friend WithEvents GroupBox1 As GroupBox

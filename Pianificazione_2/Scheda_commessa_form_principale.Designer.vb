@@ -3327,7 +3327,7 @@ Partial Class Scheda_commessa_Pianificazione
         Me.Controls.Add(Me.Panel1)
         Me.Name = "Scheda_commessa_Pianificazione"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Scheda_commessa_Pianificazione"
+        Me.Text = "in"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.Panel2.ResumeLayout(False)
         Me.TableLayoutPanel2.ResumeLayout(False)

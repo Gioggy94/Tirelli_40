@@ -297,6 +297,7 @@ coalesce(t0.u_data_valutazione_stock,'') as 'U_data_valutazione'
 , coalesce(t8.magazzino,0) as 'n_mag'
 , coalesce(t8.cassetto,0) as 'n_cass'
 ,coalesce(t0.u_progetto,0) as 'N_progetto'
+,T1.[ItmsGrpCod] as 'CodiceGruppo'
 
 from oitm t0 INNER JOIN OITB T1 ON T0.[ItmsGrpCod] = T1.[ItmsGrpCod]
 LEFT JOIN ITM1 T2 ON T2.ITEMCODE=T0.ITEMCODE
@@ -327,7 +328,7 @@ trim(DISEGNO) AS u_disegno,
 STAT_CODE AS validcomm,
 coalesce(COD_TRAT,'') AS codice_Trattamento,
 coalesce(DESC_TRAT,'') AS  Trattamento,
-GRUP_ART AS CODE_Gruppo,
+GRUP_ART AS CodiceGruppo,
 DESC_GRP AS Gruppo,
 COSTO_STD AS Price,
 punto_rio AS punto_rio,
@@ -391,6 +392,7 @@ left join [Tirelli_40].[dbo].[Cassetto_codici] T11 ON T10.code COLLATE SQL_Latin
 
             dettagli.Gestito_a_ferretto = cmd_SAP_reader("Gestito a Ferretto")
             dettagli.Gruppo = cmd_SAP_reader("Gruppo")
+            dettagli.CodiceGruppo = cmd_SAP_reader("CodiceGruppo")
             dettagli.Prezzo_listino_acquisto = cmd_SAP_reader("Price")
 
             dettagli.gestione_magazzino = cmd_SAP_reader("Gestione_magazzino")
@@ -2420,7 +2422,7 @@ where FIELDID=103 AND TABLEID='OITM' ORDER BY INDEXID
 
             If Homepage.ERP_provenienza = "SAP" Then
                 CMD_SAP.CommandText = "
-select *, '' as 'Sottocommessa', '' as 'Matricola','' as 'rifmag'
+select *, '' as 'Sottocommessa', '' as 'Matricola','' as 'rifmag', '' as num_ope
 from
 (
     SELECT  T0.[DocDate],t0.transtype,t0.transseq,
@@ -4137,8 +4139,6 @@ FROM OITM T0 WHERE T0.[ItemCode] ='" & par_codice_sap & "' "
 
     Private Sub Button15_Click(sender As Object, e As EventArgs) Handles Button15.Click
         Form_stato_commesse.Show()
-
-
     End Sub
 
 
@@ -4300,6 +4300,7 @@ FROM OITM T0 WHERE T0.[ItemCode] ='" & par_codice_sap & "' "
         Public Property Ubicazione As String
         Public Property Gestito_a_ferretto As String
         Public Property Gruppo As String
+        Public CodiceGruppo As String
         Public Property Prezzo_listino_acquisto As Decimal
         Public Property Label18_Text As String
         Public Property Label19_Text As String

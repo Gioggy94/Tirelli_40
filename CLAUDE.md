@@ -111,10 +111,19 @@ Else qtaOC = qtaOC_A  ' mostra scostamento
 - **B:** `qRaw` → it-IT (punto=migliaia, virgola=decimale)
 - **C:** `qRaw.Replace(".", "").Replace(",", "")` → InvariantCulture (rimuove tutti i separatori)
 
-#### 4. Stati risultato
+#### 4. Fallback codice da descrizione — `EstraiCodiceDaDescrizione()`
+Alcuni fornitori (es. Thenar, cod 1410000541) non mettono il codice Tirelli nella colonna codice, ma lo scrivono nella **descrizione** della riga con la dicitura "Vs. Codice:", "Vs.Codice:", "Vostro Codice:" ecc.
+
+Se il primo matching fallisce (ordine trovato, codice non trovato), `VerificaOrdiniAS400()` cerca nella colonna `colDescrizione` un pattern:
+```
+(?:vs\.?\s*codice(?:\s+prodotto)?|vostro\s+codice(?:\s+prodotto)?)\s*[:\s]\s*([A-Z0-9][A-Z0-9\-\.#_]*)
+```
+e ritenta il matching con il codice estratto. Funziona per **tutti i fornitori** in modo trasparente, senza configurazione specifica.
+
+#### 5. Stati risultato
 - Verde — **OK**: quantità DDT = quantità ordine AS400
 - Giallo — **scostamento**: ordine trovato, codice trovato, ma quantità diverse → mostra `Q DDT=X  OA=Y`
-- Arancio — **Codice non in questo ordine**: ordine trovato ma il codice/disegno non è presente
+- Arancio — **Codice non in questo ordine**: ordine trovato ma il codice/disegno non è presente (nemmeno nella descrizione)
 - Rosso — **Ordine non trovato**: nessun ordine aperto in AS400 con quel numero
 
 ---
@@ -149,6 +158,7 @@ Private Shared ReadOnly RegoleFornitore As New Dictionary(Of String, String())(S
 | COD_forn | Fornitore | Peculiarità formato DDT |
 |----------|-----------|-------------------------|
 | 1410000465 | BETT Sistemi Srl | Campo "VS.RIF.ORDINE / YOUR ORDER REF." su due righe: prima riga = numero ordine (es. `203144`), seconda riga = `del 270326` (data 27/03/26). La data va ignorata, solo il primo numero è l'ordine. |
+| 1410000541 | Thenar | Il codice Tirelli non è nella colonna codice ma scritto nella descrizione riga come "Vs. Codice: XXXXX". Il VB gestisce questo in automatico via fallback `EstraiCodiceDaDescrizione()`. |
 
 **Nota:** esiste anche una regola universale `#N → -RN` applicata a tutti i fornitori (prima delle regole specifiche), nel caso in cui il fornitore non sia nel registro.
 

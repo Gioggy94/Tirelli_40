@@ -407,7 +407,7 @@ Public Class Form_layout_CAP_1
 
                         Dim flagImage As Bitmap = Nothing
                         Try
-                            flagImage = New Bitmap("\\tirfs01\00-Tirelli 4.0\Immagini\Flags\" & destinazione & ".png")
+                            flagImage = New Bitmap("\\tirfs01\tirelli\00-Tirelli 4.0\Immagini\Flags\" & destinazione & ".png")
                         Catch
                         End Try
 
@@ -1252,7 +1252,7 @@ Public Class Form_layout_CAP_1
     End Sub
 
     Private Sub Button14_Click(sender As Object, e As EventArgs) Handles Button14.Click
-        Process.Start("\\tirfs01\00-Report aziendali\Pianificazione\PRODUZIONE\OPERATIONS\layout produzione\Layout officina.dwg")
+        Process.Start("\\tirfs01\tirelli\00-Report aziendali\Pianificazione\PRODUZIONE\OPERATIONS\layout produzione\Layout officina.dwg")
     End Sub
 
     Private Sub Button15_Click(sender As Object, e As EventArgs) Handles Button15.Click

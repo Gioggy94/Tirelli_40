@@ -3,9 +3,11 @@ Imports System.Drawing.Printing
 
 Public Class Form_Ferretto
     Public id_da_stampare As Integer = 0
+    Private id_ultimo_timer As Integer = 0  ' usato solo dal timer, indipendente dal click manuale
     Public Stampante_Selezionata As Boolean
     Public stampa_descrizione As String
     Public stampa_progetto As String
+    Public stampa_codice_articolo_padre As String
 
     ' Helper: converte DBNull/Nothing in stringa vuota e fa Trim
     Private Shared Function S(val As Object) As String
@@ -30,7 +32,7 @@ Public Class Form_Ferretto
         ' direttamente nel WHERE della query originale.
         Dim sql As String = "
 WITH base AS (
-    SELECT TOP (1000)
+    SELECT TOP (50)
         [id], [recordStatus], [recordWritingDate], [recordImportationDate],
         [plantId], [response], [listType], [listNumber],
         CASE
@@ -50,6 +52,14 @@ WITH base AS (
                  AND CHARINDEX('-ART:', listNumber) > CHARINDEX('COM:', listNumber)
             THEN SUBSTRING(listNumber, CHARINDEX('COM:', listNumber) + 4,
                  CHARINDEX('-ART:', listNumber) - CHARINDEX('COM:', listNumber) - 4)
+            WHEN CHARINDEX('COM:', listNumber) > 0 AND CHARINDEX('-ID:', listNumber) > 0
+                 AND CHARINDEX('-ID:', listNumber) > CHARINDEX('COM:', listNumber)
+            THEN SUBSTRING(listNumber, CHARINDEX('COM:', listNumber) + 4,
+                 CHARINDEX('-ID:', listNumber) - CHARINDEX('COM:', listNumber) - 4)
+            WHEN CHARINDEX('COM:', listNumber) > 0 AND CHARINDEX('-MG:', listNumber) > 0
+                 AND CHARINDEX('-MG:', listNumber) > CHARINDEX('COM:', listNumber)
+            THEN SUBSTRING(listNumber, CHARINDEX('COM:', listNumber) + 4,
+                 CHARINDEX('-MG:', listNumber) - CHARINDEX('COM:', listNumber) - 4)
             ELSE NULL
         END AS COM,
         CASE
@@ -105,6 +115,7 @@ WHERE 1=1
                             S(reader("Magazzino")),
                             reader("lineNumber"),
                             S(reader("item")),
+                            "",
                             S(reader("batch")),
                             S(reader("serialNumber")),
                             reader("requestedQty"),
@@ -116,6 +127,42 @@ WHERE 1=1
                 End Using
             End Using
         End Using
+
+        ' --- Lookup descrizioni AS400: una sola query con IN sui codici distinti ---
+        Dim codici As New HashSet(Of String)(StringComparer.OrdinalIgnoreCase)
+        For Each row As DataGridViewRow In par_datagridview.Rows
+            Dim cod = S(row.Cells("item").Value)
+            If cod <> "" Then codici.Add(cod)
+        Next
+
+        If codici.Count > 0 Then
+            ' Ogni codice viene racchiuso in ''...'' (doppi apici per SQL Server → singoli per AS400)
+            Dim inList = String.Join(",", codici.Select(Function(x) "''" & x.Replace("'", "''''") & "''"))
+            Dim sqlDesc = "SELECT trim(CODE) AS code, trim(DES_CODE) AS des_code " &
+                          "FROM OPENQUERY(AS400, 'SELECT trim(CODE) AS CODE, trim(DES_CODE) AS DES_CODE " &
+                          "FROM S786FAD1.TIR90VIS.JGALART WHERE trim(CODE) IN (" & inList & ")')"
+
+            Dim descMap As New Dictionary(Of String, String)(StringComparer.OrdinalIgnoreCase)
+            Using Cnn2 As New SqlConnection(Homepage.sap_tirelli)
+                Cnn2.Open()
+                Using CMD2 As New SqlCommand(sqlDesc, Cnn2)
+                    Using reader2 As SqlDataReader = CMD2.ExecuteReader()
+                        Do While reader2.Read()
+                            descMap(S(reader2("code"))) = S(reader2("des_code"))
+                        Loop
+                    End Using
+                End Using
+            End Using
+
+            For Each row As DataGridViewRow In par_datagridview.Rows
+                Dim cod = S(row.Cells("item").Value)
+                If cod <> "" Then
+                    Dim desc As String = ""
+                    descMap.TryGetValue(cod, desc)
+                    row.Cells("descrizione_articolo").Value = desc
+                End If
+            Next
+        End If
     End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -142,6 +189,7 @@ WHERE 1=1
         par_datagridview.Columns.Add("Magazzino", "Magazzino")
         par_datagridview.Columns.Add("lineNumber", "N° Riga")
         par_datagridview.Columns.Add("item", "Articolo")
+        par_datagridview.Columns.Add("descrizione_articolo", "Descrizione")
         par_datagridview.Columns.Add("batch", "Batch")
         par_datagridview.Columns.Add("serialNumber", "Matricola")
         par_datagridview.Columns.Add("requestedQty", "Qtà Richiesta")
@@ -183,6 +231,10 @@ WHERE 1=1
     Dim stampa_baia As String = ""
     Dim stampa_stato_odp As String = ""
     Dim stampa_magazzino_destinazione As String = ""
+    Dim codice_gruppo_art_padre As String = ""
+    Dim stampa_tipo_OC As String = ""
+    Dim stampa_numero_OC As String = ""
+    Dim Stampa_Ubicazione_Macchina As String = ""
 
     ' =============================================
     ' CLICK PULSANTE STAMPA
@@ -219,6 +271,14 @@ SELECT [id], [listNumber], [item], [requestedQty], [processedQty],
              AND CHARINDEX('-ART:', listNumber) > CHARINDEX('COM:', listNumber)
         THEN SUBSTRING(listNumber, CHARINDEX('COM:', listNumber) + 4,
              CHARINDEX('-ART:', listNumber) - CHARINDEX('COM:', listNumber) - 4)
+        WHEN CHARINDEX('COM:', listNumber) > 0 AND CHARINDEX('-ID:', listNumber) > 0
+             AND CHARINDEX('-ID:', listNumber) > CHARINDEX('COM:', listNumber)
+        THEN SUBSTRING(listNumber, CHARINDEX('COM:', listNumber) + 4,
+             CHARINDEX('-ID:', listNumber) - CHARINDEX('COM:', listNumber) - 4)
+        WHEN CHARINDEX('COM:', listNumber) > 0 AND CHARINDEX('-MG:', listNumber) > 0
+             AND CHARINDEX('-MG:', listNumber) > CHARINDEX('COM:', listNumber)
+        THEN SUBSTRING(listNumber, CHARINDEX('COM:', listNumber) + 4,
+             CHARINDEX('-MG:', listNumber) - CHARINDEX('COM:', listNumber) - 4)
         ELSE NULL
     END AS COM,
     CASE
@@ -247,6 +307,8 @@ WHERE id = @id"
                         stampa_qta_processata = S(reader("processedQty"))
                         stampa_descrizione = Magazzino.OttieniDettagliAnagrafica(stampa_articolo).Descrizione
                         stampa_progetto = Scheda_tecnica.Ottieni_cliente_papa_macchina(stampa_COM).progetto
+
+
                         If stampa_qta_processata = "" OrElse stampa_qta_processata = "0" OrElse stampa_qta_processata = "0.000" Then
                             MessageBox.Show("Nessuna quantità processata, stampa annullata.")
                             Exit Sub
@@ -259,16 +321,28 @@ WHERE id = @id"
             End Using
         End Using
 
-        ' --- BAIA e STATO dall'OD ---
+        ' --- tipo/numero OC (derivati da stampa_OC già caricato) ---
+        stampa_numero_OC = stampa_OC
+        stampa_tipo_OC = If(stampa_OC.Length > 0, stampa_OC.Substring(0, 1), "")
+
+        ' --- BAIA, STATO e GRUPPO ARTICOLO dall'OD ---
         If stampa_OD <> "" Then
             Dim info_odp = ODP_Form.ottieni_informazioni_odp("Numero", 0, stampa_OD)
             stampa_baia = info_odp.nome_baia
             stampa_stato_odp = info_odp.stato
             stampa_magazzino_destinazione = info_odp.warehouse
+            Stampa_Ubicazione_Macchina = stampa_baia
+            If info_odp.itemcode <> "" Then
+                codice_gruppo_art_padre = Magazzino.OttieniDettagliAnagrafica(info_odp.itemcode).CodiceGruppo
+            Else
+                codice_gruppo_art_padre = ""
+            End If
         Else
             stampa_baia = ""
             stampa_stato_odp = ""
             stampa_magazzino_destinazione = ""
+            Stampa_Ubicazione_Macchina = ""
+            codice_gruppo_art_padre = ""
         End If
 
         ' --- STAMPA ---
@@ -277,11 +351,11 @@ WHERE id = @id"
             sel.Document = Scontrino
             If sel.ShowDialog() = DialogResult.OK Then
                 Stampante_Selezionata = True
-                Scontrino.DefaultPageSettings.PaperSize = New System.Drawing.Printing.PaperSize("Scontrino", 185, 235)
+                Scontrino.DefaultPageSettings.PaperSize = New System.Drawing.Printing.PaperSize("Scontrino", 185, 250)
                 Scontrino.Print()
             End If
         Else
-            Scontrino.DefaultPageSettings.PaperSize = New System.Drawing.Printing.PaperSize("Scontrino", 185, 235)
+            Scontrino.DefaultPageSettings.PaperSize = New System.Drawing.Printing.PaperSize("Scontrino", 185, 250)
             Scontrino.Print()
         End If
     End Sub
@@ -294,12 +368,14 @@ WHERE id = @id"
         Dim fGrande As New Font("Calibri", 14, FontStyle.Bold)
         Dim fArticolo As New Font("Calibri", 14, FontStyle.Italic)
         Dim fQta As New Font("Calibri", 11, FontStyle.Bold)
+        Dim fMatricola As New Font("Calibri", 12, FontStyle.Bold)
+        Dim fDesc As New Font("Calibri", 8, FontStyle.Italic)
 
         Dim g As System.Drawing.Graphics = e.Graphics
         g.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
 
         ' --- BORDO ESTERNO ---
-        g.DrawRectangle(Penna, 1, 1, 183, 230)
+        g.DrawRectangle(Penna, 1, 1, 183, 245)
 
         ' --- INTESTAZIONE: numero scontrino ---
         g.DrawString("N° " & stampa_numero_scontrino, fTitolo, Brushes.Gray, 3, 2)
@@ -321,56 +397,65 @@ WHERE id = @id"
 
         g.DrawRectangle(Penna, 78, 60, 40, 35)
         g.DrawString("ID", fTitolo, Brushes.Black, 80, 62)
-        g.DrawString(stampa_ID, fTitolo, Brushes.Black, 80, 72)
+        g.DrawString(stampa_ID, fGrande, Brushes.Black, 80, 72)
 
         g.DrawRectangle(Penna, 123, 60, 59, 35)
         g.DrawString("Mag", fTitolo, Brushes.Black, 125, 62)
         g.DrawString(stampa_magazzino_destinazione, fSmall, Brushes.Black, 125, 72)
 
-        ' RIGA 3: [Articolo (sx 120px)] [Baia (dx 62px)]
+        ' RIGA 3: [Articolo (sx 120px)] [Baia/QE/CDS (dx 62px) — altezza 50 per 2 righe CDS]
         Dim articolo_troncato As String = stampa_articolo.Substring(0, Math.Min(8, stampa_articolo.Length))
         g.DrawRectangle(Penna, 3, 100, 117, 35)
         g.DrawString("Articolo", fTitolo, Brushes.Black, 5, 102)
         g.DrawString(articolo_troncato, fArticolo, Brushes.Black, 5, 110)
 
-        g.DrawRectangle(Penna, 125, 100, 57, 35)
+        g.DrawRectangle(Penna, 125, 100, 57, 50)
         g.DrawString("Baia", fTitolo, Brushes.Black, 127, 102)
-        g.DrawString(stampa_baia, fGrande, Brushes.Black, 127, 110)
 
-        ' RIGA 4: Qtà Processata (larghezza piena)
-        g.DrawRectangle(Penna, 3, 140, 179, 30)
-        g.DrawString("Qtà Processata", fTitolo, Brushes.Black, 5, 142)
-        g.DrawString(stampa_qta_processata, fQta, Brushes.Black, 5, 151)
+        ' Testo baia: Q.E. / ubicazione macchina / CDS OC — coerente con Form_stampe
+        If codice_gruppo_art_padre = "63" Then
+            g.DrawString("Q.E.", fMatricola, Brushes.Black, 127, 111)
+        ElseIf stampa_tipo_OC = "" OrElse stampa_tipo_OC = " " OrElse stampa_tipo_OC = "B" Then
+            g.DrawString(Stampa_Ubicazione_Macchina, fMatricola, Brushes.Black, 127, 111)
+        Else
+            g.DrawString("CDS " & stampa_tipo_OC, fMatricola, Brushes.Black, 127, 108)
+            g.DrawString("OC " & stampa_numero_OC, fDesc, Brushes.Black, 127, 125)
+        End If
+
+        ' RIGA 4: Qtà Processata (larghezza piena) — spostata per cella Baia più alta
+        g.DrawRectangle(Penna, 3, 155, 179, 30)
+        g.DrawString("Qtà Processata", fTitolo, Brushes.Black, 5, 157)
+        g.DrawString(stampa_qta_processata, fQta, Brushes.Black, 5, 166)
 
         ' RIGA 5: Descrizione articolo
         Dim desc_safe As String = If(stampa_descrizione, "")
         Dim desc_troncata As String = desc_safe.Substring(0, Math.Min(35, desc_safe.Length))
-        g.DrawRectangle(Penna, 3, 174, 179, 18)
-        g.DrawString("Descrizione", fTitolo, Brushes.Black, 5, 175)
-        g.DrawString(desc_troncata, fSmall, Brushes.Black, 5, 183)
+        g.DrawRectangle(Penna, 3, 189, 179, 18)
+        g.DrawString("Descrizione", fTitolo, Brushes.Black, 5, 190)
+        g.DrawString(desc_troncata, fSmall, Brushes.Black, 5, 198)
 
         ' RIGA 6: Progetto
         Dim prog_safe As String = If(stampa_progetto, "")
         Dim progetto_troncato As String = prog_safe.Substring(0, Math.Min(35, prog_safe.Length))
-        g.DrawRectangle(Penna, 3, 195, 179, 18)
-        g.DrawString("Progetto", fTitolo, Brushes.Black, 5, 196)
-        g.DrawString(progetto_troncato, fSmall, Brushes.Black, 5, 204)
+        g.DrawRectangle(Penna, 3, 211, 179, 18)
+        g.DrawString("Progetto", fTitolo, Brushes.Black, 5, 212)
+        g.DrawString(progetto_troncato, fSmall, Brushes.Black, 5, 220)
 
         ' FOOTER: data/ora + utente (una sola query)
         Dim DataOggi As String = DateTime.Now.ToString("dd/MM/yy HH:mm")
-        g.DrawString(DataOggi, fSmall, Brushes.Black, 120, 217)
+        g.DrawString(DataOggi, fSmall, Brushes.Black, 120, 232)
 
         Dim d = Homepage.trova_Dettagli_dipendente(Homepage.ID_SALVATO)
         Dim NomeTroncato As String = (d.COGNOME & " " & d.NOME).Substring(0, Math.Min(12, (d.COGNOME & " " & d.NOME).Length))
-        g.DrawString(NomeTroncato, fSmall, Brushes.Black, 5, 217)
+        g.DrawString(NomeTroncato, fSmall, Brushes.Black, 5, 232)
 
     End Sub
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         Dim id_auto As Integer = max_id_ferretto()
-        If id_auto <> id_da_stampare Then
-            id_da_stampare = id_auto
-            Stampa_stampa(id_da_stampare)
+        If id_auto <> id_ultimo_timer Then
+            id_ultimo_timer = id_auto
+            Stampa_stampa(id_auto)
         End If
     End Sub
 
@@ -391,6 +476,7 @@ WHERE id = @id"
     End Function
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        id_ultimo_timer = max_id_ferretto()   ' allinea subito per non stampare al primo tick
         Timer1.Interval = CInt(TextBox7.Text)
         Timer1.Start()
         Button3.Visible = True

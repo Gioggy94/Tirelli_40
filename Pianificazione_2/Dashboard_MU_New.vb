@@ -508,6 +508,8 @@ t10.odp
 ,larghezza as 'Bwidth1'
 ,lunghezza as 'Blenght1'
 ,fase_av
+,TRY_CAST(CAST(data_iniz AS VARCHAR) AS DATE) AS data_iniz
+,TRY_CAST(CAST(data_scad AS VARCHAR) AS DATE) AS data_scad
 
 FROM OPENQUERY(AS400, '
 select *
@@ -541,7 +543,7 @@ order by t10.priorita"
                     End Using
                 End Using
             End If
-            par_datagridview.Rows.Add(cmd_SAP_docentry_reader("ODP"), Math.Round(cmd_SAP_docentry_reader("N PEZ")), cmd_SAP_docentry_reader("COD"), cmd_SAP_docentry_reader("Nome"), cmd_SAP_docentry_reader("DIS"), img, cmd_SAP_docentry_reader("RIS"), cmd_SAP_docentry_reader("MAC"), Math.Round(cmd_SAP_docentry_reader("ATT")), Math.Round(cmd_SAP_docentry_reader("LAV")), cmd_SAP_docentry_reader("u_lavorazione"), cmd_SAP_docentry_reader("Priorità"), cmd_SAP_docentry_reader("Materiale"), cmd_SAP_docentry_reader("U_PRG_TIR_MATERIALE"), cmd_SAP_docentry_reader("BHEIGHT1"))
+            par_datagridview.Rows.Add(cmd_SAP_docentry_reader("ODP"), Math.Round(cmd_SAP_docentry_reader("N PEZ")), cmd_SAP_docentry_reader("COD"), cmd_SAP_docentry_reader("Nome"), cmd_SAP_docentry_reader("DIS"), img, cmd_SAP_docentry_reader("RIS"), cmd_SAP_docentry_reader("MAC"), Math.Round(cmd_SAP_docentry_reader("ATT")), Math.Round(cmd_SAP_docentry_reader("LAV")), cmd_SAP_docentry_reader("u_lavorazione"), cmd_SAP_docentry_reader("Priorità"), cmd_SAP_docentry_reader("Materiale"), cmd_SAP_docentry_reader("U_PRG_TIR_MATERIALE"), cmd_SAP_docentry_reader("BHEIGHT1"), "", cmd_SAP_docentry_reader("data_iniz"), cmd_SAP_docentry_reader("data_scad"))
 
         Loop
         cmd_SAP_docentry_reader.Close()
@@ -1479,8 +1481,8 @@ as t30 order by T30.[Priorità]"
         If DataGridView_ODP_TIPO_MACCHINA.Rows(e.RowIndex).Cells(columnName:="catena").Value = "SI" Then
             DataGridView_ODP_TIPO_MACCHINA.Rows(e.RowIndex).DefaultCellStyle.BackColor = Color.Yellow
 
-        ElseIf DataGridView_ODP_TIPO_MACCHINA.Rows(e.RowIndex).Cells(columnName:="Nesting").Value > 0 Then
-            DataGridView_ODP_TIPO_MACCHINA.Rows(e.RowIndex).DefaultCellStyle.BackColor = Color.Aqua
+            'ElseIf DataGridView_ODP_TIPO_MACCHINA.Rows(e.RowIndex).Cells(columnName:="Nesting").Value > 0 Then
+            '    DataGridView_ODP_TIPO_MACCHINA.Rows(e.RowIndex).DefaultCellStyle.BackColor = Color.Aqua
 
         End If
     End Sub
@@ -3267,7 +3269,7 @@ t0.[PartProgramNumber]
     End Sub
 
     Private Sub Dashboard_MU_New_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.BackColor = Homepage.colore_sfondo
+        'Me.BackColor = Homepage.colore_sfondo
     End Sub
 
     Private Sub TextBox17_TextChanged(sender As Object, e As EventArgs)

@@ -44,6 +44,7 @@ Partial Class Form_stato_commesse
         Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle21 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle22 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle23 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
         Me.TabControl_viste = New System.Windows.Forms.TabControl()
         Me.TabPage_lista = New System.Windows.Forms.TabPage()
@@ -132,6 +133,9 @@ Partial Class Form_stato_commesse
         Me.Q_ord = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Data_Imm = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Data_Cons = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Pianificato = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.GroupBox_StatoODP = New System.Windows.Forms.GroupBox()
+        Me.TextBox_StatoODP = New System.Windows.Forms.TextBox()
         Me.TableLayoutPanel3.SuspendLayout()
         Me.TabControl_viste.SuspendLayout()
         Me.TabPage_lista.SuspendLayout()
@@ -157,6 +161,7 @@ Partial Class Form_stato_commesse
         Me.GroupBox7.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox_ord.SuspendLayout()
+        Me.GroupBox_StatoODP.SuspendLayout()
         Me.TableLayoutPanel4.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -216,7 +221,7 @@ Partial Class Form_stato_commesse
         DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.DataGridView_stato_commesse.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.DataGridView_stato_commesse.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView_stato_commesse.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Codice_univoco, Me.Itemcode, Me.Descrizione, Me.Img, Me.Disegno, Me.Documento, Me.ODP, Me.Data_I, Me.Desc_odp, Me.OC, Me.Mag_ord, Me.Mag_ver, Me.Progetto, Me.Sottocommessa, Me.Matr, Me.Desc_matr, Me.Baia, Me.qtapia, Me.qtaTra, Me.qtadatra, Me.Evaso, Me.Stato, Me.Ubic, Me.Ordine_stato, Me.Doc_ord, Me.N_doc, Me.Desc_for, Me.Q_ord, Me.Data_Imm, Me.Data_Cons})
+        Me.DataGridView_stato_commesse.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Codice_univoco, Me.Itemcode, Me.Descrizione, Me.Img, Me.Disegno, Me.Documento, Me.ODP, Me.Pianificato, Me.Data_I, Me.Desc_odp, Me.OC, Me.Mag_ord, Me.Mag_ver, Me.Progetto, Me.Sottocommessa, Me.Matr, Me.Desc_matr, Me.Baia, Me.qtapia, Me.qtaTra, Me.qtadatra, Me.Evaso, Me.Stato, Me.Ubic, Me.Ordine_stato, Me.Doc_ord, Me.N_doc, Me.Desc_for, Me.Q_ord, Me.Data_Imm, Me.Data_Cons})
         Me.DataGridView_stato_commesse.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DataGridView_stato_commesse.Location = New System.Drawing.Point(0, 0)
         Me.DataGridView_stato_commesse.Name = "DataGridView_stato_commesse"
@@ -464,6 +469,7 @@ Partial Class Form_stato_commesse
         Me.TableLayoutPanel1.Controls.Add(Me.GroupBox6, 5, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.GroupBox7, 2, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.GroupBox5, 4, 1)
+        Me.TableLayoutPanel1.Controls.Add(Me.GroupBox_StatoODP, 3, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.GroupBox_ord, 4, 0)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(3, 3)
@@ -727,6 +733,26 @@ Partial Class Form_stato_commesse
         Me.ComboBox_ordinamento.Name = "ComboBox_ordinamento"
         Me.ComboBox_ordinamento.Size = New System.Drawing.Size(123, 21)
         Me.ComboBox_ordinamento.TabIndex = 0
+        '
+        'GroupBox_StatoODP
+        '
+        Me.GroupBox_StatoODP.Controls.Add(Me.TextBox_StatoODP)
+        Me.GroupBox_StatoODP.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GroupBox_StatoODP.Location = New System.Drawing.Point(387, 38)
+        Me.GroupBox_StatoODP.Margin = New System.Windows.Forms.Padding(0)
+        Me.GroupBox_StatoODP.Name = "GroupBox_StatoODP"
+        Me.GroupBox_StatoODP.Size = New System.Drawing.Size(129, 38)
+        Me.GroupBox_StatoODP.TabIndex = 179
+        Me.GroupBox_StatoODP.TabStop = False
+        Me.GroupBox_StatoODP.Text = "Stato ODP"
+        '
+        'TextBox_StatoODP
+        '
+        Me.TextBox_StatoODP.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TextBox_StatoODP.Location = New System.Drawing.Point(3, 16)
+        Me.TextBox_StatoODP.Name = "TextBox_StatoODP"
+        Me.TextBox_StatoODP.Size = New System.Drawing.Size(123, 20)
+        Me.TextBox_StatoODP.TabIndex = 0
         '
         'TableLayoutPanel4
         '
@@ -1015,6 +1041,14 @@ Partial Class Form_stato_commesse
         Me.Data_Cons.HeaderText = "Data C"
         Me.Data_Cons.Name = "Data_Cons"
         '
+        'Pianificato
+        '
+        DataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Pianificato.DefaultCellStyle = DataGridViewCellStyle23
+        Me.Pianificato.FillWeight = 80.0!
+        Me.Pianificato.HeaderText = "Stato ODP"
+        Me.Pianificato.Name = "Pianificato"
+        '
         'Form_stato_commesse
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1061,6 +1095,8 @@ Partial Class Form_stato_commesse
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
         Me.GroupBox_ord.ResumeLayout(False)
+        Me.GroupBox_StatoODP.ResumeLayout(False)
+        Me.GroupBox_StatoODP.PerformLayout()
         Me.TableLayoutPanel4.ResumeLayout(False)
         Me.TableLayoutPanel4.PerformLayout()
         Me.ResumeLayout(False)
@@ -1155,4 +1191,7 @@ Partial Class Form_stato_commesse
     Friend WithEvents Q_ord As DataGridViewTextBoxColumn
     Friend WithEvents Data_Imm As DataGridViewTextBoxColumn
     Friend WithEvents Data_Cons As DataGridViewTextBoxColumn
+    Friend WithEvents Pianificato As DataGridViewTextBoxColumn
+    Friend WithEvents GroupBox_StatoODP As GroupBox
+    Friend WithEvents TextBox_StatoODP As TextBox
 End Class

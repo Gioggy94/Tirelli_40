@@ -41,7 +41,8 @@ Public Class Form_nuovo_ticket
     End Sub
 
     Private Sub Form_Nuovo_Ticket_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.BackColor = Homepage.colore_sfondo
+        'Me.BackColor = Homepage.colore_sfondo
+        ApplicaStile()
         Inserimento_dipendenti()
         Inserimento_dipendenti_assegnato()
 
@@ -53,6 +54,59 @@ Public Class Form_nuovo_ticket
         Combo_Riferimenti.SelectedIndex = 0
         Txt_Id.Text = ""
 
+    End Sub
+
+    Private Sub ApplicaStile()
+        Dim navy As Color = Color.FromArgb(22, 45, 84)
+        Dim navyHover As Color = Color.FromArgb(30, 63, 122)
+        Dim navyDark As Color = Color.FromArgb(10, 26, 55)
+        Dim fontUI As String = "Segoe UI"
+
+        Me.Font = New Font(fontUI, 9)
+
+        ' Pulsante Inserisci — navy bold
+        Cmd_Inserisci.BackColor = navy
+        Cmd_Inserisci.ForeColor = Color.White
+        Cmd_Inserisci.FlatStyle = FlatStyle.Flat
+        Cmd_Inserisci.FlatAppearance.BorderSize = 0
+        Cmd_Inserisci.FlatAppearance.MouseOverBackColor = navyHover
+        Cmd_Inserisci.FlatAppearance.MouseDownBackColor = navyDark
+        Cmd_Inserisci.Font = New Font(fontUI, 14, FontStyle.Bold)
+
+        ' Pulsante Annulla / Chiudi
+        For Each btn As Button In New Button() {Button3}
+            btn.FlatStyle = FlatStyle.Flat
+            btn.FlatAppearance.BorderSize = 1
+            btn.Font = New Font(fontUI, 9)
+        Next
+
+        ' Altri pulsanti (zoom, incolla, aggiungi rif.)
+        For Each btn As Button In New Button() {Cmd_Zoom, Cmd_Incolla, Cmd_Aggiungi_Riferimento}
+            btn.FlatStyle = FlatStyle.Flat
+            btn.FlatAppearance.BorderSize = 1
+            btn.Font = New Font(fontUI, 9)
+        Next
+
+        ' GroupBox header color
+        For Each gb As GroupBox In New GroupBox() {GroupBox1, GroupBox2, GroupBox3, GroupBox4,
+                                                    GroupBox8, GroupBox9, GroupBox10,
+                                                    grpProgetto, grpSottocommessa}
+            gb.Font = New Font(fontUI, 8.5F, FontStyle.Bold)
+            gb.ForeColor = navy
+        Next
+
+        ' Label avviso
+        lblAvvisoMatricola.Font = New Font(fontUI, 9, FontStyle.Bold)
+        lblAvvisoMatricola.ForeColor = Color.DarkRed
+
+        ' Panel avviso
+        pnlAvviso.BackColor = Color.FromArgb(255, 243, 205)
+
+        ' Txt_Commessa — font bold evidenziato
+        Txt_Commessa.Font = New Font(fontUI, 14, FontStyle.Bold)
+
+        ' Combo motivazione — font grande leggibile
+        Combo_Motivazione.Font = New Font(fontUI, 13)
     End Sub
 
     Public Sub Startup()
@@ -518,13 +572,23 @@ FROM OPENQUERY(AS400, '
                         Else
                             If Txt_Commessa.Text.Length < 6 Then
 
-
-
-
                                 MsgBox("Indicare la commessa con almeno 6 caratteri ")
 
-
                             Else
+
+                                ' ── Controllo matricola / progetto+sottocommessa ──
+                                Dim matricolaValida As Boolean = VerificaMatricola()
+                                If Not matricolaValida Then
+                                    ' Matricola non trovata: verifica che progetto E sottocommessa siano compilati
+                                    If txtProgetto.Text.Trim() = "" OrElse txtSottocommessa.Text.Trim() = "" Then
+                                        MsgBox("La matricola non è stata trovata in AS400." & vbCrLf &
+                                               "Compilare i campi Progetto e Sottocommessa, o indicare una matricola corretta.",
+                                               MsgBoxStyle.Exclamation, "Verifica commessa")
+                                        txtProgetto.Focus()
+                                        GoTo FineInserisci
+                                    End If
+                                End If
+                                ' ─────────────────────────────────────────────────
 
                                 If TextBox1.Text = Nothing And ComboBox2.Text = "HELP_DESK" Then
 
@@ -551,7 +615,7 @@ FROM OPENQUERY(AS400, '
             End If
         End If
 
-
+FineInserisci:
     End Sub
 
 
@@ -930,6 +994,65 @@ and t2.id_reparto='" & reparto & "'  order by T0.[lastName] + ' ' + T0.[firstNam
             e.Handled = True
         End If
     End Sub
+
+    ' ─────────────────────────────────────────────────────────────────
+    '  VERIFICA MATRICOLA — chiamata su Leave del campo Txt_Commessa
+    ' ─────────────────────────────────────────────────────────────────
+
+    Private Sub Txt_Commessa_Leave(sender As Object, e As EventArgs) Handles Txt_Commessa.Leave
+        VerificaMatricola()
+    End Sub
+
+    ''' <summary>
+    ''' Verifica che la matricola esista in JGALCOM (AS400).
+    ''' Se non trovata mostra il pannello con i campi Progetto e Sottocommessa.
+    ''' Restituisce True se la matricola è valida, False altrimenti.
+    ''' </summary>
+    Private Function VerificaMatricola() As Boolean
+        Dim matricola As String = Txt_Commessa.Text.Trim().ToUpper()
+
+        If matricola.Length < 6 Then
+            pnlAvviso.Visible = False
+            Txt_Commessa.BackColor = SystemColors.Window
+            Return False
+        End If
+
+        Try
+            Using cnn As New SqlConnection(Homepage.sap_tirelli)
+                cnn.Open()
+                Using cmd As New SqlCommand()
+                    cmd.Connection = cnn
+                    cmd.CommandTimeout = 30
+                    ' Stessa logica di Scheda_commessa_form_principale — JGALCOM su AS400
+                    cmd.CommandText = String.Format(
+                        "SELECT TOP 1 trim(t10.matricola) as matricola " &
+                        "FROM OPENQUERY(AS400, 'SELECT matricola FROM TIR90VIS.JGALCOM " &
+                        "WHERE trim(matricola) = ''{0}''') T10",
+                        matricola.Replace("'", "''"))
+
+                    Dim trovata As Boolean = False
+                    Using rd As SqlDataReader = cmd.ExecuteReader()
+                        trovata = rd.Read()
+                    End Using
+
+                    If trovata Then
+                        pnlAvviso.Visible = False
+                        Txt_Commessa.BackColor = Color.FromArgb(220, 255, 220)
+                        Return True
+                    Else
+                        lblAvvisoMatricola.Text = "⚠  Matricola """ & matricola & """ non trovata in AS400 — compilare Progetto e Sottocommessa, o indica matricola corretta."
+                        pnlAvviso.Visible = True
+                        Txt_Commessa.BackColor = Color.FromArgb(255, 220, 180)
+                        txtProgetto.Focus()
+                        Return False
+                    End If
+                End Using
+            End Using
+        Catch ex As Exception
+            MsgBox("Impossibile verificare la matricola su AS400: " & ex.Message, MsgBoxStyle.Exclamation)
+            Return False
+        End Try
+    End Function
 
     Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
         If CheckBox1.Checked = True Then

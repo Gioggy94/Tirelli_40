@@ -1644,7 +1644,7 @@ FROM [TIRELLISRLDB].[DBO].RDR1 T1 WHERE T1.ITEMCODE='" & par_commessa & "') A ON
             Try
 
 
-                Excel.Sheets(par_nome_foglio).Pictures.Insert("\\tirfs01\00-Tirelli 4.0\Immagini\Flags\" & cmd_SAP_reader_2("u_destinazione") & ".png").Select
+                Excel.Sheets(par_nome_foglio).Pictures.Insert("\\tirfs01\tirelli\00-Tirelli 4.0\Immagini\Flags\" & cmd_SAP_reader_2("u_destinazione") & ".png").Select
                 With Excel.Selection
                     '.ShapeRange.LockAspectRatio = msoTrue
 
@@ -1655,7 +1655,7 @@ FROM [TIRELLISRLDB].[DBO].RDR1 T1 WHERE T1.ITEMCODE='" & par_commessa & "') A ON
                 End With
             Catch ex As Exception
 
-                MsgBox("Bandiera " & cmd_SAP_reader_2("u_destinazione") & " non presente. Inserire in \\tirfs01\00-Tirelli 4.0\Immagini\Flags\")
+                MsgBox("Bandiera " & cmd_SAP_reader_2("u_destinazione") & " non presente. Inserire in \\tirfs01\tirelli\00-Tirelli 4.0\Immagini\Flags\")
             End Try
 
         End If

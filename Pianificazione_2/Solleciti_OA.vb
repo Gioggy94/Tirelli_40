@@ -12,9 +12,17 @@ Public Class Solleciti_OA
 
     Private Sub Solleciti_OA_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         CreaTabellaFornitatoriSollecito()
+        CreaTabellaLog()
         CaricaFornitatoriSollecito()
         ImpostaListaFornitori()
         ImpostaGriglia()
+        ImpostaGrigliaStatistiche()
+        ImpostaGrigliaLog()
+        AggiornaLog()
+    End Sub
+
+    Private Sub Solleciti_OA_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+        scStatistiche.SplitterDistance = scStatistiche.Width \ 2
     End Sub
 
     ' ─────────────────────────────────────────────────────────
@@ -31,6 +39,7 @@ Public Class Solleciti_OA
         lvFornitori.Columns.Add("Fornitore", 185)
         lvFornitori.Columns.Add("Righe", 50, HorizontalAlignment.Right)
         lvFornitori.Columns.Add("Scad.", 50, HorizontalAlignment.Right)
+        lvFornitori.Columns.Add("% Sc.", 52, HorizontalAlignment.Right)
     End Sub
 
     Private Sub ImpostaGriglia()
@@ -65,15 +74,17 @@ Public Class Solleciti_OA
                           End Sub
 
         aggiungiCol("colNumdoc", "N. Ordine", 95)
+        aggiungiCol("colAcquisitore", "Acquisitore", 100)
+        aggiungiCol("colCommessa", "Commessa", 90)
+        aggiungiCol("colSottocommessa", "Sottocom.", 75)
         aggiungiCol("colMatricola", "Matricola", 85)
         aggiungiCol("colCodart", "Codice", 105)
         aggiungiCol("colDesCode", "Descrizione", 215)
-        aggiungiCol("colDataRichiesta", "Data rich.", 95)
         aggiungiCol("colDataImmissione", "Data ord.", 85)
+        aggiungiCol("colDataRichiesta", "Data consegna", 95)
         aggiungiCol("colQtaOrd", "Q.ord.", 70)
         aggiungiCol("colQtaEnt", "Q.ric.", 70)
         aggiungiCol("colQtaRes", "Q.res.", 70)
-        aggiungiCol("colIdComm", "Commessa", 90)
         aggiungiCol("colDisegno", "Disegno", 105)
     End Sub
 
@@ -114,12 +125,14 @@ Public Class Solleciti_OA
             CMD.Connection = CNN
             CMD.CommandTimeout = 120
             CMD.CommandText =
-                "SELECT * FROM OPENQUERY(AS400, " &
-                "'SELECT numdoc, codart, des_code, data_immissione, data_richiesta, " &
-                " qta_ord, qta_ent, evaso, id_comm,matricola, cod_forn, desc_for, disegno " &
-                " FROM TIR90VIS.JGALord t0 " &
-                " WHERE DOC = ''OA'' and (substring(codart,1,1)=''C'' or substring(codart,1,1)=''D'' or substring(codart,1,1)=''0'')  " &
-                " AND evaso <> ''S''')"
+                "SELECT * FROM OPENQUERY(AS400,
+'SELECT DOC, NUMDOC, CODART, DES_CODE, DATA_IMMISSIONE, DATA_RICHIESTA,
+ QTA_ORD, QTA_ENT, EVASO, ID_COMM, MATRICOLA, COD_FORN, DESC_FOR,
+ MAG_ORD, STAMPATO, DISEGNO, COMMESSA, SOTTOCOMM, DIP_INS, ACQUISITORE
+ FROM TIR90VIS.JGALORD_03
+ WHERE DOC = ''OA'' and (substring(codart,1,1)=''0'' or substring(codart,1,1)=''C'' or substring(codart,1,1)=''D'') 
+   AND EVASO <> ''S'''  -- Qui servono 3 apici totali
+)"
             Dim DA As New SqlDataAdapter(CMD)
             _datiOA = New DataTable
             DA.Fill(_datiOA)
@@ -146,11 +159,13 @@ Public Class Solleciti_OA
         Dim soloScaduti = chkSoloScaduti.Checked
         Dim soloSollecito = chkSoloSollecito.Checked
         Dim filtroForn = If(cmbFiltroFornitore.SelectedIndex > 0, CStr(cmbFiltroFornitore.SelectedItem), "")
+        Dim filtroAcq = If(cmbFiltroAcquisitore.SelectedIndex > 0, CStr(cmbFiltroAcquisitore.SelectedItem), "")
 
         Dim gruppi = _datiOA.AsEnumerable().
             Where(Function(r)
-                      If filtroComm <> "" AndAlso Not r("id_comm").ToString().Trim().ToUpper().Contains(filtroComm) Then Return False
+                      If filtroComm <> "" AndAlso Not r("commessa").ToString().Trim().ToUpper().Contains(filtroComm) Then Return False
                       If filtroForn <> "" AndAlso r("desc_for").ToString().Trim() <> filtroForn Then Return False
+                      If filtroAcq <> "" AndAlso r("acquisitore").ToString().Trim() <> filtroAcq Then Return False
                       Return True
                   End Function).
             GroupBy(Function(r) r("cod_forn").ToString().Trim()).
@@ -163,7 +178,8 @@ Public Class Solleciti_OA
                            .CodForn = g.Key,
                            .DescFor = g.First()("desc_for").ToString().Trim(),
                            .TotRighe = g.Count(),
-                           .RigheScadute = scadute
+                           .RigheScadute = scadute,
+                           .PctScadute = If(g.Count() > 0, Math.Round(scadute * 100.0 / g.Count(), 0), 0.0)
                        }
                    End Function).
             Where(Function(f) (Not soloScaduti OrElse f.RigheScadute > 0) AndAlso
@@ -183,6 +199,18 @@ Public Class Solleciti_OA
             cmbFiltroFornitore.SelectedIndex = 0
         End If
 
+        ' Rigenera combo acquisitore (solo all'avvio o su richiesta esplicita)
+        If cmbFiltroAcquisitore.Items.Count <= 1 Then
+            cmbFiltroAcquisitore.Items.Clear()
+            cmbFiltroAcquisitore.Items.Add("(tutti)")
+            For Each acq In _datiOA.AsEnumerable().
+                    Select(Function(r) r("acquisitore").ToString().Trim()).
+                    Distinct().OrderBy(Function(s) s)
+                cmbFiltroAcquisitore.Items.Add(acq)
+            Next
+            cmbFiltroAcquisitore.SelectedIndex = 0
+        End If
+
         lvFornitori.Items.Clear()
         For Each f In gruppi
             Dim inSollecito = _fornSollecito.Contains(f.CodForn)
@@ -190,6 +218,7 @@ Public Class Solleciti_OA
             item.SubItems.Add(f.DescFor & " [" & f.CodForn & "]")
             item.SubItems.Add(f.TotRighe.ToString())
             item.SubItems.Add(f.RigheScadute.ToString())
+            item.SubItems.Add(If(f.TotRighe > 0, f.PctScadute.ToString("F0") & "%", "-"))
             item.Tag = f.CodForn
             If inSollecito Then
                 item.BackColor = Color.FromArgb(230, 255, 230)
@@ -199,6 +228,7 @@ Public Class Solleciti_OA
             lvFornitori.Items.Add(item)
         Next
         lblConteggioFornitori.Text = gruppi.Count & " fornitori  (" & _fornSollecito.Count & " da sollecitare)"
+        AggiornaStatistiche()
     End Sub
 
     ' ─────────────────────────────────────────────────────────
@@ -218,10 +248,13 @@ Public Class Solleciti_OA
         Dim oggi = DateTime.Today
         Dim filtroComm = txtFiltroCommessa.Text.Trim().ToUpper()
 
+        Dim filtroAcq = If(cmbFiltroAcquisitore.SelectedIndex > 0, CStr(cmbFiltroAcquisitore.SelectedItem), "")
+
         Dim righe = _datiOA.AsEnumerable().
             Where(Function(r)
                       If r("cod_forn").ToString().Trim() <> codForn Then Return False
-                      If filtroComm <> "" AndAlso Not r("id_comm").ToString().Trim().ToUpper().Contains(filtroComm) Then Return False
+                      If filtroComm <> "" AndAlso Not r("commessa").ToString().Trim().ToUpper().Contains(filtroComm) Then Return False
+                      If filtroAcq <> "" AndAlso r("acquisitore").ToString().Trim() <> filtroAcq Then Return False
                       Return True
                   End Function).
             OrderBy(Function(r) r("data_richiesta").ToString()).
@@ -243,15 +276,17 @@ Public Class Solleciti_OA
             Dim idx = dgvOrdini.Rows.Add(
                 True,
                 r("numdoc").ToString().Trim(),
+                r("acquisitore").ToString().Trim(),
+                r("commessa").ToString().Trim(),
+                r("sottocomm").ToString().Trim(),
                 r("matricola").ToString().Trim(),
                 r("codart").ToString().Trim(),
                 r("des_code").ToString().Trim(),
-                If(dataRich.HasValue, dataRich.Value.ToString("dd/MM/yyyy"), ""),
                 If(dataImmiss.HasValue, dataImmiss.Value.ToString("dd/MM/yyyy"), ""),
+                If(dataRich.HasValue, dataRich.Value.ToString("dd/MM/yyyy"), ""),
                 qtaOrd.ToString("N0"),
                 qtaEnt.ToString("N0"),
                 (qtaOrd - qtaEnt).ToString("N0"),
-                r("id_comm").ToString().Trim(),
                 r("disegno").ToString().Trim()
             )
 
@@ -314,7 +349,7 @@ Public Class Solleciti_OA
         hsb.AppendLine("<p>con la presente Vi sollecitiamo la consegna dei seguenti ordini di acquisto ancora in attesa di evasione:</p>")
         hsb.AppendLine("<table border='1' cellpadding='5' cellspacing='0' style='border-collapse:collapse;font-size:10pt;'>")
         hsb.AppendLine("<tr style='background-color:#1F5FAF;color:white;font-weight:bold;'>")
-        For Each h In {"N. Ordine", "Matricola", "Codice", "Disegno", "Descrizione", "Data ordine", "Data consegna", "Q.ord.", "Q.ric.", "Q.res.", "Commessa"}
+        For Each h In {"N. Ordine", "Commessa", "Sottocom.", "Matricola", "Codice", "Disegno", "Descrizione", "Data ordine", "Data consegna", "Q.ord.", "Q.ric.", "Q.res."}
             hsb.AppendLine($"<th style='padding:5px 8px;'>{h}</th>")
         Next
         hsb.AppendLine("</tr>")
@@ -324,13 +359,15 @@ Public Class Solleciti_OA
         txtSb.AppendLine($"A: {descFor}")
         txtSb.AppendLine("Oggetto: " & txtOggetto.Text)
         txtSb.AppendLine()
-        txtSb.AppendLine(String.Format("{0,-10} {1,-10} {2,-12} {3,-28} {4,-12} {5,-12} {6,6} {7,6} {8,6}  {9}",
-                                        "N.Ordine", "Matricola", "Codice", "Descrizione",
-                                        "Dt.Ordine", "Dt.Consegna", "Q.ord", "Q.ric", "Q.res", "Commessa"))
-        txtSb.AppendLine(New String("-"c, 110))
+        txtSb.AppendLine(String.Format("{0,-10} {1,-10} {2,-8} {3,-10} {4,-12} {5,-26} {6,-12} {7,-12} {8,6} {9,6} {10,6}",
+                                        "N.Ordine", "Commessa", "Sottocom", "Matricola", "Codice", "Descrizione",
+                                        "Dt.Ordine", "Dt.Consegna", "Q.ord", "Q.ric", "Q.res"))
+        txtSb.AppendLine(New String("-"c, 115))
 
         For Each row In righeSelezionate
             Dim numdoc = If(TryCast(row.Cells("colNumdoc").Value, String), "")
+            Dim comm = If(TryCast(row.Cells("colCommessa").Value, String), "")
+            Dim sotto = If(TryCast(row.Cells("colSottocommessa").Value, String), "")
             Dim matr = If(TryCast(row.Cells("colMatricola").Value, String), "")
             Dim codart = If(TryCast(row.Cells("colCodart").Value, String), "")
             Dim disegno = If(TryCast(row.Cells("colDisegno").Value, String), "")
@@ -340,7 +377,6 @@ Public Class Solleciti_OA
             Dim qtaOrd = If(TryCast(row.Cells("colQtaOrd").Value, String), "")
             Dim qtaEnt = If(TryCast(row.Cells("colQtaEnt").Value, String), "")
             Dim qtaRes = If(TryCast(row.Cells("colQtaRes").Value, String), "")
-            Dim idComm = If(TryCast(row.Cells("colIdComm").Value, String), "")
 
             ' Scaduta = data consegna in passato
             Dim dtConsDate As Date
@@ -348,14 +384,14 @@ Public Class Solleciti_OA
             Dim rowBg = If(scaduta, "background-color:#FFD0D0;", "")
 
             hsb.AppendLine($"<tr style='{rowBg}'>")
-            For Each v In {numdoc, matr, codart, disegno, desc, dtOrd, dtCons, qtaOrd, qtaEnt, qtaRes, idComm}
+            For Each v In {numdoc, comm, sotto, matr, codart, disegno, desc, dtOrd, dtCons, qtaOrd, qtaEnt, qtaRes}
                 hsb.AppendLine($"<td style='padding:4px 8px;'>{Net.WebUtility.HtmlEncode(v)}</td>")
             Next
             hsb.AppendLine("</tr>")
 
-            Dim descShort = If(desc.Length > 26, desc.Substring(0, 26), desc)
-            txtSb.AppendLine(String.Format("{0,-10} {1,-10} {2,-12} {3,-28} {4,-12} {5,-12} {6,6} {7,6} {8,6}  {9}",
-                                            numdoc, matr, codart, descShort, dtOrd, dtCons, qtaOrd, qtaEnt, qtaRes, idComm))
+            Dim descShort = If(desc.Length > 24, desc.Substring(0, 24), desc)
+            txtSb.AppendLine(String.Format("{0,-10} {1,-10} {2,-8} {3,-10} {4,-12} {5,-26} {6,-12} {7,-12} {8,6} {9,6} {10,6}",
+                                            numdoc, comm, sotto, matr, codart, descShort, dtOrd, dtCons, qtaOrd, qtaEnt, qtaRes))
         Next
 
         hsb.AppendLine("</table>")
@@ -366,6 +402,190 @@ Public Class Solleciti_OA
         _htmlAnteprima = hsb.ToString()
         rtbAnteprima.Text = txtSb.ToString()
     End Sub
+
+    ' ─────────────────────────────────────────────────────────
+    ' Setup griglia statistiche
+    ' ─────────────────────────────────────────────────────────
+
+    Sub ImpostaGrigliaStatistiche()
+        dgvStatAcquisitore.Columns.Clear()
+        dgvStatAcquisitore.AutoGenerateColumns = False
+        dgvStatAcquisitore.AllowUserToAddRows = False
+        dgvStatAcquisitore.ReadOnly = True
+        dgvStatAcquisitore.RowHeadersVisible = False
+        dgvStatAcquisitore.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+        dgvStatAcquisitore.ColumnHeadersDefaultCellStyle.BackColor = Color.SteelBlue
+        dgvStatAcquisitore.ColumnHeadersDefaultCellStyle.ForeColor = Color.White
+        dgvStatAcquisitore.EnableHeadersVisualStyles = False
+        dgvStatAcquisitore.BackgroundColor = Color.White
+        dgvStatAcquisitore.BorderStyle = BorderStyle.None
+
+        Dim addCol = Sub(nome As String, header As String, larghezza As Integer, align As DataGridViewContentAlignment)
+                         Dim c As New DataGridViewTextBoxColumn
+                         c.Name = nome
+                         c.HeaderText = header
+                         c.Width = larghezza
+                         c.ReadOnly = True
+                         c.DefaultCellStyle.Alignment = align
+                         dgvStatAcquisitore.Columns.Add(c)
+                     End Sub
+
+        addCol("colAcq", "Acquisitore", 180, DataGridViewContentAlignment.MiddleLeft)
+        addCol("colAcqTot", "Tot. Righe", 80, DataGridViewContentAlignment.MiddleRight)
+        addCol("colAcqScad", "Scadute", 75, DataGridViewContentAlignment.MiddleRight)
+        addCol("colAcqPct", "% Scad.", 70, DataGridViewContentAlignment.MiddleRight)
+    End Sub
+
+    ' ─────────────────────────────────────────────────────────
+    ' Setup e caricamento griglia log solleciti
+    ' ─────────────────────────────────────────────────────────
+
+    Sub ImpostaGrigliaLog()
+        dgvLog.Columns.Clear()
+        dgvLog.AutoGenerateColumns = False
+        dgvLog.AllowUserToAddRows = False
+        dgvLog.ReadOnly = True
+        dgvLog.RowHeadersVisible = False
+        dgvLog.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+        dgvLog.ColumnHeadersDefaultCellStyle.BackColor = Color.SteelBlue
+        dgvLog.ColumnHeadersDefaultCellStyle.ForeColor = Color.White
+        dgvLog.EnableHeadersVisualStyles = False
+        dgvLog.BackgroundColor = Color.White
+        dgvLog.BorderStyle = BorderStyle.None
+        dgvLog.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(240, 248, 255)
+
+        Dim addCol = Sub(nome As String, header As String, larghezza As Integer, align As DataGridViewContentAlignment)
+                         Dim c As New DataGridViewTextBoxColumn
+                         c.Name = nome
+                         c.HeaderText = header
+                         c.Width = larghezza
+                         c.ReadOnly = True
+                         c.DefaultCellStyle.Alignment = align
+                         dgvLog.Columns.Add(c)
+                     End Sub
+
+        addCol("logDataOra", "Data / Ora", 130, DataGridViewContentAlignment.MiddleCenter)
+        addCol("logUtente", "Utente", 110, DataGridViewContentAlignment.MiddleLeft)
+        addCol("logCodForn", "Cod. Forn.", 100, DataGridViewContentAlignment.MiddleLeft)
+        addCol("logDescFor", "Fornitore", 200, DataGridViewContentAlignment.MiddleLeft)
+        addCol("logEmail", "Email", 210, DataGridViewContentAlignment.MiddleLeft)
+        addCol("logNRighe", "N. Righe", 70, DataGridViewContentAlignment.MiddleRight)
+    End Sub
+
+    Sub AggiornaLog()
+        Try
+            dgvLog.Rows.Clear()
+            Using cn As New SqlConnection(Homepage.sap_tirelli)
+                cn.Open()
+                Dim sql =
+                    "SELECT TOP 200 DataOra, Utente, CodForn, DescFor, Email, NRighe
+                     FROM [Tirelli_40].dbo.SollecitiLog
+                     ORDER BY DataOra DESC"
+                Using cmd As New SqlCommand(sql, cn)
+                    Using rd = cmd.ExecuteReader()
+                        While rd.Read()
+                            dgvLog.Rows.Add(
+                                CDate(rd("DataOra")).ToString("dd/MM/yyyy HH:mm"),
+                                rd("Utente").ToString(),
+                                rd("CodForn").ToString(),
+                                rd("DescFor").ToString(),
+                                rd("Email").ToString(),
+                                rd("NRighe").ToString())
+                        End While
+                    End Using
+                End Using
+            End Using
+        Catch
+        End Try
+    End Sub
+
+    ' ─────────────────────────────────────────────────────────
+    ' Statistiche scaduti globali e per acquisitore
+    ' ─────────────────────────────────────────────────────────
+
+    Sub AggiornaStatistiche()
+        If _datiOA Is Nothing Then
+            lblStatGenerale.Text = ""
+            dgvStatAcquisitore.Rows.Clear()
+            Return
+        End If
+
+        Dim oggi = DateTime.Today
+        Dim filtroComm = txtFiltroCommessa.Text.Trim().ToUpper()
+        Dim filtroForn = If(cmbFiltroFornitore.SelectedIndex > 0, CStr(cmbFiltroFornitore.SelectedItem), "")
+        Dim filtroAcq = If(cmbFiltroAcquisitore.SelectedIndex > 0, CStr(cmbFiltroAcquisitore.SelectedItem), "")
+
+        Dim righe = _datiOA.AsEnumerable().
+            Where(Function(r)
+                      If filtroComm <> "" AndAlso Not r("commessa").ToString().Trim().ToUpper().Contains(filtroComm) Then Return False
+                      If filtroForn <> "" AndAlso r("desc_for").ToString().Trim() <> filtroForn Then Return False
+                      If filtroAcq <> "" AndAlso r("acquisitore").ToString().Trim() <> filtroAcq Then Return False
+                      Return True
+                  End Function).ToList()
+
+        Dim totRighe = righe.Count
+        Dim totScadute = righe.Where(Function(r)
+                                         Dim dr = ParseDataAS400(r("data_richiesta"))
+                                         Return dr.HasValue AndAlso dr.Value < oggi
+                                     End Function).Count()
+        Dim pctTot = If(totRighe > 0, Math.Round(totScadute * 100.0 / totRighe, 1), 0.0)
+
+        lblStatGenerale.Text = $"Totale righe OA: {totRighe}     Scadute: {totScadute}     ({pctTot}%)"
+
+        Dim gruppiAcq = righe.
+            GroupBy(Function(r) r("acquisitore").ToString().Trim()).
+            Select(Function(g)
+                       Dim scadute = g.Where(Function(r)
+                                                 Dim dr = ParseDataAS400(r("data_richiesta"))
+                                                 Return dr.HasValue AndAlso dr.Value < oggi
+                                             End Function).Count()
+                       Return New With {
+                           .Acquisitore = If(g.Key = "", "(non assegnato)", g.Key),
+                           .TotRighe = g.Count(),
+                           .Scadute = scadute,
+                           .Pct = If(g.Count() > 0, Math.Round(scadute * 100.0 / g.Count(), 1), 0.0)
+                       }
+                   End Function).
+            OrderByDescending(Function(a) a.Scadute).
+            ToList()
+
+        dgvStatAcquisitore.Rows.Clear()
+        For Each a In gruppiAcq
+            Dim idx = dgvStatAcquisitore.Rows.Add(a.Acquisitore, a.TotRighe, a.Scadute, a.Pct.ToString("F1") & "%")
+            If a.Scadute > 0 Then
+                dgvStatAcquisitore.Rows(idx).DefaultCellStyle.BackColor = Color.FromArgb(255, 215, 215)
+            End If
+        Next
+    End Sub
+
+    ' ─────────────────────────────────────────────────────────
+    ' Lookup email fornitore da AS400 (VISTA_CONTATTI_FORNITORI)
+    ' ─────────────────────────────────────────────────────────
+
+    Private Function LookupEmailFornitore(codForn As String) As String
+        If String.IsNullOrWhiteSpace(codForn) Then Return ""
+        Try
+            Using cnn As New SqlConnection(Homepage.sap_tirelli)
+                cnn.Open()
+                Using cmd As New SqlCommand()
+                    cmd.Connection = cnn
+                    cmd.CommandTimeout = 30
+                    cmd.CommandText = String.Format(
+                        "SELECT TOP 1 INDIRIZZO_EMAIL " &
+                        "FROM OPENQUERY(AS400, " &
+                        "'SELECT INDIRIZZO_EMAIL FROM TIR90VIS.VISTA_CONTATTI_FORNITORI " &
+                        " WHERE MODALITA_SPEDIZIONE=''P'' AND trim(CONTO_CONTABILE)=''{0}''')",
+                        codForn.Trim().Replace("'", "''"))
+                    Dim result = cmd.ExecuteScalar()
+                    If result IsNot Nothing AndAlso Not IsDBNull(result) Then
+                        Return result.ToString().Trim()
+                    End If
+                End Using
+            End Using
+        Catch
+        End Try
+        Return ""
+    End Function
 
     ' ─────────────────────────────────────────────────────────
     ' Prepara mail Outlook per il fornitore selezionato
@@ -379,12 +599,29 @@ Public Class Solleciti_OA
         Try
             Dim objOutlook As Object = CreateObject("Outlook.Application")
             Dim objMail As Object = objOutlook.CreateItem(0)
+            Dim accountAcquisti As Object = Nothing
+            For Each acc As Object In objOutlook.Session.Accounts
+                If acc.SmtpAddress.ToLower() = "acquisti@tirelli.net" Then
+                    accountAcquisti = acc
+                    Exit For
+                End If
+            Next
+            Dim nRigheSelezionate As Integer = 0
+            For Each row As DataGridViewRow In dgvOrdini.Rows
+                If row.Cells("colSel").Value IsNot Nothing AndAlso CBool(row.Cells("colSel").Value) Then
+                    nRigheSelezionate += 1
+                End If
+            Next
             With objMail
+                If accountAcquisti IsNot Nothing Then .SendUsingAccount = accountAcquisti
                 .To = txtEmail.Text.Trim()
+                .BCC = "giovanni.tirelli@tirelli.net; stefano.bruno@tirelli.net"
                 .Subject = txtOggetto.Text
                 .HTMLBody = _htmlAnteprima
                 .Display()
             End With
+            LogSollecito(_codFornSelezionato, _descFornSelezionato, txtEmail.Text.Trim(), nRigheSelezionate)
+            AggiornaLog()
             objMail = Nothing
             objOutlook = Nothing
         Catch ex As Exception
@@ -424,11 +661,13 @@ Public Class Solleciti_OA
         txtOggetto.Text = "Sollecito ordini di acquisto - Tirelli S.r.l."
 
         For Each item As ListViewItem In itemsDaElaborare
+            Dim codForn = item.Tag.ToString()
             _descFornSelezionato = item.Text
-            AggiornaTabellaOrdini(item.Tag.ToString())
+            AggiornaTabellaOrdini(codForn)
             For Each row As DataGridViewRow In dgvOrdini.Rows
                 row.Cells("colSel").Value = True
             Next
+            txtEmail.Text = LookupEmailFornitore(codForn)
             AggiornaAnteprima()
             PreparaMail()
         Next
@@ -447,11 +686,24 @@ Public Class Solleciti_OA
         CaricaDati()
     End Sub
 
+    Private Sub btnAggiornaLog_Click(sender As Object, e As EventArgs) Handles btnAggiornaLog.Click
+        AggiornaLog()
+    End Sub
+
     Private Sub lvFornitori_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lvFornitori.SelectedIndexChanged
         If lvFornitori.SelectedItems.Count = 0 Then Return
         Dim item = lvFornitori.SelectedItems(0)
+        Dim codForn = item.Tag.ToString()
         _descFornSelezionato = item.Text
-        AggiornaTabellaOrdini(item.Tag.ToString())
+        AggiornaTabellaOrdini(codForn)
+        ' Precompila destinatario email da AS400
+        Dim email = LookupEmailFornitore(codForn)
+        txtEmail.Text = email
+        If email = "" Then
+            txtEmail.BackColor = System.Drawing.Color.FromArgb(255, 230, 230)  ' rosato se non trovata
+        Else
+            txtEmail.BackColor = System.Drawing.Color.FromArgb(230, 255, 230)  ' verde se trovata
+        End If
     End Sub
 
     Private Sub btnSelTutti_Click(sender As Object, e As EventArgs) Handles btnSelTutti.Click
@@ -477,7 +729,32 @@ Public Class Solleciti_OA
     End Sub
 
     Private Sub btnPreparaMail_Click(sender As Object, e As EventArgs) Handles btnPreparaMail.Click
-        PreparaMail()
+        If lvFornitori.SelectedItems.Count <= 1 Then
+            ' Comportamento normale: un solo fornitore
+            PreparaMail()
+        Else
+            ' Più fornitori selezionati → una bozza per ciascuno
+            Dim savedCod = _codFornSelezionato
+            Dim savedDesc = _descFornSelezionato
+            Dim savedEmail = txtEmail.Text
+
+            For Each item As ListViewItem In lvFornitori.SelectedItems
+                Dim codForn = item.Tag.ToString()
+                _descFornSelezionato = item.SubItems(1).Text
+                AggiornaTabellaOrdini(codForn)
+                For Each row As DataGridViewRow In dgvOrdini.Rows
+                    row.Cells("colSel").Value = True
+                Next
+                txtEmail.Text = LookupEmailFornitore(codForn)
+                AggiornaAnteprima()
+                PreparaMail()
+            Next
+
+            ' Ripristina selezione precedente
+            _descFornSelezionato = savedDesc
+            txtEmail.Text = savedEmail
+            If savedCod <> "" Then AggiornaTabellaOrdini(savedCod)
+        End If
     End Sub
 
     Private Sub btnTutteMail_Click(sender As Object, e As EventArgs) Handles btnTutteMail.Click
@@ -512,6 +789,10 @@ Public Class Solleciti_OA
         If _datiOA IsNot Nothing Then AggiornaTabellaFornitori()
     End Sub
 
+    Private Sub cmbFiltroAcquisitore_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbFiltroAcquisitore.SelectedIndexChanged
+        If _datiOA IsNot Nothing Then AggiornaTabellaFornitori()
+    End Sub
+
     Private Sub btnToggleSollecito_Click(sender As Object, e As EventArgs) Handles btnToggleSollecito.Click
         If lvFornitori.SelectedItems.Count = 0 Then
             MessageBox.Show("Seleziona un fornitore dalla lista.", "Attenzione", MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -536,6 +817,47 @@ Public Class Solleciti_OA
     ' ─────────────────────────────────────────────────────────
     ' DB — Fornitori da sollecitare
     ' ─────────────────────────────────────────────────────────
+
+    Private Sub CreaTabellaLog()
+        Try
+            Using cn As New SqlConnection(Homepage.sap_tirelli)
+                cn.Open()
+                Dim sql =
+                    "IF NOT EXISTS (SELECT * FROM [Tirelli_40].sys.tables WHERE name='SollecitiLog')
+                     CREATE TABLE [Tirelli_40].dbo.SollecitiLog (
+                         Id          int IDENTITY(1,1) PRIMARY KEY,
+                         DataOra     datetime NOT NULL DEFAULT GETDATE(),
+                         Utente      nvarchar(100) NOT NULL,
+                         CodForn     nvarchar(30),
+                         DescFor     nvarchar(250),
+                         Email       nvarchar(250),
+                         NRighe      int
+                     )"
+                Call New SqlCommand(sql, cn).ExecuteNonQuery()
+            End Using
+        Catch
+        End Try
+    End Sub
+
+    Private Sub LogSollecito(codForn As String, descFor As String, email As String, nRighe As Integer)
+        Try
+            Using cn As New SqlConnection(Homepage.sap_tirelli)
+                cn.Open()
+                Dim sql =
+                    "INSERT INTO [Tirelli_40].dbo.SollecitiLog (Utente, CodForn, DescFor, Email, NRighe)
+                     VALUES (@Utente, @CodForn, @DescFor, @Email, @NRighe)"
+                Using cmd As New SqlCommand(sql, cn)
+                    cmd.Parameters.AddWithValue("@Utente", Environment.UserName)
+                    cmd.Parameters.AddWithValue("@CodForn", If(codForn, ""))
+                    cmd.Parameters.AddWithValue("@DescFor", If(descFor, ""))
+                    cmd.Parameters.AddWithValue("@Email", If(email, ""))
+                    cmd.Parameters.AddWithValue("@NRighe", nRighe)
+                    cmd.ExecuteNonQuery()
+                End Using
+            End Using
+        Catch
+        End Try
+    End Sub
 
     Private Sub CreaTabellaFornitatoriSollecito()
         Try

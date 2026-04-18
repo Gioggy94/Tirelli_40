@@ -230,10 +230,15 @@ Partial Class Scheda_tecnica
         Me.GroupBox18 = New System.Windows.Forms.GroupBox()
         Me.TextBox8 = New System.Windows.Forms.TextBox()
         Me.GroupBox70 = New System.Windows.Forms.GroupBox()
+        Me.dgvRicambiScheda = New System.Windows.Forms.DataGridView()
+        Me.btnEliminaLista = New System.Windows.Forms.Button()
+        Me.btnImportaLista = New System.Windows.Forms.Button()
         Me.GroupBox71 = New System.Windows.Forms.GroupBox()
         Me.TextBox14 = New System.Windows.Forms.TextBox()
         Me.ComboBox36 = New System.Windows.Forms.ComboBox()
         Me.CheckBox50 = New System.Windows.Forms.CheckBox()
+        Me.btnApriRicambi = New System.Windows.Forms.Button()
+        Me.lblStatoRicambi = New System.Windows.Forms.Label()
         Me.GroupBox109 = New System.Windows.Forms.GroupBox()
         Me.ComboBox66 = New System.Windows.Forms.ComboBox()
         Me.GroupBox112 = New System.Windows.Forms.GroupBox()
@@ -592,6 +597,7 @@ Partial Class Scheda_tecnica
         Me.TableLayoutPanel21.SuspendLayout()
         Me.GroupBox18.SuspendLayout()
         Me.GroupBox70.SuspendLayout()
+        CType(Me.dgvRicambiScheda, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox71.SuspendLayout()
         Me.GroupBox109.SuspendLayout()
         Me.GroupBox112.SuspendLayout()
@@ -2729,12 +2735,86 @@ Partial Class Scheda_tecnica
         Me.GroupBox70.Controls.Add(Me.GroupBox71)
         Me.GroupBox70.Controls.Add(Me.ComboBox36)
         Me.GroupBox70.Controls.Add(Me.CheckBox50)
+        Me.GroupBox70.Controls.Add(Me.lblStatoRicambi)
+        Me.GroupBox70.Controls.Add(Me.btnApriRicambi)
+        Me.GroupBox70.Controls.Add(Me.dgvRicambiScheda)
+        Me.GroupBox70.Controls.Add(Me.btnEliminaLista)
+        Me.GroupBox70.Controls.Add(Me.btnImportaLista)
         Me.GroupBox70.Location = New System.Drawing.Point(231, 201)
         Me.GroupBox70.Name = "GroupBox70"
-        Me.GroupBox70.Size = New System.Drawing.Size(226, 131)
+        Me.GroupBox70.Size = New System.Drawing.Size(226, 338)
         Me.GroupBox70.TabIndex = 27
         Me.GroupBox70.TabStop = False
         Me.GroupBox70.Text = "Ricambi"
+        '
+        'lblStatoRicambi
+        '
+        Me.lblStatoRicambi.AutoSize = True
+        Me.lblStatoRicambi.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Italic)
+        Me.lblStatoRicambi.ForeColor = System.Drawing.Color.Gray
+        Me.lblStatoRicambi.Location = New System.Drawing.Point(6, 118)
+        Me.lblStatoRicambi.Name = "lblStatoRicambi"
+        Me.lblStatoRicambi.Size = New System.Drawing.Size(100, 13)
+        Me.lblStatoRicambi.TabIndex = 28
+        Me.lblStatoRicambi.Text = "Nessuna riga salvata"
+        '
+        'btnApriRicambi
+        '
+        Me.btnApriRicambi.FlatAppearance.BorderSize = 0
+        Me.btnApriRicambi.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnApriRicambi.Font = New System.Drawing.Font("Segoe UI", 8.5!, System.Drawing.FontStyle.Bold)
+        Me.btnApriRicambi.Location = New System.Drawing.Point(6, 135)
+        Me.btnApriRicambi.Name = "btnApriRicambi"
+        Me.btnApriRicambi.Size = New System.Drawing.Size(160, 26)
+        Me.btnApriRicambi.TabIndex = 29
+        Me.btnApriRicambi.Text = "Apri lista ricambi →"
+        Me.btnApriRicambi.UseVisualStyleBackColor = True
+        '
+        'dgvRicambiScheda
+        '
+        Me.dgvRicambiScheda.AllowUserToAddRows = False
+        Me.dgvRicambiScheda.AllowUserToDeleteRows = False
+        Me.dgvRicambiScheda.AllowUserToResizeRows = False
+        Me.dgvRicambiScheda.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.dgvRicambiScheda.BackgroundColor = System.Drawing.Color.White
+        Me.dgvRicambiScheda.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.dgvRicambiScheda.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvRicambiScheda.Location = New System.Drawing.Point(6, 168)
+        Me.dgvRicambiScheda.Name = "dgvRicambiScheda"
+        Me.dgvRicambiScheda.ReadOnly = True
+        Me.dgvRicambiScheda.RowHeadersVisible = False
+        Me.dgvRicambiScheda.RowTemplate.Height = 18
+        Me.dgvRicambiScheda.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.dgvRicambiScheda.Size = New System.Drawing.Size(212, 108)
+        Me.dgvRicambiScheda.TabIndex = 30
+        '
+        'btnEliminaLista
+        '
+        Me.btnEliminaLista.FlatAppearance.BorderSize = 0
+        Me.btnEliminaLista.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnEliminaLista.Font = New System.Drawing.Font("Segoe UI", 7.5!)
+        Me.btnEliminaLista.BackColor = System.Drawing.Color.FromArgb(180, 40, 40)
+        Me.btnEliminaLista.ForeColor = System.Drawing.Color.White
+        Me.btnEliminaLista.Location = New System.Drawing.Point(6, 282)
+        Me.btnEliminaLista.Name = "btnEliminaLista"
+        Me.btnEliminaLista.Size = New System.Drawing.Size(98, 22)
+        Me.btnEliminaLista.TabIndex = 31
+        Me.btnEliminaLista.Text = "Elimina lista"
+        Me.btnEliminaLista.UseVisualStyleBackColor = False
+        '
+        'btnImportaLista
+        '
+        Me.btnImportaLista.FlatAppearance.BorderSize = 0
+        Me.btnImportaLista.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnImportaLista.Font = New System.Drawing.Font("Segoe UI", 7.5!)
+        Me.btnImportaLista.BackColor = System.Drawing.Color.FromArgb(30, 110, 60)
+        Me.btnImportaLista.ForeColor = System.Drawing.Color.White
+        Me.btnImportaLista.Location = New System.Drawing.Point(108, 282)
+        Me.btnImportaLista.Name = "btnImportaLista"
+        Me.btnImportaLista.Size = New System.Drawing.Size(110, 22)
+        Me.btnImportaLista.TabIndex = 32
+        Me.btnImportaLista.Text = "Importa da altra →"
+        Me.btnImportaLista.UseVisualStyleBackColor = False
         '
         'GroupBox71
         '
@@ -5776,6 +5856,7 @@ Partial Class Scheda_tecnica
         Me.GroupBox18.PerformLayout()
         Me.GroupBox70.ResumeLayout(False)
         Me.GroupBox70.PerformLayout()
+        CType(Me.dgvRicambiScheda, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox71.ResumeLayout(False)
         Me.GroupBox71.PerformLayout()
         Me.GroupBox109.ResumeLayout(False)
@@ -6007,6 +6088,11 @@ Partial Class Scheda_tecnica
     Friend WithEvents TextBox14 As TextBox
     Friend WithEvents ComboBox36 As ComboBox
     Friend WithEvents CheckBox50 As CheckBox
+    Friend WithEvents btnApriRicambi As Button
+    Friend WithEvents lblStatoRicambi As Label
+    Friend WithEvents dgvRicambiScheda As DataGridView
+    Friend WithEvents btnEliminaLista As Button
+    Friend WithEvents btnImportaLista As Button
     Friend WithEvents TableLayoutPanel23 As TableLayoutPanel
     Friend WithEvents TableLayoutPanel24 As TableLayoutPanel
     Friend WithEvents Grp_Inserimento_Combinazioni As GroupBox

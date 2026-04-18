@@ -45,8 +45,10 @@ Partial Class Entrate_merci_storico
         Me.btnPrepara = New System.Windows.Forms.Button()
         Me.lblOrdiniTxt = New System.Windows.Forms.Label()
         Me.rtbOrdini = New System.Windows.Forms.RichTextBox()
+        Me.btnCopiaOrdini = New System.Windows.Forms.Button()
         Me.lblCodiciTxt = New System.Windows.Forms.Label()
         Me.rtbCodici = New System.Windows.Forms.RichTextBox()
+        Me.btnCopiaCodici = New System.Windows.Forms.Button()
         Me.dgvStorico = New System.Windows.Forms.DataGridView()
         Me.pnlTop.SuspendLayout()
         Me.pnlBottom.SuspendLayout()
@@ -291,8 +293,10 @@ Partial Class Entrate_merci_storico
         Me.pnlEstratto.Controls.Add(Me.btnPrepara)
         Me.pnlEstratto.Controls.Add(Me.lblOrdiniTxt)
         Me.pnlEstratto.Controls.Add(Me.rtbOrdini)
+        Me.pnlEstratto.Controls.Add(Me.btnCopiaOrdini)
         Me.pnlEstratto.Controls.Add(Me.lblCodiciTxt)
         Me.pnlEstratto.Controls.Add(Me.rtbCodici)
+        Me.pnlEstratto.Controls.Add(Me.btnCopiaCodici)
         Me.pnlEstratto.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.pnlEstratto.Name = "pnlEstratto"
         Me.pnlEstratto.Size = New System.Drawing.Size(1300, 85)
@@ -322,9 +326,19 @@ Partial Class Entrate_merci_storico
         '
         Me.rtbOrdini.Location = New System.Drawing.Point(150, 24)
         Me.rtbOrdini.Name = "rtbOrdini"
-        Me.rtbOrdini.Size = New System.Drawing.Size(510, 54)
+        Me.rtbOrdini.Size = New System.Drawing.Size(478, 54)
         Me.rtbOrdini.TabIndex = 1
         Me.rtbOrdini.Text = ""
+        '
+        'btnCopiaOrdini
+        '
+        Me.btnCopiaOrdini.Location = New System.Drawing.Point(632, 30)
+        Me.btnCopiaOrdini.Name = "btnCopiaOrdini"
+        Me.btnCopiaOrdini.Size = New System.Drawing.Size(26, 42)
+        Me.btnCopiaOrdini.TabIndex = 10
+        Me.btnCopiaOrdini.Text = "C"
+        Me.btnCopiaOrdini.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Bold)
+        Me.btnCopiaOrdini.UseVisualStyleBackColor = True
         '
         'lblCodiciTxt
         '
@@ -338,9 +352,19 @@ Partial Class Entrate_merci_storico
         '
         Me.rtbCodici.Location = New System.Drawing.Point(670, 24)
         Me.rtbCodici.Name = "rtbCodici"
-        Me.rtbCodici.Size = New System.Drawing.Size(620, 54)
+        Me.rtbCodici.Size = New System.Drawing.Size(590, 54)
         Me.rtbCodici.TabIndex = 2
         Me.rtbCodici.Text = ""
+        '
+        'btnCopiaCodici
+        '
+        Me.btnCopiaCodici.Location = New System.Drawing.Point(1264, 30)
+        Me.btnCopiaCodici.Name = "btnCopiaCodici"
+        Me.btnCopiaCodici.Size = New System.Drawing.Size(26, 42)
+        Me.btnCopiaCodici.TabIndex = 11
+        Me.btnCopiaCodici.Text = "C"
+        Me.btnCopiaCodici.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Bold)
+        Me.btnCopiaCodici.UseVisualStyleBackColor = True
         '
         'dgvStorico
         '
@@ -410,7 +434,9 @@ Partial Class Entrate_merci_storico
     Friend WithEvents btnPrepara As Button
     Friend WithEvents lblOrdiniTxt As Label
     Friend WithEvents rtbOrdini As RichTextBox
+    Friend WithEvents btnCopiaOrdini As Button
     Friend WithEvents lblCodiciTxt As Label
     Friend WithEvents rtbCodici As RichTextBox
+    Friend WithEvents btnCopiaCodici As Button
     Friend WithEvents dgvStorico As DataGridView
 End Class

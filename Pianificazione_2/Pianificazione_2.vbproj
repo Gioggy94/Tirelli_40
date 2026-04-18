@@ -450,6 +450,18 @@
     <Compile Include="Form_layout_CAP_1.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form_Lista_Ricambi_Consigliati.Designer.vb">
+      <DependentUpon>Form_Lista_Ricambi_Consigliati.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Lista_Ricambi_Consigliati.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Importa_Lista_Ricambi.Designer.vb">
+      <DependentUpon>Form_Importa_Lista_Ricambi.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Importa_Lista_Ricambi.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form_mail_ricambi.Designer.vb">
       <DependentUpon>Form_mail_ricambi.vb</DependentUpon>
     </Compile>
@@ -1325,6 +1337,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form_lotto_di_prelievo.resx">
       <DependentUpon>Form_lotto_di_prelievo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Lista_Ricambi_Consigliati.resx">
+      <DependentUpon>Form_Lista_Ricambi_Consigliati.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_mail_ricambi.resx">
       <DependentUpon>Form_mail_ricambi.vb</DependentUpon>

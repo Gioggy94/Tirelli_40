@@ -443,6 +443,52 @@ Public Class Entrate_merci
                 End If
             Next
 
+            ' ---- Fallback: se l'ordine esiste ma il codice non matcha,
+            ' cerca nella descrizione "Vs. Codice: XXXXX" o simili
+            ' (alcuni fornitori, es. Thenar, mettono il nostro codice lì)
+            If ordineFound AndAlso Not codiceFound Then
+                Dim descrizione As String = If(row.Cells("colDescrizione").Value IsNot Nothing, CStr(row.Cells("colDescrizione").Value).Trim(), "")
+                Dim codiceFallback As String = EstraiCodiceDaDescrizione(descrizione)
+                If codiceFallback <> "" Then
+                    Dim codiceAlt As String = codiceFallback.ToUpper()
+                    For Each dr As DataRow In dtOrdini.Rows
+                        Dim nDoc As String = NormalizzaNumero(dr("n_documento").ToString())
+                        If ordineNorm <> "" AndAlso OrdiniCorrispondono(nDoc, ordineNorm) Then
+                            Dim codArt As String = dr("codart").ToString().Trim().ToUpper()
+                            Dim disArt As String = dr("disegno").ToString().Trim().ToUpper()
+                            Dim codForn As String = dr("cod_forn").ToString().Trim().ToUpper()
+                            If CodiciCorrispondono(codArt, codiceAlt, codForn) OrElse (disArt <> "" AndAlso CodiciCorrispondono(disArt, codiceAlt, codForn)) Then
+                                Dim qRaw As String = dr("Q").ToString()
+                                Dim qtaOC_A As Decimal = 0
+                                Dim qtaOC_B As Decimal = 0
+                                Dim qtaOC_C As Decimal = 0
+                                Decimal.TryParse(qRaw.Replace(",", "."), Globalization.NumberStyles.Any, Globalization.CultureInfo.InvariantCulture, qtaOC_A)
+                                Decimal.TryParse(qRaw, Globalization.NumberStyles.Any, Globalization.CultureInfo.GetCultureInfo("it-IT"), qtaOC_B)
+                                Decimal.TryParse(qRaw.Replace(".", "").Replace(",", ""), Globalization.NumberStyles.Any, Globalization.CultureInfo.InvariantCulture, qtaOC_C)
+                                Dim qtaCandidato As Decimal
+                                If Math.Abs(qtaDDT - qtaOC_A) < 0.001D Then
+                                    qtaCandidato = qtaOC_A
+                                ElseIf Math.Abs(qtaDDT - qtaOC_B) < 0.001D Then
+                                    qtaCandidato = qtaOC_B
+                                ElseIf Math.Abs(qtaDDT - qtaOC_C) < 0.001D Then
+                                    qtaCandidato = qtaOC_C
+                                Else
+                                    qtaCandidato = qtaOC_A
+                                End If
+                                Dim delta As Decimal = Math.Abs(qtaDDT - qtaCandidato)
+                                If Not codiceFound OrElse delta < bestDelta Then
+                                    codiceFound = True
+                                    bestDelta = delta
+                                    qtaOC = qtaCandidato
+                                    bestCodArtCanonical = dr("codart").ToString().Trim()
+                                    bestDisArtCanonical = dr("disegno").ToString().Trim()
+                                End If
+                            End If
+                        End If
+                    Next
+                End If
+            End If
+
             ' Applica i valori canonici della riga AS400 selezionata
             If codiceFound Then
                 row.Cells("colCodice").Value = bestCodArtCanonical
@@ -512,6 +558,23 @@ Public Class Entrate_merci
             End While
         End If
         Return result
+    End Function
+
+    ''' <summary>
+    ''' Cerca nella descrizione di una riga DDT un codice Tirelli esplicitato dal fornitore
+    ''' con diciture tipo "Vs. Codice:", "Vs.Codice:", "Vostro Codice:", ecc.
+    ''' Restituisce il codice trovato (stringa non vuota) oppure "" se non trovato.
+    ''' </summary>
+    Private Function EstraiCodiceDaDescrizione(descrizione As String) As String
+        If String.IsNullOrWhiteSpace(descrizione) Then Return ""
+        ' Pattern: "vs cod:", "vs.codice:", "vs. codice:", "vs.art.", "vostro codice", ecc.
+        ' con o senza punto, con o senza spazio, con o senza due punti
+        Dim pattern As String = "(?:vs\.?\s*(?:cod(?:ice(?:\s+prodotto)?)?|art\.?)|vostro\s+codice(?:\s+prodotto)?)\s*:?\s*([A-Z0-9][A-Z0-9\-\.#_]*)"
+        Dim m As System.Text.RegularExpressions.Match =
+            System.Text.RegularExpressions.Regex.Match(descrizione, pattern,
+                System.Text.RegularExpressions.RegexOptions.IgnoreCase)
+        If m.Success Then Return m.Groups(1).Value.Trim()
+        Return ""
     End Function
 
     ' ----------------------------------------------------------------

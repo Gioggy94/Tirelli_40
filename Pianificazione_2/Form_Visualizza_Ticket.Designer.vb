@@ -47,6 +47,7 @@ Partial Class Form_Visualizza_Ticket
         Me.Panel19 = New System.Windows.Forms.Panel()
         Me.TableLayoutPanel7 = New System.Windows.Forms.TableLayoutPanel()
         Me.GroupBox11 = New System.Windows.Forms.GroupBox()
+        Me.Picture_Campione = New System.Windows.Forms.PictureBox()
         Me.TableLayoutPanel8 = New System.Windows.Forms.TableLayoutPanel()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
@@ -118,7 +119,6 @@ Partial Class Form_Visualizza_Ticket
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.GroupBox13 = New System.Windows.Forms.GroupBox()
         Me.Lbl_Mittente_Padre = New System.Windows.Forms.Label()
-        Me.Picture_Campione = New System.Windows.Forms.PictureBox()
         Me.Panel1.SuspendLayout()
         Me.Panel20.SuspendLayout()
         Me.GroupBox24.SuspendLayout()
@@ -130,6 +130,7 @@ Partial Class Form_Visualizza_Ticket
         Me.Panel19.SuspendLayout()
         Me.TableLayoutPanel7.SuspendLayout()
         Me.GroupBox11.SuspendLayout()
+        CType(Me.Picture_Campione, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TableLayoutPanel8.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -173,7 +174,6 @@ Partial Class Form_Visualizza_Ticket
         Me.GroupBox16.SuspendLayout()
         Me.Panel5.SuspendLayout()
         Me.GroupBox13.SuspendLayout()
-        CType(Me.Picture_Campione, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Panel1
@@ -408,6 +408,15 @@ Partial Class Form_Visualizza_Ticket
         Me.GroupBox11.TabIndex = 59
         Me.GroupBox11.TabStop = False
         Me.GroupBox11.Text = "Immagine"
+        '
+        'Picture_Campione
+        '
+        Me.Picture_Campione.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Picture_Campione.Location = New System.Drawing.Point(3, 16)
+        Me.Picture_Campione.Name = "Picture_Campione"
+        Me.Picture_Campione.Size = New System.Drawing.Size(283, 241)
+        Me.Picture_Campione.TabIndex = 39
+        Me.Picture_Campione.TabStop = False
         '
         'TableLayoutPanel8
         '
@@ -1182,15 +1191,6 @@ Partial Class Form_Visualizza_Ticket
         Me.Lbl_Mittente_Padre.TabIndex = 0
         Me.Lbl_Mittente_Padre.Text = "Collaudo"
         '
-        'Picture_Campione
-        '
-        Me.Picture_Campione.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Picture_Campione.Location = New System.Drawing.Point(3, 16)
-        Me.Picture_Campione.Name = "Picture_Campione"
-        Me.Picture_Campione.Size = New System.Drawing.Size(283, 241)
-        Me.Picture_Campione.TabIndex = 39
-        Me.Picture_Campione.TabStop = False
-        '
         'Form_Visualizza_Ticket
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1219,6 +1219,7 @@ Partial Class Form_Visualizza_Ticket
         Me.Panel19.ResumeLayout(False)
         Me.TableLayoutPanel7.ResumeLayout(False)
         Me.GroupBox11.ResumeLayout(False)
+        CType(Me.Picture_Campione, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TableLayoutPanel8.ResumeLayout(False)
         Me.GroupBox6.ResumeLayout(False)
         Me.GroupBox6.PerformLayout()
@@ -1273,7 +1274,6 @@ Partial Class Form_Visualizza_Ticket
         Me.Panel5.ResumeLayout(False)
         Me.GroupBox13.ResumeLayout(False)
         Me.GroupBox13.PerformLayout()
-        CType(Me.Picture_Campione, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

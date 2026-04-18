@@ -14,6 +14,7 @@ Public Class Modulo_cardini
 
     ' Funzione che carica dati pesanti (senza toccare UI)
     Public Function CaricaDati(par_commessa As String, conn_string As String) As List(Of Object())
+
         Dim dati As New List(Of Object())
 
         Dim connString As String = conn_string

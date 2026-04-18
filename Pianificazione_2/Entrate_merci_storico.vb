@@ -144,6 +144,18 @@ Public Class Entrate_merci_storico
         rtbCodici.Text = String.Join(";", codici)
     End Sub
 
+    Private Sub btnCopiaOrdini_Click(sender As Object, e As EventArgs) Handles btnCopiaOrdini.Click
+        If rtbOrdini.Text.Trim() <> "" Then
+            Clipboard.SetText(rtbOrdini.Text.Trim())
+        End If
+    End Sub
+
+    Private Sub btnCopiaCodici_Click(sender As Object, e As EventArgs) Handles btnCopiaCodici.Click
+        If rtbCodici.Text.Trim() <> "" Then
+            Clipboard.SetText(rtbCodici.Text.Trim())
+        End If
+    End Sub
+
     Private Sub btnChiudi_Click(sender As Object, e As EventArgs) Handles btnChiudi.Click
         Me.Close()
     End Sub

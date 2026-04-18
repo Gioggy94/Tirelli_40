@@ -520,6 +520,11 @@ WHERE active ='Y' "
         Me.Close()
     End Sub
 
+    Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
+        riempi_tickets(DataGridView1)
+        AggiornaDashboard()
+    End Sub
+
 
     Sub riempi_tickets(par_datagridview As DataGridView)
 
@@ -793,7 +798,7 @@ as t10
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        Process.Start("\\tirfs01\00-Responsible\KPI\Analisi tickets.xlsx")
+        Process.Start("\\tirfs01\tirelli\00-Responsible\KPI\Analisi tickets.xlsx")
     End Sub
 
     Sub riempi_tasks()

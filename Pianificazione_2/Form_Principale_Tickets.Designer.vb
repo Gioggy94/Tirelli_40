@@ -93,6 +93,7 @@ Partial Class Pianificazione_Tickets
         Me.Button15 = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
+        Me.btnRefresh = New System.Windows.Forms.Button()
         Me.GroupBox12 = New System.Windows.Forms.GroupBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
@@ -196,33 +197,38 @@ Partial Class Pianificazione_Tickets
         '
         'TableLayoutPanel2
         '
-        Me.TableLayoutPanel2.ColumnCount = 13
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.2622!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5.160595!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.26221!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.26496!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.40701!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 7.541089!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 6.03287!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 6.295229!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5.117249!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.187599!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.2345!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5.117249!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5.117249!))
-        Me.TableLayoutPanel2.Controls.Add(Me.GroupBox15, 8, 0)
-        Me.TableLayoutPanel2.Controls.Add(Me.GroupBox7, 5, 0)
+        Me.TableLayoutPanel2.ColumnCount = 14
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5.5!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 7.5!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9.5!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9.5!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 7.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 7.5!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 6.5!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 6.5!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.5!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 4.5!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 4.5!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 4.5!))
+        ' Col 0=Reparto, 1=Viz, 2=Status, 3=Commessa, 4=Cliente, 5=Assegnato,
+        ' 6=ID+IdPadre, 7=Business, 8=Riunione, 9=Riferimenti, 10=Contenuto,
+        ' 11=Refresh, 12=[], 13=X
         Me.TableLayoutPanel2.Controls.Add(Me.Grp_Reparto, 0, 0)
-        Me.TableLayoutPanel2.Controls.Add(Me.GroupBox4, 3, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.GroupBox11, 1, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.GroupBox5, 2, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.GroupBox4, 3, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.GroupBox2, 4, 0)
-        Me.TableLayoutPanel2.Controls.Add(Me.TableLayoutPanel5, 2, 0)
-        Me.TableLayoutPanel2.Controls.Add(Me.GroupBox3, 6, 0)
-        Me.TableLayoutPanel2.Controls.Add(Me.GroupBox13, 7, 0)
-        Me.TableLayoutPanel2.Controls.Add(Me.Button3, 12, 0)
-        Me.TableLayoutPanel2.Controls.Add(Me.Button1, 11, 0)
-        Me.TableLayoutPanel2.Controls.Add(Me.GroupBox5, 10, 0)
-        Me.TableLayoutPanel2.Controls.Add(Me.GroupBox14, 9, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.GroupBox15, 5, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.TableLayoutPanel5, 6, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.GroupBox7, 7, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.GroupBox3, 8, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.GroupBox13, 9, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.GroupBox14, 10, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.btnRefresh, 11, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.Button1, 12, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.Button3, 13, 0)
         Me.TableLayoutPanel2.Location = New System.Drawing.Point(0, 0)
         Me.TableLayoutPanel2.Margin = New System.Windows.Forms.Padding(0)
         Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
@@ -705,6 +711,19 @@ Partial Class Pianificazione_Tickets
         Me.Button5.Text = "Esporta in Excel"
         Me.Button5.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage
         Me.Button5.UseVisualStyleBackColor = True
+        '
+        'btnRefresh
+        '
+        Me.btnRefresh.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnRefresh.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnRefresh.Location = New System.Drawing.Point(2, 2)
+        Me.btnRefresh.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnRefresh.Name = "btnRefresh"
+        Me.btnRefresh.Size = New System.Drawing.Size(78, 64)
+        Me.btnRefresh.TabIndex = 172
+        Me.btnRefresh.Text = "↻"
+        Me.btnRefresh.UseVisualStyleBackColor = True
         '
         'GroupBox12
         '
@@ -1346,6 +1365,7 @@ Partial Class Pianificazione_Tickets
     Friend WithEvents Button15 As Button
     Friend WithEvents Button4 As Button
     Friend WithEvents Button5 As Button
+    Friend WithEvents btnRefresh As Button
     Friend WithEvents GroupBox3 As GroupBox
     Friend WithEvents TextBox9 As TextBox
     Friend WithEvents ID As DataGridViewButtonColumn

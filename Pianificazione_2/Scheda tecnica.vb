@@ -1,4 +1,5 @@
 ﻿Imports System.Data.SqlClient
+Imports System.Linq
 Imports System.IO
 Imports System.Reflection.Emit
 Imports System.Net.Mail
@@ -438,7 +439,7 @@ where t0.commessa='" & par_codice_commessa & "' and t0.rev ='" & par_n_rev & "'
                     TextBox11.Text = cmd_SAP_reader_2("Lingua_manuale_commento")
                     TextBox8.Text = cmd_SAP_reader_2("Layout")
 
-                    CheckBox50.Checked = Convert.ToBoolean(cmd_SAP_reader_2("Lista_ricambi_consigliata"))
+                    CheckBox50.Checked = Convert.ToBoolean(cmd_SAP_reader_2(“Lista_ricambi_consigliata”))
 
                     ComboBox36.Text = cmd_SAP_reader_2(“Lista_ricambi_dettagli”)
                     TextBox14.Text = cmd_SAP_reader_2(“Lista_ricambi_importo”)
@@ -619,6 +620,7 @@ where t0.commessa='" & par_codice_commessa & "' and t0.rev ='" & par_n_rev & "'
         riempi_scheda_tecnica(par_codice_commessa, numero_ultima_revisione)
         Progetto.trova_ultima_revisione_progetto(Button26.Text, Button12.Text)
         Progetto.riempi_scheda_tecnica_progetto(Button26.Text, Progetto.numero_ultima_revisione, "Scheda_tecnica")
+        AggiornaStatoRicambi(par_codice_commessa, numero_ultima_revisione)
         Me.Refresh()
         ' Funzione Async termina qui implicitamentedatagr
 
@@ -973,6 +975,9 @@ limit 100
 
 
     Sub inserisci_numero_nuova_revisione(par_codice_commessa As String, par_stato As String, Par_note As String)
+        If Par_note = Nothing Then
+            Par_note = ""
+        End If
         trova_ultima_revisione(codice_commessa)
         Using Cnn As New SqlConnection(Homepage.sap_tirelli)
             Cnn.Open()
@@ -1667,6 +1672,124 @@ left join [TIRELLI_40].[dbo].ohem t12 on t12.empid=t11.utente
         Else
             Configurazione_macchina(6) = 1
         End If
+    End Sub
+
+    ' ─────────────────────────────────────────────────────────────────
+    '  LISTA RICAMBI CONSIGLIATI — indicatore e apertura form
+    ' ─────────────────────────────────────────────────────────────────
+
+    Sub AggiornaStatoRicambi(par_commessa As String, par_rev As Integer)
+        If dgvRicambiScheda Is Nothing Then Return
+        ' Resetta grid
+        dgvRicambiScheda.AutoGenerateColumns = False
+        dgvRicambiScheda.DataSource = Nothing
+        dgvRicambiScheda.Columns.Clear()
+
+        Try
+            Using cnn As New SqlConnection(Homepage.sap_tirelli)
+                cnn.Open()
+                Using cmd As New SqlCommand()
+                    cmd.Connection = cnn
+                    cmd.CommandText = "
+SELECT NomeLista, COUNT(*) AS NArticoli, SUM(CostoTot) AS Totale
+FROM [Tirelli_40].[dbo].[Lista_Ricambi_Consigliati_Righe]
+WHERE Commessa=@c AND Rev=@r
+GROUP BY NomeLista
+ORDER BY NomeLista"
+                    cmd.Parameters.AddWithValue("@c", par_commessa)
+                    cmd.Parameters.AddWithValue("@r", par_rev)
+
+                    Dim dt As New DataTable()
+                    Using rd As SqlDataReader = cmd.ExecuteReader()
+                        dt.Load(rd)
+                    End Using
+
+                    Dim nListe As Integer = dt.Rows.Count
+
+                    If nListe = 0 Then
+                        lblStatoRicambi.Text = "Nessuna lista salvata"
+                        lblStatoRicambi.ForeColor = Color.Gray
+                        btnApriRicambi.BackColor = SystemColors.Control
+                        btnApriRicambi.ForeColor = SystemColors.ControlText
+                    Else
+                        lblStatoRicambi.Text = "✔ " & nListe & " list" & If(nListe = 1, "a", "e") & " ricambi"
+                        lblStatoRicambi.ForeColor = Color.FromArgb(0, 128, 0)
+                        lblStatoRicambi.Font = New Font("Segoe UI", 8.0!, FontStyle.Bold Or FontStyle.Italic)
+                        btnApriRicambi.BackColor = Color.FromArgb(22, 45, 84)
+                        btnApriRicambi.ForeColor = Color.White
+
+                        ' Stile grid
+                        Dim navy As Color = Color.FromArgb(22, 45, 84)
+                        dgvRicambiScheda.ColumnHeadersDefaultCellStyle.BackColor = navy
+                        dgvRicambiScheda.ColumnHeadersDefaultCellStyle.ForeColor = Color.White
+                        dgvRicambiScheda.ColumnHeadersDefaultCellStyle.Font = New Font("Segoe UI", 7.0!, FontStyle.Bold)
+                        dgvRicambiScheda.EnableHeadersVisualStyles = False
+                        dgvRicambiScheda.Font = New Font("Segoe UI", 7.5!)
+                        dgvRicambiScheda.RowsDefaultCellStyle.SelectionBackColor = Color.FromArgb(210, 225, 245)
+                        dgvRicambiScheda.RowsDefaultCellStyle.SelectionForeColor = navy
+                        dgvRicambiScheda.GridColor = Color.FromArgb(210, 220, 235)
+
+                        ' Solo nome lista, n. articoli e totale
+                        dgvRicambiScheda.Columns.Add(New DataGridViewTextBoxColumn() With {
+                            .Name = "colLista", .HeaderText = "Nome lista", .DataPropertyName = "NomeLista", .FillWeight = 55})
+                        dgvRicambiScheda.Columns.Add(New DataGridViewTextBoxColumn() With {
+                            .Name = "colN", .HeaderText = "Art.", .DataPropertyName = "NArticoli", .FillWeight = 20,
+                            .DefaultCellStyle = New DataGridViewCellStyle() With {.Alignment = DataGridViewContentAlignment.MiddleRight}})
+                        dgvRicambiScheda.Columns.Add(New DataGridViewTextBoxColumn() With {
+                            .Name = "colTot", .HeaderText = "€ tot", .DataPropertyName = "Totale", .FillWeight = 35,
+                            .DefaultCellStyle = New DataGridViewCellStyle() With {.Alignment = DataGridViewContentAlignment.MiddleRight, .Format = "N2"}})
+
+                        dgvRicambiScheda.DataSource = dt
+                    End If
+                End Using
+            End Using
+        Catch ex As Exception
+            lblStatoRicambi.Text = "Errore: " & ex.Message
+            lblStatoRicambi.ForeColor = Color.OrangeRed
+        End Try
+    End Sub
+
+    Private Sub btnApriRicambi_Click(sender As Object, e As EventArgs) Handles btnApriRicambi.Click
+        Dim frm As New Form_Lista_Ricambi_Consigliati()
+        frm.commessa = codice_commessa
+        frm.n_rev = numero_ultima_revisione
+        frm.ShowDialog()
+        AggiornaStatoRicambi(codice_commessa, numero_ultima_revisione)
+    End Sub
+
+    Private Sub btnEliminaLista_Click(sender As Object, e As EventArgs) Handles btnEliminaLista.Click
+        If dgvRicambiScheda.CurrentRow Is Nothing Then
+            MsgBox("Seleziona una lista da eliminare.", MsgBoxStyle.Information)
+            Return
+        End If
+        Dim nomeLista As String = dgvRicambiScheda.CurrentRow.Cells("colLista").Value?.ToString()
+        If String.IsNullOrEmpty(nomeLista) Then Return
+        If MsgBox("Eliminare la lista """ & nomeLista & """ e tutte le sue righe?",
+                  MsgBoxStyle.YesNo Or MsgBoxStyle.Exclamation, "Conferma eliminazione") <> MsgBoxResult.Yes Then Return
+        Try
+            Using cnn As New SqlConnection(Homepage.sap_tirelli)
+                cnn.Open()
+                Using cmd As New SqlCommand()
+                    cmd.Connection = cnn
+                    cmd.CommandText = "DELETE FROM [Tirelli_40].[dbo].[Lista_Ricambi_Consigliati_Righe] WHERE Commessa=@c AND Rev=@r AND NomeLista=@n"
+                    cmd.Parameters.AddWithValue("@c", codice_commessa)
+                    cmd.Parameters.AddWithValue("@r", numero_ultima_revisione)
+                    cmd.Parameters.AddWithValue("@n", nomeLista)
+                    cmd.ExecuteNonQuery()
+                End Using
+            End Using
+            AggiornaStatoRicambi(codice_commessa, numero_ultima_revisione)
+        Catch ex As Exception
+            MsgBox("Errore eliminazione: " & ex.Message, MsgBoxStyle.Critical)
+        End Try
+    End Sub
+
+    Private Sub btnImportaLista_Click(sender As Object, e As EventArgs) Handles btnImportaLista.Click
+        Dim frm As New Form_Importa_Lista_Ricambi()
+        frm.commessaDestinazione = codice_commessa
+        frm.revDestinazione = numero_ultima_revisione
+        frm.ShowDialog()
+        AggiornaStatoRicambi(codice_commessa, numero_ultima_revisione)
     End Sub
 
     Private Sub CheckBox51_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox51.CheckedChanged
@@ -3330,7 +3453,7 @@ WHERE COMMESSA='" & par_commessa_destinazione & "'"
     End Sub
 
     Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
-        Process.Start("\\tirfs01\00-Tirelli 4.0\Schede tecniche.xlsx")
+        Process.Start("\\tirfs01\tirelli\00-Tirelli 4.0\Schede tecniche.xlsx")
     End Sub
     Public Async Function mostra_file_async(par_percorso As String, par_treeview As TreeView) As Task
         Dim rootDirectoryPath As String = Homepage.percorso_cartelle_macchine & par_percorso

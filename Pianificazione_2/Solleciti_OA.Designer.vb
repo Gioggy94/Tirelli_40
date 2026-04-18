@@ -18,6 +18,16 @@ Partial Class Solleciti_OA
     Private Sub InitializeComponent()
         Me.tlpMain = New System.Windows.Forms.TableLayoutPanel()
         Me.gbFiltri = New System.Windows.Forms.GroupBox()
+        Me.lblFiltroAcq = New System.Windows.Forms.Label()
+        Me.cmbFiltroAcquisitore = New System.Windows.Forms.ComboBox()
+        Me.gbStatistiche = New System.Windows.Forms.GroupBox()
+        Me.pnlStatTop = New System.Windows.Forms.Panel()
+        Me.lblStatGenerale = New System.Windows.Forms.Label()
+        Me.scStatistiche = New System.Windows.Forms.SplitContainer()
+        Me.dgvStatAcquisitore = New System.Windows.Forms.DataGridView()
+        Me.pnlLogTop = New System.Windows.Forms.Panel()
+        Me.btnAggiornaLog = New System.Windows.Forms.Button()
+        Me.dgvLog = New System.Windows.Forms.DataGridView()
         Me.lblFiltroForn = New System.Windows.Forms.Label()
         Me.cmbFiltroFornitore = New System.Windows.Forms.ComboBox()
         Me.lblFiltroComm = New System.Windows.Forms.Label()
@@ -52,6 +62,15 @@ Partial Class Solleciti_OA
 
         Me.tlpMain.SuspendLayout()
         Me.gbFiltri.SuspendLayout()
+        Me.gbStatistiche.SuspendLayout()
+        Me.pnlStatTop.SuspendLayout()
+        CType(Me.scStatistiche, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.scStatistiche.Panel1.SuspendLayout()
+        Me.scStatistiche.Panel2.SuspendLayout()
+        Me.scStatistiche.SuspendLayout()
+        CType(Me.dgvStatAcquisitore, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.pnlLogTop.SuspendLayout()
+        CType(Me.dgvLog, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.scMain, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.scMain.Panel1.SuspendLayout()
         Me.scMain.Panel2.SuspendLayout()
@@ -70,14 +89,16 @@ Partial Class Solleciti_OA
         Me.tlpMain.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.tlpMain.Controls.Add(Me.gbFiltri, 0, 0)
         Me.tlpMain.Controls.Add(Me.scMain, 0, 1)
-        Me.tlpMain.Controls.Add(Me.gbAnteprima, 0, 2)
+        Me.tlpMain.Controls.Add(Me.gbStatistiche, 0, 2)
+        Me.tlpMain.Controls.Add(Me.gbAnteprima, 0, 3)
         Me.tlpMain.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tlpMain.Location = New System.Drawing.Point(0, 0)
         Me.tlpMain.Margin = New System.Windows.Forms.Padding(0)
         Me.tlpMain.Name = "tlpMain"
-        Me.tlpMain.RowCount = 3
-        Me.tlpMain.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 65.0!))
+        Me.tlpMain.RowCount = 4
+        Me.tlpMain.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 90.0!))
         Me.tlpMain.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.tlpMain.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 160.0!))
         Me.tlpMain.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 255.0!))
         Me.tlpMain.Size = New System.Drawing.Size(1400, 860)
         Me.tlpMain.TabIndex = 0
@@ -96,6 +117,8 @@ Partial Class Solleciti_OA
         Me.gbFiltri.Controls.Add(Me.chkSoloSollecito)
         Me.gbFiltri.Controls.Add(Me.btnCarica)
         Me.gbFiltri.Controls.Add(Me.lblStato)
+        Me.gbFiltri.Controls.Add(Me.lblFiltroAcq)
+        Me.gbFiltri.Controls.Add(Me.cmbFiltroAcquisitore)
 
         ' lblFiltroForn
         Me.lblFiltroForn.AutoSize = True
@@ -155,6 +178,20 @@ Partial Class Solleciti_OA
         Me.lblStato.Size = New System.Drawing.Size(450, 18)
         Me.lblStato.ForeColor = System.Drawing.Color.Navy
         Me.lblStato.Text = ""
+
+        ' lblFiltroAcq
+        Me.lblFiltroAcq.AutoSize = True
+        Me.lblFiltroAcq.Location = New System.Drawing.Point(8, 50)
+        Me.lblFiltroAcq.Name = "lblFiltroAcq"
+        Me.lblFiltroAcq.Text = "Acquisitore:"
+
+        ' cmbFiltroAcquisitore
+        Me.cmbFiltroAcquisitore.Location = New System.Drawing.Point(90, 47)
+        Me.cmbFiltroAcquisitore.Name = "cmbFiltroAcquisitore"
+        Me.cmbFiltroAcquisitore.Size = New System.Drawing.Size(210, 22)
+        Me.cmbFiltroAcquisitore.TabIndex = 5
+        Me.cmbFiltroAcquisitore.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbFiltroAcquisitore.DropDownWidth = 280
 
         ' ── scMain ───────────────────────────────────────────
         Me.scMain.Dock = System.Windows.Forms.DockStyle.Fill
@@ -247,6 +284,67 @@ Partial Class Solleciti_OA
         Me.dgvOrdini.TabIndex = 0
         Me.dgvOrdini.BackgroundColor = System.Drawing.Color.White
         Me.dgvOrdini.BorderStyle = System.Windows.Forms.BorderStyle.None
+
+        ' ── gbStatistiche ────────────────────────────────────
+        Me.gbStatistiche.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.gbStatistiche.Margin = New System.Windows.Forms.Padding(4, 2, 4, 2)
+        Me.gbStatistiche.Name = "gbStatistiche"
+        Me.gbStatistiche.Text = "Statistiche scaduti"
+        Me.gbStatistiche.TabIndex = 3
+        Me.gbStatistiche.Controls.Add(Me.scStatistiche)
+        Me.gbStatistiche.Controls.Add(Me.pnlStatTop)
+
+        Me.pnlStatTop.Dock = System.Windows.Forms.DockStyle.Top
+        Me.pnlStatTop.Height = 26
+        Me.pnlStatTop.Name = "pnlStatTop"
+        Me.pnlStatTop.BackColor = System.Drawing.Color.FromArgb(235, 242, 250)
+        Me.pnlStatTop.Controls.Add(Me.lblStatGenerale)
+
+        Me.lblStatGenerale.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lblStatGenerale.Name = "lblStatGenerale"
+        Me.lblStatGenerale.Text = ""
+        Me.lblStatGenerale.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lblStatGenerale.Padding = New System.Windows.Forms.Padding(6, 0, 0, 0)
+        Me.lblStatGenerale.Font = New System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold)
+        Me.lblStatGenerale.ForeColor = System.Drawing.Color.DarkRed
+
+        ' scStatistiche
+        Me.scStatistiche.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.scStatistiche.Name = "scStatistiche"
+        Me.scStatistiche.Orientation = System.Windows.Forms.Orientation.Vertical
+        Me.scStatistiche.SplitterDistance = 400
+        Me.scStatistiche.SplitterWidth = 4
+        Me.scStatistiche.TabIndex = 1
+
+        Me.scStatistiche.Panel1.Controls.Add(Me.dgvStatAcquisitore)
+        Me.scStatistiche.Panel2.Controls.Add(Me.dgvLog)
+        Me.scStatistiche.Panel2.Controls.Add(Me.pnlLogTop)
+
+        Me.dgvStatAcquisitore.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.dgvStatAcquisitore.Name = "dgvStatAcquisitore"
+        Me.dgvStatAcquisitore.TabIndex = 0
+        Me.dgvStatAcquisitore.BackgroundColor = System.Drawing.Color.White
+        Me.dgvStatAcquisitore.BorderStyle = System.Windows.Forms.BorderStyle.None
+
+        ' pnlLogTop
+        Me.pnlLogTop.Dock = System.Windows.Forms.DockStyle.Top
+        Me.pnlLogTop.Height = 28
+        Me.pnlLogTop.Name = "pnlLogTop"
+        Me.pnlLogTop.Controls.Add(Me.btnAggiornaLog)
+
+        Me.btnAggiornaLog.Dock = System.Windows.Forms.DockStyle.Left
+        Me.btnAggiornaLog.Width = 120
+        Me.btnAggiornaLog.Name = "btnAggiornaLog"
+        Me.btnAggiornaLog.Text = "↻ Aggiorna log"
+        Me.btnAggiornaLog.TabIndex = 0
+        Me.btnAggiornaLog.UseVisualStyleBackColor = True
+
+        ' dgvLog
+        Me.dgvLog.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.dgvLog.Name = "dgvLog"
+        Me.dgvLog.TabIndex = 1
+        Me.dgvLog.BackgroundColor = System.Drawing.Color.White
+        Me.dgvLog.BorderStyle = System.Windows.Forms.BorderStyle.None
 
         ' ── gbAnteprima ──────────────────────────────────────
         Me.gbAnteprima.Dock = System.Windows.Forms.DockStyle.Fill
@@ -342,6 +440,15 @@ Partial Class Solleciti_OA
         Me.tlpMain.ResumeLayout(False)
         Me.gbFiltri.ResumeLayout(False)
         Me.gbFiltri.PerformLayout()
+        Me.gbStatistiche.ResumeLayout(False)
+        Me.pnlStatTop.ResumeLayout(False)
+        Me.scStatistiche.Panel1.ResumeLayout(False)
+        Me.scStatistiche.Panel2.ResumeLayout(False)
+        CType(Me.scStatistiche, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.scStatistiche.ResumeLayout(False)
+        CType(Me.dgvStatAcquisitore, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.pnlLogTop.ResumeLayout(False)
+        CType(Me.dgvLog, System.ComponentModel.ISupportInitialize).EndInit()
         Me.scMain.Panel1.ResumeLayout(False)
         Me.scMain.Panel2.ResumeLayout(False)
         CType(Me.scMain, System.ComponentModel.ISupportInitialize).EndInit()
@@ -390,5 +497,15 @@ Partial Class Solleciti_OA
     Friend WithEvents btnPreparaMail As System.Windows.Forms.Button
     Friend WithEvents btnTutteMail As System.Windows.Forms.Button
     Friend WithEvents rtbAnteprima As System.Windows.Forms.RichTextBox
+    Friend WithEvents gbStatistiche As System.Windows.Forms.GroupBox
+    Friend WithEvents pnlStatTop As System.Windows.Forms.Panel
+    Friend WithEvents lblStatGenerale As System.Windows.Forms.Label
+    Friend WithEvents dgvStatAcquisitore As System.Windows.Forms.DataGridView
+    Friend WithEvents lblFiltroAcq As System.Windows.Forms.Label
+    Friend WithEvents cmbFiltroAcquisitore As System.Windows.Forms.ComboBox
+    Friend WithEvents scStatistiche As System.Windows.Forms.SplitContainer
+    Friend WithEvents pnlLogTop As System.Windows.Forms.Panel
+    Friend WithEvents btnAggiornaLog As System.Windows.Forms.Button
+    Friend WithEvents dgvLog As System.Windows.Forms.DataGridView
 
 End Class

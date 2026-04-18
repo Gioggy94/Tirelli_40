@@ -41,7 +41,8 @@
       "Bash(\"/c/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/MSBuild.exe\" Pianificazione_2.vbproj /t:Build /p:Configuration=Debug)",
       "Bash(echo \"EXIT: $?\")",
       "Bash(\"C:\\\\Windows\\\\Microsoft.NET\\\\Framework64\\\\v4.0.30319\\\\vbc.exe\" /help)",
-      "Bash(\"C:\\\\Program Files\\\\Microsoft Visual Studio\\\\2022\\\\Community\\\\MSBuild\\\\Current\\\\Bin\\\\Roslyn\\\\VBCSCompiler.exe\")"
+      "Bash(\"C:\\\\Program Files\\\\Microsoft Visual Studio\\\\2022\\\\Community\\\\MSBuild\\\\Current\\\\Bin\\\\Roslyn\\\\VBCSCompiler.exe\")",
+      "Bash(python *)"
     ]
   }
 }

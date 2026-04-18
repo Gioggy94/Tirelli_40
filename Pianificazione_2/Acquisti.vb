@@ -2008,7 +2008,7 @@ SET U_rs_arubastatus='100' WHERE DOCNUM=" & par_docnum & ""
             ' Aggiunge l'allegato, se presente
             If Not String.IsNullOrEmpty(par_allegato) Then
                 .Attachments.Add(par_allegato)
-                .Attachments.Add("\\tirfs01\06-Procurement\Documenti vari di lavoro\Report fornitori\Report puntualità\File di servizio\Istruzioni di lettura report.pdf")
+                .Attachments.Add("\\tirfs01\tirelli\06-Procurement\Documenti vari di lavoro\Report fornitori\Report puntualità\File di servizio\Istruzioni di lettura report.pdf")
             End If
 
             ' Imposta il mittente se non si sta inviando da un account personale
