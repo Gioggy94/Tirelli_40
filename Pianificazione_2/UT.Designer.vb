@@ -43,44 +43,6 @@ Partial Class UT
         Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.Panel33 = New System.Windows.Forms.Panel()
-        Me.GroupBox21 = New System.Windows.Forms.GroupBox()
-        Me.TextBox10 = New System.Windows.Forms.TextBox()
-        Me.GroupBox20 = New System.Windows.Forms.GroupBox()
-        Me.ComboBox8 = New System.Windows.Forms.ComboBox()
-        Me.GroupBox19 = New System.Windows.Forms.GroupBox()
-        Me.TextBox8 = New System.Windows.Forms.TextBox()
-        Me.GroupBox18 = New System.Windows.Forms.GroupBox()
-        Me.ComboBox7 = New System.Windows.Forms.ComboBox()
-        Me.GroupBox17 = New System.Windows.Forms.GroupBox()
-        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
-        Me.GroupBox16 = New System.Windows.Forms.GroupBox()
-        Me.TextBox5 = New System.Windows.Forms.TextBox()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.ComboBox_prima_lettera = New System.Windows.Forms.ComboBox()
-        Me.GroupBox_codice_articolo = New System.Windows.Forms.GroupBox()
-        Me.TextBox_codice_sap = New System.Windows.Forms.TextBox()
-        Me.Group_box_disegno = New System.Windows.Forms.GroupBox()
-        Me.TextBox_disegno = New System.Windows.Forms.TextBox()
-        Me.GroupBox28 = New System.Windows.Forms.GroupBox()
-        Me.TextBox12 = New System.Windows.Forms.TextBox()
-        Me.GroupBox_descrizione = New System.Windows.Forms.GroupBox()
-        Me.TextBox_descrizione = New System.Windows.Forms.TextBox()
-        Me.GroupBox_descrizione_supplementare = New System.Windows.Forms.GroupBox()
-        Me.TextBox_DESC_SUPP = New System.Windows.Forms.TextBox()
-        Me.GroupBox_gruppo_articoli = New System.Windows.Forms.GroupBox()
-        Me.ComboBox_gruppo_articoli = New System.Windows.Forms.ComboBox()
-        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
-        Me.ComboBox_tipo_montaggio = New System.Windows.Forms.ComboBox()
-        Me.GroupBox9 = New System.Windows.Forms.GroupBox()
-        Me.ComboBox3 = New System.Windows.Forms.ComboBox()
-        Me.GroupBox8 = New System.Windows.Forms.GroupBox()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.GroupBox11 = New System.Windows.Forms.GroupBox()
-        Me.ComboBox5 = New System.Windows.Forms.ComboBox()
-        Me.GroupBox26 = New System.Windows.Forms.GroupBox()
-        Me.ComboBox10 = New System.Windows.Forms.ComboBox()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Panel13 = New System.Windows.Forms.Panel()
@@ -126,77 +88,45 @@ Partial Class UT
         Me.Gruppo_codice = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Gruppo_nome = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel26 = New System.Windows.Forms.Panel()
+        Me.TlpFiltro2 = New System.Windows.Forms.TableLayoutPanel()
         Me.GroupBox27 = New System.Windows.Forms.GroupBox()
         Me.TextBox9 = New System.Windows.Forms.TextBox()
-        Me.Panel28 = New System.Windows.Forms.Panel()
         Me.GroupBox15 = New System.Windows.Forms.GroupBox()
         Me.TextBox4 = New System.Windows.Forms.TextBox()
         Me.Panel17 = New System.Windows.Forms.Panel()
         Me.Button_CERCA = New System.Windows.Forms.Button()
-        Me.Panel29 = New System.Windows.Forms.Panel()
         Me.GroupBox12 = New System.Windows.Forms.GroupBox()
         Me.ComboBox6 = New System.Windows.Forms.ComboBox()
-        Me.Panel30 = New System.Windows.Forms.Panel()
         Me.GroupBox13 = New System.Windows.Forms.GroupBox()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.Panel31 = New System.Windows.Forms.Panel()
         Me.GroupBox14 = New System.Windows.Forms.GroupBox()
         Me.ComboBox4 = New System.Windows.Forms.ComboBox()
         Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.TlpFiltro1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Button20 = New System.Windows.Forms.Button()
-        Me.Panel34 = New System.Windows.Forms.Panel()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
-        Me.Panel27 = New System.Windows.Forms.Panel()
         Me.GroupBox22 = New System.Windows.Forms.GroupBox()
         Me.TextBox6 = New System.Windows.Forms.TextBox()
-        Me.Panel18 = New System.Windows.Forms.Panel()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.TextBox_disegno_SAP = New System.Windows.Forms.TextBox()
-        Me.Panel16 = New System.Windows.Forms.Panel()
         Me.GroupBox10 = New System.Windows.Forms.GroupBox()
         Me.TextBox3 = New System.Windows.Forms.TextBox()
-        Me.Panel15 = New System.Windows.Forms.Panel()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.TextBox_Descrizione_ricerca = New System.Windows.Forms.TextBox()
-        Me.Panel14 = New System.Windows.Forms.Panel()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.TextBox_codice_SAP_RICERCA = New System.Windows.Forms.TextBox()
         Me.Button3 = New System.Windows.Forms.Button()
-        Me.TableLayoutPanel4 = New System.Windows.Forms.TableLayoutPanel()
-        Me.TableLayoutPanel5 = New System.Windows.Forms.TableLayoutPanel()
-        Me.TableLayoutPanel6 = New System.Windows.Forms.TableLayoutPanel()
-        Me.TableLayoutPanel7 = New System.Windows.Forms.TableLayoutPanel()
-        Me.TableLayoutPanel8 = New System.Windows.Forms.TableLayoutPanel()
-        Me.TableLayoutPanel9 = New System.Windows.Forms.TableLayoutPanel()
-        Me.Panel19 = New System.Windows.Forms.Panel()
-        Me.Panel21 = New System.Windows.Forms.Panel()
-        Me.GroupBox7 = New System.Windows.Forms.GroupBox()
-        Me.Combodipendenti = New System.Windows.Forms.ComboBox()
-        Me.Panel20 = New System.Windows.Forms.Panel()
-        Me.Aggiungi = New System.Windows.Forms.Button()
-        Me.TableLayoutPanel10 = New System.Windows.Forms.TableLayoutPanel()
-        Me.GroupBox29 = New System.Windows.Forms.GroupBox()
-        Me.ComboBox11 = New System.Windows.Forms.ComboBox()
-        Me.Panel33.SuspendLayout()
-        Me.GroupBox21.SuspendLayout()
-        Me.GroupBox20.SuspendLayout()
-        Me.GroupBox19.SuspendLayout()
-        Me.GroupBox18.SuspendLayout()
-        Me.GroupBox17.SuspendLayout()
-        Me.GroupBox16.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
-        Me.GroupBox_codice_articolo.SuspendLayout()
-        Me.Group_box_disegno.SuspendLayout()
-        Me.GroupBox28.SuspendLayout()
-        Me.GroupBox_descrizione.SuspendLayout()
-        Me.GroupBox_descrizione_supplementare.SuspendLayout()
-        Me.GroupBox_gruppo_articoli.SuspendLayout()
-        Me.GroupBox5.SuspendLayout()
-        Me.GroupBox9.SuspendLayout()
-        Me.GroupBox8.SuspendLayout()
-        Me.GroupBox11.SuspendLayout()
-        Me.GroupBox26.SuspendLayout()
+        Me.PanelAI = New System.Windows.Forms.Panel()
+        Me.PanelAI_Header = New System.Windows.Forms.Panel()
+        Me.LabelAI_Title = New System.Windows.Forms.Label()
+        Me.BtnLegenda = New System.Windows.Forms.Button()
+        Me.RtbChat = New System.Windows.Forms.RichTextBox()
+        Me.PanelAI_Bottom = New System.Windows.Forms.Panel()
+        Me.TxtAiInput = New System.Windows.Forms.TextBox()
+        Me.PanelAI_Btns = New System.Windows.Forms.Panel()
+        Me.BtnAiInvia = New System.Windows.Forms.Button()
+        Me.BtnAiPulisci = New System.Windows.Forms.Button()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel13.SuspendLayout()
@@ -213,446 +143,33 @@ Partial Class UT
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel26.SuspendLayout()
         Me.GroupBox27.SuspendLayout()
-        Me.Panel28.SuspendLayout()
         Me.GroupBox15.SuspendLayout()
         Me.Panel17.SuspendLayout()
-        Me.Panel29.SuspendLayout()
         Me.GroupBox12.SuspendLayout()
-        Me.Panel30.SuspendLayout()
         Me.GroupBox13.SuspendLayout()
-        Me.Panel31.SuspendLayout()
         Me.GroupBox14.SuspendLayout()
+        Me.TlpFiltro2.SuspendLayout()
         Me.Panel3.SuspendLayout()
-        Me.Panel34.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
-        Me.Panel27.SuspendLayout()
         Me.GroupBox22.SuspendLayout()
-        Me.Panel18.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
-        Me.Panel16.SuspendLayout()
         Me.GroupBox10.SuspendLayout()
-        Me.Panel15.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
-        Me.Panel14.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
-        Me.TableLayoutPanel4.SuspendLayout()
-        Me.TableLayoutPanel5.SuspendLayout()
-        Me.TableLayoutPanel6.SuspendLayout()
-        Me.TableLayoutPanel7.SuspendLayout()
-        Me.TableLayoutPanel8.SuspendLayout()
-        Me.TableLayoutPanel9.SuspendLayout()
-        Me.Panel19.SuspendLayout()
-        Me.Panel21.SuspendLayout()
-        Me.GroupBox7.SuspendLayout()
-        Me.Panel20.SuspendLayout()
-        Me.TableLayoutPanel10.SuspendLayout()
-        Me.GroupBox29.SuspendLayout()
+        Me.TlpFiltro1.SuspendLayout()
+        Me.PanelAI.SuspendLayout()
+        Me.PanelAI_Header.SuspendLayout()
+        Me.PanelAI_Bottom.SuspendLayout()
+        Me.PanelAI_Btns.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'Panel33
-        '
-        Me.Panel33.Controls.Add(Me.GroupBox21)
-        Me.Panel33.Controls.Add(Me.GroupBox20)
-        Me.Panel33.Controls.Add(Me.GroupBox19)
-        Me.Panel33.Controls.Add(Me.GroupBox18)
-        Me.Panel33.Controls.Add(Me.GroupBox17)
-        Me.Panel33.Controls.Add(Me.GroupBox16)
-        Me.Panel33.Controls.Add(Me.Button2)
-        Me.Panel33.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel33.Location = New System.Drawing.Point(3, 419)
-        Me.Panel33.Name = "Panel33"
-        Me.Panel33.Size = New System.Drawing.Size(422, 212)
-        Me.Panel33.TabIndex = 114
-        '
-        'GroupBox21
-        '
-        Me.GroupBox21.Controls.Add(Me.TextBox10)
-        Me.GroupBox21.Location = New System.Drawing.Point(125, 6)
-        Me.GroupBox21.Name = "GroupBox21"
-        Me.GroupBox21.Size = New System.Drawing.Size(83, 49)
-        Me.GroupBox21.TabIndex = 119
-        Me.GroupBox21.TabStop = False
-        Me.GroupBox21.Text = "Codice BP"
-        '
-        'TextBox10
-        '
-        Me.TextBox10.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TextBox10.Location = New System.Drawing.Point(3, 16)
-        Me.TextBox10.Name = "TextBox10"
-        Me.TextBox10.ReadOnly = True
-        Me.TextBox10.Size = New System.Drawing.Size(77, 20)
-        Me.TextBox10.TabIndex = 113
-        '
-        'GroupBox20
-        '
-        Me.GroupBox20.Controls.Add(Me.ComboBox8)
-        Me.GroupBox20.Location = New System.Drawing.Point(304, 66)
-        Me.GroupBox20.Name = "GroupBox20"
-        Me.GroupBox20.Size = New System.Drawing.Size(107, 36)
-        Me.GroupBox20.TabIndex = 118
-        Me.GroupBox20.TabStop = False
-        Me.GroupBox20.Text = "Brand"
-        '
-        'ComboBox8
-        '
-        Me.ComboBox8.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ComboBox8.FormattingEnabled = True
-        Me.ComboBox8.Items.AddRange(New Object() {"Tirelli", "KTF"})
-        Me.ComboBox8.Location = New System.Drawing.Point(3, 16)
-        Me.ComboBox8.Name = "ComboBox8"
-        Me.ComboBox8.Size = New System.Drawing.Size(101, 21)
-        Me.ComboBox8.TabIndex = 0
-        '
-        'GroupBox19
-        '
-        Me.GroupBox19.Controls.Add(Me.TextBox8)
-        Me.GroupBox19.Location = New System.Drawing.Point(6, 61)
-        Me.GroupBox19.Name = "GroupBox19"
-        Me.GroupBox19.Size = New System.Drawing.Size(140, 49)
-        Me.GroupBox19.TabIndex = 117
-        Me.GroupBox19.TabStop = False
-        Me.GroupBox19.Text = "Agente"
-        '
-        'TextBox8
-        '
-        Me.TextBox8.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TextBox8.Location = New System.Drawing.Point(3, 16)
-        Me.TextBox8.Name = "TextBox8"
-        Me.TextBox8.Size = New System.Drawing.Size(134, 20)
-        Me.TextBox8.TabIndex = 113
-        '
-        'GroupBox18
-        '
-        Me.GroupBox18.Controls.Add(Me.ComboBox7)
-        Me.GroupBox18.Location = New System.Drawing.Point(152, 61)
-        Me.GroupBox18.Name = "GroupBox18"
-        Me.GroupBox18.Size = New System.Drawing.Size(140, 49)
-        Me.GroupBox18.TabIndex = 116
-        Me.GroupBox18.TabStop = False
-        Me.GroupBox18.Text = "Paese"
-        '
-        'ComboBox7
-        '
-        Me.ComboBox7.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ComboBox7.FormattingEnabled = True
-        Me.ComboBox7.Location = New System.Drawing.Point(3, 16)
-        Me.ComboBox7.Name = "ComboBox7"
-        Me.ComboBox7.Size = New System.Drawing.Size(134, 21)
-        Me.ComboBox7.TabIndex = 0
-        '
-        'GroupBox17
-        '
-        Me.GroupBox17.Controls.Add(Me.ComboBox2)
-        Me.GroupBox17.Location = New System.Drawing.Point(318, 11)
-        Me.GroupBox17.Name = "GroupBox17"
-        Me.GroupBox17.Size = New System.Drawing.Size(96, 49)
-        Me.GroupBox17.TabIndex = 115
-        Me.GroupBox17.TabStop = False
-        Me.GroupBox17.Text = "Settore"
-        '
-        'ComboBox2
-        '
-        Me.ComboBox2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ComboBox2.FormattingEnabled = True
-        Me.ComboBox2.Location = New System.Drawing.Point(3, 16)
-        Me.ComboBox2.Name = "ComboBox2"
-        Me.ComboBox2.Size = New System.Drawing.Size(90, 21)
-        Me.ComboBox2.TabIndex = 0
-        '
-        'GroupBox16
-        '
-        Me.GroupBox16.Controls.Add(Me.TextBox5)
-        Me.GroupBox16.Location = New System.Drawing.Point(223, 6)
-        Me.GroupBox16.Name = "GroupBox16"
-        Me.GroupBox16.Size = New System.Drawing.Size(83, 49)
-        Me.GroupBox16.TabIndex = 114
-        Me.GroupBox16.TabStop = False
-        Me.GroupBox16.Text = "Nome BP"
-        '
-        'TextBox5
-        '
-        Me.TextBox5.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TextBox5.Location = New System.Drawing.Point(3, 16)
-        Me.TextBox5.Name = "TextBox5"
-        Me.TextBox5.Size = New System.Drawing.Size(77, 20)
-        Me.TextBox5.TabIndex = 113
-        '
-        'Button2
-        '
-        Me.Button2.Location = New System.Drawing.Point(3, 6)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(116, 35)
-        Me.Button2.TabIndex = 112
-        Me.Button2.Text = "Codice BP"
-        Me.Button2.UseVisualStyleBackColor = True
-        '
-        'GroupBox1
-        '
-        Me.GroupBox1.Controls.Add(Me.ComboBox_prima_lettera)
-        Me.GroupBox1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GroupBox1.ForeColor = System.Drawing.Color.Black
-        Me.GroupBox1.Location = New System.Drawing.Point(0, 0)
-        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(0)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(211, 46)
-        Me.GroupBox1.TabIndex = 14
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Prima lettera"
-        '
-        'ComboBox_prima_lettera
-        '
-        Me.ComboBox_prima_lettera.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ComboBox_prima_lettera.FormattingEnabled = True
-        Me.ComboBox_prima_lettera.Items.AddRange(New Object() {"0", "B", "C", "D", "F", "M", "W"})
-        Me.ComboBox_prima_lettera.Location = New System.Drawing.Point(3, 16)
-        Me.ComboBox_prima_lettera.Name = "ComboBox_prima_lettera"
-        Me.ComboBox_prima_lettera.Size = New System.Drawing.Size(205, 21)
-        Me.ComboBox_prima_lettera.TabIndex = 0
-        '
-        'GroupBox_codice_articolo
-        '
-        Me.GroupBox_codice_articolo.Controls.Add(Me.TextBox_codice_sap)
-        Me.GroupBox_codice_articolo.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GroupBox_codice_articolo.ForeColor = System.Drawing.Color.Black
-        Me.GroupBox_codice_articolo.Location = New System.Drawing.Point(211, 0)
-        Me.GroupBox_codice_articolo.Margin = New System.Windows.Forms.Padding(0)
-        Me.GroupBox_codice_articolo.Name = "GroupBox_codice_articolo"
-        Me.GroupBox_codice_articolo.Size = New System.Drawing.Size(211, 46)
-        Me.GroupBox_codice_articolo.TabIndex = 5
-        Me.GroupBox_codice_articolo.TabStop = False
-        Me.GroupBox_codice_articolo.Text = "Codice SAP"
-        '
-        'TextBox_codice_sap
-        '
-        Me.TextBox_codice_sap.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TextBox_codice_sap.Location = New System.Drawing.Point(3, 16)
-        Me.TextBox_codice_sap.Name = "TextBox_codice_sap"
-        Me.TextBox_codice_sap.Size = New System.Drawing.Size(205, 20)
-        Me.TextBox_codice_sap.TabIndex = 0
-        '
-        'Group_box_disegno
-        '
-        Me.Group_box_disegno.Controls.Add(Me.TextBox_disegno)
-        Me.Group_box_disegno.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Group_box_disegno.ForeColor = System.Drawing.Color.Black
-        Me.Group_box_disegno.Location = New System.Drawing.Point(0, 0)
-        Me.Group_box_disegno.Margin = New System.Windows.Forms.Padding(0)
-        Me.Group_box_disegno.Name = "Group_box_disegno"
-        Me.Group_box_disegno.Size = New System.Drawing.Size(211, 46)
-        Me.Group_box_disegno.TabIndex = 6
-        Me.Group_box_disegno.TabStop = False
-        Me.Group_box_disegno.Text = "Disegno"
-        '
-        'TextBox_disegno
-        '
-        Me.TextBox_disegno.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TextBox_disegno.Location = New System.Drawing.Point(3, 16)
-        Me.TextBox_disegno.Name = "TextBox_disegno"
-        Me.TextBox_disegno.Size = New System.Drawing.Size(205, 20)
-        Me.TextBox_disegno.TabIndex = 0
-        '
-        'GroupBox28
-        '
-        Me.GroupBox28.Controls.Add(Me.TextBox12)
-        Me.GroupBox28.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GroupBox28.Location = New System.Drawing.Point(211, 0)
-        Me.GroupBox28.Margin = New System.Windows.Forms.Padding(0)
-        Me.GroupBox28.Name = "GroupBox28"
-        Me.GroupBox28.Size = New System.Drawing.Size(211, 46)
-        Me.GroupBox28.TabIndex = 1
-        Me.GroupBox28.TabStop = False
-        Me.GroupBox28.Text = "Codice BRB"
-        '
-        'TextBox12
-        '
-        Me.TextBox12.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TextBox12.Location = New System.Drawing.Point(3, 16)
-        Me.TextBox12.Name = "TextBox12"
-        Me.TextBox12.Size = New System.Drawing.Size(205, 20)
-        Me.TextBox12.TabIndex = 0
-        '
-        'GroupBox_descrizione
-        '
-        Me.GroupBox_descrizione.Controls.Add(Me.TextBox_descrizione)
-        Me.GroupBox_descrizione.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GroupBox_descrizione.ForeColor = System.Drawing.Color.Black
-        Me.GroupBox_descrizione.Location = New System.Drawing.Point(0, 104)
-        Me.GroupBox_descrizione.Margin = New System.Windows.Forms.Padding(0)
-        Me.GroupBox_descrizione.Name = "GroupBox_descrizione"
-        Me.GroupBox_descrizione.Size = New System.Drawing.Size(428, 52)
-        Me.GroupBox_descrizione.TabIndex = 7
-        Me.GroupBox_descrizione.TabStop = False
-        Me.GroupBox_descrizione.Text = "Descrizione"
-        '
-        'TextBox_descrizione
-        '
-        Me.TextBox_descrizione.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TextBox_descrizione.Location = New System.Drawing.Point(3, 16)
-        Me.TextBox_descrizione.Name = "TextBox_descrizione"
-        Me.TextBox_descrizione.Size = New System.Drawing.Size(422, 20)
-        Me.TextBox_descrizione.TabIndex = 1
-        '
-        'GroupBox_descrizione_supplementare
-        '
-        Me.GroupBox_descrizione_supplementare.Controls.Add(Me.TextBox_DESC_SUPP)
-        Me.GroupBox_descrizione_supplementare.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GroupBox_descrizione_supplementare.ForeColor = System.Drawing.Color.Black
-        Me.GroupBox_descrizione_supplementare.Location = New System.Drawing.Point(0, 156)
-        Me.GroupBox_descrizione_supplementare.Margin = New System.Windows.Forms.Padding(0)
-        Me.GroupBox_descrizione_supplementare.Name = "GroupBox_descrizione_supplementare"
-        Me.GroupBox_descrizione_supplementare.Size = New System.Drawing.Size(428, 52)
-        Me.GroupBox_descrizione_supplementare.TabIndex = 8
-        Me.GroupBox_descrizione_supplementare.TabStop = False
-        Me.GroupBox_descrizione_supplementare.Text = "Descrizione supplementare"
-        '
-        'TextBox_DESC_SUPP
-        '
-        Me.TextBox_DESC_SUPP.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TextBox_DESC_SUPP.Location = New System.Drawing.Point(3, 16)
-        Me.TextBox_DESC_SUPP.Name = "TextBox_DESC_SUPP"
-        Me.TextBox_DESC_SUPP.Size = New System.Drawing.Size(422, 20)
-        Me.TextBox_DESC_SUPP.TabIndex = 1
-        '
-        'GroupBox_gruppo_articoli
-        '
-        Me.GroupBox_gruppo_articoli.Controls.Add(Me.ComboBox_gruppo_articoli)
-        Me.GroupBox_gruppo_articoli.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GroupBox_gruppo_articoli.ForeColor = System.Drawing.Color.Black
-        Me.GroupBox_gruppo_articoli.Location = New System.Drawing.Point(0, 0)
-        Me.GroupBox_gruppo_articoli.Margin = New System.Windows.Forms.Padding(0)
-        Me.GroupBox_gruppo_articoli.Name = "GroupBox_gruppo_articoli"
-        Me.GroupBox_gruppo_articoli.Size = New System.Drawing.Size(214, 52)
-        Me.GroupBox_gruppo_articoli.TabIndex = 9
-        Me.GroupBox_gruppo_articoli.TabStop = False
-        Me.GroupBox_gruppo_articoli.Text = "Gruppo articoli"
-        '
-        'ComboBox_gruppo_articoli
-        '
-        Me.ComboBox_gruppo_articoli.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ComboBox_gruppo_articoli.FormattingEnabled = True
-        Me.ComboBox_gruppo_articoli.Location = New System.Drawing.Point(3, 16)
-        Me.ComboBox_gruppo_articoli.Name = "ComboBox_gruppo_articoli"
-        Me.ComboBox_gruppo_articoli.Size = New System.Drawing.Size(208, 21)
-        Me.ComboBox_gruppo_articoli.TabIndex = 0
-        '
-        'GroupBox5
-        '
-        Me.GroupBox5.Controls.Add(Me.ComboBox_tipo_montaggio)
-        Me.GroupBox5.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GroupBox5.ForeColor = System.Drawing.Color.Black
-        Me.GroupBox5.Location = New System.Drawing.Point(214, 0)
-        Me.GroupBox5.Margin = New System.Windows.Forms.Padding(0)
-        Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Size = New System.Drawing.Size(214, 52)
-        Me.GroupBox5.TabIndex = 15
-        Me.GroupBox5.TabStop = False
-        Me.GroupBox5.Text = "Tipo montaggio"
-        '
-        'ComboBox_tipo_montaggio
-        '
-        Me.ComboBox_tipo_montaggio.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ComboBox_tipo_montaggio.FormattingEnabled = True
-        Me.ComboBox_tipo_montaggio.Items.AddRange(New Object() {"", "P01501", "P02001", "P03001"})
-        Me.ComboBox_tipo_montaggio.Location = New System.Drawing.Point(3, 16)
-        Me.ComboBox_tipo_montaggio.Name = "ComboBox_tipo_montaggio"
-        Me.ComboBox_tipo_montaggio.Size = New System.Drawing.Size(208, 21)
-        Me.ComboBox_tipo_montaggio.TabIndex = 0
-        '
-        'GroupBox9
-        '
-        Me.GroupBox9.Controls.Add(Me.ComboBox3)
-        Me.GroupBox9.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GroupBox9.ForeColor = System.Drawing.Color.Black
-        Me.GroupBox9.Location = New System.Drawing.Point(0, 0)
-        Me.GroupBox9.Margin = New System.Windows.Forms.Padding(0)
-        Me.GroupBox9.Name = "GroupBox9"
-        Me.GroupBox9.Size = New System.Drawing.Size(211, 46)
-        Me.GroupBox9.TabIndex = 9
-        Me.GroupBox9.TabStop = False
-        Me.GroupBox9.Text = "Produttore"
-        '
-        'ComboBox3
-        '
-        Me.ComboBox3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ComboBox3.FormattingEnabled = True
-        Me.ComboBox3.Location = New System.Drawing.Point(3, 16)
-        Me.ComboBox3.Name = "ComboBox3"
-        Me.ComboBox3.Size = New System.Drawing.Size(205, 21)
-        Me.ComboBox3.TabIndex = 0
-        '
-        'GroupBox8
-        '
-        Me.GroupBox8.Controls.Add(Me.TextBox1)
-        Me.GroupBox8.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GroupBox8.ForeColor = System.Drawing.Color.Black
-        Me.GroupBox8.Location = New System.Drawing.Point(211, 0)
-        Me.GroupBox8.Margin = New System.Windows.Forms.Padding(0)
-        Me.GroupBox8.Name = "GroupBox8"
-        Me.GroupBox8.Size = New System.Drawing.Size(211, 46)
-        Me.GroupBox8.TabIndex = 15
-        Me.GroupBox8.TabStop = False
-        Me.GroupBox8.Text = "Catalogo fornitore"
-        '
-        'TextBox1
-        '
-        Me.TextBox1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TextBox1.Location = New System.Drawing.Point(3, 16)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(205, 20)
-        Me.TextBox1.TabIndex = 0
-        '
-        'GroupBox11
-        '
-        Me.GroupBox11.Controls.Add(Me.ComboBox5)
-        Me.GroupBox11.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GroupBox11.ForeColor = System.Drawing.Color.Black
-        Me.GroupBox11.Location = New System.Drawing.Point(0, 0)
-        Me.GroupBox11.Margin = New System.Windows.Forms.Padding(0)
-        Me.GroupBox11.Name = "GroupBox11"
-        Me.GroupBox11.Size = New System.Drawing.Size(211, 46)
-        Me.GroupBox11.TabIndex = 9
-        Me.GroupBox11.TabStop = False
-        Me.GroupBox11.Text = "Fornitore preferito"
-        '
-        'ComboBox5
-        '
-        Me.ComboBox5.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ComboBox5.FormattingEnabled = True
-        Me.ComboBox5.Location = New System.Drawing.Point(3, 16)
-        Me.ComboBox5.Name = "ComboBox5"
-        Me.ComboBox5.Size = New System.Drawing.Size(205, 21)
-        Me.ComboBox5.TabIndex = 0
-        '
-        'GroupBox26
-        '
-        Me.GroupBox26.Controls.Add(Me.ComboBox10)
-        Me.GroupBox26.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GroupBox26.Location = New System.Drawing.Point(211, 0)
-        Me.GroupBox26.Margin = New System.Windows.Forms.Padding(0)
-        Me.GroupBox26.Name = "GroupBox26"
-        Me.GroupBox26.Size = New System.Drawing.Size(211, 46)
-        Me.GroupBox26.TabIndex = 0
-        Me.GroupBox26.TabStop = False
-        Me.GroupBox26.Text = "Fantasma"
-        '
-        'ComboBox10
-        '
-        Me.ComboBox10.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ComboBox10.FormattingEnabled = True
-        Me.ComboBox10.Items.AddRange(New Object() {"N", "Y"})
-        Me.ComboBox10.Location = New System.Drawing.Point(3, 16)
-        Me.ComboBox10.Name = "ComboBox10"
-        Me.ComboBox10.Size = New System.Drawing.Size(205, 21)
-        Me.ComboBox10.TabIndex = 0
-        Me.ComboBox10.Text = "N"
         '
         'TableLayoutPanel1
         '
         Me.TableLayoutPanel1.ColumnCount = 2
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30.0!))
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70.0!))
+        Me.TableLayoutPanel1.Controls.Add(Me.PanelAI, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.Panel2, 1, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.TableLayoutPanel4, 0, 0)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
         Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(0)
@@ -661,6 +178,133 @@ Partial Class UT
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(1427, 857)
         Me.TableLayoutPanel1.TabIndex = 111
+        '
+        'PanelAI
+        '
+        Me.PanelAI.Controls.Add(Me.RtbChat)
+        Me.PanelAI.Controls.Add(Me.PanelAI_Bottom)
+        Me.PanelAI.Controls.Add(Me.PanelAI_Header)
+        Me.PanelAI.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.PanelAI.Location = New System.Drawing.Point(3, 3)
+        Me.PanelAI.Name = "PanelAI"
+        Me.PanelAI.Padding = New System.Windows.Forms.Padding(0)
+        Me.PanelAI.Size = New System.Drawing.Size(425, 851)
+        Me.PanelAI.TabIndex = 200
+        '
+        'PanelAI_Header
+        '
+        Me.PanelAI_Header.BackColor = System.Drawing.Color.FromArgb(22, 45, 84)
+        Me.PanelAI_Header.Controls.Add(Me.LabelAI_Title)
+        Me.PanelAI_Header.Dock = System.Windows.Forms.DockStyle.Top
+        Me.PanelAI_Header.Location = New System.Drawing.Point(0, 0)
+        Me.PanelAI_Header.Name = "PanelAI_Header"
+        Me.PanelAI_Header.Size = New System.Drawing.Size(425, 38)
+        Me.PanelAI_Header.TabIndex = 0
+        '
+        'LabelAI_Title
+        '
+        Me.LabelAI_Title.AutoSize = False
+        Me.LabelAI_Title.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.LabelAI_Title.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold)
+        Me.LabelAI_Title.ForeColor = System.Drawing.Color.White
+        Me.LabelAI_Title.Location = New System.Drawing.Point(0, 0)
+        Me.LabelAI_Title.Name = "LabelAI_Title"
+        Me.LabelAI_Title.Padding = New System.Windows.Forms.Padding(8, 0, 0, 0)
+        Me.LabelAI_Title.Size = New System.Drawing.Size(425, 38)
+        Me.LabelAI_Title.TabIndex = 0
+        Me.LabelAI_Title.Text = "Assistente AI — Ricerca Articoli"
+        Me.LabelAI_Title.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'BtnLegenda
+        '
+        Me.BtnLegenda.BackColor = System.Drawing.Color.FromArgb(22, 45, 84)
+        Me.BtnLegenda.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnLegenda.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BtnLegenda.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(10, 26, 55)
+        Me.BtnLegenda.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Bold)
+        Me.BtnLegenda.ForeColor = System.Drawing.Color.White
+        Me.BtnLegenda.Location = New System.Drawing.Point(0, 0)
+        Me.BtnLegenda.Name = "BtnLegenda"
+        Me.BtnLegenda.Size = New System.Drawing.Size(95, 53)
+        Me.BtnLegenda.TabIndex = 190
+        Me.BtnLegenda.Text = "?  Legenda"
+        Me.BtnLegenda.UseVisualStyleBackColor = False
+        '
+        'RtbChat
+        '
+        Me.RtbChat.BackColor = System.Drawing.Color.FromArgb(250, 252, 255)
+        Me.RtbChat.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.RtbChat.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.RtbChat.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.RtbChat.Location = New System.Drawing.Point(0, 38)
+        Me.RtbChat.Name = "RtbChat"
+        Me.RtbChat.ReadOnly = True
+        Me.RtbChat.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical
+        Me.RtbChat.Size = New System.Drawing.Size(425, 716)
+        Me.RtbChat.TabIndex = 1
+        Me.RtbChat.Text = ""
+        '
+        'PanelAI_Bottom
+        '
+        Me.PanelAI_Bottom.Controls.Add(Me.TxtAiInput)
+        Me.PanelAI_Bottom.Controls.Add(Me.PanelAI_Btns)
+        Me.PanelAI_Bottom.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.PanelAI_Bottom.Location = New System.Drawing.Point(0, 754)
+        Me.PanelAI_Bottom.Name = "PanelAI_Bottom"
+        Me.PanelAI_Bottom.Size = New System.Drawing.Size(425, 97)
+        Me.PanelAI_Bottom.TabIndex = 2
+        '
+        'TxtAiInput
+        '
+        Me.TxtAiInput.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TxtAiInput.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.TxtAiInput.Location = New System.Drawing.Point(0, 0)
+        Me.TxtAiInput.Multiline = True
+        Me.TxtAiInput.Name = "TxtAiInput"
+        Me.TxtAiInput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.TxtAiInput.Size = New System.Drawing.Size(425, 65)
+        Me.TxtAiInput.TabIndex = 0
+        '
+        'PanelAI_Btns
+        '
+        Me.PanelAI_Btns.Controls.Add(Me.BtnAiInvia)
+        Me.PanelAI_Btns.Controls.Add(Me.BtnAiPulisci)
+        Me.PanelAI_Btns.BackColor = System.Drawing.Color.FromArgb(10, 26, 55)
+        Me.PanelAI_Btns.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.PanelAI_Btns.Location = New System.Drawing.Point(0, 65)
+        Me.PanelAI_Btns.Name = "PanelAI_Btns"
+        Me.PanelAI_Btns.Size = New System.Drawing.Size(425, 32)
+        Me.PanelAI_Btns.TabIndex = 1
+        '
+        'BtnAiPulisci
+        '
+        Me.BtnAiPulisci.BackColor = System.Drawing.Color.FromArgb(10, 26, 55)
+        Me.BtnAiPulisci.Dock = System.Windows.Forms.DockStyle.Left
+        Me.BtnAiPulisci.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BtnAiPulisci.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(30, 63, 122)
+        Me.BtnAiPulisci.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular)
+        Me.BtnAiPulisci.ForeColor = System.Drawing.Color.FromArgb(160, 180, 210)
+        Me.BtnAiPulisci.Location = New System.Drawing.Point(0, 0)
+        Me.BtnAiPulisci.Name = "BtnAiPulisci"
+        Me.BtnAiPulisci.Size = New System.Drawing.Size(80, 32)
+        Me.BtnAiPulisci.TabIndex = 1
+        Me.BtnAiPulisci.Text = "Pulisci"
+        Me.BtnAiPulisci.UseVisualStyleBackColor = False
+        '
+        'BtnAiInvia
+        '
+        Me.BtnAiInvia.BackColor = System.Drawing.Color.FromArgb(22, 45, 84)
+        Me.BtnAiInvia.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.BtnAiInvia.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BtnAiInvia.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(30, 63, 122)
+        Me.BtnAiInvia.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.BtnAiInvia.ForeColor = System.Drawing.Color.White
+        Me.BtnAiInvia.Location = New System.Drawing.Point(80, 0)
+        Me.BtnAiInvia.Name = "BtnAiInvia"
+        Me.BtnAiInvia.Size = New System.Drawing.Size(345, 32)
+        Me.BtnAiInvia.TabIndex = 0
+        Me.BtnAiInvia.Text = "Invia  (Invio)"
+        Me.BtnAiInvia.UseVisualStyleBackColor = False
         '
         'Panel2
         '
@@ -887,7 +531,7 @@ Partial Class UT
         Me.BRB.Location = New System.Drawing.Point(4, 22)
         Me.BRB.Name = "BRB"
         Me.BRB.Padding = New System.Windows.Forms.Padding(3)
-        Me.BRB.Size = New System.Drawing.Size(899, 719)
+        Me.BRB.Size = New System.Drawing.Size(985, 719)
         Me.BRB.TabIndex = 1
         Me.BRB.Text = "BRB"
         Me.BRB.UseVisualStyleBackColor = True
@@ -904,7 +548,7 @@ Partial Class UT
         Me.TableLayoutPanel3.RowCount = 2
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80.0!))
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
-        Me.TableLayoutPanel3.Size = New System.Drawing.Size(893, 713)
+        Me.TableLayoutPanel3.Size = New System.Drawing.Size(979, 713)
         Me.TableLayoutPanel3.TabIndex = 12
         '
         'TableLayoutPanel2
@@ -925,16 +569,16 @@ Partial Class UT
         Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
         Me.TableLayoutPanel2.RowCount = 1
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel2.Size = New System.Drawing.Size(887, 137)
+        Me.TableLayoutPanel2.Size = New System.Drawing.Size(973, 137)
         Me.TableLayoutPanel2.TabIndex = 12
         '
         'GroupBox25
         '
         Me.GroupBox25.Controls.Add(Me.TextBox11)
         Me.GroupBox25.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GroupBox25.Location = New System.Drawing.Point(297, 3)
+        Me.GroupBox25.Location = New System.Drawing.Point(327, 3)
         Me.GroupBox25.Name = "GroupBox25"
-        Me.GroupBox25.Size = New System.Drawing.Size(141, 131)
+        Me.GroupBox25.Size = New System.Drawing.Size(156, 131)
         Me.GroupBox25.TabIndex = 3
         Me.GroupBox25.TabStop = False
         Me.GroupBox25.Text = "Prima lettera"
@@ -945,16 +589,16 @@ Partial Class UT
         Me.TextBox11.Enabled = False
         Me.TextBox11.Location = New System.Drawing.Point(3, 16)
         Me.TextBox11.Name = "TextBox11"
-        Me.TextBox11.Size = New System.Drawing.Size(135, 20)
+        Me.TextBox11.Size = New System.Drawing.Size(150, 20)
         Me.TextBox11.TabIndex = 0
         '
         'GroupBox24
         '
         Me.GroupBox24.Controls.Add(Me.ComboBox9)
         Me.GroupBox24.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GroupBox24.Location = New System.Drawing.Point(150, 3)
+        Me.GroupBox24.Location = New System.Drawing.Point(165, 3)
         Me.GroupBox24.Name = "GroupBox24"
-        Me.GroupBox24.Size = New System.Drawing.Size(141, 131)
+        Me.GroupBox24.Size = New System.Drawing.Size(156, 131)
         Me.GroupBox24.TabIndex = 2
         Me.GroupBox24.TabStop = False
         Me.GroupBox24.Text = "Gruppo articoli"
@@ -965,15 +609,15 @@ Partial Class UT
         Me.ComboBox9.FormattingEnabled = True
         Me.ComboBox9.Location = New System.Drawing.Point(3, 16)
         Me.ComboBox9.Name = "ComboBox9"
-        Me.ComboBox9.Size = New System.Drawing.Size(135, 21)
+        Me.ComboBox9.Size = New System.Drawing.Size(150, 21)
         Me.ComboBox9.TabIndex = 0
         '
         'Button4
         '
         Me.Button4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Button4.Location = New System.Drawing.Point(738, 3)
+        Me.Button4.Location = New System.Drawing.Point(813, 3)
         Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(146, 131)
+        Me.Button4.Size = New System.Drawing.Size(157, 131)
         Me.Button4.TabIndex = 0
         Me.Button4.Text = "Crea codice SAP"
         Me.Button4.UseVisualStyleBackColor = True
@@ -984,7 +628,7 @@ Partial Class UT
         Me.GroupBox23.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupBox23.Location = New System.Drawing.Point(3, 3)
         Me.GroupBox23.Name = "GroupBox23"
-        Me.GroupBox23.Size = New System.Drawing.Size(141, 131)
+        Me.GroupBox23.Size = New System.Drawing.Size(156, 131)
         Me.GroupBox23.TabIndex = 1
         Me.GroupBox23.TabStop = False
         Me.GroupBox23.Text = "Codice selezionato"
@@ -995,7 +639,7 @@ Partial Class UT
         Me.TextBox7.Enabled = False
         Me.TextBox7.Location = New System.Drawing.Point(3, 16)
         Me.TextBox7.Name = "TextBox7"
-        Me.TextBox7.Size = New System.Drawing.Size(135, 20)
+        Me.TextBox7.Size = New System.Drawing.Size(150, 20)
         Me.TextBox7.TabIndex = 0
         '
         'DataGridView1
@@ -1029,7 +673,7 @@ Partial Class UT
         Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle19
         Me.DataGridView1.RowHeadersVisible = False
         Me.DataGridView1.RowHeadersWidth = 51
-        Me.DataGridView1.Size = New System.Drawing.Size(887, 564)
+        Me.DataGridView1.Size = New System.Drawing.Size(973, 564)
         Me.DataGridView1.TabIndex = 11
         '
         'Codice_
@@ -1113,12 +757,8 @@ Partial Class UT
         '
         'Panel26
         '
-        Me.Panel26.Controls.Add(Me.GroupBox27)
-        Me.Panel26.Controls.Add(Me.Panel28)
+        Me.Panel26.Controls.Add(Me.TlpFiltro2)
         Me.Panel26.Controls.Add(Me.Panel17)
-        Me.Panel26.Controls.Add(Me.Panel29)
-        Me.Panel26.Controls.Add(Me.Panel30)
-        Me.Panel26.Controls.Add(Me.Panel31)
         Me.Panel26.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel26.Location = New System.Drawing.Point(0, 0)
         Me.Panel26.Name = "Panel26"
@@ -1128,9 +768,11 @@ Partial Class UT
         'GroupBox27
         '
         Me.GroupBox27.Controls.Add(Me.TextBox9)
-        Me.GroupBox27.Location = New System.Drawing.Point(768, 6)
+        Me.GroupBox27.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GroupBox27.Margin = New System.Windows.Forms.Padding(0)
+        Me.GroupBox27.Location = New System.Drawing.Point(0, 0)
         Me.GroupBox27.Name = "GroupBox27"
-        Me.GroupBox27.Size = New System.Drawing.Size(117, 46)
+        Me.GroupBox27.Size = New System.Drawing.Size(117, 53)
         Me.GroupBox27.TabIndex = 163
         Me.GroupBox27.TabStop = False
         Me.GroupBox27.Text = "N° risultati"
@@ -1143,15 +785,6 @@ Partial Class UT
         Me.TextBox9.Size = New System.Drawing.Size(111, 20)
         Me.TextBox9.TabIndex = 0
         Me.TextBox9.Text = "100"
-        '
-        'Panel28
-        '
-        Me.Panel28.Controls.Add(Me.GroupBox15)
-        Me.Panel28.Dock = System.Windows.Forms.DockStyle.Left
-        Me.Panel28.Location = New System.Drawing.Point(460, 0)
-        Me.Panel28.Name = "Panel28"
-        Me.Panel28.Size = New System.Drawing.Size(145, 53)
-        Me.Panel28.TabIndex = 160
         '
         'GroupBox15
         '
@@ -1193,15 +826,6 @@ Partial Class UT
         Me.Button_CERCA.Text = "Cerca"
         Me.Button_CERCA.UseVisualStyleBackColor = False
         '
-        'Panel29
-        '
-        Me.Panel29.Controls.Add(Me.GroupBox12)
-        Me.Panel29.Dock = System.Windows.Forms.DockStyle.Left
-        Me.Panel29.Location = New System.Drawing.Point(315, 0)
-        Me.Panel29.Name = "Panel29"
-        Me.Panel29.Size = New System.Drawing.Size(145, 53)
-        Me.Panel29.TabIndex = 158
-        '
         'GroupBox12
         '
         Me.GroupBox12.Controls.Add(Me.ComboBox6)
@@ -1223,15 +847,6 @@ Partial Class UT
         Me.ComboBox6.Size = New System.Drawing.Size(139, 21)
         Me.ComboBox6.TabIndex = 2
         '
-        'Panel30
-        '
-        Me.Panel30.Controls.Add(Me.GroupBox13)
-        Me.Panel30.Dock = System.Windows.Forms.DockStyle.Left
-        Me.Panel30.Location = New System.Drawing.Point(129, 0)
-        Me.Panel30.Name = "Panel30"
-        Me.Panel30.Size = New System.Drawing.Size(186, 53)
-        Me.Panel30.TabIndex = 157
-        '
         'GroupBox13
         '
         Me.GroupBox13.Controls.Add(Me.TextBox2)
@@ -1251,15 +866,6 @@ Partial Class UT
         Me.TextBox2.Name = "TextBox2"
         Me.TextBox2.Size = New System.Drawing.Size(180, 20)
         Me.TextBox2.TabIndex = 1
-        '
-        'Panel31
-        '
-        Me.Panel31.Controls.Add(Me.GroupBox14)
-        Me.Panel31.Dock = System.Windows.Forms.DockStyle.Left
-        Me.Panel31.Location = New System.Drawing.Point(0, 0)
-        Me.Panel31.Name = "Panel31"
-        Me.Panel31.Size = New System.Drawing.Size(129, 53)
-        Me.Panel31.TabIndex = 156
         '
         'GroupBox14
         '
@@ -1282,15 +888,33 @@ Partial Class UT
         Me.ComboBox4.Size = New System.Drawing.Size(123, 21)
         Me.ComboBox4.TabIndex = 2
         '
+        'TlpFiltro2
+        '
+        Me.TlpFiltro2.ColumnCount = 5
+        Me.TlpFiltro2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
+        Me.TlpFiltro2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 26.0!))
+        Me.TlpFiltro2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 26.0!))
+        Me.TlpFiltro2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 18.0!))
+        Me.TlpFiltro2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.0!))
+        Me.TlpFiltro2.Controls.Add(Me.GroupBox14, 0, 0)
+        Me.TlpFiltro2.Controls.Add(Me.GroupBox13, 1, 0)
+        Me.TlpFiltro2.Controls.Add(Me.GroupBox12, 2, 0)
+        Me.TlpFiltro2.Controls.Add(Me.GroupBox15, 3, 0)
+        Me.TlpFiltro2.Controls.Add(Me.GroupBox27, 4, 0)
+        Me.TlpFiltro2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TlpFiltro2.Location = New System.Drawing.Point(0, 0)
+        Me.TlpFiltro2.Margin = New System.Windows.Forms.Padding(0)
+        Me.TlpFiltro2.Name = "TlpFiltro2"
+        Me.TlpFiltro2.RowCount = 1
+        Me.TlpFiltro2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TlpFiltro2.Size = New System.Drawing.Size(874, 53)
+        Me.TlpFiltro2.TabIndex = 200
+        '
         'Panel3
         '
+        Me.Panel3.Controls.Add(Me.TlpFiltro1)
+        Me.Panel3.Controls.Add(Me.BtnLegenda)
         Me.Panel3.Controls.Add(Me.Button20)
-        Me.Panel3.Controls.Add(Me.Panel34)
-        Me.Panel3.Controls.Add(Me.Panel27)
-        Me.Panel3.Controls.Add(Me.Panel18)
-        Me.Panel3.Controls.Add(Me.Panel16)
-        Me.Panel3.Controls.Add(Me.Panel15)
-        Me.Panel3.Controls.Add(Me.Panel14)
         Me.Panel3.Controls.Add(Me.Button3)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel3.Location = New System.Drawing.Point(0, 0)
@@ -1310,15 +934,6 @@ Partial Class UT
         Me.Button20.TabIndex = 189
         Me.Button20.Text = "-"
         Me.Button20.UseVisualStyleBackColor = True
-        '
-        'Panel34
-        '
-        Me.Panel34.Controls.Add(Me.GroupBox6)
-        Me.Panel34.Dock = System.Windows.Forms.DockStyle.Left
-        Me.Panel34.Location = New System.Drawing.Point(859, 0)
-        Me.Panel34.Name = "Panel34"
-        Me.Panel34.Size = New System.Drawing.Size(131, 53)
-        Me.Panel34.TabIndex = 162
         '
         'GroupBox6
         '
@@ -1341,20 +956,12 @@ Partial Class UT
         Me.ComboBox1.Size = New System.Drawing.Size(125, 21)
         Me.ComboBox1.TabIndex = 1
         '
-        'Panel27
-        '
-        Me.Panel27.Controls.Add(Me.GroupBox22)
-        Me.Panel27.Dock = System.Windows.Forms.DockStyle.Left
-        Me.Panel27.Location = New System.Drawing.Point(708, 0)
-        Me.Panel27.Name = "Panel27"
-        Me.Panel27.Size = New System.Drawing.Size(151, 53)
-        Me.Panel27.TabIndex = 161
-        '
         'GroupBox22
         '
         Me.GroupBox22.Controls.Add(Me.TextBox6)
         Me.GroupBox22.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupBox22.Location = New System.Drawing.Point(0, 0)
+        Me.GroupBox22.Margin = New System.Windows.Forms.Padding(0)
         Me.GroupBox22.Name = "GroupBox22"
         Me.GroupBox22.Size = New System.Drawing.Size(151, 53)
         Me.GroupBox22.TabIndex = 0
@@ -1368,15 +975,6 @@ Partial Class UT
         Me.TextBox6.Name = "TextBox6"
         Me.TextBox6.Size = New System.Drawing.Size(145, 20)
         Me.TextBox6.TabIndex = 2
-        '
-        'Panel18
-        '
-        Me.Panel18.Controls.Add(Me.GroupBox4)
-        Me.Panel18.Dock = System.Windows.Forms.DockStyle.Left
-        Me.Panel18.Location = New System.Drawing.Point(567, 0)
-        Me.Panel18.Name = "Panel18"
-        Me.Panel18.Size = New System.Drawing.Size(141, 53)
-        Me.Panel18.TabIndex = 160
         '
         'GroupBox4
         '
@@ -1398,15 +996,6 @@ Partial Class UT
         Me.TextBox_disegno_SAP.Size = New System.Drawing.Size(135, 20)
         Me.TextBox_disegno_SAP.TabIndex = 1
         '
-        'Panel16
-        '
-        Me.Panel16.Controls.Add(Me.GroupBox10)
-        Me.Panel16.Dock = System.Windows.Forms.DockStyle.Left
-        Me.Panel16.Location = New System.Drawing.Point(315, 0)
-        Me.Panel16.Name = "Panel16"
-        Me.Panel16.Size = New System.Drawing.Size(252, 53)
-        Me.Panel16.TabIndex = 158
-        '
         'GroupBox10
         '
         Me.GroupBox10.Controls.Add(Me.TextBox3)
@@ -1427,15 +1016,6 @@ Partial Class UT
         Me.TextBox3.Size = New System.Drawing.Size(246, 20)
         Me.TextBox3.TabIndex = 1
         '
-        'Panel15
-        '
-        Me.Panel15.Controls.Add(Me.GroupBox3)
-        Me.Panel15.Dock = System.Windows.Forms.DockStyle.Left
-        Me.Panel15.Location = New System.Drawing.Point(129, 0)
-        Me.Panel15.Name = "Panel15"
-        Me.Panel15.Size = New System.Drawing.Size(186, 53)
-        Me.Panel15.TabIndex = 157
-        '
         'GroupBox3
         '
         Me.GroupBox3.Controls.Add(Me.TextBox_Descrizione_ricerca)
@@ -1455,15 +1035,6 @@ Partial Class UT
         Me.TextBox_Descrizione_ricerca.Name = "TextBox_Descrizione_ricerca"
         Me.TextBox_Descrizione_ricerca.Size = New System.Drawing.Size(180, 20)
         Me.TextBox_Descrizione_ricerca.TabIndex = 1
-        '
-        'Panel14
-        '
-        Me.Panel14.Controls.Add(Me.GroupBox2)
-        Me.Panel14.Dock = System.Windows.Forms.DockStyle.Left
-        Me.Panel14.Location = New System.Drawing.Point(0, 0)
-        Me.Panel14.Name = "Panel14"
-        Me.Panel14.Size = New System.Drawing.Size(129, 53)
-        Me.Panel14.TabIndex = 156
         '
         'GroupBox2
         '
@@ -1498,219 +1069,29 @@ Partial Class UT
         Me.Button3.Text = "X"
         Me.Button3.UseVisualStyleBackColor = True
         '
-        'TableLayoutPanel4
+        'TlpFiltro1
         '
-        Me.TableLayoutPanel4.ColumnCount = 1
-        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel4.Controls.Add(Me.Panel33, 0, 8)
-        Me.TableLayoutPanel4.Controls.Add(Me.GroupBox_descrizione_supplementare, 0, 3)
-        Me.TableLayoutPanel4.Controls.Add(Me.GroupBox_descrizione, 0, 2)
-        Me.TableLayoutPanel4.Controls.Add(Me.TableLayoutPanel5, 0, 0)
-        Me.TableLayoutPanel4.Controls.Add(Me.TableLayoutPanel6, 0, 1)
-        Me.TableLayoutPanel4.Controls.Add(Me.TableLayoutPanel7, 0, 4)
-        Me.TableLayoutPanel4.Controls.Add(Me.TableLayoutPanel8, 0, 5)
-        Me.TableLayoutPanel4.Controls.Add(Me.TableLayoutPanel9, 0, 6)
-        Me.TableLayoutPanel4.Controls.Add(Me.Panel19, 0, 9)
-        Me.TableLayoutPanel4.Controls.Add(Me.TableLayoutPanel10, 0, 7)
-        Me.TableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel4.Location = New System.Drawing.Point(0, 0)
-        Me.TableLayoutPanel4.Margin = New System.Windows.Forms.Padding(0)
-        Me.TableLayoutPanel4.Name = "TableLayoutPanel4"
-        Me.TableLayoutPanel4.RowCount = 10
-        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.122449!))
-        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.122449!))
-        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.122449!))
-        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.122449!))
-        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.122449!))
-        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.122449!))
-        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.122449!))
-        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.122449!))
-        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.5102!))
-        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.5102!))
-        Me.TableLayoutPanel4.Size = New System.Drawing.Size(428, 857)
-        Me.TableLayoutPanel4.TabIndex = 0
-        Me.TableLayoutPanel4.Visible = False
-        '
-        'TableLayoutPanel5
-        '
-        Me.TableLayoutPanel5.ColumnCount = 2
-        Me.TableLayoutPanel5.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel5.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel5.Controls.Add(Me.GroupBox_codice_articolo, 1, 0)
-        Me.TableLayoutPanel5.Controls.Add(Me.GroupBox1, 0, 0)
-        Me.TableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel5.Location = New System.Drawing.Point(3, 3)
-        Me.TableLayoutPanel5.Name = "TableLayoutPanel5"
-        Me.TableLayoutPanel5.RowCount = 1
-        Me.TableLayoutPanel5.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel5.Size = New System.Drawing.Size(422, 46)
-        Me.TableLayoutPanel5.TabIndex = 0
-        '
-        'TableLayoutPanel6
-        '
-        Me.TableLayoutPanel6.ColumnCount = 2
-        Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel6.Controls.Add(Me.GroupBox28, 1, 0)
-        Me.TableLayoutPanel6.Controls.Add(Me.Group_box_disegno, 0, 0)
-        Me.TableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel6.Location = New System.Drawing.Point(3, 55)
-        Me.TableLayoutPanel6.Name = "TableLayoutPanel6"
-        Me.TableLayoutPanel6.RowCount = 1
-        Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel6.Size = New System.Drawing.Size(422, 46)
-        Me.TableLayoutPanel6.TabIndex = 1
-        '
-        'TableLayoutPanel7
-        '
-        Me.TableLayoutPanel7.ColumnCount = 2
-        Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel7.Controls.Add(Me.GroupBox5, 1, 0)
-        Me.TableLayoutPanel7.Controls.Add(Me.GroupBox_gruppo_articoli, 0, 0)
-        Me.TableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel7.Location = New System.Drawing.Point(0, 208)
-        Me.TableLayoutPanel7.Margin = New System.Windows.Forms.Padding(0)
-        Me.TableLayoutPanel7.Name = "TableLayoutPanel7"
-        Me.TableLayoutPanel7.RowCount = 1
-        Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel7.Size = New System.Drawing.Size(428, 52)
-        Me.TableLayoutPanel7.TabIndex = 9
-        '
-        'TableLayoutPanel8
-        '
-        Me.TableLayoutPanel8.ColumnCount = 2
-        Me.TableLayoutPanel8.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel8.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel8.Controls.Add(Me.GroupBox8, 1, 0)
-        Me.TableLayoutPanel8.Controls.Add(Me.GroupBox9, 0, 0)
-        Me.TableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel8.Location = New System.Drawing.Point(3, 263)
-        Me.TableLayoutPanel8.Name = "TableLayoutPanel8"
-        Me.TableLayoutPanel8.RowCount = 1
-        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel8.Size = New System.Drawing.Size(422, 46)
-        Me.TableLayoutPanel8.TabIndex = 10
-        '
-        'TableLayoutPanel9
-        '
-        Me.TableLayoutPanel9.ColumnCount = 2
-        Me.TableLayoutPanel9.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel9.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel9.Controls.Add(Me.GroupBox26, 1, 0)
-        Me.TableLayoutPanel9.Controls.Add(Me.GroupBox11, 0, 0)
-        Me.TableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel9.Location = New System.Drawing.Point(3, 315)
-        Me.TableLayoutPanel9.Name = "TableLayoutPanel9"
-        Me.TableLayoutPanel9.RowCount = 1
-        Me.TableLayoutPanel9.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel9.Size = New System.Drawing.Size(422, 46)
-        Me.TableLayoutPanel9.TabIndex = 11
-        '
-        'Panel19
-        '
-        Me.Panel19.Controls.Add(Me.Panel21)
-        Me.Panel19.Controls.Add(Me.Panel20)
-        Me.Panel19.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel19.Location = New System.Drawing.Point(2, 636)
-        Me.Panel19.Margin = New System.Windows.Forms.Padding(2)
-        Me.Panel19.Name = "Panel19"
-        Me.Panel19.Size = New System.Drawing.Size(424, 219)
-        Me.Panel19.TabIndex = 115
-        '
-        'Panel21
-        '
-        Me.Panel21.Controls.Add(Me.GroupBox7)
-        Me.Panel21.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel21.Location = New System.Drawing.Point(0, 172)
-        Me.Panel21.Margin = New System.Windows.Forms.Padding(2)
-        Me.Panel21.Name = "Panel21"
-        Me.Panel21.Size = New System.Drawing.Size(264, 47)
-        Me.Panel21.TabIndex = 1
-        '
-        'GroupBox7
-        '
-        Me.GroupBox7.Controls.Add(Me.Combodipendenti)
-        Me.GroupBox7.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GroupBox7.Location = New System.Drawing.Point(0, 0)
-        Me.GroupBox7.Margin = New System.Windows.Forms.Padding(2)
-        Me.GroupBox7.Name = "GroupBox7"
-        Me.GroupBox7.Padding = New System.Windows.Forms.Padding(2)
-        Me.GroupBox7.Size = New System.Drawing.Size(264, 47)
-        Me.GroupBox7.TabIndex = 107
-        Me.GroupBox7.TabStop = False
-        Me.GroupBox7.Text = "Dipendente"
-        '
-        'Combodipendenti
-        '
-        Me.Combodipendenti.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Combodipendenti.FormattingEnabled = True
-        Me.Combodipendenti.Location = New System.Drawing.Point(2, 15)
-        Me.Combodipendenti.Margin = New System.Windows.Forms.Padding(2)
-        Me.Combodipendenti.Name = "Combodipendenti"
-        Me.Combodipendenti.Size = New System.Drawing.Size(260, 21)
-        Me.Combodipendenti.TabIndex = 85
-        '
-        'Panel20
-        '
-        Me.Panel20.Controls.Add(Me.Aggiungi)
-        Me.Panel20.Dock = System.Windows.Forms.DockStyle.Right
-        Me.Panel20.Location = New System.Drawing.Point(264, 0)
-        Me.Panel20.Margin = New System.Windows.Forms.Padding(2)
-        Me.Panel20.Name = "Panel20"
-        Me.Panel20.Size = New System.Drawing.Size(160, 219)
-        Me.Panel20.TabIndex = 0
-        '
-        'Aggiungi
-        '
-        Me.Aggiungi.BackColor = System.Drawing.Color.LemonChiffon
-        Me.Aggiungi.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Aggiungi.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Aggiungi.Location = New System.Drawing.Point(0, 0)
-        Me.Aggiungi.Name = "Aggiungi"
-        Me.Aggiungi.Size = New System.Drawing.Size(160, 219)
-        Me.Aggiungi.TabIndex = 12
-        Me.Aggiungi.Text = "Aggiungi"
-        Me.Aggiungi.UseVisualStyleBackColor = False
-        Me.Aggiungi.Visible = False
-        '
-        'TableLayoutPanel10
-        '
-        Me.TableLayoutPanel10.ColumnCount = 2
-        Me.TableLayoutPanel10.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel10.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel10.Controls.Add(Me.GroupBox29, 0, 0)
-        Me.TableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel10.Location = New System.Drawing.Point(3, 367)
-        Me.TableLayoutPanel10.Name = "TableLayoutPanel10"
-        Me.TableLayoutPanel10.RowCount = 1
-        Me.TableLayoutPanel10.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel10.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutPanel10.Size = New System.Drawing.Size(422, 46)
-        Me.TableLayoutPanel10.TabIndex = 116
-        '
-        'GroupBox29
-        '
-        Me.GroupBox29.Controls.Add(Me.ComboBox11)
-        Me.GroupBox29.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GroupBox29.Location = New System.Drawing.Point(0, 0)
-        Me.GroupBox29.Margin = New System.Windows.Forms.Padding(0)
-        Me.GroupBox29.Name = "GroupBox29"
-        Me.GroupBox29.Size = New System.Drawing.Size(211, 46)
-        Me.GroupBox29.TabIndex = 0
-        Me.GroupBox29.TabStop = False
-        Me.GroupBox29.Text = "Make/Buy"
-        '
-        'ComboBox11
-        '
-        Me.ComboBox11.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ComboBox11.FormattingEnabled = True
-        Me.ComboBox11.Items.AddRange(New Object() {"M", "B"})
-        Me.ComboBox11.Location = New System.Drawing.Point(3, 16)
-        Me.ComboBox11.Name = "ComboBox11"
-        Me.ComboBox11.Size = New System.Drawing.Size(205, 21)
-        Me.ComboBox11.TabIndex = 0
-        Me.ComboBox11.Text = "M"
+        Me.TlpFiltro1.ColumnCount = 6
+        Me.TlpFiltro1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.0!))
+        Me.TlpFiltro1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
+        Me.TlpFiltro1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
+        Me.TlpFiltro1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.0!))
+        Me.TlpFiltro1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.0!))
+        Me.TlpFiltro1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.0!))
+        Me.TlpFiltro1.Controls.Add(Me.GroupBox2, 0, 0)
+        Me.TlpFiltro1.Controls.Add(Me.GroupBox3, 1, 0)
+        Me.TlpFiltro1.Controls.Add(Me.GroupBox10, 2, 0)
+        Me.TlpFiltro1.Controls.Add(Me.GroupBox4, 3, 0)
+        Me.TlpFiltro1.Controls.Add(Me.GroupBox22, 4, 0)
+        Me.TlpFiltro1.Controls.Add(Me.GroupBox6, 5, 0)
+        Me.TlpFiltro1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TlpFiltro1.Location = New System.Drawing.Point(0, 0)
+        Me.TlpFiltro1.Margin = New System.Windows.Forms.Padding(0)
+        Me.TlpFiltro1.Name = "TlpFiltro1"
+        Me.TlpFiltro1.RowCount = 1
+        Me.TlpFiltro1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TlpFiltro1.Size = New System.Drawing.Size(752, 53)
+        Me.TlpFiltro1.TabIndex = 201
         '
         'UT
         '
@@ -1722,34 +1103,11 @@ Partial Class UT
         Me.Name = "UT"
         Me.Text = "Codifica Tirelli"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
-        Me.Panel33.ResumeLayout(False)
-        Me.GroupBox21.ResumeLayout(False)
-        Me.GroupBox21.PerformLayout()
-        Me.GroupBox20.ResumeLayout(False)
-        Me.GroupBox19.ResumeLayout(False)
-        Me.GroupBox19.PerformLayout()
-        Me.GroupBox18.ResumeLayout(False)
-        Me.GroupBox17.ResumeLayout(False)
-        Me.GroupBox16.ResumeLayout(False)
-        Me.GroupBox16.PerformLayout()
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox_codice_articolo.ResumeLayout(False)
-        Me.GroupBox_codice_articolo.PerformLayout()
-        Me.Group_box_disegno.ResumeLayout(False)
-        Me.Group_box_disegno.PerformLayout()
-        Me.GroupBox28.ResumeLayout(False)
-        Me.GroupBox28.PerformLayout()
-        Me.GroupBox_descrizione.ResumeLayout(False)
-        Me.GroupBox_descrizione.PerformLayout()
-        Me.GroupBox_descrizione_supplementare.ResumeLayout(False)
-        Me.GroupBox_descrizione_supplementare.PerformLayout()
-        Me.GroupBox_gruppo_articoli.ResumeLayout(False)
-        Me.GroupBox5.ResumeLayout(False)
-        Me.GroupBox9.ResumeLayout(False)
-        Me.GroupBox8.ResumeLayout(False)
-        Me.GroupBox8.PerformLayout()
-        Me.GroupBox11.ResumeLayout(False)
-        Me.GroupBox26.ResumeLayout(False)
+        Me.PanelAI_Btns.ResumeLayout(False)
+        Me.PanelAI_Bottom.ResumeLayout(False)
+        Me.PanelAI_Bottom.PerformLayout()
+        Me.PanelAI_Header.ResumeLayout(False)
+        Me.PanelAI.ResumeLayout(False)
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.TableLayoutPanel1.PerformLayout()
         Me.Panel2.ResumeLayout(False)
@@ -1768,98 +1126,34 @@ Partial Class UT
         Me.GroupBox23.PerformLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel26.ResumeLayout(False)
-        Me.GroupBox27.ResumeLayout(False)
-        Me.GroupBox27.PerformLayout()
-        Me.Panel28.ResumeLayout(False)
-        Me.GroupBox15.ResumeLayout(False)
-        Me.GroupBox15.PerformLayout()
-        Me.Panel17.ResumeLayout(False)
-        Me.Panel29.ResumeLayout(False)
-        Me.GroupBox12.ResumeLayout(False)
-        Me.Panel30.ResumeLayout(False)
+        Me.TlpFiltro2.ResumeLayout(False)
+        Me.GroupBox14.ResumeLayout(False)
         Me.GroupBox13.ResumeLayout(False)
         Me.GroupBox13.PerformLayout()
-        Me.Panel31.ResumeLayout(False)
-        Me.GroupBox14.ResumeLayout(False)
+        Me.GroupBox12.ResumeLayout(False)
+        Me.GroupBox15.ResumeLayout(False)
+        Me.GroupBox15.PerformLayout()
+        Me.GroupBox27.ResumeLayout(False)
+        Me.GroupBox27.PerformLayout()
+        Me.Panel17.ResumeLayout(False)
         Me.Panel3.ResumeLayout(False)
-        Me.Panel34.ResumeLayout(False)
-        Me.GroupBox6.ResumeLayout(False)
-        Me.Panel27.ResumeLayout(False)
-        Me.GroupBox22.ResumeLayout(False)
-        Me.GroupBox22.PerformLayout()
-        Me.Panel18.ResumeLayout(False)
-        Me.GroupBox4.ResumeLayout(False)
-        Me.GroupBox4.PerformLayout()
-        Me.Panel16.ResumeLayout(False)
-        Me.GroupBox10.ResumeLayout(False)
-        Me.GroupBox10.PerformLayout()
-        Me.Panel15.ResumeLayout(False)
-        Me.GroupBox3.ResumeLayout(False)
-        Me.GroupBox3.PerformLayout()
-        Me.Panel14.ResumeLayout(False)
+        Me.TlpFiltro1.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
-        Me.TableLayoutPanel4.ResumeLayout(False)
-        Me.TableLayoutPanel5.ResumeLayout(False)
-        Me.TableLayoutPanel6.ResumeLayout(False)
-        Me.TableLayoutPanel7.ResumeLayout(False)
-        Me.TableLayoutPanel8.ResumeLayout(False)
-        Me.TableLayoutPanel9.ResumeLayout(False)
-        Me.Panel19.ResumeLayout(False)
-        Me.Panel21.ResumeLayout(False)
-        Me.GroupBox7.ResumeLayout(False)
-        Me.Panel20.ResumeLayout(False)
-        Me.TableLayoutPanel10.ResumeLayout(False)
-        Me.GroupBox29.ResumeLayout(False)
+        Me.GroupBox3.ResumeLayout(False)
+        Me.GroupBox3.PerformLayout()
+        Me.GroupBox10.ResumeLayout(False)
+        Me.GroupBox10.PerformLayout()
+        Me.GroupBox4.ResumeLayout(False)
+        Me.GroupBox4.PerformLayout()
+        Me.GroupBox22.ResumeLayout(False)
+        Me.GroupBox22.PerformLayout()
+        Me.GroupBox6.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
     Friend WithEvents Timer1 As Timer
-    Friend WithEvents Panel33 As Panel
-    Friend WithEvents GroupBox21 As GroupBox
-    Friend WithEvents TextBox10 As TextBox
-    Friend WithEvents GroupBox20 As GroupBox
-    Friend WithEvents ComboBox8 As ComboBox
-    Friend WithEvents GroupBox19 As GroupBox
-    Friend WithEvents TextBox8 As TextBox
-    Friend WithEvents GroupBox18 As GroupBox
-    Friend WithEvents ComboBox7 As ComboBox
-    Friend WithEvents GroupBox17 As GroupBox
-    Friend WithEvents ComboBox2 As ComboBox
-    Friend WithEvents GroupBox16 As GroupBox
-    Friend WithEvents TextBox5 As TextBox
-    Friend WithEvents Button2 As Button
-    Friend WithEvents GroupBox_codice_articolo As GroupBox
-    Friend WithEvents TextBox_codice_sap As TextBox
-    Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents ComboBox_prima_lettera As ComboBox
-    Friend WithEvents GroupBox28 As GroupBox
-    Friend WithEvents TextBox12 As TextBox
-    Friend WithEvents Group_box_disegno As GroupBox
-    Friend WithEvents TextBox_disegno As TextBox
-    Friend WithEvents GroupBox_descrizione As GroupBox
-    Friend WithEvents TextBox_descrizione As TextBox
-    Friend WithEvents GroupBox_descrizione_supplementare As GroupBox
-    Friend WithEvents TextBox_DESC_SUPP As TextBox
-    Friend WithEvents GroupBox5 As GroupBox
-    Friend WithEvents ComboBox_tipo_montaggio As ComboBox
-    Friend WithEvents GroupBox_gruppo_articoli As GroupBox
-    Friend WithEvents ComboBox_gruppo_articoli As ComboBox
-    Friend WithEvents GroupBox8 As GroupBox
-    Friend WithEvents TextBox1 As TextBox
-    Friend WithEvents GroupBox9 As GroupBox
-    Friend WithEvents ComboBox3 As ComboBox
-    Friend WithEvents GroupBox26 As GroupBox
-    Friend WithEvents ComboBox10 As ComboBox
-    Friend WithEvents GroupBox11 As GroupBox
-    Friend WithEvents ComboBox5 As ComboBox
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
-    Friend WithEvents TableLayoutPanel4 As TableLayoutPanel
-    Friend WithEvents TableLayoutPanel5 As TableLayoutPanel
-    Friend WithEvents TableLayoutPanel6 As TableLayoutPanel
-    Friend WithEvents TableLayoutPanel7 As TableLayoutPanel
-    Friend WithEvents TableLayoutPanel8 As TableLayoutPanel
-    Friend WithEvents TableLayoutPanel9 As TableLayoutPanel
     Friend WithEvents Panel2 As Panel
     Friend WithEvents Panel13 As Panel
     Friend WithEvents Panel32 As Panel
@@ -1904,50 +1198,43 @@ Partial Class UT
     Friend WithEvents Gruppo_codice As DataGridViewTextBoxColumn
     Friend WithEvents Gruppo_nome As DataGridViewTextBoxColumn
     Friend WithEvents Panel26 As Panel
+    Friend WithEvents TlpFiltro2 As TableLayoutPanel
     Friend WithEvents GroupBox27 As GroupBox
     Friend WithEvents TextBox9 As TextBox
-    Friend WithEvents Panel28 As Panel
     Friend WithEvents GroupBox15 As GroupBox
     Friend WithEvents TextBox4 As TextBox
     Friend WithEvents Panel17 As Panel
     Friend WithEvents Button_CERCA As Button
-    Friend WithEvents Panel29 As Panel
     Friend WithEvents GroupBox12 As GroupBox
     Friend WithEvents ComboBox6 As ComboBox
-    Friend WithEvents Panel30 As Panel
     Friend WithEvents GroupBox13 As GroupBox
     Friend WithEvents TextBox2 As TextBox
-    Friend WithEvents Panel31 As Panel
     Friend WithEvents GroupBox14 As GroupBox
     Friend WithEvents ComboBox4 As ComboBox
     Friend WithEvents Panel3 As Panel
+    Friend WithEvents TlpFiltro1 As TableLayoutPanel
     Friend WithEvents Button20 As Button
-    Friend WithEvents Panel34 As Panel
     Friend WithEvents GroupBox6 As GroupBox
     Friend WithEvents ComboBox1 As ComboBox
-    Friend WithEvents Panel27 As Panel
     Friend WithEvents GroupBox22 As GroupBox
     Friend WithEvents TextBox6 As TextBox
-    Friend WithEvents Panel18 As Panel
     Friend WithEvents GroupBox4 As GroupBox
     Friend WithEvents TextBox_disegno_SAP As TextBox
-    Friend WithEvents Panel16 As Panel
     Friend WithEvents GroupBox10 As GroupBox
     Friend WithEvents TextBox3 As TextBox
-    Friend WithEvents Panel15 As Panel
     Friend WithEvents GroupBox3 As GroupBox
     Friend WithEvents TextBox_Descrizione_ricerca As TextBox
-    Friend WithEvents Panel14 As Panel
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents TextBox_codice_SAP_RICERCA As TextBox
     Friend WithEvents Button3 As Button
-    Friend WithEvents Panel19 As Panel
-    Friend WithEvents Panel21 As Panel
-    Friend WithEvents GroupBox7 As GroupBox
-    Friend WithEvents Combodipendenti As ComboBox
-    Friend WithEvents Panel20 As Panel
-    Friend WithEvents Aggiungi As Button
-    Friend WithEvents TableLayoutPanel10 As TableLayoutPanel
-    Friend WithEvents GroupBox29 As GroupBox
-    Friend WithEvents ComboBox11 As ComboBox
+    Friend WithEvents PanelAI As Panel
+    Friend WithEvents PanelAI_Header As Panel
+    Friend WithEvents LabelAI_Title As Label
+    Friend WithEvents BtnLegenda As Button
+    Friend WithEvents RtbChat As RichTextBox
+    Friend WithEvents PanelAI_Bottom As Panel
+    Friend WithEvents TxtAiInput As TextBox
+    Friend WithEvents PanelAI_Btns As Panel
+    Friend WithEvents BtnAiInvia As Button
+    Friend WithEvents BtnAiPulisci As Button
 End Class

@@ -441,13 +441,7 @@ left join [TIRELLISRLDB].[dbo].[ocrd] t8 on t7.codice_tirelli=t8.cardcode
             If cmd_SAP_reader_2("Codice_SAP") = "" Then
 
                 If check_esistenza_codice(cmd_SAP_reader_2("Codice_BRB")) = "Y" Then
-                    nuovo_Codice_tirelli = UT.Dammi_codice(cmd_SAP_reader_2("Tirelli"))
-                    If UT.check_non_duplicazione_codici(nuovo_Codice_tirelli, cmd_SAP_reader_2("Disegno"), cmd_SAP_reader_2("Codice_BRB")) = "N" Then
-                        UT.inserisci_Nuovo_codice(cmd_SAP_reader_2("Creato_da"), nuovo_Codice_tirelli, cmd_SAP_reader_2("Descrizione"), cmd_SAP_reader_2("Descrizione_supp"), cmd_SAP_reader_2("Disegno"), cmd_SAP_reader_2("Gruppo_articoli"), cmd_SAP_reader_2("Codice_bp_tirelli"), "", "-1", "", "", "", "", "", "", "", cmd_SAP_reader_2("Codice_BRB"), cmd_SAP_reader_2("Revisione"), cmd_SAP_reader_2("phantom"), cmd_SAP_reader_2("costo"), cmd_SAP_reader_2("Ubicazione"), "M")
-
-                    Else
-                        MsgBox("Il disegno " & cmd_SAP_reader_2("Disegno") & " codice BRB " & cmd_SAP_reader_2("Codice_BRB") & " è già presente a Database ")
-                    End If
+                    ' nuovo_Codice_tirelli = UT.Dammi_codice(cmd_SAP_reader_2("Tirelli"))
 
 
 
@@ -558,9 +552,9 @@ left join [TIRELLI_40].[DBO].[brb_codici] t5 on t0.[Codice_figlio]=t5.[Codice_BR
         Do While cmd_SAP_reader_2.Read()
 
             If cmd_SAP_reader_2("Codice_SAP") = "" Then
-                nuovo_Codice_tirelli = UT.Dammi_codice(cmd_SAP_reader_2("Tirelli"))
+                'nuovo_Codice_tirelli = UT.Dammi_codice(cmd_SAP_reader_2("Tirelli"))
 
-                UT.inserisci_Nuovo_codice(cmd_SAP_reader_2("Creato_da"), nuovo_Codice_tirelli, cmd_SAP_reader_2("Descrizione"), cmd_SAP_reader_2("Descrizione_supp"), cmd_SAP_reader_2("Disegno"), cmd_SAP_reader_2("Gruppo_articoli"), "", "", "-1", "", "", "", "", "", "", "", cmd_SAP_reader_2("Codice_figlio"), cmd_SAP_reader_2("Revisione"), cmd_SAP_reader_2("phantom"), cmd_SAP_reader_2("costo"), cmd_SAP_reader_2("ubicazione"), "M")
+                ' UT.inserisci_Nuovo_codice(cmd_SAP_reader_2("Creato_da"), nuovo_Codice_tirelli, cmd_SAP_reader_2("Descrizione"), cmd_SAP_reader_2("Descrizione_supp"), cmd_SAP_reader_2("Disegno"), cmd_SAP_reader_2("Gruppo_articoli"), "", "", "-1", "", "", "", "", "", "", "", cmd_SAP_reader_2("Codice_figlio"), cmd_SAP_reader_2("Revisione"), cmd_SAP_reader_2("phantom"), cmd_SAP_reader_2("costo"), cmd_SAP_reader_2("ubicazione"), "M")
 
             Else
 
@@ -668,9 +662,9 @@ where t0.Esportato_distinta='N'  AND COALESCE(t0.[Codice_figlio],'')<>''
 
 
                             If cmd_SAP_reader_2("Codice_SAP_figlio") = "" Then
-                                codice_tirelli_figlio = UT.Dammi_codice(cmd_SAP_reader_2("Tirelli"))
+                                ' codice_tirelli_figlio = UT.Dammi_codice(cmd_SAP_reader_2("Tirelli"))
 
-                                UT.inserisci_Nuovo_codice(cmd_SAP_reader_2("Creato_da"), codice_tirelli_figlio, cmd_SAP_reader_2("Descrizione"), cmd_SAP_reader_2("Descrizione_supp"), cmd_SAP_reader_2("Disegno"), cmd_SAP_reader_2("Gruppo_articoli"), "", "", "-1", "", "", "", "", "", "", "", cmd_SAP_reader_2("Codice_figlio"), cmd_SAP_reader_2("Revisione"), cmd_SAP_reader_2("phantom"), cmd_SAP_reader_2("costo"), cmd_SAP_reader_2("ubicazione"), "M")
+                                'UT.inserisci_Nuovo_codice(cmd_SAP_reader_2("Creato_da"), codice_tirelli_figlio, cmd_SAP_reader_2("Descrizione"), cmd_SAP_reader_2("Descrizione_supp"), cmd_SAP_reader_2("Disegno"), cmd_SAP_reader_2("Gruppo_articoli"), "", "", "-1", "", "", "", "", "", "", "", cmd_SAP_reader_2("Codice_figlio"), cmd_SAP_reader_2("Revisione"), cmd_SAP_reader_2("phantom"), cmd_SAP_reader_2("costo"), cmd_SAP_reader_2("ubicazione"), "M")
 
 
                                 Distinta_base_form.INSERT_INTO_ITT1(cmd_SAP_reader_2("codice_sap_padre"), codice_tirelli_figlio, cmd_SAP_reader_2("q"), cmd_SAP_reader_2("costo"), 0, cmd_SAP_reader_2("posizione"), "B01", cmd_SAP_reader_2("descrizione"), LOGINSTANC, "IVSAPLINK")

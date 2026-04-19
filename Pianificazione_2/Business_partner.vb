@@ -144,9 +144,7 @@ as t0"
                 Form_scheda_intervento.Codice_BP_finale_jG = Codice_BP_JG_selezionato
 
 
-            ElseIf Provenienza = "UT" Then
-                UT.TextBox10.Text = Codice_BP_selezionato
-                UT.TextBox5.Text = Nome_BP_selezionato
+
 
             ElseIf Provenienza = "Form_nuovo_campione" Then
                 Form_nuovo_campione.Codice_BP_selezionato = Codice_BP_selezionato

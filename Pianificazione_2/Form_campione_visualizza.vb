@@ -1493,15 +1493,7 @@ group by mag"
         End If
     End Sub
 
-    Private Sub Button7_Click(sender As Object, e As EventArgs)
-        UT.inizializzazione_ut()
-        UT.ComboBox_prima_lettera.Text = "W"
-        UT.Show()
-        UT.ComboBox_gruppo_articoli.Text = "Campioni"
-        UT.TextBox10.Text = codice_bp_SELEZIONATO
-        UT.TextBox5.Text = Label1.Text
-        UT.TextBox_descrizione.Text = Combo_tipo_campione.Text & " " & Txt_Sigla.Text & " " & Txt_nome.Text
-    End Sub
+
 
     Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
 

@@ -1000,21 +1000,7 @@ t1.INIZIALE_SIGLA ,  cast(substring(T0.NOME,1,99) as integer)
         End If
     End Sub
 
-    Private Sub Button4_Click(sender As Object, e As EventArgs)
-        If Txt_nome.Text.Length = 0 Then
-            MsgBox("Inserire un Nome Campione prima di staccare codice SAP")
-        Else
-            UT.inizializzazione_ut()
-            UT.ComboBox_prima_lettera.Text = "W"
-            UT.Show()
-            UT.ComboBox_gruppo_articoli.Text = "Campioni"
-            UT.TextBox10.Text = Codice_BP_selezionato
-            UT.TextBox5.Text = Label1.Text
-            UT.TextBox_descrizione.Text = Combo_tipo_campione.Text & " " & Txt_Sigla.Text & " " & Txt_nome.Text
-        End If
 
-
-    End Sub
 
     Private Sub TextBox_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TextBox3.KeyPress, Txt_nome.KeyPress, TextBox3.KeyPress, TextBox4.KeyPress, TextBox6.KeyPress, TextBox7.KeyPress, TextBox8.KeyPress, TextBox9.KeyPress, TextBox21.KeyPress, TextBox22.KeyPress, TextBox23.KeyPress, TextBox17.KeyPress, TextBox18.KeyPress, TextBox1.KeyPress, TextBox2.KeyPress, TextBox39.KeyPress, TextBox38.KeyPress, TextBox37.KeyPress, TextBox36.KeyPress, TextBox30.KeyPress, TextBox31.KeyPress, TextBox32.KeyPress, TextBox40.KeyPress, TextBox41.KeyPress, TextBox42.KeyPress, TextBox43.KeyPress, TextBox44.KeyPress, TextBox45.KeyPress, TextBox46.KeyPress, TextBox47.KeyPress, TextBox48.KeyPress, TextBox75.KeyPress, TextBox74.KeyPress, TextBox70.KeyPress, TextBox78.KeyPress, TextBox79.KeyPress, TextBox80.KeyPress, TextBox81.KeyPress, TextBox82.KeyPress, TextBox83.KeyPress, TextBox58.KeyPress, TextBox66.KeyPress, TextBox65.KeyPress, TextBox57.KeyPress, TextBox77.KeyPress, TextBox100.KeyPress, TextBox97.KeyPress, TextBox89.KeyPress, TextBox88.KeyPress, TextBox91.KeyPress, TextBox103.KeyPress, TextBox102.KeyPress, TextBox101.KeyPress, TextBox98.KeyPress, TextBox71.KeyPress, TextBox112.KeyPress, TextBox111.KeyPress, TextBox110.KeyPress, TextBox109.KeyPress
         Dim currentTextBox As TextBox = DirectCast(sender, TextBox)

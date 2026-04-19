@@ -635,25 +635,7 @@ INSERT INTO [TIRELLI_40].[DBO].BRB_Codici
 
     End Sub
 
-    Sub crea_codice_articolo(par_Colonna_1 As String, par_Colonna_2 As String, par_Colonna_3 As String, par_Colonna_4 As String, par_colonna_5 As String, par_colonna_6 As String)
-        UT.Show()
-        UT.ComboBox_prima_lettera.SelectedIndex = 2
-        UT.ComboBox_prima_lettera.SelectedIndex = 1
-        UT.ComboBox_gruppo_articoli.Text = "Attrezzatura a formato"
-        par_Colonna_1 = Replace(par_Colonna_1, "'", " ")
-        par_Colonna_2 = Replace(par_Colonna_2, "'", " ")
-        par_Colonna_3 = Replace(par_Colonna_3, "'", " ")
-        par_Colonna_4 = Replace(par_Colonna_4, "'", " ")
-        par_colonna_5 = Replace(par_colonna_5, "'", " ")
-        par_colonna_6 = Replace(par_colonna_6, ",", ".")
 
-        UT.TextBox_descrizione.Text = par_Colonna_2
-        UT.TextBox_disegno.Text = par_Colonna_1
-        UT.TextBox_DESC_SUPP.Text = par_Colonna_4
-
-        UT.Aggiungi.PerformClick()
-
-    End Sub
 
     Sub UPDATE(par_Colonna_1 As String, par_Colonna_2 As String, par_Colonna_3 As String, par_Colonna_4 As String, par_Colonna_5 As String)
 
