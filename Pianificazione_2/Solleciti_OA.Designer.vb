@@ -16,6 +16,7 @@ Partial Class Solleciti_OA
 
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.txbStatus = New System.Windows.Forms.TextBox()
         Me.tlpMain = New System.Windows.Forms.TableLayoutPanel()
         Me.gbFiltri = New System.Windows.Forms.GroupBox()
         Me.lblFiltroAcq = New System.Windows.Forms.Label()
@@ -27,6 +28,7 @@ Partial Class Solleciti_OA
         Me.dgvStatAcquisitore = New System.Windows.Forms.DataGridView()
         Me.pnlLogTop = New System.Windows.Forms.Panel()
         Me.btnAggiornaLog = New System.Windows.Forms.Button()
+        Me.btnInviaReport = New System.Windows.Forms.Button()
         Me.dgvLog = New System.Windows.Forms.DataGridView()
         Me.lblFiltroForn = New System.Windows.Forms.Label()
         Me.cmbFiltroFornitore = New System.Windows.Forms.ComboBox()
@@ -330,6 +332,7 @@ Partial Class Solleciti_OA
         Me.pnlLogTop.Dock = System.Windows.Forms.DockStyle.Top
         Me.pnlLogTop.Height = 28
         Me.pnlLogTop.Name = "pnlLogTop"
+        Me.pnlLogTop.Controls.Add(Me.btnInviaReport)
         Me.pnlLogTop.Controls.Add(Me.btnAggiornaLog)
 
         Me.btnAggiornaLog.Dock = System.Windows.Forms.DockStyle.Left
@@ -338,6 +341,13 @@ Partial Class Solleciti_OA
         Me.btnAggiornaLog.Text = "↻ Aggiorna log"
         Me.btnAggiornaLog.TabIndex = 0
         Me.btnAggiornaLog.UseVisualStyleBackColor = True
+
+        Me.btnInviaReport.Dock = System.Windows.Forms.DockStyle.Left
+        Me.btnInviaReport.Width = 150
+        Me.btnInviaReport.Name = "btnInviaReport"
+        Me.btnInviaReport.Text = "📧 Invia report settimanale"
+        Me.btnInviaReport.TabIndex = 1
+        Me.btnInviaReport.UseVisualStyleBackColor = True
 
         ' dgvLog
         Me.dgvLog.Dock = System.Windows.Forms.DockStyle.Fill
@@ -426,11 +436,22 @@ Partial Class Solleciti_OA
         Me.rtbAnteprima.ReadOnly = True
         Me.rtbAnteprima.BackColor = System.Drawing.Color.White
 
+        ' txbStatus
+        Me.txbStatus.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.txbStatus.ReadOnly = True
+        Me.txbStatus.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txbStatus.BackColor = System.Drawing.Color.FromArgb(240, 240, 240)
+        Me.txbStatus.Font = New System.Drawing.Font("Segoe UI", 8.5!)
+        Me.txbStatus.Height = 20
+        Me.txbStatus.TabStop = False
+        Me.txbStatus.Name = "txbStatus"
+
         ' ── Form ─────────────────────────────────────────────
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1400, 860)
         Me.Controls.Add(Me.tlpMain)
+        Me.Controls.Add(Me.txbStatus)
         Me.MinimumSize = New System.Drawing.Size(1050, 650)
         Me.Name = "Solleciti_OA"
         Me.Text = "Solleciti Ordini di Acquisto"
@@ -462,8 +483,10 @@ Partial Class Solleciti_OA
         Me.pnlMailHeader.PerformLayout()
         Me.pnlBtnsAnteprima.ResumeLayout(False)
         Me.ResumeLayout(False)
+        Me.PerformLayout()
     End Sub
 
+    Friend WithEvents txbStatus As System.Windows.Forms.TextBox
     Friend WithEvents tlpMain As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents gbFiltri As System.Windows.Forms.GroupBox
     Friend WithEvents lblFiltroForn As System.Windows.Forms.Label
@@ -506,6 +529,7 @@ Partial Class Solleciti_OA
     Friend WithEvents scStatistiche As System.Windows.Forms.SplitContainer
     Friend WithEvents pnlLogTop As System.Windows.Forms.Panel
     Friend WithEvents btnAggiornaLog As System.Windows.Forms.Button
+    Friend WithEvents btnInviaReport As System.Windows.Forms.Button
     Friend WithEvents dgvLog As System.Windows.Forms.DataGridView
 
 End Class

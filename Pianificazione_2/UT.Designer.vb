@@ -45,6 +45,7 @@ Partial Class UT
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.txbStatus = New System.Windows.Forms.TextBox()
         Me.Panel13 = New System.Windows.Forms.Panel()
         Me.Panel32 = New System.Windows.Forms.Panel()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
@@ -95,6 +96,7 @@ Partial Class UT
         Me.TextBox4 = New System.Windows.Forms.TextBox()
         Me.Panel17 = New System.Windows.Forms.Panel()
         Me.Button_CERCA = New System.Windows.Forms.Button()
+        Me.btnExcel = New System.Windows.Forms.Button()
         Me.GroupBox12 = New System.Windows.Forms.GroupBox()
         Me.ComboBox6 = New System.Windows.Forms.ComboBox()
         Me.GroupBox13 = New System.Windows.Forms.GroupBox()
@@ -127,6 +129,7 @@ Partial Class UT
         Me.PanelAI_Btns = New System.Windows.Forms.Panel()
         Me.BtnAiInvia = New System.Windows.Forms.Button()
         Me.BtnAiPulisci = New System.Windows.Forms.Button()
+        Me.BtnStorico = New System.Windows.Forms.Button()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel13.SuspendLayout()
@@ -268,6 +271,7 @@ Partial Class UT
         'PanelAI_Btns
         '
         Me.PanelAI_Btns.Controls.Add(Me.BtnAiInvia)
+        Me.PanelAI_Btns.Controls.Add(Me.BtnStorico)
         Me.PanelAI_Btns.Controls.Add(Me.BtnAiPulisci)
         Me.PanelAI_Btns.BackColor = System.Drawing.Color.FromArgb(10, 26, 55)
         Me.PanelAI_Btns.Dock = System.Windows.Forms.DockStyle.Bottom
@@ -290,6 +294,18 @@ Partial Class UT
         Me.BtnAiPulisci.TabIndex = 1
         Me.BtnAiPulisci.Text = "Pulisci"
         Me.BtnAiPulisci.UseVisualStyleBackColor = False
+
+        Me.BtnStorico.BackColor = System.Drawing.Color.FromArgb(10, 26, 55)
+        Me.BtnStorico.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnStorico.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BtnStorico.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(30, 63, 122)
+        Me.BtnStorico.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular)
+        Me.BtnStorico.ForeColor = System.Drawing.Color.FromArgb(160, 180, 210)
+        Me.BtnStorico.Name = "BtnStorico"
+        Me.BtnStorico.Size = New System.Drawing.Size(90, 32)
+        Me.BtnStorico.TabIndex = 2
+        Me.BtnStorico.Text = "📋 Storico"
+        Me.BtnStorico.UseVisualStyleBackColor = False
         '
         'BtnAiInvia
         '
@@ -432,6 +448,7 @@ Partial Class UT
         '
         Me.Fam_disegno.HeaderText = "Fam disegno"
         Me.Fam_disegno.Name = "Fam_disegno"
+        Me.Fam_disegno.Visible = False
         '
         'Disegno_
         '
@@ -808,23 +825,35 @@ Partial Class UT
         '
         'Panel17
         '
+        Me.Panel17.Controls.Add(Me.btnExcel)
         Me.Panel17.Controls.Add(Me.Button_CERCA)
         Me.Panel17.Dock = System.Windows.Forms.DockStyle.Right
         Me.Panel17.Location = New System.Drawing.Point(874, 0)
         Me.Panel17.Name = "Panel17"
-        Me.Panel17.Size = New System.Drawing.Size(119, 53)
+        Me.Panel17.Size = New System.Drawing.Size(240, 53)
         Me.Panel17.TabIndex = 159
         '
         'Button_CERCA
         '
         Me.Button_CERCA.BackColor = System.Drawing.Color.LemonChiffon
-        Me.Button_CERCA.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Button_CERCA.Location = New System.Drawing.Point(0, 0)
         Me.Button_CERCA.Name = "Button_CERCA"
         Me.Button_CERCA.Size = New System.Drawing.Size(119, 53)
         Me.Button_CERCA.TabIndex = 11
         Me.Button_CERCA.Text = "Cerca"
         Me.Button_CERCA.UseVisualStyleBackColor = False
+
+        ' btnExcel
+        Me.btnExcel.BackColor = System.Drawing.Color.FromArgb(0, 128, 0)
+        Me.btnExcel.ForeColor = System.Drawing.Color.White
+        Me.btnExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnExcel.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(0, 100, 0)
+        Me.btnExcel.Location = New System.Drawing.Point(121, 0)
+        Me.btnExcel.Name = "btnExcel"
+        Me.btnExcel.Size = New System.Drawing.Size(119, 53)
+        Me.btnExcel.TabIndex = 12
+        Me.btnExcel.Text = "Esporta Excel"
+        Me.btnExcel.UseVisualStyleBackColor = False
         '
         'GroupBox12
         '
@@ -1095,10 +1124,21 @@ Partial Class UT
         '
         'UT
         '
+        ' txbStatus
+        Me.txbStatus.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.txbStatus.ReadOnly = True
+        Me.txbStatus.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txbStatus.BackColor = System.Drawing.Color.FromArgb(240, 240, 240)
+        Me.txbStatus.Font = New System.Drawing.Font("Segoe UI", 8.5!)
+        Me.txbStatus.Height = 20
+        Me.txbStatus.TabStop = False
+        Me.txbStatus.Name = "txbStatus"
+
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1427, 857)
         Me.ControlBox = False
+        Me.Controls.Add(Me.txbStatus)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.Name = "UT"
         Me.Text = "Codifica Tirelli"
@@ -1150,8 +1190,11 @@ Partial Class UT
         Me.GroupBox22.PerformLayout()
         Me.GroupBox6.ResumeLayout(False)
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
+    Friend WithEvents txbStatus As System.Windows.Forms.TextBox
+    Friend WithEvents btnExcel As System.Windows.Forms.Button
     Friend WithEvents Timer1 As Timer
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
     Friend WithEvents Panel2 As Panel
@@ -1237,4 +1280,5 @@ Partial Class UT
     Friend WithEvents PanelAI_Btns As Panel
     Friend WithEvents BtnAiInvia As Button
     Friend WithEvents BtnAiPulisci As Button
+    Friend WithEvents BtnStorico As Button
 End Class

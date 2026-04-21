@@ -3108,7 +3108,7 @@ WHERE ID=@ID"
         End If
 
             ' 4. Definizione file (Sorgente e Destinazione con nuovo nome)
-            Dim fileSorgente As String = "\\tirfs01\04-Leads\SENG\Azioni contenitive.xlsx"
+            Dim fileSorgente As String = "\\tirfs01\TIRELLI\04-Leads\SENG\Azioni contenitive.xlsx"
 
             ' Nuovo nome file: "Azioni contenitive [TestoLabel4].xlsx"
             Dim nomeFileDestinazione As String = "Azioni contenitive " & suffissoFile & ".xlsx"

@@ -746,6 +746,8 @@ SELECT
     t10.qtatra                    AS Trasferito,
     t10.qtadatra                  AS [Da trasferire],
     trim(t10.matricola)                 AS U_prg_azs_commessa,
+	cod_commessa,
+	cod_sottocommessa,
 coalesce(t12.[Nome_Baia],'') as 'Nome_baia' ,
     'MANCA'                       AS U_utilizz,
     t10.status,
@@ -756,6 +758,7 @@ coalesce(t12.[Nome_Baia],'') as 'Nome_baia' ,
     mag_ver                           AS DIV,
 codmag_im
 ,saldo_imp
+
 FROM OPENQUERY([AS400], '
     SELECT
         documento,
@@ -771,8 +774,10 @@ FROM OPENQUERY([AS400], '
         status,
         Dtasca,
 codmag_im,
-mag_ver
+mag_ver as mag_ver
 ,saldo_imp
+,cod_commessa as cod_commessa
+,cod_sottocommessa as cod_sottocommessa
     FROM S786FAD1.TIR90VIS.JGALIMP
     WHERE evaso_odp <> ''S'' and codart=''" & par_codice_sap & "''
 ') AS t10

@@ -10,9 +10,16 @@ Public Class Solleciti_OA
     Private _htmlAnteprima As String = ""
     Private _fornSollecito As New HashSet(Of String)(StringComparer.OrdinalIgnoreCase)
 
+    Private Sub SetStatus(msg As String, Optional isError As Boolean = False)
+        txbStatus.Text = msg
+        txbStatus.ForeColor = If(isError, Color.DarkRed, Color.DarkGreen)
+        txbStatus.Refresh()
+    End Sub
+
     Private Sub Solleciti_OA_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         CreaTabellaFornitatoriSollecito()
         CreaTabellaLog()
+        CreaTabellaSnapshot()
         CaricaFornitatoriSollecito()
         ImpostaListaFornitori()
         ImpostaGriglia()
@@ -23,6 +30,8 @@ Public Class Solleciti_OA
 
     Private Sub Solleciti_OA_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
         scStatistiche.SplitterDistance = scStatistiche.Width \ 2
+        chkSoloScaduti.Checked = True
+        CaricaDati()
     End Sub
 
     ' ─────────────────────────────────────────────────────────
@@ -40,6 +49,7 @@ Public Class Solleciti_OA
         lvFornitori.Columns.Add("Righe", 50, HorizontalAlignment.Right)
         lvFornitori.Columns.Add("Scad.", 50, HorizontalAlignment.Right)
         lvFornitori.Columns.Add("% Sc.", 52, HorizontalAlignment.Right)
+        lvFornitori.Columns.Add("Sol.8gg", 55, HorizontalAlignment.Right)
     End Sub
 
     Private Sub ImpostaGriglia()
@@ -115,8 +125,7 @@ Public Class Solleciti_OA
 
     Sub CaricaDati()
         Cursor = Cursors.WaitCursor
-        lblStato.Text = "Caricamento dati AS400..."
-        lblStato.Refresh()
+        SetStatus("Caricamento dati AS400...")
         Application.DoEvents()
         Try
             Dim CNN As New SqlConnection(Homepage.sap_tirelli)
@@ -138,10 +147,14 @@ Public Class Solleciti_OA
             DA.Fill(_datiOA)
             CNN.Close()
 
-            lblStato.Text = _datiOA.Rows.Count & " righe caricate"
+            SetStatus(_datiOA.Rows.Count & " righe caricate")
             AggiornaTabellaFornitori()
+            SalvaSnapshotGiornaliero()
+            If DateTime.Today.DayOfWeek = DayOfWeek.Monday Then
+                InviaReportSettimanale(False)
+            End If
         Catch ex As Exception
-            lblStato.Text = "Errore: " & ex.Message
+            SetStatus("Errore: " & ex.Message, True)
             MessageBox.Show("Errore caricamento dati:" & vbCrLf & ex.Message, "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally
             Cursor = Cursors.Default
@@ -155,6 +168,24 @@ Public Class Solleciti_OA
     Sub AggiornaTabellaFornitori()
         If _datiOA Is Nothing Then Return
         Dim oggi = DateTime.Today
+
+        ' Carica conteggio solleciti ultimi 8 giorni per fornitore
+        Dim solleciti8gg As New Dictionary(Of String, Integer)(StringComparer.OrdinalIgnoreCase)
+        Try
+            Using cn As New SqlConnection(Homepage.sap_tirelli)
+                cn.Open()
+                Dim sql = "SELECT CodForn, COUNT(*) as N FROM [Tirelli_40].dbo.SollecitiLog " &
+                          "WHERE DataOra >= DATEADD(day, -8, GETDATE()) GROUP BY CodForn"
+                Using cmd As New SqlCommand(sql, cn)
+                    Using rd = cmd.ExecuteReader()
+                        While rd.Read()
+                            solleciti8gg(rd("CodForn").ToString().Trim()) = CInt(rd("N"))
+                        End While
+                    End Using
+                End Using
+            End Using
+        Catch
+        End Try
         Dim filtroComm = txtFiltroCommessa.Text.Trim().ToUpper()
         Dim soloScaduti = chkSoloScaduti.Checked
         Dim soloSollecito = chkSoloSollecito.Checked
@@ -219,6 +250,9 @@ Public Class Solleciti_OA
             item.SubItems.Add(f.TotRighe.ToString())
             item.SubItems.Add(f.RigheScadute.ToString())
             item.SubItems.Add(If(f.TotRighe > 0, f.PctScadute.ToString("F0") & "%", "-"))
+            Dim nSol8gg As Integer = 0
+            solleciti8gg.TryGetValue(f.CodForn, nSol8gg)
+            item.SubItems.Add(If(nSol8gg > 0, nSol8gg.ToString(), ""))
             item.Tag = f.CodForn
             If inSollecito Then
                 item.BackColor = Color.FromArgb(230, 255, 230)
@@ -466,10 +500,7 @@ Public Class Solleciti_OA
 
         addCol("logDataOra", "Data / Ora", 130, DataGridViewContentAlignment.MiddleCenter)
         addCol("logUtente", "Utente", 110, DataGridViewContentAlignment.MiddleLeft)
-        addCol("logCodForn", "Cod. Forn.", 100, DataGridViewContentAlignment.MiddleLeft)
-        addCol("logDescFor", "Fornitore", 200, DataGridViewContentAlignment.MiddleLeft)
-        addCol("logEmail", "Email", 210, DataGridViewContentAlignment.MiddleLeft)
-        addCol("logNRighe", "N. Righe", 70, DataGridViewContentAlignment.MiddleRight)
+        addCol("logDescFor", "Fornitore", 400, DataGridViewContentAlignment.MiddleLeft)
     End Sub
 
     Sub AggiornaLog()
@@ -478,24 +509,28 @@ Public Class Solleciti_OA
             Using cn As New SqlConnection(Homepage.sap_tirelli)
                 cn.Open()
                 Dim sql =
-                    "SELECT TOP 200 DataOra, Utente, CodForn, DescFor, Email, NRighe
-                     FROM [Tirelli_40].dbo.SollecitiLog
-                     ORDER BY DataOra DESC"
+                    "SELECT TOP 200 sl.DataOra, sl.Utente, sl.CodForn,
+                            coalesce(forn.ds_conto COLLATE SQL_Latin1_General_CP1_CI_AS, sl.DescFor, '') as DescFor
+                     FROM [Tirelli_40].dbo.SollecitiLog sl
+                     LEFT JOIN OPENQUERY(AS400, '
+                         SELECT trim(conto) as conto, trim(ds_conto) as ds_conto
+                         FROM S786FAD1.TIR90VIS.JGALACF
+                         WHERE clifor = ''F''
+                     ') forn ON forn.conto COLLATE SQL_Latin1_General_CP1_CI_AS = sl.CodForn
+                     ORDER BY sl.DataOra DESC"
                 Using cmd As New SqlCommand(sql, cn)
                     Using rd = cmd.ExecuteReader()
                         While rd.Read()
                             dgvLog.Rows.Add(
                                 CDate(rd("DataOra")).ToString("dd/MM/yyyy HH:mm"),
                                 rd("Utente").ToString(),
-                                rd("CodForn").ToString(),
-                                rd("DescFor").ToString(),
-                                rd("Email").ToString(),
-                                rd("NRighe").ToString())
+                                rd("DescFor").ToString())
                         End While
                     End Using
                 End Using
             End Using
-        Catch
+        Catch ex As Exception
+            SetStatus("Errore log: " & ex.Message, True)
         End Try
     End Sub
 
@@ -694,7 +729,7 @@ Public Class Solleciti_OA
         If lvFornitori.SelectedItems.Count = 0 Then Return
         Dim item = lvFornitori.SelectedItems(0)
         Dim codForn = item.Tag.ToString()
-        _descFornSelezionato = item.Text
+        _descFornSelezionato = item.SubItems(1).Text
         AggiornaTabellaOrdini(codForn)
         ' Precompila destinatario email da AS400
         Dim email = LookupEmailFornitore(codForn)
@@ -907,6 +942,144 @@ Public Class Solleciti_OA
                 End Using
             End If
         End Using
+    End Sub
+
+    ' ─────────────────────────────────────────────────────────
+    ' Snapshot giornaliero % scaduti + report settimanale
+    ' ─────────────────────────────────────────────────────────
+
+    Private Sub CreaTabellaSnapshot()
+        Try
+            Using cn As New SqlConnection(Homepage.sap_tirelli)
+                cn.Open()
+                Dim sql =
+                    "IF NOT EXISTS (SELECT * FROM [Tirelli_40].sys.tables WHERE name='ScadutiSnapshot')
+                     CREATE TABLE [Tirelli_40].dbo.ScadutiSnapshot (
+                         Data            date        NOT NULL PRIMARY KEY,
+                         TotRighe        int         NOT NULL,
+                         RigheScadute    int         NOT NULL,
+                         PctScadute      decimal(5,1) NOT NULL,
+                         ReportInviato   bit         NOT NULL DEFAULT 0
+                     )"
+                Call New SqlCommand(sql, cn).ExecuteNonQuery()
+            End Using
+        Catch
+        End Try
+    End Sub
+
+    Private Sub SalvaSnapshotGiornaliero()
+        If _datiOA Is Nothing Then Return
+        Dim oggi = DateTime.Today
+        Dim totRighe = _datiOA.Rows.Count
+        Dim totScadute = _datiOA.AsEnumerable().
+            Where(Function(r)
+                      Dim dr = ParseDataAS400(r("data_richiesta"))
+                      Return dr.HasValue AndAlso dr.Value < oggi
+                  End Function).Count()
+        Dim pct = If(totRighe > 0, Math.Round(totScadute * 100.0 / totRighe, 1), 0.0)
+        Try
+            Using cn As New SqlConnection(Homepage.sap_tirelli)
+                cn.Open()
+                Dim sql =
+                    "IF NOT EXISTS (SELECT 1 FROM [Tirelli_40].dbo.ScadutiSnapshot WHERE Data=@D)
+                     INSERT INTO [Tirelli_40].dbo.ScadutiSnapshot (Data, TotRighe, RigheScadute, PctScadute)
+                     VALUES (@D, @Tot, @Scad, @Pct)"
+                Using cmd As New SqlCommand(sql, cn)
+                    cmd.Parameters.AddWithValue("@D", oggi)
+                    cmd.Parameters.AddWithValue("@Tot", totRighe)
+                    cmd.Parameters.AddWithValue("@Scad", totScadute)
+                    cmd.Parameters.AddWithValue("@Pct", CDec(pct))
+                    cmd.ExecuteNonQuery()
+                End Using
+            End Using
+        Catch
+        End Try
+    End Sub
+
+    ''' <param name="forzato">True = invio forzato dall'utente (ignora flag già-inviato)</param>
+    Private Sub InviaReportSettimanale(forzato As Boolean)
+        Try
+            Using cn As New SqlConnection(Homepage.sap_tirelli)
+                cn.Open()
+
+                If Not forzato Then
+                    ' Controlla se già inviato questa settimana (dal lunedì corrente)
+                    Dim lunedi = DateTime.Today.AddDays(-(CInt(DateTime.Today.DayOfWeek + 6) Mod 7))
+                    Using cmd As New SqlCommand(
+                        "SELECT COUNT(*) FROM [Tirelli_40].dbo.ScadutiSnapshot WHERE Data >= @Lun AND ReportInviato=1", cn)
+                        cmd.Parameters.AddWithValue("@Lun", lunedi)
+                        If CInt(cmd.ExecuteScalar()) > 0 Then Return
+                    End Using
+                End If
+
+                ' Ultimi 7 snapshot disponibili
+                Dim dt As New DataTable
+                Using cmd As New SqlCommand(
+                    "SELECT TOP 7 Data, TotRighe, RigheScadute, PctScadute
+                     FROM [Tirelli_40].dbo.ScadutiSnapshot
+                     ORDER BY Data DESC", cn)
+                    Using da As New SqlDataAdapter(cmd)
+                        da.Fill(dt)
+                    End Using
+                End Using
+
+                If dt.Rows.Count = 0 Then
+                    If forzato Then MessageBox.Show("Nessun dato snapshot disponibile.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    Return
+                End If
+
+                ' Costruisce HTML
+                Dim sb As New System.Text.StringBuilder
+                sb.AppendLine("<html><body style='font-family:Calibri,Arial,sans-serif;font-size:11pt;'>")
+                sb.AppendLine("<p>Buongiorno,</p>")
+                sb.AppendLine("<p>di seguito il riepilogo settimanale degli ordini di acquisto scaduti registrato dal sistema Pianificazione:</p>")
+                sb.AppendLine("<table border='1' cellpadding='6' cellspacing='0' style='border-collapse:collapse;font-size:10pt;'>")
+                sb.AppendLine("<tr style='background-color:#1F5FAF;color:white;font-weight:bold;'>")
+                sb.AppendLine("<th>Data</th><th>Tot. Righe OA</th><th>Scadute</th><th>% Scadute</th></tr>")
+                For Each row As DataRow In dt.Rows
+                    Dim pctVal = CDec(row("PctScadute"))
+                    Dim bg = If(pctVal >= 30, "background-color:#FFD0D0;", If(pctVal >= 15, "background-color:#FFF3C0;", ""))
+                    sb.AppendLine($"<tr style='{bg}'>")
+                    sb.AppendLine($"<td style='text-align:center'>{CDate(row("Data")).ToString("dd/MM/yyyy")}</td>")
+                    sb.AppendLine($"<td style='text-align:right'>{row("TotRighe")}</td>")
+                    sb.AppendLine($"<td style='text-align:right'>{row("RigheScadute")}</td>")
+                    sb.AppendLine($"<td style='text-align:right;font-weight:bold'>{pctVal.ToString("F1")}%</td>")
+                    sb.AppendLine("</tr>")
+                Next
+                sb.AppendLine("</table>")
+                sb.AppendLine("<p style='color:#888;font-size:9pt;margin-top:16px;'>Tirelli S.r.l. — Sistema Pianificazione (invio automatico)</p>")
+                sb.AppendLine("</body></html>")
+
+                ' Invia via Outlook
+                Dim objOutlook As Object = CreateObject("Outlook.Application")
+                Dim objMail As Object = objOutlook.CreateItem(0)
+                With objMail
+                    .To = "giovanni.tirelli@tirelli.net; stefano.bruno@tirelli.net"
+                    .Subject = "Report settimanale OA scaduti — " & DateTime.Today.ToString("dd/MM/yyyy")
+                    .HTMLBody = sb.ToString()
+                    .Send()
+                End With
+                objMail = Nothing
+                objOutlook = Nothing
+
+                ' Marca come inviato
+                Using cmd As New SqlCommand(
+                    "UPDATE [Tirelli_40].dbo.ScadutiSnapshot SET ReportInviato=1 WHERE Data=@D", cn)
+                    cmd.Parameters.AddWithValue("@D", DateTime.Today)
+                    cmd.ExecuteNonQuery()
+                End Using
+
+                SetStatus("Report settimanale inviato a giovanni.tirelli@tirelli.net / stefano.bruno@tirelli.net")
+                If forzato Then MessageBox.Show("Report inviato correttamente.", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            End Using
+        Catch ex As Exception
+            SetStatus("Errore invio report settimanale: " & ex.Message, True)
+            If forzato Then MessageBox.Show("Errore invio report:" & vbCrLf & ex.Message, "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    Private Sub btnInviaReport_Click(sender As Object, e As EventArgs) Handles btnInviaReport.Click
+        InviaReportSettimanale(True)
     End Sub
 
 End Class

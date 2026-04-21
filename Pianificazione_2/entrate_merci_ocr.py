@@ -64,7 +64,7 @@ Esempio output corretto (G&G: "Vs. Ord. 202211 ... (OVC 2286)" -> ordine=202211,
 Se la pagina non contiene righe articolo (es. e solo una pagina con timbri, firme o testo generico), restituisci: []"""
 
     message = client.messages.create(
-        model="claude-opus-4-6",
+        model="claude-haiku-4-5-20251001",
         max_tokens=4096,
         messages=[
             {

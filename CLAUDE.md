@@ -14,7 +14,7 @@
 
 1. L'utente seleziona un PDF di bolla DDT fornitore
 2. Il VB.NET lancia lo script Python passando il path del PDF e la chiave API Claude
-3. Lo script Python converte ogni pagina PDF in immagine (PyMuPDF/fitz) e chiede a Claude Opus di estrarre le righe articolo come JSON
+3. Lo script Python converte ogni pagina PDF in immagine (PyMuPDF/fitz) e chiede a Claude Haiku di estrarre le righe articolo come JSON
 4. Il JSON viene restituito su stdout e parsato dal VB.NET
 5. Le righe vengono mostrate nella griglia `dgvRighe`
 6. La funzione `VerificaOrdiniAS400()` confronta ogni riga con gli ordini aperti su AS400 tramite OPENQUERY su SQL Server collegato (linked server `AS400`)
@@ -184,3 +184,15 @@ pip install pymupdf anthropic
 ### Note operative
 - Lo script Python in `bin/Debug/` deve essere sempre allineato con il sorgente in `Pianificazione_2/` — aggiornarli entrambi ad ogni modifica
 - La chiave API Claude viene letta da `anthropic_key.txt` nella cartella di avvio applicazione
+
+---
+
+### Modelli Claude in uso
+
+| File | Modello attuale |
+|------|----------------|
+| `entrate_merci_ocr.py` + copia bin/Debug | `claude-haiku-4-5-20251001` |
+| `UT.vb` (ricerca AI + ricerca per immagine) | `claude-haiku-4-5-20251001` |
+| `MC_AnthropicService.vb` | `claude-haiku-4-5-20251001` |
+
+**Nota:** se l'estrazione DDT (entrate_merci_ocr.py) produce errori su bolle complesse, valutare di tornare a `claude-sonnet-4-6` solo per quel file.

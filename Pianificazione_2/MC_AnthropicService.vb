@@ -6,7 +6,7 @@ Imports System.Threading.Tasks
 
 Public Class MC_AnthropicService
 
-    Private Const MODEL As String = "claude-opus-4-5"
+    Private Const MODEL As String = "claude-haiku-4-5-20251001"
     Private Const API_URL As String = "https://api.anthropic.com/v1/messages"
     Private ReadOnly _client As New HttpClient()
 

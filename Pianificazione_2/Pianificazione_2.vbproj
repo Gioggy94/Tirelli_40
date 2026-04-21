@@ -988,6 +988,12 @@
     <Compile Include="Scheda tecnica.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Scheda_Tecnica_Tabelle.Designer.vb">
+      <DependentUpon>Scheda_Tecnica_Tabelle.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Scheda_Tecnica_Tabelle.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Scheda_commessa_documentazione.Designer.vb">
       <DependentUpon>Scheda_commessa_documentazione.vb</DependentUpon>
     </Compile>
@@ -1520,6 +1526,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Scheda tecnica.resx">
       <DependentUpon>Scheda tecnica.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Scheda_Tecnica_Tabelle.resx">
+      <DependentUpon>Scheda_Tecnica_Tabelle.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Scheda_commessa_documentazione.resx">
       <DependentUpon>Scheda_commessa_documentazione.vb</DependentUpon>

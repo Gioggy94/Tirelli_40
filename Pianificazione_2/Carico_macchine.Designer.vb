@@ -24,14 +24,15 @@ Partial Class Carico_macchine
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle36 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle37 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle38 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle39 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle40 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle41 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Carico_macchine))
+        Dim DataGridViewCellStyle41 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle70 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle42 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle71 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle43 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle44 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle45 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -59,7 +60,6 @@ Partial Class Carico_macchine
         Dim DataGridViewCellStyle67 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle68 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle69 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle70 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
         Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
         Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
@@ -72,14 +72,15 @@ Partial Class Carico_macchine
         Dim ChartArea4 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
         Dim Legend4 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
         Dim Series4 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim DataGridViewCellStyle71 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle72 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle73 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle74 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle75 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle76 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle77 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle112 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle78 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle113 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle79 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle80 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle81 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -113,7 +114,6 @@ Partial Class Carico_macchine
         Dim DataGridViewCellStyle109 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle110 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle111 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle112 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -148,7 +148,6 @@ Partial Class Carico_macchine
         Dim DataGridViewCellStyle33 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle34 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle35 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle36 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.GroupBox_manodopera = New System.Windows.Forms.GroupBox()
         Me.Label_n_ordini = New System.Windows.Forms.Label()
@@ -178,6 +177,11 @@ Partial Class Carico_macchine
         Me.TextBox14 = New System.Windows.Forms.TextBox()
         Me.GroupBox27 = New System.Windows.Forms.GroupBox()
         Me.TextBox17 = New System.Windows.Forms.TextBox()
+        Me.GroupBox28 = New System.Windows.Forms.GroupBox()
+        Me.FlowLayoutPanel_mag = New System.Windows.Forms.FlowLayoutPanel()
+        Me.CheckBoxTCP = New System.Windows.Forms.CheckBox()
+        Me.CheckBoxMU = New System.Windows.Forms.CheckBox()
+        Me.CheckBoxT01 = New System.Windows.Forms.CheckBox()
         Me.Button9 = New System.Windows.Forms.Button()
         Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
@@ -396,7 +400,7 @@ Partial Class Carico_macchine
         Me.Quantità = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Commessa = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.Cliente = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Dest = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Mag_dest = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Disponibile = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Attrezzatura = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Cod_risorsa = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -440,6 +444,8 @@ Partial Class Carico_macchine
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox25.SuspendLayout()
         Me.GroupBox27.SuspendLayout()
+        Me.GroupBox28.SuspendLayout()
+        Me.FlowLayoutPanel_mag.SuspendLayout()
         Me.TableLayoutPanel3.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -520,15 +526,15 @@ Partial Class Carico_macchine
         DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.DataGridView1.ColumnHeadersHeight = 30
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Seleziona, Me.ODP_, Me.Lavorazione_, Me.Stato, Me.Data_I, Me.Data_cons, Me.Cons_rich, Me.Data_C, Me.Cod_mat, Me.MAT, Me.Arrivo_mat, Me.Priorita, Me.Codice, Me.Img, Me.Descrizione, Me.Disegno, Me.Famiglia_Dis, Me.Nesting, Me.Quantità, Me.Commessa, Me.Cliente, Me.Dest, Me.Disponibile, Me.Attrezzatura, Me.Cod_risorsa, Me.Stato_fase, Me.Completati, Me.Prog, Me.Prog_P, Me.T_MAN, Me.T_Auto, Me.Pant_P, Me.Pant_A, Me.Tornio_, Me.Goodway, Me.Doosan, Me.Doosan_4, Me.Doos6, Me.Multi, Me.Haas_2, Me.Haas_3, Me.Haas_5, Me.Haas_6, Me.Famup, Me.Awea, Me.Stozza, Me.Sald, Me.Trap, Me.Vulcanizzazione, Me.Finitura})
-        DataGridViewCellStyle37.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle37.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle37.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle37.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle37.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle37.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle37.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle37
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Seleziona, Me.ODP_, Me.Lavorazione_, Me.Stato, Me.Data_I, Me.Data_cons, Me.Cons_rich, Me.Data_C, Me.Cod_mat, Me.MAT, Me.Arrivo_mat, Me.Priorita, Me.Codice, Me.Img, Me.Descrizione, Me.Disegno, Me.Famiglia_Dis, Me.Nesting, Me.Quantità, Me.Commessa, Me.Cliente, Me.Mag_dest, Me.Disponibile, Me.Attrezzatura, Me.Cod_risorsa, Me.Stato_fase, Me.Completati, Me.Prog, Me.Prog_P, Me.T_MAN, Me.T_Auto, Me.Pant_P, Me.Pant_A, Me.Tornio_, Me.Goodway, Me.Doosan, Me.Doosan_4, Me.Doos6, Me.Multi, Me.Haas_2, Me.Haas_3, Me.Haas_5, Me.Haas_6, Me.Famup, Me.Awea, Me.Stozza, Me.Sald, Me.Trap, Me.Vulcanizzazione, Me.Finitura})
+        DataGridViewCellStyle36.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle36.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle36.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle36.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle36.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle36.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle36.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle36
         Me.DataGridView1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.DataGridView1.GridColor = System.Drawing.SystemColors.ActiveBorder
@@ -609,14 +615,14 @@ Partial Class Carico_macchine
         Me.DataGridView_backlog.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.DataGridView_backlog.BackgroundColor = System.Drawing.Color.White
         Me.DataGridView_backlog.BorderStyle = System.Windows.Forms.BorderStyle.None
-        DataGridViewCellStyle38.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle38.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle38.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle38.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle38.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle38.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle38.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView_backlog.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle38
+        DataGridViewCellStyle37.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle37.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle37.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle37.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle37.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle37.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle37.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView_backlog.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle37
         Me.DataGridView_backlog.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView_backlog.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Categoria, Me.Pianificati, Me.Rilasciati, Me.Conclusi})
         Me.DataGridView_backlog.Dock = System.Windows.Forms.DockStyle.Fill
@@ -636,29 +642,29 @@ Partial Class Carico_macchine
         '
         'Pianificati
         '
-        DataGridViewCellStyle39.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle39.Format = "N0"
-        DataGridViewCellStyle39.NullValue = Nothing
-        Me.Pianificati.DefaultCellStyle = DataGridViewCellStyle39
+        DataGridViewCellStyle38.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle38.Format = "N0"
+        DataGridViewCellStyle38.NullValue = Nothing
+        Me.Pianificati.DefaultCellStyle = DataGridViewCellStyle38
         Me.Pianificati.HeaderText = "Pianificati"
         Me.Pianificati.MinimumWidth = 15
         Me.Pianificati.Name = "Pianificati"
         '
         'Rilasciati
         '
-        DataGridViewCellStyle40.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle40.Format = "N0"
-        DataGridViewCellStyle40.NullValue = Nothing
-        Me.Rilasciati.DefaultCellStyle = DataGridViewCellStyle40
+        DataGridViewCellStyle39.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle39.Format = "N0"
+        DataGridViewCellStyle39.NullValue = Nothing
+        Me.Rilasciati.DefaultCellStyle = DataGridViewCellStyle39
         Me.Rilasciati.HeaderText = "Rilasciati"
         Me.Rilasciati.MinimumWidth = 15
         Me.Rilasciati.Name = "Rilasciati"
         '
         'Conclusi
         '
-        DataGridViewCellStyle41.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle41.Format = "N0"
-        Me.Conclusi.DefaultCellStyle = DataGridViewCellStyle41
+        DataGridViewCellStyle40.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle40.Format = "N0"
+        Me.Conclusi.DefaultCellStyle = DataGridViewCellStyle40
         Me.Conclusi.HeaderText = "Conclusi"
         Me.Conclusi.MinimumWidth = 15
         Me.Conclusi.Name = "Conclusi"
@@ -808,6 +814,7 @@ Partial Class Carico_macchine
         Me.TableLayoutPanel7.Controls.Add(Me.CheckBox17, 4, 0)
         Me.TableLayoutPanel7.Controls.Add(Me.GroupBox25, 0, 0)
         Me.TableLayoutPanel7.Controls.Add(Me.GroupBox27, 3, 0)
+        Me.TableLayoutPanel7.Controls.Add(Me.GroupBox28, 1, 0)
         Me.TableLayoutPanel7.Controls.Add(Me.Button9, 5, 0)
         Me.TableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel7.Location = New System.Drawing.Point(0, 60)
@@ -899,6 +906,56 @@ Partial Class Carico_macchine
         Me.TextBox17.Name = "TextBox17"
         Me.TextBox17.Size = New System.Drawing.Size(91, 26)
         Me.TextBox17.TabIndex = 159
+        '
+        'GroupBox28
+        '
+        Me.GroupBox28.Controls.Add(Me.FlowLayoutPanel_mag)
+        Me.GroupBox28.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GroupBox28.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GroupBox28.ForeColor = System.Drawing.Color.White
+        Me.GroupBox28.Location = New System.Drawing.Point(309, 0)
+        Me.GroupBox28.Margin = New System.Windows.Forms.Padding(0)
+        Me.GroupBox28.Name = "GroupBox28"
+        Me.GroupBox28.Size = New System.Drawing.Size(73, 61)
+        Me.GroupBox28.TabIndex = 165
+        Me.GroupBox28.TabStop = False
+        Me.GroupBox28.Text = "Mag dest"
+        '
+        'FlowLayoutPanel_mag
+        '
+        Me.FlowLayoutPanel_mag.Controls.Add(Me.CheckBoxTCP)
+        Me.FlowLayoutPanel_mag.Controls.Add(Me.CheckBoxMU)
+        Me.FlowLayoutPanel_mag.Controls.Add(Me.CheckBoxT01)
+        Me.FlowLayoutPanel_mag.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.FlowLayoutPanel_mag.FlowDirection = System.Windows.Forms.FlowDirection.LeftToRight
+        Me.FlowLayoutPanel_mag.Name = "FlowLayoutPanel_mag"
+        Me.FlowLayoutPanel_mag.WrapContents = True
+        '
+        'CheckBoxTCP
+        '
+        Me.CheckBoxTCP.AutoSize = True
+        Me.CheckBoxTCP.Checked = True
+        Me.CheckBoxTCP.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.CheckBoxTCP.ForeColor = System.Drawing.Color.White
+        Me.CheckBoxTCP.Name = "CheckBoxTCP"
+        Me.CheckBoxTCP.Text = "TCP"
+        '
+        'CheckBoxMU
+        '
+        Me.CheckBoxMU.AutoSize = True
+        Me.CheckBoxMU.Checked = True
+        Me.CheckBoxMU.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.CheckBoxMU.ForeColor = System.Drawing.Color.White
+        Me.CheckBoxMU.Name = "CheckBoxMU"
+        Me.CheckBoxMU.Text = "MU"
+        '
+        'CheckBoxT01
+        '
+        Me.CheckBoxT01.AutoSize = True
+        Me.CheckBoxT01.Checked = False
+        Me.CheckBoxT01.ForeColor = System.Drawing.Color.White
+        Me.CheckBoxT01.Name = "CheckBoxT01"
+        Me.CheckBoxT01.Text = "T01"
         '
         'Button9
         '
@@ -1502,24 +1559,24 @@ Partial Class Carico_macchine
         Me.DataGridView2.AllowUserToDeleteRows = False
         Me.DataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.DataGridView2.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight
-        DataGridViewCellStyle42.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle42.BackColor = System.Drawing.SystemColors.ControlDark
-        DataGridViewCellStyle42.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle42.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle42.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle42.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle42.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView2.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle42
+        DataGridViewCellStyle41.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle41.BackColor = System.Drawing.SystemColors.ControlDark
+        DataGridViewCellStyle41.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle41.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle41.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle41.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle41.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView2.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle41
         Me.DataGridView2.ColumnHeadersHeight = 30
         Me.DataGridView2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewCheckBoxColumn1, Me.DataGridViewButtonColumn1, Me.DataGridViewButtonColumn2, Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn5, Me.DataGridViewTextBoxColumn6, Me.DataGridViewTextBoxColumn7, Me.DataGridViewTextBoxColumn8, Me.DataGridViewButtonColumn3, Me.DataGridViewTextBoxColumn9, Me.DataGridViewButtonColumn4, Me.DataGridViewTextBoxColumn10, Me.DataGridViewTextBoxColumn11, Me.DataGridViewTextBoxColumn12, Me.DataGridViewTextBoxColumn13, Me.DataGridViewTextBoxColumn14, Me.DataGridViewTextBoxColumn15, Me.DataGridViewTextBoxColumn16, Me.DataGridViewTextBoxColumn17, Me.DataGridViewTextBoxColumn18, Me.DataGridViewTextBoxColumn19, Me.DataGridViewTextBoxColumn20, Me.DataGridViewTextBoxColumn21, Me.DataGridViewTextBoxColumn22, Me.DataGridViewTextBoxColumn23, Me.DataGridViewTextBoxColumn24, Me.DataGridViewTextBoxColumn25, Me.DataGridViewTextBoxColumn26, Me.DataGridViewTextBoxColumn27, Me.DataGridViewTextBoxColumn28, Me.DataGridViewTextBoxColumn29, Me.DataGridViewTextBoxColumn30, Me.DataGridViewTextBoxColumn31, Me.DataGridViewTextBoxColumn32, Me.DataGridViewTextBoxColumn33})
-        DataGridViewCellStyle71.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle71.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle71.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle71.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle71.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle71.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle71.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridView2.DefaultCellStyle = DataGridViewCellStyle71
+        DataGridViewCellStyle70.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle70.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle70.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle70.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle70.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle70.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle70.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridView2.DefaultCellStyle = DataGridViewCellStyle70
         Me.DataGridView2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DataGridView2.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.DataGridView2.GridColor = System.Drawing.SystemColors.ActiveBorder
@@ -1558,8 +1615,8 @@ Partial Class Carico_macchine
         '
         'DataGridViewTextBoxColumn1
         '
-        DataGridViewCellStyle43.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle43
+        DataGridViewCellStyle42.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle42
         Me.DataGridViewTextBoxColumn1.FillWeight = 45.0!
         Me.DataGridViewTextBoxColumn1.HeaderText = "LAV"
         Me.DataGridViewTextBoxColumn1.MinimumWidth = 6
@@ -1567,8 +1624,8 @@ Partial Class Carico_macchine
         '
         'DataGridViewTextBoxColumn2
         '
-        DataGridViewCellStyle44.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle44
+        DataGridViewCellStyle43.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle43
         Me.DataGridViewTextBoxColumn2.FillWeight = 55.0!
         Me.DataGridViewTextBoxColumn2.HeaderText = "Stato"
         Me.DataGridViewTextBoxColumn2.MinimumWidth = 6
@@ -1577,8 +1634,8 @@ Partial Class Carico_macchine
         '
         'DataGridViewTextBoxColumn3
         '
-        DataGridViewCellStyle45.Format = "dd/MM"
-        Me.DataGridViewTextBoxColumn3.DefaultCellStyle = DataGridViewCellStyle45
+        DataGridViewCellStyle44.Format = "dd/MM"
+        Me.DataGridViewTextBoxColumn3.DefaultCellStyle = DataGridViewCellStyle44
         Me.DataGridViewTextBoxColumn3.FillWeight = 80.0!
         Me.DataGridViewTextBoxColumn3.HeaderText = "Data_C"
         Me.DataGridViewTextBoxColumn3.MinimumWidth = 6
@@ -1586,8 +1643,8 @@ Partial Class Carico_macchine
         '
         'DataGridViewTextBoxColumn4
         '
-        DataGridViewCellStyle46.Format = "dd/MM"
-        Me.DataGridViewTextBoxColumn4.DefaultCellStyle = DataGridViewCellStyle46
+        DataGridViewCellStyle45.Format = "dd/MM"
+        Me.DataGridViewTextBoxColumn4.DefaultCellStyle = DataGridViewCellStyle45
         Me.DataGridViewTextBoxColumn4.FillWeight = 80.0!
         Me.DataGridViewTextBoxColumn4.HeaderText = "Consegna"
         Me.DataGridViewTextBoxColumn4.MinimumWidth = 6
@@ -1595,8 +1652,8 @@ Partial Class Carico_macchine
         '
         'DataGridViewTextBoxColumn5
         '
-        DataGridViewCellStyle47.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn5.DefaultCellStyle = DataGridViewCellStyle47
+        DataGridViewCellStyle46.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn5.DefaultCellStyle = DataGridViewCellStyle46
         Me.DataGridViewTextBoxColumn5.FillWeight = 60.0!
         Me.DataGridViewTextBoxColumn5.HeaderText = "Priorita"
         Me.DataGridViewTextBoxColumn5.MinimumWidth = 6
@@ -1604,8 +1661,8 @@ Partial Class Carico_macchine
         '
         'DataGridViewTextBoxColumn6
         '
-        DataGridViewCellStyle48.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn6.DefaultCellStyle = DataGridViewCellStyle48
+        DataGridViewCellStyle47.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn6.DefaultCellStyle = DataGridViewCellStyle47
         Me.DataGridViewTextBoxColumn6.FillWeight = 65.0!
         Me.DataGridViewTextBoxColumn6.HeaderText = "Stamp"
         Me.DataGridViewTextBoxColumn6.MinimumWidth = 6
@@ -1620,8 +1677,8 @@ Partial Class Carico_macchine
         '
         'DataGridViewTextBoxColumn8
         '
-        DataGridViewCellStyle49.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DataGridViewTextBoxColumn8.DefaultCellStyle = DataGridViewCellStyle49
+        DataGridViewCellStyle48.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.DataGridViewTextBoxColumn8.DefaultCellStyle = DataGridViewCellStyle48
         Me.DataGridViewTextBoxColumn8.FillWeight = 300.0!
         Me.DataGridViewTextBoxColumn8.HeaderText = "Descrizione"
         Me.DataGridViewTextBoxColumn8.MinimumWidth = 6
@@ -1658,9 +1715,9 @@ Partial Class Carico_macchine
         '
         'DataGridViewTextBoxColumn11
         '
-        DataGridViewCellStyle50.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle50.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DataGridViewTextBoxColumn11.DefaultCellStyle = DataGridViewCellStyle50
+        DataGridViewCellStyle49.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle49.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.DataGridViewTextBoxColumn11.DefaultCellStyle = DataGridViewCellStyle49
         Me.DataGridViewTextBoxColumn11.HeaderText = "Quantità"
         Me.DataGridViewTextBoxColumn11.MinimumWidth = 6
         Me.DataGridViewTextBoxColumn11.Name = "DataGridViewTextBoxColumn11"
@@ -1680,8 +1737,8 @@ Partial Class Carico_macchine
         '
         'DataGridViewTextBoxColumn14
         '
-        DataGridViewCellStyle51.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn14.DefaultCellStyle = DataGridViewCellStyle51
+        DataGridViewCellStyle50.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn14.DefaultCellStyle = DataGridViewCellStyle50
         Me.DataGridViewTextBoxColumn14.FillWeight = 70.0!
         Me.DataGridViewTextBoxColumn14.HeaderText = "Man"
         Me.DataGridViewTextBoxColumn14.MinimumWidth = 6
@@ -1689,8 +1746,8 @@ Partial Class Carico_macchine
         '
         'DataGridViewTextBoxColumn15
         '
-        DataGridViewCellStyle52.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn15.DefaultCellStyle = DataGridViewCellStyle52
+        DataGridViewCellStyle51.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn15.DefaultCellStyle = DataGridViewCellStyle51
         Me.DataGridViewTextBoxColumn15.FillWeight = 70.0!
         Me.DataGridViewTextBoxColumn15.HeaderText = "Taglio"
         Me.DataGridViewTextBoxColumn15.MinimumWidth = 6
@@ -1698,8 +1755,8 @@ Partial Class Carico_macchine
         '
         'DataGridViewTextBoxColumn16
         '
-        DataGridViewCellStyle53.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn16.DefaultCellStyle = DataGridViewCellStyle53
+        DataGridViewCellStyle52.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn16.DefaultCellStyle = DataGridViewCellStyle52
         Me.DataGridViewTextBoxColumn16.FillWeight = 70.0!
         Me.DataGridViewTextBoxColumn16.HeaderText = "Tornio"
         Me.DataGridViewTextBoxColumn16.MinimumWidth = 6
@@ -1707,8 +1764,8 @@ Partial Class Carico_macchine
         '
         'DataGridViewTextBoxColumn17
         '
-        DataGridViewCellStyle54.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn17.DefaultCellStyle = DataGridViewCellStyle54
+        DataGridViewCellStyle53.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn17.DefaultCellStyle = DataGridViewCellStyle53
         Me.DataGridViewTextBoxColumn17.FillWeight = 70.0!
         Me.DataGridViewTextBoxColumn17.HeaderText = "Fresa"
         Me.DataGridViewTextBoxColumn17.MinimumWidth = 6
@@ -1716,8 +1773,8 @@ Partial Class Carico_macchine
         '
         'DataGridViewTextBoxColumn18
         '
-        DataGridViewCellStyle55.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn18.DefaultCellStyle = DataGridViewCellStyle55
+        DataGridViewCellStyle54.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn18.DefaultCellStyle = DataGridViewCellStyle54
         Me.DataGridViewTextBoxColumn18.FillWeight = 50.0!
         Me.DataGridViewTextBoxColumn18.HeaderText = "Prog"
         Me.DataGridViewTextBoxColumn18.MinimumWidth = 6
@@ -1725,8 +1782,8 @@ Partial Class Carico_macchine
         '
         'DataGridViewTextBoxColumn19
         '
-        DataGridViewCellStyle56.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn19.DefaultCellStyle = DataGridViewCellStyle56
+        DataGridViewCellStyle55.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn19.DefaultCellStyle = DataGridViewCellStyle55
         Me.DataGridViewTextBoxColumn19.FillWeight = 50.0!
         Me.DataGridViewTextBoxColumn19.HeaderText = "T MAN"
         Me.DataGridViewTextBoxColumn19.MinimumWidth = 6
@@ -1734,8 +1791,8 @@ Partial Class Carico_macchine
         '
         'DataGridViewTextBoxColumn20
         '
-        DataGridViewCellStyle57.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn20.DefaultCellStyle = DataGridViewCellStyle57
+        DataGridViewCellStyle56.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn20.DefaultCellStyle = DataGridViewCellStyle56
         Me.DataGridViewTextBoxColumn20.FillWeight = 50.0!
         Me.DataGridViewTextBoxColumn20.HeaderText = "T Auto"
         Me.DataGridViewTextBoxColumn20.MinimumWidth = 6
@@ -1743,8 +1800,8 @@ Partial Class Carico_macchine
         '
         'DataGridViewTextBoxColumn21
         '
-        DataGridViewCellStyle58.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn21.DefaultCellStyle = DataGridViewCellStyle58
+        DataGridViewCellStyle57.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn21.DefaultCellStyle = DataGridViewCellStyle57
         Me.DataGridViewTextBoxColumn21.FillWeight = 50.0!
         Me.DataGridViewTextBoxColumn21.HeaderText = "Tornio"
         Me.DataGridViewTextBoxColumn21.MinimumWidth = 6
@@ -1752,8 +1809,8 @@ Partial Class Carico_macchine
         '
         'DataGridViewTextBoxColumn22
         '
-        DataGridViewCellStyle59.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn22.DefaultCellStyle = DataGridViewCellStyle59
+        DataGridViewCellStyle58.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn22.DefaultCellStyle = DataGridViewCellStyle58
         Me.DataGridViewTextBoxColumn22.FillWeight = 50.0!
         Me.DataGridViewTextBoxColumn22.HeaderText = "Goodway"
         Me.DataGridViewTextBoxColumn22.MinimumWidth = 6
@@ -1761,8 +1818,8 @@ Partial Class Carico_macchine
         '
         'DataGridViewTextBoxColumn23
         '
-        DataGridViewCellStyle60.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn23.DefaultCellStyle = DataGridViewCellStyle60
+        DataGridViewCellStyle59.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn23.DefaultCellStyle = DataGridViewCellStyle59
         Me.DataGridViewTextBoxColumn23.FillWeight = 50.0!
         Me.DataGridViewTextBoxColumn23.HeaderText = "Doos"
         Me.DataGridViewTextBoxColumn23.MinimumWidth = 6
@@ -1770,8 +1827,8 @@ Partial Class Carico_macchine
         '
         'DataGridViewTextBoxColumn24
         '
-        DataGridViewCellStyle61.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn24.DefaultCellStyle = DataGridViewCellStyle61
+        DataGridViewCellStyle60.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn24.DefaultCellStyle = DataGridViewCellStyle60
         Me.DataGridViewTextBoxColumn24.FillWeight = 50.0!
         Me.DataGridViewTextBoxColumn24.HeaderText = "Doos4"
         Me.DataGridViewTextBoxColumn24.MinimumWidth = 6
@@ -1779,8 +1836,8 @@ Partial Class Carico_macchine
         '
         'DataGridViewTextBoxColumn25
         '
-        DataGridViewCellStyle62.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn25.DefaultCellStyle = DataGridViewCellStyle62
+        DataGridViewCellStyle61.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn25.DefaultCellStyle = DataGridViewCellStyle61
         Me.DataGridViewTextBoxColumn25.FillWeight = 50.0!
         Me.DataGridViewTextBoxColumn25.HeaderText = "Doos6"
         Me.DataGridViewTextBoxColumn25.MinimumWidth = 6
@@ -1788,8 +1845,8 @@ Partial Class Carico_macchine
         '
         'DataGridViewTextBoxColumn26
         '
-        DataGridViewCellStyle63.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn26.DefaultCellStyle = DataGridViewCellStyle63
+        DataGridViewCellStyle62.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn26.DefaultCellStyle = DataGridViewCellStyle62
         Me.DataGridViewTextBoxColumn26.FillWeight = 50.0!
         Me.DataGridViewTextBoxColumn26.HeaderText = "Haas 2"
         Me.DataGridViewTextBoxColumn26.MinimumWidth = 6
@@ -1797,8 +1854,8 @@ Partial Class Carico_macchine
         '
         'DataGridViewTextBoxColumn27
         '
-        DataGridViewCellStyle64.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn27.DefaultCellStyle = DataGridViewCellStyle64
+        DataGridViewCellStyle63.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn27.DefaultCellStyle = DataGridViewCellStyle63
         Me.DataGridViewTextBoxColumn27.FillWeight = 50.0!
         Me.DataGridViewTextBoxColumn27.HeaderText = "Haas 3"
         Me.DataGridViewTextBoxColumn27.MinimumWidth = 6
@@ -1806,8 +1863,8 @@ Partial Class Carico_macchine
         '
         'DataGridViewTextBoxColumn28
         '
-        DataGridViewCellStyle65.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn28.DefaultCellStyle = DataGridViewCellStyle65
+        DataGridViewCellStyle64.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn28.DefaultCellStyle = DataGridViewCellStyle64
         Me.DataGridViewTextBoxColumn28.FillWeight = 50.0!
         Me.DataGridViewTextBoxColumn28.HeaderText = "Haas 5"
         Me.DataGridViewTextBoxColumn28.MinimumWidth = 6
@@ -1815,8 +1872,8 @@ Partial Class Carico_macchine
         '
         'DataGridViewTextBoxColumn29
         '
-        DataGridViewCellStyle66.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn29.DefaultCellStyle = DataGridViewCellStyle66
+        DataGridViewCellStyle65.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn29.DefaultCellStyle = DataGridViewCellStyle65
         Me.DataGridViewTextBoxColumn29.FillWeight = 50.0!
         Me.DataGridViewTextBoxColumn29.HeaderText = "Haas 6"
         Me.DataGridViewTextBoxColumn29.MinimumWidth = 6
@@ -1824,8 +1881,8 @@ Partial Class Carico_macchine
         '
         'DataGridViewTextBoxColumn30
         '
-        DataGridViewCellStyle67.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn30.DefaultCellStyle = DataGridViewCellStyle67
+        DataGridViewCellStyle66.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn30.DefaultCellStyle = DataGridViewCellStyle66
         Me.DataGridViewTextBoxColumn30.FillWeight = 50.0!
         Me.DataGridViewTextBoxColumn30.HeaderText = "Famup"
         Me.DataGridViewTextBoxColumn30.MinimumWidth = 6
@@ -1833,8 +1890,8 @@ Partial Class Carico_macchine
         '
         'DataGridViewTextBoxColumn31
         '
-        DataGridViewCellStyle68.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn31.DefaultCellStyle = DataGridViewCellStyle68
+        DataGridViewCellStyle67.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn31.DefaultCellStyle = DataGridViewCellStyle67
         Me.DataGridViewTextBoxColumn31.FillWeight = 50.0!
         Me.DataGridViewTextBoxColumn31.HeaderText = "Awea"
         Me.DataGridViewTextBoxColumn31.MinimumWidth = 6
@@ -1842,8 +1899,8 @@ Partial Class Carico_macchine
         '
         'DataGridViewTextBoxColumn32
         '
-        DataGridViewCellStyle69.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn32.DefaultCellStyle = DataGridViewCellStyle69
+        DataGridViewCellStyle68.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn32.DefaultCellStyle = DataGridViewCellStyle68
         Me.DataGridViewTextBoxColumn32.FillWeight = 50.0!
         Me.DataGridViewTextBoxColumn32.HeaderText = "Stozza"
         Me.DataGridViewTextBoxColumn32.MinimumWidth = 6
@@ -1851,8 +1908,8 @@ Partial Class Carico_macchine
         '
         'DataGridViewTextBoxColumn33
         '
-        DataGridViewCellStyle70.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn33.DefaultCellStyle = DataGridViewCellStyle70
+        DataGridViewCellStyle69.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn33.DefaultCellStyle = DataGridViewCellStyle69
         Me.DataGridViewTextBoxColumn33.FillWeight = 50.0!
         Me.DataGridViewTextBoxColumn33.HeaderText = "Sald"
         Me.DataGridViewTextBoxColumn33.MinimumWidth = 6
@@ -2452,14 +2509,14 @@ Partial Class Carico_macchine
         Me.DataGridView3.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.DataGridView3.BackgroundColor = System.Drawing.Color.White
         Me.DataGridView3.BorderStyle = System.Windows.Forms.BorderStyle.None
-        DataGridViewCellStyle72.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle72.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle72.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle72.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle72.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle72.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle72.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView3.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle72
+        DataGridViewCellStyle71.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle71.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle71.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle71.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle71.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle71.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle71.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView3.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle71
         Me.DataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView3.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Codice_risorsa, Me.Nome_risorsa, Me.Ordini_lavorabili, Me.Ordini_TOT, Me.Tempo_lavorabile, Me.Tempo_TOT})
         Me.DataGridView3.Dock = System.Windows.Forms.DockStyle.Fill
@@ -2479,49 +2536,49 @@ Partial Class Carico_macchine
         '
         'Nome_risorsa
         '
-        DataGridViewCellStyle73.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle73.Format = "N0"
-        DataGridViewCellStyle73.NullValue = Nothing
-        Me.Nome_risorsa.DefaultCellStyle = DataGridViewCellStyle73
+        DataGridViewCellStyle72.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle72.Format = "N0"
+        DataGridViewCellStyle72.NullValue = Nothing
+        Me.Nome_risorsa.DefaultCellStyle = DataGridViewCellStyle72
         Me.Nome_risorsa.HeaderText = "Nome"
         Me.Nome_risorsa.MinimumWidth = 15
         Me.Nome_risorsa.Name = "Nome_risorsa"
         '
         'Ordini_lavorabili
         '
-        DataGridViewCellStyle74.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle74.Format = "N0"
-        DataGridViewCellStyle74.NullValue = Nothing
-        Me.Ordini_lavorabili.DefaultCellStyle = DataGridViewCellStyle74
+        DataGridViewCellStyle73.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle73.Format = "N0"
+        DataGridViewCellStyle73.NullValue = Nothing
+        Me.Ordini_lavorabili.DefaultCellStyle = DataGridViewCellStyle73
         Me.Ordini_lavorabili.HeaderText = "Ordini lavorabili"
         Me.Ordini_lavorabili.MinimumWidth = 15
         Me.Ordini_lavorabili.Name = "Ordini_lavorabili"
         '
         'Ordini_TOT
         '
-        DataGridViewCellStyle75.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle75.Format = "N0"
-        DataGridViewCellStyle75.NullValue = Nothing
-        Me.Ordini_TOT.DefaultCellStyle = DataGridViewCellStyle75
+        DataGridViewCellStyle74.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle74.Format = "N0"
+        DataGridViewCellStyle74.NullValue = Nothing
+        Me.Ordini_TOT.DefaultCellStyle = DataGridViewCellStyle74
         Me.Ordini_TOT.HeaderText = "Ordini TOT"
         Me.Ordini_TOT.MinimumWidth = 6
         Me.Ordini_TOT.Name = "Ordini_TOT"
         '
         'Tempo_lavorabile
         '
-        DataGridViewCellStyle76.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle76.Format = "N1"
-        Me.Tempo_lavorabile.DefaultCellStyle = DataGridViewCellStyle76
+        DataGridViewCellStyle75.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle75.Format = "N1"
+        Me.Tempo_lavorabile.DefaultCellStyle = DataGridViewCellStyle75
         Me.Tempo_lavorabile.HeaderText = "Tempo lavorabile(h)"
         Me.Tempo_lavorabile.MinimumWidth = 15
         Me.Tempo_lavorabile.Name = "Tempo_lavorabile"
         '
         'Tempo_TOT
         '
-        DataGridViewCellStyle77.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle77.Format = "N1"
-        DataGridViewCellStyle77.NullValue = Nothing
-        Me.Tempo_TOT.DefaultCellStyle = DataGridViewCellStyle77
+        DataGridViewCellStyle76.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle76.Format = "N1"
+        DataGridViewCellStyle76.NullValue = Nothing
+        Me.Tempo_TOT.DefaultCellStyle = DataGridViewCellStyle76
         Me.Tempo_TOT.HeaderText = "Tempo TOT(h)"
         Me.Tempo_TOT.MinimumWidth = 6
         Me.Tempo_TOT.Name = "Tempo_TOT"
@@ -2613,24 +2670,24 @@ Partial Class Carico_macchine
         Me.DataGridView5.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.DataGridView5.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.DataGridView5.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight
-        DataGridViewCellStyle78.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle78.BackColor = System.Drawing.SystemColors.ControlDark
-        DataGridViewCellStyle78.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle78.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle78.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle78.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle78.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView5.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle78
+        DataGridViewCellStyle77.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle77.BackColor = System.Drawing.SystemColors.ControlDark
+        DataGridViewCellStyle77.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle77.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle77.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle77.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle77.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView5.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle77
         Me.DataGridView5.ColumnHeadersHeight = 30
         Me.DataGridView5.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewCheckBoxColumn2, Me.DataGridViewButtonColumn5, Me.DataGridViewTextBoxColumn34, Me.DataGridViewTextBoxColumn35, Me.DataGridViewTextBoxColumn36, Me.DataGridViewTextBoxColumn37, Me.DataGridViewTextBoxColumn38, Me.DataGridViewTextBoxColumn39, Me.DataGridViewButtonColumn6, Me.DataGridViewTextBoxColumn40, Me.DataGridViewTextBoxColumn41, Me.DataGridViewTextBoxColumn42, Me.DataGridViewButtonColumn7, Me.DataGridViewTextBoxColumn43, Me.DataGridViewButtonColumn8, Me.DataGridViewTextBoxColumn44, Me.DataGridViewButtonColumn9, Me.DataGridViewTextBoxColumn45, Me.DataGridViewButtonColumn10, Me.DataGridViewTextBoxColumn46, Me.DataGridViewTextBoxColumn47, Me.DataGridViewTextBoxColumn48, Me.DataGridViewTextBoxColumn49, Me.DataGridViewTextBoxColumn50, Me.DataGridViewTextBoxColumn51, Me.DataGridViewTextBoxColumn52, Me.DataGridViewTextBoxColumn53, Me.DataGridViewTextBoxColumn54, Me.DataGridViewTextBoxColumn55, Me.DataGridViewTextBoxColumn56, Me.DataGridViewTextBoxColumn57, Me.DataGridViewTextBoxColumn58, Me.DataGridViewTextBoxColumn59, Me.DataGridViewTextBoxColumn60, Me.DataGridViewTextBoxColumn61, Me.DataGridViewTextBoxColumn62, Me.DataGridViewTextBoxColumn63, Me.DataGridViewTextBoxColumn64, Me.DataGridViewTextBoxColumn65, Me.DataGridViewTextBoxColumn66, Me.DataGridViewTextBoxColumn67, Me.DataGridViewTextBoxColumn68, Me.DataGridViewTextBoxColumn69, Me.DataGridViewTextBoxColumn70, Me.DataGridViewTextBoxColumn71, Me.DataGridViewTextBoxColumn72})
-        DataGridViewCellStyle113.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle113.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle113.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle113.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle113.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle113.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle113.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridView5.DefaultCellStyle = DataGridViewCellStyle113
+        DataGridViewCellStyle112.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle112.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle112.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle112.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle112.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle112.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle112.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridView5.DefaultCellStyle = DataGridViewCellStyle112
         Me.DataGridView5.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DataGridView5.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.DataGridView5.GridColor = System.Drawing.SystemColors.ActiveBorder
@@ -2662,8 +2719,8 @@ Partial Class Carico_macchine
         '
         'DataGridViewTextBoxColumn34
         '
-        DataGridViewCellStyle79.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn34.DefaultCellStyle = DataGridViewCellStyle79
+        DataGridViewCellStyle78.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn34.DefaultCellStyle = DataGridViewCellStyle78
         Me.DataGridViewTextBoxColumn34.FillWeight = 45.0!
         Me.DataGridViewTextBoxColumn34.HeaderText = "LAV"
         Me.DataGridViewTextBoxColumn34.MinimumWidth = 6
@@ -2671,9 +2728,9 @@ Partial Class Carico_macchine
         '
         'DataGridViewTextBoxColumn35
         '
-        DataGridViewCellStyle80.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle80.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DataGridViewTextBoxColumn35.DefaultCellStyle = DataGridViewCellStyle80
+        DataGridViewCellStyle79.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle79.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.DataGridViewTextBoxColumn35.DefaultCellStyle = DataGridViewCellStyle79
         Me.DataGridViewTextBoxColumn35.FillWeight = 55.0!
         Me.DataGridViewTextBoxColumn35.HeaderText = "Stato"
         Me.DataGridViewTextBoxColumn35.MinimumWidth = 6
@@ -2682,9 +2739,9 @@ Partial Class Carico_macchine
         '
         'DataGridViewTextBoxColumn36
         '
-        DataGridViewCellStyle81.Format = "dd/MM"
-        DataGridViewCellStyle81.NullValue = Nothing
-        Me.DataGridViewTextBoxColumn36.DefaultCellStyle = DataGridViewCellStyle81
+        DataGridViewCellStyle80.Format = "dd/MM"
+        DataGridViewCellStyle80.NullValue = Nothing
+        Me.DataGridViewTextBoxColumn36.DefaultCellStyle = DataGridViewCellStyle80
         Me.DataGridViewTextBoxColumn36.FillWeight = 70.0!
         Me.DataGridViewTextBoxColumn36.HeaderText = "Data I"
         Me.DataGridViewTextBoxColumn36.MinimumWidth = 6
@@ -2692,8 +2749,8 @@ Partial Class Carico_macchine
         '
         'DataGridViewTextBoxColumn37
         '
-        DataGridViewCellStyle82.Format = "dd/MM"
-        Me.DataGridViewTextBoxColumn37.DefaultCellStyle = DataGridViewCellStyle82
+        DataGridViewCellStyle81.Format = "dd/MM"
+        Me.DataGridViewTextBoxColumn37.DefaultCellStyle = DataGridViewCellStyle81
         Me.DataGridViewTextBoxColumn37.FillWeight = 70.0!
         Me.DataGridViewTextBoxColumn37.HeaderText = "Cons"
         Me.DataGridViewTextBoxColumn37.MinimumWidth = 6
@@ -2701,8 +2758,8 @@ Partial Class Carico_macchine
         '
         'DataGridViewTextBoxColumn38
         '
-        DataGridViewCellStyle83.Format = "dd/MM"
-        Me.DataGridViewTextBoxColumn38.DefaultCellStyle = DataGridViewCellStyle83
+        DataGridViewCellStyle82.Format = "dd/MM"
+        Me.DataGridViewTextBoxColumn38.DefaultCellStyle = DataGridViewCellStyle82
         Me.DataGridViewTextBoxColumn38.FillWeight = 80.0!
         Me.DataGridViewTextBoxColumn38.HeaderText = "Cons rich."
         Me.DataGridViewTextBoxColumn38.MinimumWidth = 6
@@ -2710,10 +2767,10 @@ Partial Class Carico_macchine
         '
         'DataGridViewTextBoxColumn39
         '
-        DataGridViewCellStyle84.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle84.Format = "N0"
-        DataGridViewCellStyle84.NullValue = Nothing
-        Me.DataGridViewTextBoxColumn39.DefaultCellStyle = DataGridViewCellStyle84
+        DataGridViewCellStyle83.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle83.Format = "N0"
+        DataGridViewCellStyle83.NullValue = Nothing
+        Me.DataGridViewTextBoxColumn39.DefaultCellStyle = DataGridViewCellStyle83
         Me.DataGridViewTextBoxColumn39.FillWeight = 70.0!
         Me.DataGridViewTextBoxColumn39.HeaderText = "ANT/RIT"
         Me.DataGridViewTextBoxColumn39.MinimumWidth = 6
@@ -2738,8 +2795,8 @@ Partial Class Carico_macchine
         '
         'DataGridViewTextBoxColumn41
         '
-        DataGridViewCellStyle85.Format = "dd/MM"
-        Me.DataGridViewTextBoxColumn41.DefaultCellStyle = DataGridViewCellStyle85
+        DataGridViewCellStyle84.Format = "dd/MM"
+        Me.DataGridViewTextBoxColumn41.DefaultCellStyle = DataGridViewCellStyle84
         Me.DataGridViewTextBoxColumn41.FillWeight = 80.0!
         Me.DataGridViewTextBoxColumn41.HeaderText = "Arrivo Mat"
         Me.DataGridViewTextBoxColumn41.MinimumWidth = 6
@@ -2747,8 +2804,8 @@ Partial Class Carico_macchine
         '
         'DataGridViewTextBoxColumn42
         '
-        DataGridViewCellStyle86.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn42.DefaultCellStyle = DataGridViewCellStyle86
+        DataGridViewCellStyle85.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn42.DefaultCellStyle = DataGridViewCellStyle85
         Me.DataGridViewTextBoxColumn42.FillWeight = 60.0!
         Me.DataGridViewTextBoxColumn42.HeaderText = "Priorita"
         Me.DataGridViewTextBoxColumn42.MinimumWidth = 6
@@ -2765,9 +2822,9 @@ Partial Class Carico_macchine
         '
         'DataGridViewTextBoxColumn43
         '
-        DataGridViewCellStyle87.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle87.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridViewTextBoxColumn43.DefaultCellStyle = DataGridViewCellStyle87
+        DataGridViewCellStyle86.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle86.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridViewTextBoxColumn43.DefaultCellStyle = DataGridViewCellStyle86
         Me.DataGridViewTextBoxColumn43.FillWeight = 300.0!
         Me.DataGridViewTextBoxColumn43.HeaderText = "Descrizione"
         Me.DataGridViewTextBoxColumn43.MinimumWidth = 6
@@ -2795,11 +2852,11 @@ Partial Class Carico_macchine
         '
         'DataGridViewTextBoxColumn45
         '
-        DataGridViewCellStyle88.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle88.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle88.Format = "N1"
-        DataGridViewCellStyle88.NullValue = Nothing
-        Me.DataGridViewTextBoxColumn45.DefaultCellStyle = DataGridViewCellStyle88
+        DataGridViewCellStyle87.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle87.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle87.Format = "N1"
+        DataGridViewCellStyle87.NullValue = Nothing
+        Me.DataGridViewTextBoxColumn45.DefaultCellStyle = DataGridViewCellStyle87
         Me.DataGridViewTextBoxColumn45.HeaderText = "Quantità"
         Me.DataGridViewTextBoxColumn45.MinimumWidth = 6
         Me.DataGridViewTextBoxColumn45.Name = "DataGridViewTextBoxColumn45"
@@ -2820,18 +2877,18 @@ Partial Class Carico_macchine
         '
         'DataGridViewTextBoxColumn47
         '
-        DataGridViewCellStyle89.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn47.DefaultCellStyle = DataGridViewCellStyle89
+        DataGridViewCellStyle88.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn47.DefaultCellStyle = DataGridViewCellStyle88
         Me.DataGridViewTextBoxColumn47.FillWeight = 70.0!
         Me.DataGridViewTextBoxColumn47.HeaderText = "Dest"
         Me.DataGridViewTextBoxColumn47.Name = "DataGridViewTextBoxColumn47"
         '
         'DataGridViewTextBoxColumn48
         '
-        DataGridViewCellStyle90.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle90.Format = "N2"
-        DataGridViewCellStyle90.NullValue = Nothing
-        Me.DataGridViewTextBoxColumn48.DefaultCellStyle = DataGridViewCellStyle90
+        DataGridViewCellStyle89.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle89.Format = "N2"
+        DataGridViewCellStyle89.NullValue = Nothing
+        Me.DataGridViewTextBoxColumn48.DefaultCellStyle = DataGridViewCellStyle89
         Me.DataGridViewTextBoxColumn48.HeaderText = "Disp"
         Me.DataGridViewTextBoxColumn48.MinimumWidth = 6
         Me.DataGridViewTextBoxColumn48.Name = "DataGridViewTextBoxColumn48"
@@ -2845,8 +2902,8 @@ Partial Class Carico_macchine
         '
         'DataGridViewTextBoxColumn50
         '
-        DataGridViewCellStyle91.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn50.DefaultCellStyle = DataGridViewCellStyle91
+        DataGridViewCellStyle90.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn50.DefaultCellStyle = DataGridViewCellStyle90
         Me.DataGridViewTextBoxColumn50.FillWeight = 50.0!
         Me.DataGridViewTextBoxColumn50.HeaderText = "Prog MU"
         Me.DataGridViewTextBoxColumn50.MinimumWidth = 6
@@ -2854,16 +2911,16 @@ Partial Class Carico_macchine
         '
         'DataGridViewTextBoxColumn51
         '
-        DataGridViewCellStyle92.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn51.DefaultCellStyle = DataGridViewCellStyle92
+        DataGridViewCellStyle91.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn51.DefaultCellStyle = DataGridViewCellStyle91
         Me.DataGridViewTextBoxColumn51.FillWeight = 50.0!
         Me.DataGridViewTextBoxColumn51.HeaderText = "Prog P"
         Me.DataGridViewTextBoxColumn51.Name = "DataGridViewTextBoxColumn51"
         '
         'DataGridViewTextBoxColumn52
         '
-        DataGridViewCellStyle93.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn52.DefaultCellStyle = DataGridViewCellStyle93
+        DataGridViewCellStyle92.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn52.DefaultCellStyle = DataGridViewCellStyle92
         Me.DataGridViewTextBoxColumn52.FillWeight = 50.0!
         Me.DataGridViewTextBoxColumn52.HeaderText = "T MAN"
         Me.DataGridViewTextBoxColumn52.MinimumWidth = 6
@@ -2871,8 +2928,8 @@ Partial Class Carico_macchine
         '
         'DataGridViewTextBoxColumn53
         '
-        DataGridViewCellStyle94.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn53.DefaultCellStyle = DataGridViewCellStyle94
+        DataGridViewCellStyle93.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn53.DefaultCellStyle = DataGridViewCellStyle93
         Me.DataGridViewTextBoxColumn53.FillWeight = 50.0!
         Me.DataGridViewTextBoxColumn53.HeaderText = "T Auto"
         Me.DataGridViewTextBoxColumn53.MinimumWidth = 6
@@ -2880,8 +2937,8 @@ Partial Class Carico_macchine
         '
         'DataGridViewTextBoxColumn54
         '
-        DataGridViewCellStyle95.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn54.DefaultCellStyle = DataGridViewCellStyle95
+        DataGridViewCellStyle94.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn54.DefaultCellStyle = DataGridViewCellStyle94
         Me.DataGridViewTextBoxColumn54.FillWeight = 50.0!
         Me.DataGridViewTextBoxColumn54.HeaderText = "Pant P"
         Me.DataGridViewTextBoxColumn54.MinimumWidth = 6
@@ -2889,8 +2946,8 @@ Partial Class Carico_macchine
         '
         'DataGridViewTextBoxColumn55
         '
-        DataGridViewCellStyle96.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn55.DefaultCellStyle = DataGridViewCellStyle96
+        DataGridViewCellStyle95.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn55.DefaultCellStyle = DataGridViewCellStyle95
         Me.DataGridViewTextBoxColumn55.FillWeight = 50.0!
         Me.DataGridViewTextBoxColumn55.HeaderText = "Pant A"
         Me.DataGridViewTextBoxColumn55.MinimumWidth = 6
@@ -2898,8 +2955,8 @@ Partial Class Carico_macchine
         '
         'DataGridViewTextBoxColumn56
         '
-        DataGridViewCellStyle97.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn56.DefaultCellStyle = DataGridViewCellStyle97
+        DataGridViewCellStyle96.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn56.DefaultCellStyle = DataGridViewCellStyle96
         Me.DataGridViewTextBoxColumn56.FillWeight = 50.0!
         Me.DataGridViewTextBoxColumn56.HeaderText = "Tor P"
         Me.DataGridViewTextBoxColumn56.MinimumWidth = 6
@@ -2907,8 +2964,8 @@ Partial Class Carico_macchine
         '
         'DataGridViewTextBoxColumn57
         '
-        DataGridViewCellStyle98.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn57.DefaultCellStyle = DataGridViewCellStyle98
+        DataGridViewCellStyle97.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn57.DefaultCellStyle = DataGridViewCellStyle97
         Me.DataGridViewTextBoxColumn57.FillWeight = 50.0!
         Me.DataGridViewTextBoxColumn57.HeaderText = "Goodway"
         Me.DataGridViewTextBoxColumn57.MinimumWidth = 6
@@ -2916,8 +2973,8 @@ Partial Class Carico_macchine
         '
         'DataGridViewTextBoxColumn58
         '
-        DataGridViewCellStyle99.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn58.DefaultCellStyle = DataGridViewCellStyle99
+        DataGridViewCellStyle98.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn58.DefaultCellStyle = DataGridViewCellStyle98
         Me.DataGridViewTextBoxColumn58.FillWeight = 50.0!
         Me.DataGridViewTextBoxColumn58.HeaderText = "Doos"
         Me.DataGridViewTextBoxColumn58.MinimumWidth = 6
@@ -2925,8 +2982,8 @@ Partial Class Carico_macchine
         '
         'DataGridViewTextBoxColumn59
         '
-        DataGridViewCellStyle100.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn59.DefaultCellStyle = DataGridViewCellStyle100
+        DataGridViewCellStyle99.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn59.DefaultCellStyle = DataGridViewCellStyle99
         Me.DataGridViewTextBoxColumn59.FillWeight = 50.0!
         Me.DataGridViewTextBoxColumn59.HeaderText = "Doos4"
         Me.DataGridViewTextBoxColumn59.MinimumWidth = 6
@@ -2934,8 +2991,8 @@ Partial Class Carico_macchine
         '
         'DataGridViewTextBoxColumn60
         '
-        DataGridViewCellStyle101.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn60.DefaultCellStyle = DataGridViewCellStyle101
+        DataGridViewCellStyle100.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn60.DefaultCellStyle = DataGridViewCellStyle100
         Me.DataGridViewTextBoxColumn60.FillWeight = 50.0!
         Me.DataGridViewTextBoxColumn60.HeaderText = "Doos6"
         Me.DataGridViewTextBoxColumn60.MinimumWidth = 6
@@ -2943,16 +3000,16 @@ Partial Class Carico_macchine
         '
         'DataGridViewTextBoxColumn61
         '
-        DataGridViewCellStyle102.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn61.DefaultCellStyle = DataGridViewCellStyle102
+        DataGridViewCellStyle101.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn61.DefaultCellStyle = DataGridViewCellStyle101
         Me.DataGridViewTextBoxColumn61.FillWeight = 50.0!
         Me.DataGridViewTextBoxColumn61.HeaderText = "Multi"
         Me.DataGridViewTextBoxColumn61.Name = "DataGridViewTextBoxColumn61"
         '
         'DataGridViewTextBoxColumn62
         '
-        DataGridViewCellStyle103.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn62.DefaultCellStyle = DataGridViewCellStyle103
+        DataGridViewCellStyle102.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn62.DefaultCellStyle = DataGridViewCellStyle102
         Me.DataGridViewTextBoxColumn62.FillWeight = 50.0!
         Me.DataGridViewTextBoxColumn62.HeaderText = "Haas 2"
         Me.DataGridViewTextBoxColumn62.MinimumWidth = 6
@@ -2960,8 +3017,8 @@ Partial Class Carico_macchine
         '
         'DataGridViewTextBoxColumn63
         '
-        DataGridViewCellStyle104.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn63.DefaultCellStyle = DataGridViewCellStyle104
+        DataGridViewCellStyle103.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn63.DefaultCellStyle = DataGridViewCellStyle103
         Me.DataGridViewTextBoxColumn63.FillWeight = 50.0!
         Me.DataGridViewTextBoxColumn63.HeaderText = "Haas 3"
         Me.DataGridViewTextBoxColumn63.MinimumWidth = 6
@@ -2969,8 +3026,8 @@ Partial Class Carico_macchine
         '
         'DataGridViewTextBoxColumn64
         '
-        DataGridViewCellStyle105.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn64.DefaultCellStyle = DataGridViewCellStyle105
+        DataGridViewCellStyle104.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn64.DefaultCellStyle = DataGridViewCellStyle104
         Me.DataGridViewTextBoxColumn64.FillWeight = 50.0!
         Me.DataGridViewTextBoxColumn64.HeaderText = "Haas 5"
         Me.DataGridViewTextBoxColumn64.MinimumWidth = 6
@@ -2978,8 +3035,8 @@ Partial Class Carico_macchine
         '
         'DataGridViewTextBoxColumn65
         '
-        DataGridViewCellStyle106.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn65.DefaultCellStyle = DataGridViewCellStyle106
+        DataGridViewCellStyle105.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn65.DefaultCellStyle = DataGridViewCellStyle105
         Me.DataGridViewTextBoxColumn65.FillWeight = 50.0!
         Me.DataGridViewTextBoxColumn65.HeaderText = "Haas 6"
         Me.DataGridViewTextBoxColumn65.MinimumWidth = 6
@@ -2987,8 +3044,8 @@ Partial Class Carico_macchine
         '
         'DataGridViewTextBoxColumn66
         '
-        DataGridViewCellStyle107.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn66.DefaultCellStyle = DataGridViewCellStyle107
+        DataGridViewCellStyle106.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn66.DefaultCellStyle = DataGridViewCellStyle106
         Me.DataGridViewTextBoxColumn66.FillWeight = 50.0!
         Me.DataGridViewTextBoxColumn66.HeaderText = "Famup"
         Me.DataGridViewTextBoxColumn66.MinimumWidth = 6
@@ -2996,8 +3053,8 @@ Partial Class Carico_macchine
         '
         'DataGridViewTextBoxColumn67
         '
-        DataGridViewCellStyle108.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn67.DefaultCellStyle = DataGridViewCellStyle108
+        DataGridViewCellStyle107.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn67.DefaultCellStyle = DataGridViewCellStyle107
         Me.DataGridViewTextBoxColumn67.FillWeight = 50.0!
         Me.DataGridViewTextBoxColumn67.HeaderText = "Awea"
         Me.DataGridViewTextBoxColumn67.MinimumWidth = 6
@@ -3005,8 +3062,8 @@ Partial Class Carico_macchine
         '
         'DataGridViewTextBoxColumn68
         '
-        DataGridViewCellStyle109.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn68.DefaultCellStyle = DataGridViewCellStyle109
+        DataGridViewCellStyle108.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn68.DefaultCellStyle = DataGridViewCellStyle108
         Me.DataGridViewTextBoxColumn68.FillWeight = 50.0!
         Me.DataGridViewTextBoxColumn68.HeaderText = "Stozza"
         Me.DataGridViewTextBoxColumn68.MinimumWidth = 6
@@ -3014,8 +3071,8 @@ Partial Class Carico_macchine
         '
         'DataGridViewTextBoxColumn69
         '
-        DataGridViewCellStyle110.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn69.DefaultCellStyle = DataGridViewCellStyle110
+        DataGridViewCellStyle109.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn69.DefaultCellStyle = DataGridViewCellStyle109
         Me.DataGridViewTextBoxColumn69.FillWeight = 50.0!
         Me.DataGridViewTextBoxColumn69.HeaderText = "Sald"
         Me.DataGridViewTextBoxColumn69.MinimumWidth = 6
@@ -3023,8 +3080,8 @@ Partial Class Carico_macchine
         '
         'DataGridViewTextBoxColumn70
         '
-        DataGridViewCellStyle111.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn70.DefaultCellStyle = DataGridViewCellStyle111
+        DataGridViewCellStyle110.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn70.DefaultCellStyle = DataGridViewCellStyle110
         Me.DataGridViewTextBoxColumn70.FillWeight = 50.0!
         Me.DataGridViewTextBoxColumn70.HeaderText = "Trap"
         Me.DataGridViewTextBoxColumn70.MinimumWidth = 6
@@ -3038,8 +3095,8 @@ Partial Class Carico_macchine
         '
         'DataGridViewTextBoxColumn72
         '
-        DataGridViewCellStyle112.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn72.DefaultCellStyle = DataGridViewCellStyle112
+        DataGridViewCellStyle111.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn72.DefaultCellStyle = DataGridViewCellStyle111
         Me.DataGridViewTextBoxColumn72.FillWeight = 50.0!
         Me.DataGridViewTextBoxColumn72.HeaderText = "Fin"
         Me.DataGridViewTextBoxColumn72.Name = "DataGridViewTextBoxColumn72"
@@ -3292,20 +3349,18 @@ Partial Class Carico_macchine
         Me.Cliente.MinimumWidth = 6
         Me.Cliente.Name = "Cliente"
         '
-        'Dest
+        'Mag_dest
         '
-        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Dest.DefaultCellStyle = DataGridViewCellStyle13
-        Me.Dest.FillWeight = 70.0!
-        Me.Dest.HeaderText = "Dest"
-        Me.Dest.Name = "Dest"
+        Me.Mag_dest.FillWeight = 70.0!
+        Me.Mag_dest.HeaderText = "mag_dest"
+        Me.Mag_dest.Name = "Mag_dest"
         '
         'Disponibile
         '
-        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle14.Format = "N2"
-        DataGridViewCellStyle14.NullValue = Nothing
-        Me.Disponibile.DefaultCellStyle = DataGridViewCellStyle14
+        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle13.Format = "N2"
+        DataGridViewCellStyle13.NullValue = Nothing
+        Me.Disponibile.DefaultCellStyle = DataGridViewCellStyle13
         Me.Disponibile.HeaderText = "Disp"
         Me.Disponibile.MinimumWidth = 6
         Me.Disponibile.Name = "Disponibile"
@@ -3336,8 +3391,8 @@ Partial Class Carico_macchine
         '
         'Prog
         '
-        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Prog.DefaultCellStyle = DataGridViewCellStyle15
+        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Prog.DefaultCellStyle = DataGridViewCellStyle14
         Me.Prog.FillWeight = 50.0!
         Me.Prog.HeaderText = "Prog MU"
         Me.Prog.MinimumWidth = 6
@@ -3345,16 +3400,16 @@ Partial Class Carico_macchine
         '
         'Prog_P
         '
-        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Prog_P.DefaultCellStyle = DataGridViewCellStyle16
+        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Prog_P.DefaultCellStyle = DataGridViewCellStyle15
         Me.Prog_P.FillWeight = 50.0!
         Me.Prog_P.HeaderText = "Prog P"
         Me.Prog_P.Name = "Prog_P"
         '
         'T_MAN
         '
-        DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.T_MAN.DefaultCellStyle = DataGridViewCellStyle17
+        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.T_MAN.DefaultCellStyle = DataGridViewCellStyle16
         Me.T_MAN.FillWeight = 50.0!
         Me.T_MAN.HeaderText = "T MAN"
         Me.T_MAN.MinimumWidth = 6
@@ -3362,8 +3417,8 @@ Partial Class Carico_macchine
         '
         'T_Auto
         '
-        DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.T_Auto.DefaultCellStyle = DataGridViewCellStyle18
+        DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.T_Auto.DefaultCellStyle = DataGridViewCellStyle17
         Me.T_Auto.FillWeight = 50.0!
         Me.T_Auto.HeaderText = "T Auto"
         Me.T_Auto.MinimumWidth = 6
@@ -3371,8 +3426,8 @@ Partial Class Carico_macchine
         '
         'Pant_P
         '
-        DataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Pant_P.DefaultCellStyle = DataGridViewCellStyle19
+        DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Pant_P.DefaultCellStyle = DataGridViewCellStyle18
         Me.Pant_P.FillWeight = 50.0!
         Me.Pant_P.HeaderText = "Pant P"
         Me.Pant_P.MinimumWidth = 6
@@ -3380,8 +3435,8 @@ Partial Class Carico_macchine
         '
         'Pant_A
         '
-        DataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Pant_A.DefaultCellStyle = DataGridViewCellStyle20
+        DataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Pant_A.DefaultCellStyle = DataGridViewCellStyle19
         Me.Pant_A.FillWeight = 50.0!
         Me.Pant_A.HeaderText = "Pant A"
         Me.Pant_A.MinimumWidth = 6
@@ -3389,8 +3444,8 @@ Partial Class Carico_macchine
         '
         'Tornio_
         '
-        DataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Tornio_.DefaultCellStyle = DataGridViewCellStyle21
+        DataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Tornio_.DefaultCellStyle = DataGridViewCellStyle20
         Me.Tornio_.FillWeight = 50.0!
         Me.Tornio_.HeaderText = "Tor P"
         Me.Tornio_.MinimumWidth = 6
@@ -3398,8 +3453,8 @@ Partial Class Carico_macchine
         '
         'Goodway
         '
-        DataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Goodway.DefaultCellStyle = DataGridViewCellStyle22
+        DataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Goodway.DefaultCellStyle = DataGridViewCellStyle21
         Me.Goodway.FillWeight = 50.0!
         Me.Goodway.HeaderText = "Goodway"
         Me.Goodway.MinimumWidth = 6
@@ -3407,8 +3462,8 @@ Partial Class Carico_macchine
         '
         'Doosan
         '
-        DataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Doosan.DefaultCellStyle = DataGridViewCellStyle23
+        DataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Doosan.DefaultCellStyle = DataGridViewCellStyle22
         Me.Doosan.FillWeight = 50.0!
         Me.Doosan.HeaderText = "Doos"
         Me.Doosan.MinimumWidth = 6
@@ -3416,8 +3471,8 @@ Partial Class Carico_macchine
         '
         'Doosan_4
         '
-        DataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Doosan_4.DefaultCellStyle = DataGridViewCellStyle24
+        DataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Doosan_4.DefaultCellStyle = DataGridViewCellStyle23
         Me.Doosan_4.FillWeight = 50.0!
         Me.Doosan_4.HeaderText = "Doos4"
         Me.Doosan_4.MinimumWidth = 6
@@ -3425,8 +3480,8 @@ Partial Class Carico_macchine
         '
         'Doos6
         '
-        DataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Doos6.DefaultCellStyle = DataGridViewCellStyle25
+        DataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Doos6.DefaultCellStyle = DataGridViewCellStyle24
         Me.Doos6.FillWeight = 50.0!
         Me.Doos6.HeaderText = "Doos6"
         Me.Doos6.MinimumWidth = 6
@@ -3434,16 +3489,16 @@ Partial Class Carico_macchine
         '
         'Multi
         '
-        DataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Multi.DefaultCellStyle = DataGridViewCellStyle26
+        DataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Multi.DefaultCellStyle = DataGridViewCellStyle25
         Me.Multi.FillWeight = 50.0!
         Me.Multi.HeaderText = "Multi"
         Me.Multi.Name = "Multi"
         '
         'Haas_2
         '
-        DataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Haas_2.DefaultCellStyle = DataGridViewCellStyle27
+        DataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Haas_2.DefaultCellStyle = DataGridViewCellStyle26
         Me.Haas_2.FillWeight = 50.0!
         Me.Haas_2.HeaderText = "Haas 2"
         Me.Haas_2.MinimumWidth = 6
@@ -3451,8 +3506,8 @@ Partial Class Carico_macchine
         '
         'Haas_3
         '
-        DataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Haas_3.DefaultCellStyle = DataGridViewCellStyle28
+        DataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Haas_3.DefaultCellStyle = DataGridViewCellStyle27
         Me.Haas_3.FillWeight = 50.0!
         Me.Haas_3.HeaderText = "Haas 3"
         Me.Haas_3.MinimumWidth = 6
@@ -3460,8 +3515,8 @@ Partial Class Carico_macchine
         '
         'Haas_5
         '
-        DataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Haas_5.DefaultCellStyle = DataGridViewCellStyle29
+        DataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Haas_5.DefaultCellStyle = DataGridViewCellStyle28
         Me.Haas_5.FillWeight = 50.0!
         Me.Haas_5.HeaderText = "Haas 5"
         Me.Haas_5.MinimumWidth = 6
@@ -3469,8 +3524,8 @@ Partial Class Carico_macchine
         '
         'Haas_6
         '
-        DataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Haas_6.DefaultCellStyle = DataGridViewCellStyle30
+        DataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Haas_6.DefaultCellStyle = DataGridViewCellStyle29
         Me.Haas_6.FillWeight = 50.0!
         Me.Haas_6.HeaderText = "Haas 6"
         Me.Haas_6.MinimumWidth = 6
@@ -3478,8 +3533,8 @@ Partial Class Carico_macchine
         '
         'Famup
         '
-        DataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Famup.DefaultCellStyle = DataGridViewCellStyle31
+        DataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Famup.DefaultCellStyle = DataGridViewCellStyle30
         Me.Famup.FillWeight = 50.0!
         Me.Famup.HeaderText = "Famup"
         Me.Famup.MinimumWidth = 6
@@ -3487,8 +3542,8 @@ Partial Class Carico_macchine
         '
         'Awea
         '
-        DataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Awea.DefaultCellStyle = DataGridViewCellStyle32
+        DataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Awea.DefaultCellStyle = DataGridViewCellStyle31
         Me.Awea.FillWeight = 50.0!
         Me.Awea.HeaderText = "Awea"
         Me.Awea.MinimumWidth = 6
@@ -3496,8 +3551,8 @@ Partial Class Carico_macchine
         '
         'Stozza
         '
-        DataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Stozza.DefaultCellStyle = DataGridViewCellStyle33
+        DataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Stozza.DefaultCellStyle = DataGridViewCellStyle32
         Me.Stozza.FillWeight = 50.0!
         Me.Stozza.HeaderText = "Stozza"
         Me.Stozza.MinimumWidth = 6
@@ -3505,8 +3560,8 @@ Partial Class Carico_macchine
         '
         'Sald
         '
-        DataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Sald.DefaultCellStyle = DataGridViewCellStyle34
+        DataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Sald.DefaultCellStyle = DataGridViewCellStyle33
         Me.Sald.FillWeight = 50.0!
         Me.Sald.HeaderText = "Sald"
         Me.Sald.MinimumWidth = 6
@@ -3514,8 +3569,8 @@ Partial Class Carico_macchine
         '
         'Trap
         '
-        DataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Trap.DefaultCellStyle = DataGridViewCellStyle35
+        DataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Trap.DefaultCellStyle = DataGridViewCellStyle34
         Me.Trap.FillWeight = 50.0!
         Me.Trap.HeaderText = "Trap"
         Me.Trap.MinimumWidth = 6
@@ -3529,8 +3584,8 @@ Partial Class Carico_macchine
         '
         'Finitura
         '
-        DataGridViewCellStyle36.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Finitura.DefaultCellStyle = DataGridViewCellStyle36
+        DataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Finitura.DefaultCellStyle = DataGridViewCellStyle35
         Me.Finitura.FillWeight = 50.0!
         Me.Finitura.HeaderText = "Fin"
         Me.Finitura.Name = "Finitura"
@@ -3567,6 +3622,10 @@ Partial Class Carico_macchine
         Me.GroupBox25.PerformLayout()
         Me.GroupBox27.ResumeLayout(False)
         Me.GroupBox27.PerformLayout()
+        Me.GroupBox28.ResumeLayout(False)
+        Me.GroupBox28.PerformLayout()
+        Me.FlowLayoutPanel_mag.ResumeLayout(False)
+        Me.FlowLayoutPanel_mag.PerformLayout()
         Me.TableLayoutPanel3.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
@@ -3874,6 +3933,11 @@ Partial Class Carico_macchine
     Friend WithEvents TabPage6 As TabPage
     Friend WithEvents PictureBox2 As PictureBox
     Friend WithEvents DataGridViewImageColumn1 As DataGridViewImageColumn
+    Friend WithEvents GroupBox28 As GroupBox
+    Friend WithEvents FlowLayoutPanel_mag As FlowLayoutPanel
+    Friend WithEvents CheckBoxTCP As CheckBox
+    Friend WithEvents CheckBoxMU As CheckBox
+    Friend WithEvents CheckBoxT01 As CheckBox
     Friend WithEvents Seleziona As DataGridViewCheckBoxColumn
     Friend WithEvents ODP_ As DataGridViewButtonColumn
     Friend WithEvents Lavorazione_ As DataGridViewTextBoxColumn
@@ -3895,7 +3959,7 @@ Partial Class Carico_macchine
     Friend WithEvents Quantità As DataGridViewTextBoxColumn
     Friend WithEvents Commessa As DataGridViewButtonColumn
     Friend WithEvents Cliente As DataGridViewTextBoxColumn
-    Friend WithEvents Dest As DataGridViewTextBoxColumn
+    Friend WithEvents Mag_dest As DataGridViewTextBoxColumn
     Friend WithEvents Disponibile As DataGridViewTextBoxColumn
     Friend WithEvents Attrezzatura As DataGridViewTextBoxColumn
     Friend WithEvents Cod_risorsa As DataGridViewTextBoxColumn

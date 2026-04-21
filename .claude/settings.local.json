@@ -42,7 +42,8 @@
       "Bash(echo \"EXIT: $?\")",
       "Bash(\"C:\\\\Windows\\\\Microsoft.NET\\\\Framework64\\\\v4.0.30319\\\\vbc.exe\" /help)",
       "Bash(\"C:\\\\Program Files\\\\Microsoft Visual Studio\\\\2022\\\\Community\\\\MSBuild\\\\Current\\\\Bin\\\\Roslyn\\\\VBCSCompiler.exe\")",
-      "Bash(python *)"
+      "Bash(python *)",
+      "Bash(grep -n -i \"CaricaImmagineRiga\\\\|PNG\\\\|T:\\\\\\\\\\\\\\\\\\\\|percorso\\\\|path\\\\|immagin\\\\|foto\" \"/c/Users/giovannitirelli/Desktop/Pianificazione 253/Tirelli_40/Pianificazione_2/UT.vb\")"
     ]
   }
 }

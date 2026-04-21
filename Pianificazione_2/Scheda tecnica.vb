@@ -31,6 +31,8 @@ Public Class Scheda_tecnica
     Private N_rev_visualizza As Integer
     Public numero_combinazioni As Integer = 0
 
+    Private cbTipologiaMacchina As ComboBox
+    Private cbModelloMacchina As ComboBox
 
     Private Controllo_generico(50) As Byte
     Private Configurazione_macchina(50) As Byte ' Private binary array of 50 bytes
@@ -47,13 +49,109 @@ Public Class Scheda_tecnica
     Private Sub Scheda_tecnica_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         TabControl1.DrawMode = TabDrawMode.OwnerDrawFixed
         '    Me.BackColor = Homepage.colore_sfondo
+        AggiungiCampiTipologiaModello()
         ApplicaStile()
         Inserimento_dipendenti()
+        CaricaTipologieModelli()
         For Each page As TabPage In TabControl1.TabPages
             For Each ctrl As Control In page.Controls
                 AggiungiGestoreEvento(ctrl)
             Next
         Next
+    End Sub
+
+    Private Sub AggiungiCampiTipologiaModello()
+        Dim navy As Color = Color.FromArgb(22, 45, 84)
+
+        Dim pnlMacchina As New Panel
+        pnlMacchina.Height = 64
+        pnlMacchina.Dock = DockStyle.Top
+        pnlMacchina.BackColor = Color.FromArgb(230, 240, 255)
+        pnlMacchina.Padding = New Padding(2)
+
+        Dim gbTip As New GroupBox
+        gbTip.Text = "Tipologia macchina"
+        gbTip.Font = New Font("Segoe UI", 8.5F, FontStyle.Bold)
+        gbTip.ForeColor = navy
+        gbTip.Left = 0
+        gbTip.Top = 0
+        gbTip.Width = 200
+        gbTip.Height = 60
+        cbTipologiaMacchina = New ComboBox
+        cbTipologiaMacchina.Dock = DockStyle.Fill
+        cbTipologiaMacchina.Font = New Font("Segoe UI", 9)
+        cbTipologiaMacchina.Name = "cbTipologiaMacchina"
+        gbTip.Controls.Add(cbTipologiaMacchina)
+
+        Dim gbMod As New GroupBox
+        gbMod.Text = "Modello macchina"
+        gbMod.Font = New Font("Segoe UI", 8.5F, FontStyle.Bold)
+        gbMod.ForeColor = navy
+        gbMod.Left = 200
+        gbMod.Top = 0
+        gbMod.Width = 193
+        gbMod.Height = 60
+        cbModelloMacchina = New ComboBox
+        cbModelloMacchina.Dock = DockStyle.Fill
+        cbModelloMacchina.Font = New Font("Segoe UI", 9)
+        cbModelloMacchina.Name = "cbModelloMacchina"
+        gbMod.Controls.Add(cbModelloMacchina)
+
+        Dim btnGestisci As New Button
+        btnGestisci.Text = "..."
+        btnGestisci.Font = New Font("Segoe UI", 7.5F)
+        btnGestisci.Left = 393
+        btnGestisci.Top = 0
+        btnGestisci.Width = 24
+        btnGestisci.Height = 60
+        btnGestisci.FlatStyle = FlatStyle.Flat
+        btnGestisci.BackColor = navy
+        btnGestisci.ForeColor = Color.White
+        btnGestisci.FlatAppearance.BorderSize = 0
+        AddHandler btnGestisci.Click, AddressOf BtnGestisciTabelleST_Click
+
+        pnlMacchina.Controls.Add(gbTip)
+        pnlMacchina.Controls.Add(gbMod)
+        pnlMacchina.Controls.Add(btnGestisci)
+
+        Panel2.Controls.Add(pnlMacchina)
+    End Sub
+
+    Private Sub CaricaTipologieModelli()
+        If cbTipologiaMacchina Is Nothing OrElse cbModelloMacchina Is Nothing Then Return
+        Dim savedTip = cbTipologiaMacchina.Text
+        Dim savedMod = cbModelloMacchina.Text
+        cbTipologiaMacchina.Items.Clear()
+        cbModelloMacchina.Items.Clear()
+        Try
+            Using Cnn As New SqlConnection(Homepage.sap_tirelli)
+                Cnn.Open()
+                Using CMD As New SqlCommand("SELECT valore FROM [TIRELLI_40].[dbo].[ST_lookup_tipologia_macchina] ORDER BY valore", Cnn)
+                    Using r = CMD.ExecuteReader()
+                        While r.Read()
+                            cbTipologiaMacchina.Items.Add(r("valore").ToString())
+                        End While
+                    End Using
+                End Using
+                Using CMD As New SqlCommand("SELECT valore FROM [TIRELLI_40].[dbo].[ST_lookup_modello_macchina] ORDER BY valore", Cnn)
+                    Using r = CMD.ExecuteReader()
+                        While r.Read()
+                            cbModelloMacchina.Items.Add(r("valore").ToString())
+                        End While
+                    End Using
+                End Using
+            End Using
+        Catch
+        End Try
+        cbTipologiaMacchina.Text = savedTip
+        cbModelloMacchina.Text = savedMod
+    End Sub
+
+    Private Sub BtnGestisciTabelleST_Click(sender As Object, e As EventArgs)
+        Using f As New Scheda_Tecnica_Tabelle
+            f.ShowDialog()
+        End Using
+        CaricaTipologieModelli()
     End Sub
 
     Private Sub ApplicaStile()
@@ -380,6 +478,8 @@ Public Class Scheda_tecnica
       ,coalesce(t0.[Etichettatura_stella_uscita_diametro],'') as 'Etichettatura_stella_uscita_diametro'
 ,coalesce(t0.[FAT_concordata],'') as 'FAT_concordata'
 ,coalesce(t1.stato,'') as 'Stato_scheda'
+,coalesce(t0.[Tipologia_macchina],'') as 'Tipologia_macchina'
+,coalesce(t0.[Modello_macchina],'') as 'Modello_macchina'
 
 
 
@@ -587,6 +687,8 @@ where t0.commessa='" & par_codice_commessa & "' and t0.rev ='" & par_n_rev & "'
 
                     RichTextBox6.Text = cmd_SAP_reader_2(“FAT_concordata”)
 
+                    If cbTipologiaMacchina IsNot Nothing Then cbTipologiaMacchina.Text = cmd_SAP_reader_2(“Tipologia_macchina”)
+                    If cbModelloMacchina IsNot Nothing Then cbModelloMacchina.Text = cmd_SAP_reader_2(“Modello_macchina”)
 
 
 
@@ -1182,6 +1284,8 @@ limit 100
 ,[Fat_concordata]
 ,Tappatura_fornitura_torretta
 ,Soffiatura_numero_ugelli
+,[Tipologia_macchina]
+,[Modello_macchina]
 
 
 
@@ -1374,6 +1478,8 @@ limit 100
 ,'" & Replace(RichTextBox6.Text, "'", " ") & "'
 ,'" & Replace(ComboBox69.Text, "'", " ") & "'
 ,'" & ComboBox68.Text & "'
+,'" & Replace(If(cbTipologiaMacchina IsNot Nothing, cbTipologiaMacchina.Text, ""), "'", " ") & "'
+,'" & Replace(If(cbModelloMacchina IsNot Nothing, cbModelloMacchina.Text, ""), "'", " ") & "'
 
 
 )"
