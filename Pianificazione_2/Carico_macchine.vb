@@ -487,7 +487,8 @@ GROUP BY
                         par_disegno As String,
                         par_commessa As String,
                         par_cliente As String,
-                        par_materia_prima As String, par_stato_materia_prima As String)
+                        par_materia_prima As String, par_stato_materia_prima As String,
+                        par_dest_filter As String)
 
         DataGridView1.Rows.Clear()
         Dim contatore_ordini As Integer = 0
@@ -580,8 +581,8 @@ FROM OPENQUERY(AS400, '
         ATTREZZATURA,
 		stato_fase
     FROM S786FAD1.TIR90VIS.JGALodpmu
-    WHERE
- (dest=''TCP'' or dest=''MU'') and
+    WHERE 0=0
+ " & par_dest_filter & " and
         UPPER(codart_odp) LIKE ''%" & par_codice & "%''
         AND UPPER(dscodart_odp) LIKE ''%" & par_descrizione & "%''
         AND ODP LIKE ''%" & par_odp & "%''
@@ -1646,7 +1647,7 @@ where t10.nesting>1 and (T11.[Status]='P' or T11.[Status]='R')"
     End Sub
 
     Sub datagridview_carico_macchine()
-        carico_macchine_NEW(TextBox5.Text.ToUpper, TextBox1.Text.ToUpper, TextBox2.Text.ToUpper, TextBox3.Text.ToUpper, TextBox4.Text.ToUpper, TextBox6.Text.ToUpper, TextBox14.Text.ToUpper, TextBox16.Text.ToUpper, TextBox17.Text.ToUpper)
+        carico_macchine_NEW(TextBox5.Text.ToUpper, TextBox1.Text.ToUpper, TextBox2.Text.ToUpper, TextBox3.Text.ToUpper, TextBox4.Text.ToUpper, TextBox6.Text.ToUpper, TextBox14.Text.ToUpper, TextBox16.Text.ToUpper, TextBox17.Text.ToUpper, " and (dest=''MU'' or dest=''TCP'') ")
     End Sub
 
 

@@ -109,7 +109,8 @@ Public Class UT
         "  p1*p2      = contiene p1 E p2" & vbLf &
         "  """"        = nessun filtro su quel campo" & vbLf & vbLf &
         "ESEMPI:" & vbLf &
-        "Utente: 'cerca cuscinetti SKF 6205' → {""azione"":""cerca"",""messaggio"":""Cerco cuscinetti con catalogo 6205 e produttore SKF"",""filtri"":{""codice"":"""",""descrizione"":""cuscinett*"",""desc_supp"":"""",""disegno"":"""",""catalogo"":""6205"",""produttore"":""SKF"",""fornitore"":"""",""ubicazione"":"""",""gruppo"":"""",""prezzo_min"":"""",""prezzo_max"":"""",""stato"":"""",""tipo_parte"":""""}}" & vbLf &
+        "Utente: 'cerca cuscinetti SKF 6205' → {""azione"":""cerca"",""messaggio"":""Cerco cuscinetti con catalogo 6205 e produttore SKF"",""filtri"":{""codice"":"""",""descrizione"":""*cuscinett"",""desc_supp"":"""",""disegno"":"""",""catalogo"":""6205"",""produttore"":""SKF"",""fornitore"":"""",""ubicazione"":"""",""gruppo"":"""",""prezzo_min"":"""",""prezzo_max"":"""",""stato"":"""",""tipo_parte"":""""}}" & vbLf &
+        "Utente: 'inverter siemens con codice che inizia per C' → {""azione"":""cerca"",""messaggio"":""Cerco inverter Siemens con codice che inizia per C"",""filtri"":{""codice"":""*C"",""descrizione"":""inverter"",""desc_supp"":"""",""disegno"":"""",""catalogo"":"""",""produttore"":""SIEMENS"",""fornitore"":"""",""ubicazione"":"""",""gruppo"":"""",""prezzo_min"":"""",""prezzo_max"":"""",""stato"":"""",""tipo_parte"":""""}}" & vbLf &
         "Utente: 'articoli che costano più di 100 euro' → {""azione"":""cerca"",""messaggio"":""Cerco articoli con prezzo > 100"",""filtri"":{""codice"":"""",""descrizione"":"""",""desc_supp"":"""",""disegno"":"""",""catalogo"":"""",""produttore"":"""",""fornitore"":"""",""ubicazione"":"""",""gruppo"":"""",""prezzo_min"":""100"",""prezzo_max"":"""",""stato"":"""",""tipo_parte"":""""}}" & vbLf &
         "Utente: 'codici taglio laser di Galati' → {""azione"":""cerca"",""messaggio"":""Cerco articoli taglio laser con fornitore Galati"",""filtri"":{""codice"":"""",""descrizione"":"""",""desc_supp"":"""",""disegno"":"""",""catalogo"":"""",""produttore"":"""",""fornitore"":""galati"",""ubicazione"":"""",""gruppo"":""taglio laser"",""prezzo_min"":"""",""prezzo_max"":"""",""stato"":"""",""tipo_parte"":""""}}" & vbLf &
         "Utente: 'fotocellule usate nella commessa T000001 sottocommessa 05000' → {""azione"":""impegni"",""messaggio"":""Cerco fotocellule negli impegni commessa T000001/05000"",""filtri"":{""commessa"":""T000001"",""sottocommessa"":""05000"",""codice_articolo"":"""",""descrizione_articolo"":""fotocell"",""ultimi_odp"":""""}}" & vbLf &
@@ -846,7 +847,8 @@ ORDER BY t0.ds_Conto"
             ("Matricola", "Matricola"),
             ("DescCommessa", "Desc. Commessa"),
             ("Codice", "Codice"),
-            ("Descrizione", "Descrizione"),
+            ("DescArt", "Desc. Articolo"),
+            ("Descrizione", "Desc. ODP"),
             ("Disegno", "Disegno"),
             ("Quantita", "Quantità"),
             ("Costo", "Costo"),
@@ -1482,6 +1484,15 @@ ORDER BY t0.ds_Conto"
         Return String.Join("", terms.Where(Function(x) x.Trim() <> "").Select(Function(x) " and upper(" & campo & ") LIKE ''%" & x.Trim() & "%''"))
     End Function
 
+    ''' <summary>Restituisce il pattern LIKE (senza campo) per OPENQUERY AS400.
+    ''' *word→word%  word*→%word  plain→%word%</summary>
+    Private Function LikeAS400(testo As String) As String
+        Dim t = testo.Trim().ToUpper()
+        If t.StartsWith("*") AndAlso t.IndexOf("*"c, 1) < 0 Then Return t.Substring(1) & "%"
+        If t.EndsWith("*") AndAlso t.LastIndexOf("*"c, t.Length - 2) < 0 Then Return "%" & t.Substring(0, t.Length - 1)
+        Return "%" & t.Replace("*", "%") & "%"
+    End Function
+
     ' ──────────────────────────────────────────────────────────────────
     '  PANNELLO AI
     ' ──────────────────────────────────────────────────────────────────
@@ -2112,7 +2123,7 @@ ORDER BY t0.ds_Conto"
             Return
         End If
 
-        Dim whereImp As String = " WHERE 1=1"
+        Dim whereImp As String = " WHERE 1=1 AND t1.documento=''ODP''"
         If commessa <> "" Then
             whereImp &= " AND upper(trim(t1.cod_commessa)) = ''" & commessa.Replace("'", "''") & "''"
         End If
@@ -2120,10 +2131,13 @@ ORDER BY t0.ds_Conto"
             whereImp &= " AND upper(trim(t1.cod_sottocommessa)) = ''" & sottocommessa.Replace("'", "''") & "''"
         End If
         If codiceArt <> "" Then
-            whereImp &= " AND upper(trim(t1.codart)) LIKE ''%" & codiceArt.Replace("'", "''") & "%''"
+            whereImp &= " AND upper(trim(t1.codart)) LIKE ''" & LikeAS400(codiceArt).Replace("'", "''") & "''"
         End If
         If descArt <> "" Then
-            whereImp &= " AND upper(t1.itemname) LIKE ''%" & descArt.Replace("'", "''") & "%''"
+            whereImp &= " AND upper(t2.des_code) LIKE ''%" & descArt.Replace("'", "''") & "%''"
+        End If
+        If codiceArt = "" Then
+            whereImp &= " AND t2.stat_code = ''A''"
         End If
 
         Dim fetchClause As String = ""
@@ -2132,41 +2146,27 @@ ORDER BY t0.ds_Conto"
             fetchClause = " FETCH FIRST " & n & " ROWS ONLY"
         End If
 
-        Dim sqlImp As String = "SELECT
-    TRIM(CAST(i.codart AS VARCHAR(50)))            AS Codice,
-    i.itemname                                     AS Descrizione,
-    TRIM(CAST(i.odp AS VARCHAR(50)))               AS ODP,
-    TRIM(CAST(i.status AS VARCHAR(10)))            AS Status,
-    TRIM(CAST(i.cod_commessa AS VARCHAR(50)))      AS Commessa,
-    TRIM(CAST(i.cod_sottocommessa AS VARCHAR(50))) AS Sottocommessa,
-    TRIM(CAST(i.matricola AS VARCHAR(50)))         AS Matricola,
-    i.desc_commessa                                AS DescCommessa,
-    i.qtapia                                       AS Quantita
+        Dim sql As String = "SELECT
+    TRIM(CAST(i.codart AS VARCHAR(50)))              AS Codice,
+    i.des_code                                       AS DescArt,
+    TRIM(CAST(i.odp AS VARCHAR(50)))                 AS ODP,
+    i.itemname                                       AS Descrizione,
+    TRIM(CAST(i.status AS VARCHAR(10)))              AS Status,
+    TRIM(CAST(i.cod_commessa AS VARCHAR(50)))        AS Commessa,
+    TRIM(CAST(i.cod_sottocommessa AS VARCHAR(50)))   AS Sottocommessa,
+    TRIM(CAST(i.matricola AS VARCHAR(50)))           AS Matricola,
+    i.desc_commessa                                  AS DescCommessa,
+    i.qtapia                                         AS Quantita,
+    ISNULL(TRIM(CAST(i.disegno AS VARCHAR(50))), '') AS Disegno,
+    ISNULL(CAST(i.costo_std AS DECIMAL(18,6)), 0)    AS Costo
 FROM OPENQUERY(AS400, '
-    SELECT codart, odp, itemname, status, cod_commessa, cod_sottocommessa, matricola, desc_commessa, dtasca, qtapia
-    FROM TIR90VIS.JGALIMP t1" & whereImp & " AND documento=''ODP''
-    ORDER BY dtasca DESC, codart" & fetchClause & "
+    SELECT t1.codart, t2.des_code, t1.odp, t1.itemname, t1.status, t1.cod_commessa,
+           t1.cod_sottocommessa, t1.matricola, t1.desc_commessa, t1.dtasca, t1.qtapia,
+           t2.disegno, t2.costo_std
+    FROM TIR90VIS.JGALIMP t1
+    INNER JOIN TIR90VIS.JGALART t2 ON trim(t1.codart) = trim(t2.code)" & whereImp & "
+    ORDER BY t1.dtasca DESC, t1.codart" & fetchClause & "
 ') i"
-
-        Dim whereArt As String
-        If codiceArt <> "" Then
-            whereArt = "upper(trim(code)) LIKE ''%" & codiceArt.Replace("'", "''") & "%''"
-        Else
-            whereArt = "stat_code = ''A''"
-        End If
-        Dim sqlArt As String = "SELECT
-    TRIM(CAST(code AS VARCHAR(50)))    AS Codice,
-    TRIM(CAST(disegno AS VARCHAR(50))) AS Disegno,
-    costo_std                          AS Costo
-FROM OPENQUERY(AS400, 'SELECT code, disegno, costo_std FROM TIR90VIS.JGALART WHERE " & whereArt & "')"
-
-        Dim sql As String = "SELECT i.ODP, i.Status, i.Commessa, i.Sottocommessa, i.Matricola, i.DescCommessa,
-    i.Codice, i.Descrizione,
-    ISNULL(a.Disegno, '')                       AS Disegno,
-    i.Quantita,
-    ISNULL(CAST(a.Costo AS DECIMAL(18,6)), 0)   AS Costo
-FROM (" & sqlImp & ") i
-LEFT JOIN (" & sqlArt & ") a ON i.Codice = a.Codice"
 
         _lastSqlImpegni = sql
         dgvImpegni.Rows.Clear()
@@ -2198,6 +2198,7 @@ LEFT JOIN (" & sqlArt & ") a ON i.Codice = a.Codice"
                     rdr("Matricola"),
                     rdr("DescCommessa"),
                     rdr("Codice"),
+                    rdr("DescArt"),
                     rdr("Descrizione"),
                     rdr("Disegno"),
                     qta.ToString("N2"),
@@ -2310,7 +2311,7 @@ LEFT JOIN (" & sqlArt & ") a ON i.Codice = a.Codice"
             whereOdp &= " AND upper(trim(t0.matricola)) LIKE ''%" & matricola.Replace("'", "''") & "%''"
         End If
         If codiceArt <> "" Then
-            whereOdp &= " AND upper(trim(t0.codart)) LIKE ''%" & codiceArt.Replace("'", "''") & "%''"
+            whereOdp &= " AND upper(trim(t0.codart)) LIKE ''" & LikeAS400(codiceArt).Replace("'", "''") & "''"
         End If
         If descArt <> "" Then
             whereOdp &= " AND upper(t0.dscodart_odp) LIKE ''%" & descArt.Replace("'", "''") & "%''"
